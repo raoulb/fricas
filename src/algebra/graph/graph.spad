@@ -1,0 +1,70 @@
+-- These two macros are necessary to distinguish between Rep and %.
+rep x ==> (x@%) pretend Rep
+per x ==> (x@Rep) pretend %
+-------------------------------------------------------------------
+
+ID ==> Symbol
+-- Each vertex and each edge gets a unique id.
+
+)abbrev category GRVERT GraphVertex
+++ Author: Ralf Hemmecke
+++ Keywords: graph theory
+++ Description:
+++ Category for vertices of a graph.
+GraphVertex: Category == SetCategory with
+    id: % -> ID
+      ++ id(x) returns the id of the edge x.
+  add
+    hash(x: %): SingleInteger == hash id x
+    latex(x: %): String == latex id x
+    ((x: %) = (y: %)): Boolean == id x = id y
+
+)abbrev category GREDGE GraphEdge
+++ Author: Ralf Hemmecke
+++ Keywords: graph theory
+++ Description:
+++ Category for Edges of a graph.
+GraphEdge(V: GraphVertex): Category == SetCategory with
+    id: % -> ID
+      ++ id() returns the id of the edge
+    vertices: % -> List V
+      ++ vertices(x) returns the vertices that the edge x connects.
+      ++ The returned list has at least length 2, but (as for hypergraphs)
+      ++ can contain more vertices.
+  add
+    hash(x: %): SingleInteger == hash id x
+    latex(x: %): String == latex id x
+    ((x: %) = (y: %)): Boolean == id x = id y
+
+)abbrev category FGRAPH FinGraph
+++ Author: Ralf Hemmecke
+++ Keywords: graph theory
+++ Description:
+++ Category of finite graphs, allows us to model graph theory
+FinGraph(V: GraphVertex, E: GraphEdge V): Category == SetCategory with
+    finiteGraph: (List V, List E) -> %
+      ++ finiteGraph(vertices, edgees) constructs a graph made
+      ++ from vertices and edges.
+    insert!: (V, %) -> %
+      ++ insert!(v, x) adds a new vertex v to the graph x.
+    insert!: (E, %) -> %
+      ++ insert!(e, x) adds a new edge e and to the graph x
+      ++ (including its vertices).
+    vertices: % -> List V
+      ++ vertices(x) returns all vertices of the graph x.
+    edges: % -> List E
+      ++ edges(x) returns all edges of the graph x.
+  add
+    ((x: %) = (y: %)): Boolean ==
+        -- dummy implementation
+        -- We assume the list of vertices and edges are sorted by their
+        -- respective id's.
+        vex := vertices x
+	vey := vertices y
+	#vex ~= #vey => false
+	for vx in vex for vy in vey repeat if id vx ~= id vy then return false
+        edx := edges x
+	edy := edges y
+	#edx ~= #edy => false
+	for ex in edx for ey in edy repeat if id ex ~= id ey then return false
+	true
