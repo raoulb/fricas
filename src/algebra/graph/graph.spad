@@ -28,10 +28,14 @@ GraphVertex: Category == SetCategory with
 GraphEdge(V: GraphVertex): Category == SetCategory with
     id: % -> ID
       ++ id() returns the id of the edge
-    vertices: % -> List V
-      ++ vertices(x) returns the vertices that the edge x connects.
-      ++ The returned list has at least length 2, but (as for hypergraphs)
-      ++ can contain more vertices.
+    vertex1: % -> V
+      ++ vertex1(x) returns the first vertex of an edge.
+      ++ In case the edge is undirected, the following holds:
+      ++ id vertex1 x < id vertex2 x.
+    vertex2: % -> V
+      ++ vertex2(x) returns the second vertex of an edge.
+      ++ In case the edge is undirected, the following holds:
+      ++ id vertex1 x < id vertex2 x.
   add
     hash(x: %): SingleInteger == hash id x
     latex(x: %): String == latex id x
@@ -120,7 +124,8 @@ LabeledEdge(L: SetCategory, V: LabeledGraphVertex L): LabeledGraphEdge(L, V)
     edge(l: L, v1: V, v2: V): % == per [new()$ID, l, v1, v2]
     id(x: %): ID == (rep x).id
     label(x: %): L == (rep x).lab
-    vertices(x: %): List V == [(rep x).vert1, (rep x).vert2]
+    vertex1(x: %): V == (rep x).vert1
+    vertex2(x: %): V == (rep x).vert2
     coerce(x: %): OutputForm ==
       l: OutputForm := label(x)::OutputForm
       v1: V := (rep x).vert1
