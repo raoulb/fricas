@@ -103,20 +103,34 @@ Labeled(L: SetCategory): Category == with
 ++ The category Directed only serves as an attribute category.
 Directed(): Category == with ()
 
-)abbrev category LGRVERT LabeledGraphVertex
+)abbrev domain UVERTEX UnlabeledVertex
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
 ++ Description:
-++ Category for vertices of a graph.
-LabeledGraphVertex(L: SetCategory): Category == GraphVertex with
+++ A domain of unlabeled vertices.
+UnlabeledVertex: GraphVertex with
+    vertex: () -> %
+      ++ vertex() creates a new vertex.
+  == add
+    Rep == ID
+    vertex(): % == per new()$ID
+    id(x: %): ID == rep x
+
+)abbrev domain LVERTEX LabeledVertex
+++ Author: Ralf Hemmecke
+++ Keywords: graph theory
+++ Description:
+++ A domain of labeled vertices.
+LabeledVertex(L: SetCategory): Join(Labeled L, GraphVertex) with
     vertex: L -> %
       ++ vertex(l) returns a vertex with label l.
-    label: % -> L
-      ++ label(x) returns the label corresponding to vertex x.
-  add
+ == add
+    Rep == Record(ident: ID, lab: L)
+    vertex(l: L): % == per [new()$ID, l]
+    id(x: %): ID == (rep x).ident
+    label(x: %): L == (rep x).lab
     coerce(x: %): OutputForm == label(x)::OutputForm
 
-)abbrev category LGREDGE LabeledGraphEdge
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
 ++ Description:
