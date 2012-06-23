@@ -87,6 +87,22 @@ FinGraph(V: GraphVertex, E: GraphEdge V): Category == SetCategory with
         es: List OutputForm := [e::OutputForm for e in edges x]
         bracket [bracket vs, bracket es]
 
+)abbrev category LABELED Labeled
+++ Author: Ralf Hemmecke
+++ Description:
+++ Category for labeled objects.
+++ The category Labeled mainly serves as an attribute category.
+Labeled(L: SetCategory): Category == with
+    label: % -> L
+      ++ label(x) returns the label corresponding to x.
+
+)abbrev category DIRECT Directed
+++ Author: Ralf Hemmecke
+++ Description:
+++ Category for directed objects.
+++ The category Directed only serves as an attribute category.
+Directed(): Category == with ()
+
 )abbrev category LGRVERT LabeledGraphVertex
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
