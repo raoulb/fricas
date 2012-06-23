@@ -131,47 +131,87 @@ LabeledVertex(L: SetCategory): Join(Labeled L, GraphVertex) with
     label(x: %): L == (rep x).lab
     coerce(x: %): OutputForm == label(x)::OutputForm
 
+)abbrev domain UDEDGE UnlabeledDirectedEdge
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
 ++ Description:
-++ Category for labeled edges of a graph.
-LabeledGraphEdge(L: SetCategory, V: GraphVertex): Category == GraphEdge V with
+++ A domain of directed unlabeled edges.
+UnlabeledDirectedEdge(V: GraphVertex): Join(Directed, GraphEdge V) with
+    edge: (V, V) -> %
+      ++ edge(v1, v2) returns an new edge from vertex v1 to vertex v2.
+  == add
+    Rep == Record(ident: ID, vert1: V, vert2: V)
+    edge(v1: V, v2: V): % == per [new()$ID, v1, v2]
+    id(x: %): ID == (rep x).ident
+    vertex1(x: %): V == (rep x).vert1
+    vertex2(x: %): V == (rep x).vert2
+    coerce(x: %): OutputForm ==
+      n: OutputForm := id(x)::OutputForm
+      v1: OutputForm := (vertex1 x) :: OutputForm
+      v2: OutputForm := (vertex2 x) :: OutputForm
+      hconcat [n, ": "::OutputForm, v1, " --> "::OutputForm, v2]
+
+)abbrev domain UUEDGE UnlabeledUndirectedEdge
+++ Author: Ralf Hemmecke
+++ Keywords: graph theory
+++ Description:
+++ A domain of unlabeled undirected edges.
+UnlabeledUndirectedEdge(V: GraphVertex): GraphEdge V with
+    edge: (V, V) -> %
+      ++ edge(v1, v2) returns an new edge from vertex v1 to vertex v2.
+  == UnlabeledDirectedEdge V add
+    Rep == UnlabeledDirectedEdge V
+    edge(v1: V, v2: V): % ==
+      -- We store the vertex with the smaller id as first node.
+      i: ID := new()$ID
+      per(if id v1 < id v2 then edge(v1, v2)$Rep else edge(v2, v1)$Rep)
+    coerce(x: %): OutputForm ==
+      n: OutputForm := id(x)::OutputForm
+      v1: OutputForm := (vertex1 x) :: OutputForm
+      v2: OutputForm := (vertex2 x) :: OutputForm
+      hconcat [n, ": "::OutputForm, v1, " --- "::OutputForm, v2]
+
+)abbrev domain LDEDGE LabeledDirectedEdge
+++ Author: Ralf Hemmecke
+++ Keywords: graph theory
+++ Description:
+++ A domain of labeled directed edges.
+LabeledDirectedEdge(L: SetCategory, V: GraphVertex): _
+  Join(Labeled L, Directed, GraphEdge V) with
     edge: (L, V, V) -> %
       ++ edge(l, v1, v2) returns a vertex with label l going between
       ++ the vertices v1 and v2.
-    label: % -> L
-      ++ label(x) returns the label corresponding to vertex x.
-  add
-    coerce(x: %): OutputForm == label(x)::OutputForm
-
-)abbrev domain LVERTEX LabeledVertex
-++ Author: Ralf Hemmecke
-++ Keywords: graph theory
-++ Description:
-++ A domain of vertices that are labeled.
-LabeledVertex(L: SetCategory): LabeledGraphVertex(L) == add
-    Rep == Record(id: ID, lab: L)
-    vertex(l: L): % == per [new()$ID, l]
-    id(x: %): ID == (rep x).id
-    label(x: %): L == (rep x).lab
-
-)abbrev domain LEDGE LabeledEdge
-++ Author: Ralf Hemmecke
-++ Keywords: graph theory
-++ Description:
-++ A domain of edges that are labeled.
-LabeledEdge(L: SetCategory, V: LabeledGraphVertex L): LabeledGraphEdge(L, V)
   == add
-    Rep == Record(id: ID, lab: L, vert1: V, vert2: V)
+    Rep == Record(ident: ID, lab: L, vert1: V, vert2: V)
     edge(l: L, v1: V, v2: V): % == per [new()$ID, l, v1, v2]
-    id(x: %): ID == (rep x).id
+    id(x: %): ID == (rep x).ident
     label(x: %): L == (rep x).lab
     vertex1(x: %): V == (rep x).vert1
     vertex2(x: %): V == (rep x).vert2
     coerce(x: %): OutputForm ==
-      l: OutputForm := label(x)::OutputForm
-      v1: V := (rep x).vert1
-      v2: V := (rep x).vert2
-      l1: OutputForm := label(v1)::OutputForm
-      l2: OutputForm := label(v2)::OutputForm
-      hconcat [l, ": "::OutputForm, l1, " -- "::OutputForm, l2]
+      n: OutputForm := label(x)::OutputForm
+      v1: OutputForm := (vertex1 x) :: OutputForm
+      v2: OutputForm := (vertex2 x) :: OutputForm
+      hconcat [n, ": "::OutputForm, v1, " --> "::OutputForm, v2]
+
+)abbrev domain LUEDGE LabeledUndirectedEdge
+++ Author: Ralf Hemmecke
+++ Keywords: graph theory
+++ Description:
+++ A domain of labeled undirected edges.
+LabeledUndirectedEdge(L: SetCategory, V: GraphVertex): _
+  Join(Labeled L, GraphEdge V) with
+    edge: (L, V, V) -> %
+      ++ edge(l, v1, v2) returns a vertex with label l going between
+      ++ the vertices v1 and v2.
+  == LabeledDirectedEdge(L, V) add
+    Rep == LabeledDirectedEdge(L, V)
+    edge(l: L, v1: V, v2: V): % ==
+      -- We store the vertex with the smaller id as first node.
+      per(if id v1 < id v2 then edge(l, v1, v2)$Rep else edge(l, v2, v1)$Rep)
+    coerce(x: %): OutputForm ==
+      n: OutputForm := label(x)::OutputForm
+      v1: OutputForm := (vertex1 x) :: OutputForm
+      v2: OutputForm := (vertex2 x) :: OutputForm
+      hconcat [n, ": "::OutputForm, v1, " --- "::OutputForm, v2]
+
