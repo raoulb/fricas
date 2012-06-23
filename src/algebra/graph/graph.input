@@ -1,0 +1,50 @@
+-- some examples for the Graph code
+
+-- first we need some vertices
+V := LabeledVertex Symbol
+a: V := vertex "A"
+b: V := vertex "B"
+c: V := vertex "C"
+
+-- the directed situation
+D := LabeledDirectedEdge(Symbol, V)
+dab:D := edge("alpha"::Symbol, a, b)
+dac:D := edge("beta"::Symbol, a, c)
+dbc:D := edge("gamma"::Symbol, b, c)
+dba:D := edge("delta"::Symbol, b, a)
+daa:D := edge("id"::Symbol, a, a)
+dbb:D := edge("id"::Symbol, b, b)
+DG:=GenericGraph(V,D)
+dg := finiteGraph([],[dab, dac, dbc, dba, daa, dbb])$DG
+remove!(a, dg)
+
+-- the undirected situation
+U := LabeledUndirectedEdge(Symbol, V)
+uab:U := edge("alpha"::Symbol, a, b)
+uab2:U := edge("alpha2"::Symbol, a, b)
+uaa:U := edge("id"::Symbol, a, a)
+ubc:U := edge("ubc"::Symbol, b, c)
+(uab=uab2)@Boolean
+UG := GenericGraph(V,U)
+finiteGraph([],[uab, uab])$UG
+ug := finiteGraph([],[uab, uab2, uaa, ubc])$UG
+vertices ug
+edges ug
+remove!(a, ug)
+
+-- Prepare for graph of graphs
+-- first the "vertices"
+dg1 := dg
+dg2: DG := finiteGraph([], [daa, dab])
+dg3: DG := finiteGraph([],[daa,dac,dbb])
+
+-- create some edges, here we create undirected ones
+DE := LabeledUndirectedEdge(Symbol, DG)
+ug12: DE := edge("phi12"::Symbol, dg1, dg2)
+ug23: DE := edge("phi23"::Symbol, dg2, dg3)
+ug31: DE := edge("phi31"::Symbol, dg3, dg1)
+
+UDG := GenericGraph(DG, DE)
+udg: UDG := finiteGraph([], [ug12, ug23])
+insert!(ug31, udg)
+remove!(dg3, udg)
