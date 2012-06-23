@@ -24,7 +24,8 @@ GraphVertex: Category == SetCategory with
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
 ++ Description:
-++ Category for edges of a graph.
+++ Category for edges of a graph. Edges are supposed to be connected
+++ to two vertices.
 GraphEdge(V: GraphVertex): Category == SetCategory with
     id: % -> ID
       ++ id() returns the id of the edge
@@ -53,9 +54,18 @@ FinGraph(V: GraphVertex, E: GraphEdge V): Category == SetCategory with
       ++ from vertices and edges.
     insert!: (V, %) -> %
       ++ insert!(v, x) adds a new vertex v to the graph x.
+      ++ The function works destructively on x.
     insert!: (E, %) -> %
       ++ insert!(e, x) adds a new edge e and to the graph x
       ++ (including its vertices).
+      ++ The function works destructively on x.
+    remove!: (V, %) -> %
+      ++ remove!(v, x) removes the vertex v and all edges that
+      ++ contain v from the graph x.
+      ++ The function works destructively on x.
+    remove!: (E, %) -> %
+      ++ remove!(e, x) removes the edge e from the graph x.
+      ++ The function works destructively on x.
     vertices: % -> List V
       ++ vertices(x) returns all vertices of the graph x.
     edges: % -> List E
@@ -65,15 +75,17 @@ FinGraph(V: GraphVertex, E: GraphEdge V): Category == SetCategory with
         -- dummy implementation
         -- We assume the list of vertices and edges are sorted by their
         -- respective id's.
-        vex := vertices x
-	vey := vertices y
-	#vex ~= #vey => false
-	for vx in vex for vy in vey repeat if id vx ~= id vy then return false
-        edx := edges x
-	edy := edges y
-	#edx ~= #edy => false
-	for ex in edx for ey in edy repeat if id ex ~= id ey then return false
-	true
+        (vsx, vsy) := (vertices x, vertices y)
+        #vsx ~= #vsy => false
+        for vx in vsx for vy in vsy repeat if vx ~= vy then return false
+        (esx, esy) := (edges x, edges y)
+        #esx ~= #esy => false
+        for ex in esx for ey in esy repeat if ex ~= ey then return false
+        true
+    coerce(x: %): OutputForm ==
+        vs: List OutputForm := [v::OutputForm for v in vertices x]
+        es: List OutputForm := [e::OutputForm for e in edges x]
+        bracket [bracket vs, bracket es]
 
 )abbrev category LGRVERT LabeledGraphVertex
 ++ Author: Ralf Hemmecke
