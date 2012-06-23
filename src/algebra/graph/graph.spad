@@ -215,3 +215,82 @@ LabeledUndirectedEdge(L: SetCategory, V: GraphVertex): _
       v2: OutputForm := (vertex2 x) :: OutputForm
       hconcat [n, ": "::OutputForm, v1, " --- "::OutputForm, v2]
 
+)abbrev domain GGRAPH GenericGraph
+++ Author: Ralf Hemmecke
+++ Keywords: graph theory
+++ Description:
+++ A domain that represents an unlabeled graph.
+GenericGraph(V: GraphVertex, E: GraphEdge V): _
+  Join(FinGraph(V, E), GraphVertex) == add
+    HTE ==> HashTable(ID, E, "ID") -- for in/out-going edges
+    VIO ==> Record(vert: V, ingoing: HTE, outgoing: HTE)
+        -- vertices with their in- and outgoing edges
+    IV ==> Record(key: ID, entry: VIO) -- insert! into the Rep's hashtable
+    HTVIO ==> HashTable(ID, VIO, "ID") -- hashtable of the Rep
+    Rep == Record(ident: ID, htvio: HTVIO)
+
+    -- local functions
+    toIV(v: V): IV == [id v, [v, table(), table()]$VIO]$IV
+    getvio(v: V, ht: HTVIO): VIO ==
+        -- get the entry for v in the hash table ht and create
+        -- a new empty entry for v if not yet available
+        uvio: Union(VIO, "failed") := search(id v, ht)
+        uvio case "failed" => -- create new empty entry.
+            iv: IV := toIV v
+            ht := insert!(iv, ht)
+            iv.entry
+        uvio :: VIO
+    insertDirectedEdge!(e: E, h: HTE): Void ==
+        -- Destructively insert the edge e into the hash table h
+        -- if it doesn't yet exist. If the edge id is already known,
+        -- nothing is done.
+        i := id e
+        ue: Union(E, "failed") := search(i, h)
+        ue case "failed" => insert!([i, e]$Record(key:ID,entry:E), h)
+    insertEdge!(e: E, ht: HTVIO): Void ==
+        insertDirectedEdge!(e, getvio(vertex1 e, ht).outgoing)
+        insertDirectedEdge!(e, getvio(vertex2 e, ht).ingoing)
+    removeEdge!(e: E, ht: HTVIO): HTVIO ==
+        remove!(id e, getvio(vertex1 e, ht).outgoing)$HTE
+        remove!(id e, getvio(vertex2 e, ht).ingoing)$HTE
+        ht
+
+    -- exported functions
+    finiteGraph(vs: List V, es: List E): % ==
+        -- We make sure that all the vertices of the edges also become
+        -- vertices of the graph and that the vertices are stored in a
+        -- list which is sorted by ascending id.
+        ht: HTVIO := table()
+        for v in vs repeat insert!(toIV v, ht)$HTVIO
+        for e in es repeat insertEdge!(e, ht)
+        per [new()$ID, ht]
+
+    insert!(v: V, x: %): % == (insert!(toIV v, (rep x).htvio)$HTVIO; x)
+    insert!(e: E, x: %): % == (insertEdge!(e, (rep x).htvio); x)
+    remove!(v: V, x: %): % ==
+        -- We also remove all edges that are connected to vertex v.
+        ht: HTVIO := (rep x).htvio
+        i: ID := id v
+        uvio: Union(VIO, "failed") := search(i, ht)
+        uvio case "failed" => x -- do nothing if vertex is not in the graph
+        vio: VIO := uvio::VIO
+        -- remove all outgoing edges of v
+        h: HTE := vio.outgoing
+        for e in entries h repeat
+            vio2: VIO := ht id vertex2 e -- other vertex (it exists!)
+            remove!(id e, vio2.ingoing) -- remove ingoing of v2
+        -- remove all ingoing edges
+        h := vio.ingoing
+        for e in entries h repeat
+            vio1: VIO := ht id vertex1 e -- other vertex (it exists!)
+            remove!(id e, vio1.outgoing) -- remove outgoing of v1
+        remove!(i, ht)$HTVIO -- remove the vertex entry itself
+        x
+    remove!(e: E, x: %): % == (removeEdge!(e, (rep x).htvio); x)
+    vertices(x: %): List V == [vio.vert for vio in entries((rep x).htvio)]
+    edges(x: %): List E ==
+        le: List E := []
+        for vio in entries((rep x).htvio) repeat
+            le := concat!(entries(vio.outgoing), le)
+        le
+    id(x: %): ID == (rep x).ident
