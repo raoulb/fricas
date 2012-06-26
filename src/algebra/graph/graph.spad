@@ -5,20 +5,15 @@ per x ==> (x@Rep) pretend %
 
 ID ==> Symbol
 -- Each vertex and each edge gets a unique id.
+-- This ID is only used internally to identify a vertex or an edge
+-- and compare two vertices or two edges.
 
 )abbrev category GRVERT GraphVertex
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
 ++ Description:
 ++ Category for vertices of a graph.
-GraphVertex: Category == SetCategory with
-    id: % -> ID
-      ++ id(x) returns the id of the edge x.
-  add
-    hash(x: %): SingleInteger == hash id x
-    latex(x: %): String == latex id x
-    ((x: %) = (y: %)): Boolean == id x = id y
-    coerce(x: %): OutputForm == id(x)::OutputForm
+GraphVertex: Category == SetCategory
 
 )abbrev category GREDGE GraphEdge
 ++ Author: Ralf Hemmecke
@@ -27,21 +22,10 @@ GraphVertex: Category == SetCategory with
 ++ Category for edges of a graph. Edges are supposed to be connected
 ++ to two vertices.
 GraphEdge(V: GraphVertex): Category == SetCategory with
-    id: % -> ID
-      ++ id() returns the id of the edge
     vertex1: % -> V
       ++ vertex1(x) returns the first vertex of an edge.
-      ++ In case the edge is undirected, the following holds:
-      ++ id vertex1 x < id vertex2 x.
     vertex2: % -> V
       ++ vertex2(x) returns the second vertex of an edge.
-      ++ In case the edge is undirected, the following holds:
-      ++ id vertex1 x < id vertex2 x.
-  add
-    hash(x: %): SingleInteger == hash id x
-    latex(x: %): String == latex id x
-    ((x: %) = (y: %)): Boolean == id x = id y
-    coerce(x: %): OutputForm == id(x)::OutputForm
 
 )abbrev category FGRAPH FinGraph
 ++ Author: Ralf Hemmecke
@@ -108,28 +92,38 @@ Directed(): Category == with ()
 ++ Keywords: graph theory
 ++ Description:
 ++ A domain of unlabeled vertices.
-UnlabeledVertex: GraphVertex with
+UnlabeledVertex: Join(GraphVertex, Comparable) with
     vertex: () -> %
       ++ vertex() creates a new vertex.
   == add
     Rep == ID
+    id(x: %): ID == rep x -- local
     vertex(): % == per new()$ID
-    id(x: %): ID == rep x
+    hash(x: %): SingleInteger == hash id x
+    latex(x: %): String == latex id x
+    coerce(x: %): OutputForm == id(x)::OutputForm
+    ((x: %) = (y: %)): Boolean == id x = id y
+    smaller?(x: %, y: %): Boolean == id x < id y
+
 
 )abbrev domain LVERTEX LabeledVertex
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
 ++ Description:
 ++ A domain of labeled vertices.
-LabeledVertex(L: SetCategory): Join(Labeled L, GraphVertex) with
+LabeledVertex(L: SetCategory): Join(Labeled L, GraphVertex, Comparable) with
     vertex: L -> %
       ++ vertex(l) returns a vertex with label l.
  == add
     Rep == Record(ident: ID, lab: L)
-    vertex(l: L): % == per [new()$ID, l]
-    id(x: %): ID == (rep x).ident
-    label(x: %): L == (rep x).lab
+    id(x: %): ID == (rep x).ident -- local
+    hash(x: %): SingleInteger == hash id x
+    latex(x: %): String == latex label x
     coerce(x: %): OutputForm == label(x)::OutputForm
+    ((x: %) = (y: %)): Boolean == id x = id y
+    smaller?(x: %, y: %): Boolean == id x < id y
+    vertex(l: L): % == per [new()$ID, l]
+    label(x: %): L == (rep x).lab
 
 )abbrev domain UDEDGE UnlabeledDirectedEdge
 ++ Author: Ralf Hemmecke
@@ -141,8 +135,8 @@ UnlabeledDirectedEdge(V: GraphVertex): Join(Directed, GraphEdge V) with
       ++ edge(v1, v2) returns an new edge from vertex v1 to vertex v2.
   == add
     Rep == Record(ident: ID, vert1: V, vert2: V)
+    id(x: %): ID == (rep x).ident --local
     edge(v1: V, v2: V): % == per [new()$ID, v1, v2]
-    id(x: %): ID == (rep x).ident
     vertex1(x: %): V == (rep x).vert1
     vertex2(x: %): V == (rep x).vert2
     coerce(x: %): OutputForm ==
@@ -150,26 +144,36 @@ UnlabeledDirectedEdge(V: GraphVertex): Join(Directed, GraphEdge V) with
       v1: OutputForm := (vertex1 x) :: OutputForm
       v2: OutputForm := (vertex2 x) :: OutputForm
       hconcat [n, ": "::OutputForm, v1, " --> "::OutputForm, v2]
+    hash(x: %): SingleInteger == hash id x
+    latex(x: %): String ==
+        concat [latex id x, ":", latex vertex1 x, "\to ", latex vertex2 x]
+    ((x: %) = (y: %)): Boolean == id x = id y
 
 )abbrev domain UUEDGE UnlabeledUndirectedEdge
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
 ++ Description:
 ++ A domain of unlabeled undirected edges.
-UnlabeledUndirectedEdge(V: GraphVertex): GraphEdge V with
+UnlabeledUndirectedEdge(V: Join(GraphVertex, Comparable)): GraphEdge V with
+    vertex1: % -> V
+      ++ vertex1(x) returns the first vertex of an edge.
+      ++ In case the edge is undirected, the following holds:
+      ++ smaller?(vertex1 x, vertex2 x).
+    vertex2: % -> V
+      ++ vertex2(x) returns the second vertex of an edge.
+      ++ In case the edge is undirected, the following holds:
+      ++ smaller?(vertex1 x, vertex2 x).
     edge: (V, V) -> %
       ++ edge(v1, v2) returns an new edge from vertex v1 to vertex v2.
   == UnlabeledDirectedEdge V add
     Rep == UnlabeledDirectedEdge V
     edge(v1: V, v2: V): % ==
       -- We store the vertex with the smaller id as first node.
-      i: ID := new()$ID
-      per(if id v1 < id v2 then edge(v1, v2)$Rep else edge(v2, v1)$Rep)
+      per(if smaller?(v1, v2) then edge(v1, v2)$Rep else edge(v2, v1)$Rep)
     coerce(x: %): OutputForm ==
-      n: OutputForm := id(x)::OutputForm
       v1: OutputForm := (vertex1 x) :: OutputForm
       v2: OutputForm := (vertex2 x) :: OutputForm
-      hconcat [n, ": "::OutputForm, v1, " --- "::OutputForm, v2]
+      hconcat [v1, " --- "::OutputForm, v2]
 
 )abbrev domain LDEDGE LabeledDirectedEdge
 ++ Author: Ralf Hemmecke
@@ -183,24 +187,36 @@ LabeledDirectedEdge(L: SetCategory, V: GraphVertex): _
       ++ the vertices v1 and v2.
   == add
     Rep == Record(ident: ID, lab: L, vert1: V, vert2: V)
+    id(x: %): ID == (rep x).ident -- local
     edge(l: L, v1: V, v2: V): % == per [new()$ID, l, v1, v2]
-    id(x: %): ID == (rep x).ident
     label(x: %): L == (rep x).lab
     vertex1(x: %): V == (rep x).vert1
     vertex2(x: %): V == (rep x).vert2
+    hash(x: %): SingleInteger == hash id x
     coerce(x: %): OutputForm ==
       n: OutputForm := label(x)::OutputForm
       v1: OutputForm := (vertex1 x) :: OutputForm
       v2: OutputForm := (vertex2 x) :: OutputForm
       hconcat [n, ": "::OutputForm, v1, " --> "::OutputForm, v2]
+    latex(x: %): String ==
+        concat [latex label x, ":", latex vertex1 x, "\to ", latex vertex2 x]
+    ((x: %) = (y: %)): Boolean == id x = id y
 
 )abbrev domain LUEDGE LabeledUndirectedEdge
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
 ++ Description:
 ++ A domain of labeled undirected edges.
-LabeledUndirectedEdge(L: SetCategory, V: GraphVertex): _
+LabeledUndirectedEdge(L: SetCategory, V: Join(GraphVertex, Comparable)): _
   Join(Labeled L, GraphEdge V) with
+    vertex1: % -> V
+      ++ vertex1(x) returns the first vertex of an edge.
+      ++ In case the edge is undirected, the following holds:
+      ++ smaller?(vertex1 x, vertex2 x).
+    vertex2: % -> V
+      ++ vertex2(x) returns the second vertex of an edge.
+      ++ In case the edge is undirected, the following holds:
+      ++ smaller?(vertex1 x, vertex2 x).
     edge: (L, V, V) -> %
       ++ edge(l, v1, v2) returns a vertex with label l going between
       ++ the vertices v1 and v2.
@@ -208,7 +224,7 @@ LabeledUndirectedEdge(L: SetCategory, V: GraphVertex): _
     Rep == LabeledDirectedEdge(L, V)
     edge(l: L, v1: V, v2: V): % ==
       -- We store the vertex with the smaller id as first node.
-      per(if id v1 < id v2 then edge(l, v1, v2)$Rep else edge(l, v2, v1)$Rep)
+      per(if smaller?(v1, v2) then edge(l, v1, v2)$Rep else edge(l, v2, v1)$Rep)
     coerce(x: %): OutputForm ==
       n: OutputForm := label(x)::OutputForm
       v1: OutputForm := (vertex1 x) :: OutputForm
@@ -221,76 +237,79 @@ LabeledUndirectedEdge(L: SetCategory, V: GraphVertex): _
 ++ Description:
 ++ A domain that represents an unlabeled graph.
 GenericGraph(V: GraphVertex, E: GraphEdge V): _
-  Join(FinGraph(V, E), GraphVertex) == add
-    HTE ==> HashTable(ID, E, "ID") -- for in/out-going edges
-    VIO ==> Record(vert: V, ingoing: HTE, outgoing: HTE)
-        -- vertices with their in- and outgoing edges
-    IV ==> Record(key: ID, entry: VIO) -- insert! into the Rep's hashtable
-    HTVIO ==> HashTable(ID, VIO, "ID") -- hashtable of the Rep
+  Join(FinGraph(V, E), GraphVertex, Comparable) == add
+    EDGES ==> List E -- for in/out-going edges
+    INOUT ==> Record(ingoing: EDGES, outgoing: EDGES)
+        -- in- and outgoing edges of a vertex
+    VIO ==> Record(key: V, entry: INOUT) -- insert! into the Rep's hashtable
+    HTVIO ==> HashTable(V, INOUT, "ID") -- hashtable of the Rep
     Rep == Record(ident: ID, htvio: HTVIO)
 
     -- local functions
-    toIV(v: V): IV == [id v, [v, table(), table()]$VIO]$IV
-    getvio(v: V, ht: HTVIO): VIO ==
+    id(x: %): ID == (rep x).ident
+    toVIO(v: V): VIO == [v, [[], []]$INOUT]$VIO
+    getio(v: V, ht: HTVIO): INOUT ==
         -- get the entry for v in the hash table ht and create
         -- a new empty entry for v if not yet available
-        uvio: Union(VIO, "failed") := search(id v, ht)
-        uvio case "failed" => -- create new empty entry.
-            iv: IV := toIV v
-            ht := insert!(iv, ht)
-            iv.entry
-        uvio :: VIO
-    insertDirectedEdge!(e: E, h: HTE): Void ==
-        -- Destructively insert the edge e into the hash table h
-        -- if it doesn't yet exist. If the edge id is already known,
-        -- nothing is done.
-        i := id e
-        ue: Union(E, "failed") := search(i, h)
-        ue case "failed" => insert!([i, e]$Record(key:ID,entry:E), h)
-    insertEdge!(e: E, ht: HTVIO): Void ==
-        insertDirectedEdge!(e, getvio(vertex1 e, ht).outgoing)
-        insertDirectedEdge!(e, getvio(vertex2 e, ht).ingoing)
+        uio: Union(INOUT, "failed") := search(v, ht)
+        uio case "failed" => -- create new empty entry.
+            vio: VIO := toVIO v
+            ht := insert!(vio, ht)
+            vio.entry
+        uio :: INOUT
+    insertEdge!(e: E, ht: HTVIO): HTVIO ==
+        -- Destructvioely insert the edge e if it doesn't yet exist.
+        -- If the edge id is already known, nothing is done.
+        io: INOUT := getio(vertex1 e, ht)
+        es: EDGES := io.outgoing
+        if not member?(e, es) then io.outgoing := cons(e, es)
+        io := getio(vertex2 e, ht)
+        es := io.ingoing
+        if not member?(e, es) then io.ingoing := cons(e, es)
+        ht
     removeEdge!(e: E, ht: HTVIO): HTVIO ==
-        remove!(id e, getvio(vertex1 e, ht).outgoing)$HTE
-        remove!(id e, getvio(vertex2 e, ht).ingoing)$HTE
+        io: INOUT := getio(vertex1 e, ht)
+        io.outgoing := remove!(e, io.outgoing)
+        io := getio(vertex2 e, ht)
+        io.ingoing := remove!(e, io.ingoing)
         ht
 
     -- exported functions
+    hash(x: %): SingleInteger == hash id x
+    ((x: %) = (y: %)): Boolean == id x = id y
+    smaller?(x: %, y: %): Boolean == id x < id y
     finiteGraph(vs: List V, es: List E): % ==
         -- We make sure that all the vertices of the edges also become
         -- vertices of the graph and that the vertices are stored in a
         -- list which is sorted by ascending id.
         ht: HTVIO := table()
-        for v in vs repeat insert!(toIV v, ht)$HTVIO
+        for v in vs repeat insert!(toVIO v, ht)$HTVIO
         for e in es repeat insertEdge!(e, ht)
         per [new()$ID, ht]
 
-    insert!(v: V, x: %): % == (insert!(toIV v, (rep x).htvio)$HTVIO; x)
+    insert!(v: V, x: %): % == (insert!(toVIO v, (rep x).htvio)$HTVIO; x)
     insert!(e: E, x: %): % == (insertEdge!(e, (rep x).htvio); x)
     remove!(v: V, x: %): % ==
         -- We also remove all edges that are connected to vertex v.
         ht: HTVIO := (rep x).htvio
-        i: ID := id v
-        uvio: Union(VIO, "failed") := search(i, ht)
-        uvio case "failed" => x -- do nothing if vertex is not in the graph
-        vio: VIO := uvio::VIO
+        uio: Union(INOUT, "failed") := search(v, ht)
+        uio case "failed" => x -- do nothing if vertex is not in the graph
+        io: INOUT := uio::INOUT
         -- remove all outgoing edges of v
-        h: HTE := vio.outgoing
-        for e in entries h repeat
-            vio2: VIO := ht id vertex2 e -- other vertex (it exists!)
-            remove!(id e, vio2.ingoing) -- remove ingoing of v2
+        for e in io.outgoing repeat
+            io2: INOUT := ht vertex2 e -- other vertex (it exists!)
+            io2.ingoing := remove!(e, io2.ingoing) -- remove ingoing of v2
         -- remove all ingoing edges
-        h := vio.ingoing
-        for e in entries h repeat
-            vio1: VIO := ht id vertex1 e -- other vertex (it exists!)
-            remove!(id e, vio1.outgoing) -- remove outgoing of v1
-        remove!(i, ht)$HTVIO -- remove the vertex entry itself
+        for e in io.ingoing repeat
+            io1: INOUT := ht vertex1 e -- other vertex (it exists!)
+            io.outgoing := remove!(e, io1.outgoing) -- remove outgoing of v1
+        remove!(v, ht)$HTVIO -- remove the vertex entry itself
         x
     remove!(e: E, x: %): % == (removeEdge!(e, (rep x).htvio); x)
-    vertices(x: %): List V == [vio.vert for vio in entries((rep x).htvio)]
+    vertices(x: %): List V == keys((rep x).htvio)
     edges(x: %): List E ==
         le: List E := []
-        for vio in entries((rep x).htvio) repeat
-            le := concat!(entries(vio.outgoing), le)
+        -- It's enough to collect the outgoing edges for each vertex.
+        for io in entries((rep x).htvio) repeat
+            for e in io.outgoing repeat le := cons(e, le)
         le
-    id(x: %): ID == (rep x).ident
