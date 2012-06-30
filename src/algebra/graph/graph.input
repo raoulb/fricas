@@ -1,4 +1,5 @@
 -- some examples for the Graph code
+)clear all
 
 -- first we need some vertices
 V := LabeledVertex Symbol
@@ -16,7 +17,23 @@ daa:D := edge("id"::Symbol, a, a)
 dbb:D := edge("id"::Symbol, b, b)
 DG:=GenericGraph(V,D)
 dg := finiteGraph([],[dab, dac, dbc, dba, daa, dbb])$DG
+edges dg
+edg: V -> List D := edges dg
+ldg: V -> List D := loops dg
+idg: V -> List D := ingoingEdges dg
+odg: V -> List D := outgoingEdges dg
+edg(a)
+(ldg a, idg a, odg a)
+edg(b)
+(ldg b, idg b, odg b)
+edg(c)
+(ldg c, idg c, odg c)
 remove!(a, dg)
+(member?(dg) a, member?(dg) b)
+edg(b)
+(ldg b, idg b, odg b)
+edg(c)
+(ldg c, idg c, odg c)
 
 -- the undirected situation
 U := LabeledUndirectedEdge(Symbol, V)
@@ -30,7 +47,14 @@ finiteGraph([],[uab, uab])$UG
 ug := finiteGraph([],[uab, uab2, uaa, ubc])$UG
 vertices ug
 edges ug
+eug: V -> List U := edges ug
+eug a
+eug b
+eug c
 remove!(a, ug)
+(member?(ug)a, member?(ug)b, member?(ug)c)
+eug b
+eug c
 
 -- Prepare for graph of graphs
 -- first the "vertices"

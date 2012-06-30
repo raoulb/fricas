@@ -54,6 +54,28 @@ FinGraph(V: GraphVertex, E: GraphEdge V): Category == SetCategory with
       ++ vertices(x) returns all vertices of the graph x.
     edges: % -> List E
       ++ edges(x) returns all edges of the graph x.
+    member?: % -> (V -> Boolean)
+      ++ member?(x)(v) returns true if v is a vertex of graph x, and false
+      ++ otherwise.
+    edges: % -> (V -> List E)
+      ++ edges(x)(v) returns all edges of x that involve the vertex v.
+      ++ edges(x) returns a partial function which is undefined if v is
+      ++ not a vertex of x.
+    loops: % -> (V -> List E)
+      ++ loops(x)(v) returns the edges of graph x that start and end in v.
+      ++ loops(x) returns a partial function which is undefined if v is
+      ++ not a vertex of x.
+    if E has Directed then
+      ingoingEdges: % -> (V -> List E)
+        ++ ingoingEdges(x)(v) returns a list of ingoing edges (non-loops)
+        ++ of vertex v in graph x.
+        ++ ingoingEdges(x) returns a partial function which is undefined
+        ++ if v is not a vertex of x.
+      outgoingEdges: % -> (V -> List E)
+        ++ outgoingEdges(x)(v) returns a list of outgoing edges (non-loops)
+        ++ of vertex v in graph x.
+        ++ outgoingEdges(x) returns a partial function which is undefined
+        ++ if v is not a vertex of x.
   add
     ((x: %) = (y: %)): Boolean ==
         -- dummy implementation
@@ -239,15 +261,16 @@ LabeledUndirectedEdge(L: SetCategory, V: Join(GraphVertex, Comparable)): _
 GenericGraph(V: GraphVertex, E: GraphEdge V): _
   Join(FinGraph(V, E), GraphVertex, Comparable) == add
     EDGES ==> List E -- for in/out-going edges
-    INOUT ==> Record(ingoing: EDGES, outgoing: EDGES)
-        -- in- and outgoing edges of a vertex
+    INOUT ==> Record(outgoing: EDGES, ingoing: EDGES, xloops: EDGES)
+        -- loops and in- and outgoing edges of a vertex
     VIO ==> Record(key: V, entry: INOUT) -- insert! into the Rep's hashtable
     HTVIO ==> HashTable(V, INOUT, "ID") -- hashtable of the Rep
-    Rep == Record(ident: ID, htvio: HTVIO)
+    Rep == Record(ident: ID, hashtablevio: HTVIO)
 
     -- local functions
     id(x: %): ID == (rep x).ident
-    toVIO(v: V): VIO == [v, [[], []]$INOUT]$VIO
+    htvio(x: %): HTVIO == (rep x).hashtablevio
+    toVIO(v: V): VIO == [v, [[], [], []]$INOUT]$VIO
     getio(v: V, ht: HTVIO): INOUT ==
         -- get the entry for v in the hash table ht and create
         -- a new empty entry for v if not yet available
@@ -257,21 +280,26 @@ GenericGraph(V: GraphVertex, E: GraphEdge V): _
             ht := insert!(vio, ht)
             vio.entry
         uio :: INOUT
+    insertNew(e: E, es: List E): List E ==
+        -- insert e into  the list es if it is not already there
+         if member?(e, es) then es else cons(e, es)
     insertEdge!(e: E, ht: HTVIO): HTVIO ==
         -- Destructvioely insert the edge e if it doesn't yet exist.
         -- If the edge id is already known, nothing is done.
-        io: INOUT := getio(vertex1 e, ht)
-        es: EDGES := io.outgoing
-        if not member?(e, es) then io.outgoing := cons(e, es)
-        io := getio(vertex2 e, ht)
-        es := io.ingoing
-        if not member?(e, es) then io.ingoing := cons(e, es)
+        (v1, v2) := (vertex1 e, vertex2 e)
+        io := getio(v1, ht)
+        v1 = v2 => (io.xloops := insertNew(e, io.xloops); ht)
+        io.outgoing := insertNew(e, io.outgoing)
+        io := getio(v2, ht)
+        io.ingoing  := insertNew(e, io.ingoing)
         ht
     removeEdge!(e: E, ht: HTVIO): HTVIO ==
-        io: INOUT := getio(vertex1 e, ht)
+        (v1, v2) := (vertex1 e, vertex2 e)
+        io := getio(v1, ht);
+        v1 = v2 => (io.xloops := remove!(e, io.xloops); ht)
         io.outgoing := remove!(e, io.outgoing)
-        io := getio(vertex2 e, ht)
-        io.ingoing := remove!(e, io.ingoing)
+        io := getio(v2, ht)
+        io.ingoing  := remove!(e, io.ingoing)
         ht
 
     -- exported functions
@@ -287,11 +315,11 @@ GenericGraph(V: GraphVertex, E: GraphEdge V): _
         for e in es repeat insertEdge!(e, ht)
         per [new()$ID, ht]
 
-    insert!(v: V, x: %): % == (insert!(toVIO v, (rep x).htvio)$HTVIO; x)
-    insert!(e: E, x: %): % == (insertEdge!(e, (rep x).htvio); x)
+    insert!(v: V, x: %): % == (insert!(toVIO v, htvio x)$HTVIO; x)
+    insert!(e: E, x: %): % == (insertEdge!(e, htvio x); x)
     remove!(v: V, x: %): % ==
         -- We also remove all edges that are connected to vertex v.
-        ht: HTVIO := (rep x).htvio
+        ht: HTVIO := htvio x
         uio: Union(INOUT, "failed") := search(v, ht)
         uio case "failed" => x -- do nothing if vertex is not in the graph
         io: INOUT := uio::INOUT
@@ -305,11 +333,25 @@ GenericGraph(V: GraphVertex, E: GraphEdge V): _
             io.outgoing := remove!(e, io1.outgoing) -- remove outgoing of v1
         remove!(v, ht)$HTVIO -- remove the vertex entry itself
         x
-    remove!(e: E, x: %): % == (removeEdge!(e, (rep x).htvio); x)
-    vertices(x: %): List V == keys((rep x).htvio)
+    remove!(e: E, x: %): % == (removeEdge!(e, htvio x); x)
+    vertices(x: %): List V == keys htvio x
     edges(x: %): List E ==
         le: List E := []
-        -- It's enough to collect the outgoing edges for each vertex.
-        for io in entries((rep x).htvio) repeat
+        -- It's enough to collect the loops and the outgoing edges for
+        -- each vertex.
+        for io in entries htvio x repeat
+            for e in io.xloops repeat le := cons(e, le)
             for e in io.outgoing repeat le := cons(e, le)
         le
+    member?(x: %): V -> Boolean == (v: V): Boolean +-> key?(v, htvio x)
+    edges(x: %): V -> List E == (v: V): List E +->
+        io: INOUT := qelt(htvio x, v)
+        le: List E := concat(io.ingoing, io.outgoing)
+        for e in io.xloops repeat le := cons(e, le)
+        le
+    loops(x: %): V -> List E == (v: V): List E +-> qelt(htvio x, v).xloops
+    if E has Directed then
+        ingoingEdges(x: %): V -> List E == (v: V): List E +->
+            qelt(htvio x, v).ingoing
+        outgoingEdges(x: %): V -> List E == (v: V): List E +->
+            qelt(htvio x, v).outgoing
