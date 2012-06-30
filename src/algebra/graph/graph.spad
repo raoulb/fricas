@@ -7,6 +7,7 @@ ID ==> Symbol
 -- Each vertex and each edge gets a unique id.
 -- This ID is only used internally to identify a vertex or an edge
 -- and compare two vertices or two edges.
+Z ==> Integer
 
 )abbrev category GRVERT GraphVertex
 ++ Author: Ralf Hemmecke
@@ -57,6 +58,11 @@ FinGraph(V: GraphVertex, E: GraphEdge V): Category == SetCategory with
     member?: % -> (V -> Boolean)
       ++ member?(x)(v) returns true if v is a vertex of graph x, and false
       ++ otherwise.
+    degree: % -> (V -> Z)
+      ++ If not member?(x)(v), then degree(x)(v) returns -1. Otherwise
+      ++ degree(x)(v) is the number of edges of graph x ingoing to vertex v
+      ++ or outgoing from it.
+      ++ Note: A loop which starts and ends in vertex v counts 2.
     edges: % -> (V -> List E)
       ++ edges(x)(v) returns all edges of x that involve the vertex v.
       ++ edges(x) returns a partial function which is undefined if v is
@@ -66,6 +72,14 @@ FinGraph(V: GraphVertex, E: GraphEdge V): Category == SetCategory with
       ++ loops(x) returns a partial function which is undefined if v is
       ++ not a vertex of x.
     if E has Directed then
+      inDegree: % -> (V -> Z)
+        ++ inDegree(x)(v) returns the number of ingoing edges of vertex v
+        ++ in graph x. If not member?(x)(v), then inDegree(x)(v) returns -1.
+        ++ Note: A loop which starts and ends in vertex v counts 2.
+      outDegree: % -> (V -> Z)
+        ++ outDegree(x)(v) returns the number of outgoing edges of vertex v
+        ++ in graph x. If not member?(x)(v), then outDegree(x)(v) returns -1.
+        ++ Note: A loop which starts and ends in vertex v counts 2.
       ingoingEdges: % -> (V -> List E)
         ++ ingoingEdges(x)(v) returns a list of ingoing edges (non-loops)
         ++ of vertex v in graph x.
@@ -344,6 +358,11 @@ GenericGraph(V: GraphVertex, E: GraphEdge V): _
             for e in io.outgoing repeat le := cons(e, le)
         le
     member?(x: %): V -> Boolean == (v: V): Boolean +-> key?(v, htvio x)
+    degree(x: %): V -> Z == (v: V): Z +->
+        uio: Union(INOUT, "failed") := search(v, htvio x)
+        uio case "failed" => -1
+        io: INOUT := uio :: INOUT
+        2 * #(io.xloops)::Z + #(io.ingoing)::Z + #(io.outgoing)::Z
     edges(x: %): V -> List E == (v: V): List E +->
         io: INOUT := qelt(htvio x, v)
         le: List E := concat(io.ingoing, io.outgoing)
@@ -351,6 +370,16 @@ GenericGraph(V: GraphVertex, E: GraphEdge V): _
         le
     loops(x: %): V -> List E == (v: V): List E +-> qelt(htvio x, v).xloops
     if E has Directed then
+        inDegree(x: %): V -> Z == (v: V): Z +->
+            uio: Union(INOUT, "failed") := search(v, htvio x)
+            uio case "failed" => -1
+            io: INOUT := uio :: INOUT
+            #(io.xloops)::Z + #(io.ingoing)::Z
+        outDegree(x: %): V -> Z == (v: V): Z +->
+            uio: Union(INOUT, "failed") := search(v, htvio x)
+            uio case "failed" => -1
+            io: INOUT := uio :: INOUT
+            #(io.xloops)::Z + #(io.outgoing)::Z
         ingoingEdges(x: %): V -> List E == (v: V): List E +->
             qelt(htvio x, v).ingoing
         outgoingEdges(x: %): V -> List E == (v: V): List E +->

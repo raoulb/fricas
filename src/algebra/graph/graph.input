@@ -35,6 +35,13 @@ edg(b)
 edg(c)
 (ldg c, idg c, odg c)
 
+indg := inDegree dg
+otdg := outDegree dg
+dgdg := degree dg
+(indg a, otdg a, dgdg a)
+(indg b, otdg b, dgdg b)
+(indg c, otdg c, dgdg c)
+
 -- the undirected situation
 U := LabeledUndirectedEdge(Symbol, V)
 uab:U := edge("alpha"::Symbol, a, b)
@@ -56,6 +63,9 @@ remove!(a, ug)
 eug b
 eug c
 
+dug := degree ug
+(dug a, dug b, dug c)
+
 -- Prepare for graph of graphs
 -- first the "vertices"
 dg1 := dg
@@ -72,3 +82,6 @@ UDG := GenericGraph(DG, DE)
 udg: UDG := finiteGraph([], [ug12, ug23])
 insert!(ug31, udg)
 remove!(dg3, udg)
+
+dudg := degree udg
+(dudg dg1, dudg dg2, dudg dg3)
