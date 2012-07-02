@@ -1,3 +1,4 @@
+<<common>>=
 -- These two macros are necessary to distinguish between Rep and %.
 rep x ==> (x@%) pretend Rep
 per x ==> (x@Rep) pretend %
@@ -8,14 +9,19 @@ ID ==> Symbol
 -- This ID is only used internally to identify a vertex or an edge
 -- and compare two vertices or two edges.
 Z ==> Integer
+@
 
+<<category GRVERT GraphVertex>>=
 )abbrev category GRVERT GraphVertex
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
 ++ Description:
 ++ Category for vertices of a graph.
 GraphVertex: Category == SetCategory
+@
 
+
+<<category GREDGE GraphEdge>>=
 )abbrev category GREDGE GraphEdge
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
@@ -27,7 +33,10 @@ GraphEdge(V: GraphVertex): Category == SetCategory with
       ++ vertex1(x) returns the first vertex of an edge.
     vertex2: % -> V
       ++ vertex2(x) returns the second vertex of an edge.
+@
 
+<<category FGRAPH FinGraph>>=
+<<common>>
 )abbrev category FGRAPH FinGraph
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
@@ -75,11 +84,11 @@ FinGraph(V: GraphVertex, E: GraphEdge V): Category == SetCategory with
       inDegree: % -> (V -> Z)
         ++ inDegree(x)(v) returns the number of ingoing edges of vertex v
         ++ in graph x. If not member?(x)(v), then inDegree(x)(v) returns -1.
-        ++ Note: A loop which starts and ends in vertex v counts 2.
+        ++ Note: A loop which starts and ends in vertex v counts 1.
       outDegree: % -> (V -> Z)
         ++ outDegree(x)(v) returns the number of outgoing edges of vertex v
         ++ in graph x. If not member?(x)(v), then outDegree(x)(v) returns -1.
-        ++ Note: A loop which starts and ends in vertex v counts 2.
+        ++ Note: A loop which starts and ends in vertex v counts 1.
       ingoingEdges: % -> (V -> List E)
         ++ ingoingEdges(x)(v) returns a list of ingoing edges (non-loops)
         ++ of vertex v in graph x.
@@ -106,7 +115,9 @@ FinGraph(V: GraphVertex, E: GraphEdge V): Category == SetCategory with
         vs: List OutputForm := [v::OutputForm for v in vertices x]
         es: List OutputForm := [e::OutputForm for e in edges x]
         bracket [bracket vs, bracket es]
+@
 
+<<category LABELED Labeled>>=
 )abbrev category LABELED Labeled
 ++ Author: Ralf Hemmecke
 ++ Description:
@@ -115,14 +126,19 @@ FinGraph(V: GraphVertex, E: GraphEdge V): Category == SetCategory with
 Labeled(L: SetCategory): Category == with
     label: % -> L
       ++ label(x) returns the label corresponding to x.
+@
 
+<<category DIRECT Directed>>=
 )abbrev category DIRECT Directed
 ++ Author: Ralf Hemmecke
 ++ Description:
 ++ Category for directed objects.
 ++ The category Directed only serves as an attribute category.
 Directed(): Category == with ()
+@
 
+<<domain UVERTEX UnlabeledVertex>>=
+<<common>>
 )abbrev domain UVERTEX UnlabeledVertex
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
@@ -140,8 +156,10 @@ UnlabeledVertex: Join(GraphVertex, Comparable) with
     coerce(x: %): OutputForm == id(x)::OutputForm
     ((x: %) = (y: %)): Boolean == id x = id y
     smaller?(x: %, y: %): Boolean == id x < id y
+@
 
-
+<<domain LVERTEX LabeledVertex>>=
+<<common>>
 )abbrev domain LVERTEX LabeledVertex
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
@@ -160,7 +178,10 @@ LabeledVertex(L: SetCategory): Join(Labeled L, GraphVertex, Comparable) with
     smaller?(x: %, y: %): Boolean == id x < id y
     vertex(l: L): % == per [new()$ID, l]
     label(x: %): L == (rep x).lab
+@
 
+<<domain UDEDGE UnlabeledDirectedEdge>>=
+<<common>>
 )abbrev domain UDEDGE UnlabeledDirectedEdge
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
@@ -185,12 +206,15 @@ UnlabeledDirectedEdge(V: GraphVertex): Join(Directed, GraphEdge V) with
         concat [latex id x, ":", latex vertex1 x, "\to ", latex vertex2 x]
     ((x: %) = (y: %)): Boolean == id x = id y
 
+<<domain UUEDGE UnlabeledUndirectedEdge>>=
+<<common>>
 )abbrev domain UUEDGE UnlabeledUndirectedEdge
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
 ++ Description:
 ++ A domain of unlabeled undirected edges.
-UnlabeledUndirectedEdge(V: Join(GraphVertex, Comparable)): GraphEdge V with
+UnlabeledUndirectedEdge(V: Join(GraphVertex, Comparable)): _
+  Join(GraphEdge V, Comparable) with
     vertex1: % -> V
       ++ vertex1(x) returns the first vertex of an edge.
       ++ In case the edge is undirected, the following holds:
@@ -210,7 +234,10 @@ UnlabeledUndirectedEdge(V: Join(GraphVertex, Comparable)): GraphEdge V with
       v1: OutputForm := (vertex1 x) :: OutputForm
       v2: OutputForm := (vertex2 x) :: OutputForm
       hconcat [v1, " --- "::OutputForm, v2]
+@
 
+<<domain LDEDGE LabeledDirectedEdge>>=
+<<common>>
 )abbrev domain LDEDGE LabeledDirectedEdge
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
@@ -237,14 +264,17 @@ LabeledDirectedEdge(L: SetCategory, V: GraphVertex): _
     latex(x: %): String ==
         concat [latex label x, ":", latex vertex1 x, "\to ", latex vertex2 x]
     ((x: %) = (y: %)): Boolean == id x = id y
+@
 
+<<domain LUEDGE LabeledUndirectedEdge>>=
+<<common>>
 )abbrev domain LUEDGE LabeledUndirectedEdge
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
 ++ Description:
 ++ A domain of labeled undirected edges.
 LabeledUndirectedEdge(L: SetCategory, V: Join(GraphVertex, Comparable)): _
-  Join(Labeled L, GraphEdge V) with
+  Join(Labeled L, GraphEdge V, Comparable) with
     vertex1: % -> V
       ++ vertex1(x) returns the first vertex of an edge.
       ++ In case the edge is undirected, the following holds:
@@ -266,7 +296,10 @@ LabeledUndirectedEdge(L: SetCategory, V: Join(GraphVertex, Comparable)): _
       v1: OutputForm := (vertex1 x) :: OutputForm
       v2: OutputForm := (vertex2 x) :: OutputForm
       hconcat [n, ": "::OutputForm, v1, " --- "::OutputForm, v2]
+@
 
+<<domain GGRAPH GenericGraph>>=
+<<common>>
 )abbrev domain GGRAPH GenericGraph
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
@@ -344,7 +377,7 @@ GenericGraph(V: GraphVertex, E: GraphEdge V): _
         -- remove all ingoing edges
         for e in io.ingoing repeat
             io1: INOUT := ht vertex1 e -- other vertex (it exists!)
-            io.outgoing := remove!(e, io1.outgoing) -- remove outgoing of v1
+            io1.outgoing := remove!(e, io1.outgoing) -- remove outgoing of v1
         remove!(v, ht)$HTVIO -- remove the vertex entry itself
         x
     remove!(e: E, x: %): % == (removeEdge!(e, htvio x); x)
@@ -384,3 +417,4 @@ GenericGraph(V: GraphVertex, E: GraphEdge V): _
             qelt(htvio x, v).ingoing
         outgoingEdges(x: %): V -> List E == (v: V): List E +->
             qelt(htvio x, v).outgoing
+@
