@@ -9,26 +9,20 @@ ID ==> Symbol
 -- This ID is only used internally to identify a vertex or an edge
 -- and compare two vertices or two edges.
 Z ==> Integer
-@
-
-<<category GRVERT GraphVertex>>=
-)abbrev category GRVERT GraphVertex
-++ Author: Ralf Hemmecke
-++ Keywords: graph theory
-++ Description:
-++ Category for vertices of a graph.
-GraphVertex: Category == SetCategory
+-- Category for vertices of a graph.
+GraphVertex ==> SetCategory
 @
 
 
 <<category GREDGE GraphEdge>>=
+<<common>>
 )abbrev category GREDGE GraphEdge
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
 ++ Description:
 ++ Category for edges of a graph. Edges are supposed to be connected
 ++ to two vertices.
-GraphEdge(V: GraphVertex): Category == SetCategory with
+GraphEdge(V: GraphVertex): Category == GraphVertex with
     vertex1: % -> V
       ++ vertex1(x) returns the first vertex of an edge.
     vertex2: % -> V
@@ -187,7 +181,8 @@ LabeledVertex(L: SetCategory): Join(Labeled L, GraphVertex, Comparable) with
 ++ Keywords: graph theory
 ++ Description:
 ++ A domain of directed unlabeled edges.
-UnlabeledDirectedEdge(V: GraphVertex): Join(Directed, GraphEdge V) with
+UnlabeledDirectedEdge(V: GraphVertex): _
+  Join(Directed, GraphEdge V, Comparable) with
     edge: (V, V) -> %
       ++ edge(v1, v2) returns an new edge from vertex v1 to vertex v2.
   == add
@@ -205,6 +200,7 @@ UnlabeledDirectedEdge(V: GraphVertex): Join(Directed, GraphEdge V) with
     latex(x: %): String ==
         concat [latex id x, ":", latex vertex1 x, "\to ", latex vertex2 x]
     ((x: %) = (y: %)): Boolean == id x = id y
+    smaller?(x: %, y: %): Boolean == id x < id y
 
 <<domain UUEDGE UnlabeledUndirectedEdge>>=
 <<common>>
@@ -244,7 +240,7 @@ UnlabeledUndirectedEdge(V: Join(GraphVertex, Comparable)): _
 ++ Description:
 ++ A domain of labeled directed edges.
 LabeledDirectedEdge(L: SetCategory, V: GraphVertex): _
-  Join(Labeled L, Directed, GraphEdge V) with
+  Join(Labeled L, Directed, GraphEdge V, Comparable) with
     edge: (L, V, V) -> %
       ++ edge(l, v1, v2) returns a vertex with label l going between
       ++ the vertices v1 and v2.
@@ -264,6 +260,7 @@ LabeledDirectedEdge(L: SetCategory, V: GraphVertex): _
     latex(x: %): String ==
         concat [latex label x, ":", latex vertex1 x, "\to ", latex vertex2 x]
     ((x: %) = (y: %)): Boolean == id x = id y
+    smaller?(x: %, y: %): Boolean == id x < id y
 @
 
 <<domain LUEDGE LabeledUndirectedEdge>>=

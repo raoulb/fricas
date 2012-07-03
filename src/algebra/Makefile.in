@@ -1,5 +1,4 @@
 SPADLIST_xgraph=\
-    GRVERT\
     GREDGE\
     FGRAPH\
     LABELED\
@@ -12,7 +11,6 @@ SPADLIST_xgraph=\
     LUEDGE\
     GGRAPH
 CATLIST_xgraph=\
-    GRVERT\
     GREDGE\
     FGRAPH\
     LABELED\
