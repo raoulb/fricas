@@ -1,0 +1,79 @@
+<<setUp>>=
+-- we need some vertices
+V := LabeledVertex Symbol
+a: V := vertex "A"
+b: V := vertex "B"
+c: V := vertex "C"
+
+-- the directed situation
+D := LabeledDirectedEdge(Symbol, V)
+dab: D := edge("alpha"::Symbol, a, b)
+dac: D := edge("beta"::Symbol, a, c)
+dbc: D := edge("gamma"::Symbol, b, c)
+dba: D := edge("delta"::Symbol, b, a)
+daa: D := edge("id"::Symbol, a, a)
+dbb: D := edge("id"::Symbol, b, b)
+DG := GenericGraph(V,D)
+
+-- Prepare for graph of graphs
+-- first the "vertices"
+dg1: DG := finiteGraph([], [dab, dac, dbc, dba, daa, dbb])$DG
+dg2: DG := finiteGraph([], [daa, dab])
+dg3: DG := finiteGraph([],[daa,dac,dbb])
+
+-- create some edges, here we create undirected ones
+DE := LabeledUndirectedEdge(Symbol, DG)
+ug12: DE := edge("phi12"::Symbol, dg1, dg2)
+ug23: DE := edge("phi23"::Symbol, dg2, dg3)
+ug31: DE := edge("phi31"::Symbol, dg3, dg1)
+
+UDG := GenericGraph(DG, DE)
+udg: UDG := finiteGraph([], [ug12, ug23])
+
+assertEqualsSortedV(x: List DG, y: List DG): Void ==_
+    assertEquals(sort(smaller?, x), sort(smaller?, y))
+assertEqualsSortedE(x: List DE, y: List DE): Void ==_
+    assertEquals(sort(smaller?, x), sort(smaller?, y))
+@
+
+<<test:vertices>>=
+assertEqualsSortedV(vertices udg, [dg1,dg2,dg3])
+@
+
+<<test:edges>>=
+assertEqualsSortedE(edges udg, [ug12, ug23])
+@
+
+Don't change the edges if the edge is already in the graph.
+<<test:insert12>>=
+udg := insert!(ug12, udg)
+assertEqualsSortedE(edges udg, [ug12, ug23])
+@
+
+<<test:insert31>>=
+udg := insert!(ug31, udg)
+assertEqualsSortedE(edges udg, [ug12, ug23, ug31])
+@
+
+<<test:remove-edge>>=
+udg: UDG := remove!(ug12, udg)
+assertEqualsSortedE(edges udg, [ug23])
+assertEqualsSortedV(vertices udg, [dg1,dg2,dg3])
+@
+
+<<test:remove-vertex3>>=
+udg := remove!(dg3, udg)
+assertEqualsSortedV(vertices udg, [dg1,dg2])
+assertEqualsSortedE(edges udg, [ug12])
+@
+
+<<test:degree>>=
+dudg: DG -> Integer := degree udg
+assertEquals([dudg dg1, dudg dg2, dudg dg3], [1,2,1]
+@
+
+<<test:remove-degree>>=
+udg := remove!(dg3, udg)
+dudg: DG -> Integer := degree udg
+assertEquals([dudg dg1, dudg dg2, dudg dg3], [1,1,-1]
+@

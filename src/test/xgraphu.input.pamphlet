@@ -1,0 +1,76 @@
+<<setUp>>=
+-- we need some vertices
+V := LabeledVertex Symbol
+a: V := vertex "A"
+b: V := vertex "B"
+c: V := vertex "C"
+
+-- the undirected situation
+U := LabeledUndirectedEdge(Symbol, V)
+uab: U := edge("alpha"::Symbol, a, b)
+uab2:U := edge("alpha2"::Symbol, a, b)
+uaa: U := edge("id"::Symbol, a, a)
+ubc: U := edge("ubc"::Symbol, b, c)
+UG := GenericGraph(V,U)
+eds: List U := [uab, uab2, uaa, ubc]
+ug := finiteGraph([], eds)$UG
+eug: V -> List U := edges ug
+
+assertEqualsSortedV(x: List V, y: List V): Void ==_
+    assertEquals(sort(smaller?, x), sort(smaller?, y))
+assertEqualsSortedE(x: List U, y: List U): Void ==_
+    assertEquals(sort(smaller?, x), sort(smaller?, y))
+@
+
+The edges are not equal, because each call to the function
+\texttt{edge} creates a new edge.
+<<test:compare-edges>>=
+assertNotEquals(uab,uab2)$SpadUnit(U)
+@
+
+<<test:vertices>>=
+assertEqualsSortedV(vertices ug, [a,b,c])
+@
+
+<<test:edges>>=
+assertEqualsSortedE(edges ug, eds)$
+@
+
+<<test:edgesVa>>=
+assertEqualsSortedE(eug a, [uab, uab2, uaa])
+@
+
+<<test:edgesVb>>=
+assertEqualsSortedE(eug b, [uab, uab2, ubc])
+@
+
+<<test:edgesVc>>=
+assertEqualsSortedE(eug c, [ubc])
+@
+
+<<test:member>>=
+assertEquals([member?(ug)a, member?(ug)b, member?(ug)c],[true,true,true])
+remove!(a, ug)
+assertEquals([member?(ug)a, member?(ug)b, member?(ug)c],[false,true,true])
+@
+
+<<test:edgesVbb>>=
+remove!(a, ug)
+assertEqualsSortedE(eug b, [ubc])
+@
+
+<<test:edgesVcc>>=
+remove!(a, ug)
+assertEqualsSortedE(eug c, [ubc])
+@
+
+<<test:degree>>=
+dug := degree ug
+assertEquals([dug a, dug b, dug c], [4, 3, 1])
+@
+
+<<test:remove-degree>>=
+remove!(a, ug)
+dug := degree ug
+assertEquals([dug a, dug b, dug c], [-1, 1, 1])
+@
