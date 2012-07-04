@@ -8,6 +8,7 @@ ID ==> Symbol
 -- Each vertex and each edge gets a unique id.
 -- This ID is only used internally to identify a vertex or an edge
 -- and compare two vertices or two edges.
+N ==> NonNegativeInteger
 Z ==> Integer
 -- Category for vertices of a graph.
 GraphVertex ==> SetCategory
@@ -93,6 +94,19 @@ FinGraph(V: GraphVertex, E: GraphEdge V): Category == SetCategory with
         ++ of vertex v in graph x.
         ++ outgoingEdges(x) returns a partial function which is undefined
         ++ if v is not a vertex of x.
+    adjacency: % -> ((V, V) -> N)
+      ++ ajacency(x)(v1, v2) returns for a graph x and two vertices v1
+      ++ and v2 of the graph the number of edges that connects v1 to v2.
+      ++ The outcome of this function is undefined if v1 or v2 are not
+      ++ vertices of the graph.
+      ++ Condition: member?(x)(v1) and member?(x)(v2).
+    adjacencyMatrix: % -> Matrix N
+      ++ ajacencyMatrix(x) returns the adjacency matrix of x such that
+      ++ the rows and columns correspond to the order of vertices
+      ++ given by vertices(x).
+      ++ For two vertices u and v, the corresponding entry in the
+      ++ matrix gives the number of edges from u to v. If u=v, the matrix
+      ++ entry is the number of loops at v.
   add
     ((x: %) = (y: %)): Boolean ==
         -- dummy implementation
@@ -109,6 +123,14 @@ FinGraph(V: GraphVertex, E: GraphEdge V): Category == SetCategory with
         vs: List OutputForm := [v::OutputForm for v in vertices x]
         es: List OutputForm := [e::OutputForm for e in edges x]
         bracket [bracket vs, bracket es]
+    adjacencyMatrix(x: %): Matrix N ==
+        vs: List V := vertices x
+        n: N := #vs
+        m: Matrix N := new(n, n, 0)
+        adj: (V, V) -> N := adjacency x
+        for v1 in vs for i in 1.. repeat
+            for v2 in vs for j in 1.. repeat qsetelt!(m, i, j, adj(v1, v2))
+        m
 @
 
 <<category LABELED Labeled>>=
@@ -405,4 +427,18 @@ GenericGraph(V: GraphVertex, E: GraphEdge V): _
             qelt(htvio x, v).ingoing
         outgoingEdges(x: %): V -> List E == (v: V): List E +->
             qelt(htvio x, v).outgoing
+        adjacency(x: %): (V, V) -> N == (v1: V, v2: V): N +->
+            io: INOUT := qelt(htvio x, v1)
+            v1=v2 => #(io.xloops)
+            n: N := 0
+            for e in io.outgoing repeat if vertex2(e)=v2 then n := n+1
+            n
+    else -- not(E has Directed)
+        adjacency(x: %): (V, V) -> N == (v1: V, v2: V): N +->
+            io: INOUT := qelt(htvio x, v1)
+            v1=v2 => #(io.xloops)
+            n: N := 0
+            for e in io.outgoing repeat if vertex2(e)=v2 then n := n+1
+            for e in io.ingoing  repeat if vertex1(e)=v2 then n := n+1
+            n
 @

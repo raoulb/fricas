@@ -74,3 +74,21 @@ remove!(a, ug)
 dug := degree ug
 assertEquals([dug a, dug b, dug c], [-1, 1, 1])
 @
+
+<<test:adjab>>=
+assertEquals(adjacency(ug)(a,b), 2)
+@
+
+<<test:adjaa>>=
+assertEquals(adjacency(ug)(a,a), 1)
+@
+
+<<test:adjcb>>=
+assertEquals(adjacency(ug)(c,b), 1)
+@
+
+<<test:adjmat>>=
+vs: List V := vertices ug
+m: Matrix NonNegativeInteger := matrix [[0,1,0],[1,0,2],[0,2,1]]
+assertEquals(adjacencyMatrix(ug), m)
+@

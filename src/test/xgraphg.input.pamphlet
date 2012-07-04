@@ -77,3 +77,21 @@ udg := remove!(dg3, udg)
 dudg: DG -> Integer := degree udg
 assertEquals([dudg dg1, dudg dg2, dudg dg3], [1,1,-1]
 @
+
+<<test:adj12>>=
+assertEquals(adjacency(udg)(dg1,dg2), 1)
+@
+
+<<test:adj23>>=
+assertEquals(adjacency(udg)(dg2,dg3), 1)
+@
+
+<<test:adj31>>=
+assertEquals(adjacency(udg)(dg1,dg3), 0)
+@
+
+<<test:adjmat>>=
+vs: List DG := vertices udg
+m: Matrix NonNegativeInteger := matrix [[0,1,0],[1,0,1],[0,1,0]]
+assertEquals(adjacencyMatrix(udg), m)
+@

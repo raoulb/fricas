@@ -111,3 +111,21 @@ assertEquals([indg b, otdg b, dgdg b], [1, 2, 3])
 remove!(a, dg)
 assertEquals([indg c, otdg c, dgdg c], [1, 0, 1])
 @
+
+<<test:adjab>>=
+assertEquals(adjacency(dg)(a,b), 1)
+@
+
+<<test:adjaa>>=
+assertEquals(adjacency(dg)(a,a), 1)
+@
+
+<<test:adjcb>>=
+assertEquals(adjacency(dg)(c,b), 0)
+@
+
+<<test:adjmat>>=
+vs: List V := vertices dg
+m: Matrix NonNegativeInteger := matrix [[0,0,0],[1,1,1],[1,1,1]]
+assertEquals(adjacencyMatrix(dg), m)
+@
