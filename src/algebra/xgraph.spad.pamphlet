@@ -11,7 +11,7 @@ ID ==> Symbol
 N ==> NonNegativeInteger
 Z ==> Integer
 -- Category for vertices of a graph.
-GraphVertex ==> SetCategory
+GraphVertex ==> Join(SetCategory, Comparable)
 @
 
 
@@ -36,7 +36,7 @@ GraphEdge(V: GraphVertex): Category == GraphVertex with
 ++ Author: Ralf Hemmecke
 ++ Keywords: graph theory
 ++ Description:
-++ Category of finite graphs, allows us to model graph theory
+++ Category of finite graphs, allows us to model graph theory.
 FinGraph(V: GraphVertex, E: GraphEdge V): Category == SetCategory with
     finiteGraph: (List V, List E) -> %
       ++ finiteGraph(vertices, edgees) constructs a graph made
@@ -75,25 +75,34 @@ FinGraph(V: GraphVertex, E: GraphEdge V): Category == SetCategory with
       ++ loops(x)(v) returns the edges of graph x that start and end in v.
       ++ loops(x) returns a partial function which is undefined if v is
       ++ not a vertex of x.
-    if E has Directed then
-      inDegree: % -> (V -> Z)
-        ++ inDegree(x)(v) returns the number of ingoing edges of vertex v
-        ++ in graph x. If not member?(x)(v), then inDegree(x)(v) returns -1.
-        ++ Note: A loop which starts and ends in vertex v counts 1.
-      outDegree: % -> (V -> Z)
-        ++ outDegree(x)(v) returns the number of outgoing edges of vertex v
-        ++ in graph x. If not member?(x)(v), then outDegree(x)(v) returns -1.
-        ++ Note: A loop which starts and ends in vertex v counts 1.
-      ingoingEdges: % -> (V -> List E)
-        ++ ingoingEdges(x)(v) returns a list of ingoing edges (non-loops)
-        ++ of vertex v in graph x.
-        ++ ingoingEdges(x) returns a partial function which is undefined
-        ++ if v is not a vertex of x.
-      outgoingEdges: % -> (V -> List E)
-        ++ outgoingEdges(x)(v) returns a list of outgoing edges (non-loops)
-        ++ of vertex v in graph x.
-        ++ outgoingEdges(x) returns a partial function which is undefined
-        ++ if v is not a vertex of x.
+    inDegree: % -> (V -> Z)
+      ++ inDegree(x)(v) returns the number of ingoing edges of vertex v
+      ++ in graph x. If not member?(x)(v), then inDegree(x)(v) returns -1.
+      ++ Note: A loop which starts and ends in vertex v counts 1.
+      ++ If E is not directed then inDegree(x)(v) counts the number u of
+      ++ vertices that are connected to v by an edge and such that
+      ++ smaller?(u, v).
+    outDegree: % -> (V -> Z)
+      ++ outDegree(x)(v) returns the number of outgoing edges of vertex v
+      ++ in graph x. If not member?(x)(v), then outDegree(x)(v) returns -1.
+      ++ Note: A loop which starts and ends in vertex v counts 1.
+      ++ If E is not directed then outDegree(x)(v) counts the number u of
+      ++ vertices that are connected to v by an edge and such that
+      ++ smaller?(v, u).
+    ingoingEdges: % -> (V -> List E)
+      ++ ingoingEdges(x)(v) returns a list of ingoing edges (non-loops)
+      ++ of vertex v in graph x.
+      ++ ingoingEdges(x) returns a partial function which is undefined
+      ++ if v is not a vertex of x.
+      ++ If E is not directed then ingoingEdges(x)(v) returns all edges e
+      ++ for which vertex2 e = v and smaller?(vertex1 e, v).
+    outgoingEdges: % -> (V -> List E)
+      ++ outgoingEdges(x)(v) returns a list of outgoing edges (non-loops)
+      ++ of vertex v in graph x.
+      ++ outgoingEdges(x) returns a partial function which is undefined
+      ++ if v is not a vertex of x.
+      ++ If E is not directed then outgoingEdges(x)(v) returns all edges e
+      ++ for which vertex1 e = v and smaller?(v, vertex2 e).
     adjacency: % -> ((V, V) -> N)
       ++ ajacency(x)(v1, v2) returns for a graph x and two vertices v1
       ++ and v2 of the graph the number of edges that connects v1 to v2.
@@ -160,7 +169,7 @@ Directed(): Category == with ()
 ++ Keywords: graph theory
 ++ Description:
 ++ A domain of unlabeled vertices.
-UnlabeledVertex: Join(GraphVertex, Comparable) with
+UnlabeledVertex: GraphVertex with
     vertex: () -> %
       ++ vertex() creates a new vertex.
   == add
@@ -181,7 +190,7 @@ UnlabeledVertex: Join(GraphVertex, Comparable) with
 ++ Keywords: graph theory
 ++ Description:
 ++ A domain of labeled vertices.
-LabeledVertex(L: SetCategory): Join(Labeled L, GraphVertex, Comparable) with
+LabeledVertex(L: SetCategory): Join(Labeled L, GraphVertex) with
     vertex: L -> %
       ++ vertex(l) returns a vertex with label l.
  == add
@@ -204,7 +213,7 @@ LabeledVertex(L: SetCategory): Join(Labeled L, GraphVertex, Comparable) with
 ++ Description:
 ++ A domain of directed unlabeled edges.
 UnlabeledDirectedEdge(V: GraphVertex): _
-  Join(Directed, GraphEdge V, Comparable) with
+  Join(Directed, GraphEdge V) with
     edge: (V, V) -> %
       ++ edge(v1, v2) returns an new edge from vertex v1 to vertex v2.
   == add
@@ -231,8 +240,7 @@ UnlabeledDirectedEdge(V: GraphVertex): _
 ++ Keywords: graph theory
 ++ Description:
 ++ A domain of unlabeled undirected edges.
-UnlabeledUndirectedEdge(V: Join(GraphVertex, Comparable)): _
-  Join(GraphEdge V, Comparable) with
+UnlabeledUndirectedEdge(V: GraphVertex): GraphEdge V with
     vertex1: % -> V
       ++ vertex1(x) returns the first vertex of an edge.
       ++ In case the edge is undirected, the following holds:
@@ -258,7 +266,7 @@ UnlabeledUndirectedEdge(V: Join(GraphVertex, Comparable)): _
 ++ Description:
 ++ A domain of labeled directed edges.
 LabeledDirectedEdge(L: SetCategory, V: GraphVertex): _
-  Join(Labeled L, Directed, GraphEdge V, Comparable) with
+  Join(Labeled L, Directed, GraphEdge V) with
     edge: (L, V, V) -> %
       ++ edge(l, v1, v2) returns a vertex with label l going between
       ++ the vertices v1 and v2.
@@ -288,8 +296,8 @@ LabeledDirectedEdge(L: SetCategory, V: GraphVertex): _
 ++ Keywords: graph theory
 ++ Description:
 ++ A domain of labeled undirected edges.
-LabeledUndirectedEdge(L: SetCategory, V: Join(GraphVertex, Comparable)): _
-  Join(Labeled L, GraphEdge V, Comparable) with
+LabeledUndirectedEdge(L: SetCategory, V: GraphVertex): _
+  Join(Labeled L, GraphEdge V) with
     vertex1: % -> V
       ++ vertex1(x) returns the first vertex of an edge.
       ++ In case the edge is undirected, the following holds:
@@ -316,7 +324,7 @@ LabeledUndirectedEdge(L: SetCategory, V: Join(GraphVertex, Comparable)): _
 ++ Description:
 ++ A domain that represents an unlabeled graph.
 GenericGraph(V: GraphVertex, E: GraphEdge V): _
-  Join(FinGraph(V, E), GraphVertex, Comparable) == add
+  Join(FinGraph(V, E), GraphVertex) == add
     EDGES ==> List E -- for in/out-going edges
     INOUT ==> Record(outgoing: EDGES, ingoing: EDGES, xloops: EDGES)
         -- loops and in- and outgoing edges of a vertex
@@ -412,33 +420,31 @@ GenericGraph(V: GraphVertex, E: GraphEdge V): _
         for e in io.xloops repeat le := cons(e, le)
         le
     loops(x: %): V -> List E == (v: V): List E +-> qelt(htvio x, v).xloops
+    inDegree(x: %): V -> Z == (v: V): Z +->
+        uio: Union(INOUT, "failed") := search(v, htvio x)
+        uio case "failed" => -1
+        io: INOUT := uio :: INOUT
+        #(io.xloops)::Z + #(io.ingoing)::Z
+    outDegree(x: %): V -> Z == (v: V): Z +->
+        uio: Union(INOUT, "failed") := search(v, htvio x)
+        uio case "failed" => -1
+        io: INOUT := uio :: INOUT
+        #(io.xloops)::Z + #(io.outgoing)::Z
+    ingoingEdges(x: %): V -> List E == (v: V): List E +->
+        qelt(htvio x, v).ingoing
+    outgoingEdges(x: %): V -> List E == (v: V): List E +->
+        qelt(htvio x, v).outgoing
+    adjacencyAux(x: %): (V, V) -> N == (v1: V, v2: V): N +->
+        io: INOUT := qelt(htvio x, v1)
+        v1=v2 => #(io.xloops)
+        n: N := 0
+        for e in io.outgoing repeat if vertex2(e)=v2 then n := n+1
+        n
     if E has Directed then
-        inDegree(x: %): V -> Z == (v: V): Z +->
-            uio: Union(INOUT, "failed") := search(v, htvio x)
-            uio case "failed" => -1
-            io: INOUT := uio :: INOUT
-            #(io.xloops)::Z + #(io.ingoing)::Z
-        outDegree(x: %): V -> Z == (v: V): Z +->
-            uio: Union(INOUT, "failed") := search(v, htvio x)
-            uio case "failed" => -1
-            io: INOUT := uio :: INOUT
-            #(io.xloops)::Z + #(io.outgoing)::Z
-        ingoingEdges(x: %): V -> List E == (v: V): List E +->
-            qelt(htvio x, v).ingoing
-        outgoingEdges(x: %): V -> List E == (v: V): List E +->
-            qelt(htvio x, v).outgoing
         adjacency(x: %): (V, V) -> N == (v1: V, v2: V): N +->
-            io: INOUT := qelt(htvio x, v1)
-            v1=v2 => #(io.xloops)
-            n: N := 0
-            for e in io.outgoing repeat if vertex2(e)=v2 then n := n+1
-            n
+            adjacencyAux(x)(v1, v2)
     else -- not(E has Directed)
         adjacency(x: %): (V, V) -> N == (v1: V, v2: V): N +->
-            io: INOUT := qelt(htvio x, v1)
-            v1=v2 => #(io.xloops)
-            n: N := 0
-            for e in io.outgoing repeat if vertex2(e)=v2 then n := n+1
-            for e in io.ingoing  repeat if vertex1(e)=v2 then n := n+1
-            n
+            smaller?(v1, v2) => adjacencyAux(x)(v1, v2)
+            adjacencyAux(x)(v2, v1)
 @
