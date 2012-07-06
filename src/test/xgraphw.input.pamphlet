@@ -1,0 +1,137 @@
+<<setUp>>=
+-- we need some vertices
+V := LabeledVertex Symbol
+a: V := vertex "A"
+b: V := vertex "B"
+c: V := vertex "C"
+
+L := NameWeight(Symbol, Integer)
+
+-- the directed situation
+D := LabeledDirectedEdge(L, V)
+dab: D := edge(a, b, ["alpha"::Symbol, 2]$L)
+dac: D := edge(a, c, ["beta"::Symbol, 1]$L)
+dbc: D := edge(b, c, ["gamma"::Symbol, 9]$L)
+dba: D := edge(b, a, ["delta"::Symbol, 1]$L)
+daa: D := edge(a, a, ["idA"::Symbol, 3]$L)
+dbb: D := edge(b, b, ["idB"::Symbol,7]$L)
+DG := GenericGraph(V,D)
+eds: List D := [dab, dac, dbc, dba, daa, dbb]
+dg := finiteGraph([], eds)$DG
+edg: V -> List D := edges dg
+ldg: V -> List D := loops dg
+idg: V -> List D := ingoingEdges dg
+odg: V -> List D := outgoingEdges dg
+indg := inDegree dg
+otdg := outDegree dg
+dgdg := degree dg
+assertEqualsSortedV(x: List V, y: List V): Void ==_
+    assertEquals(sort(smaller?, x)$List(V), sort(smaller?, y)$List(V))
+assertEqualsSortedE(x: List D, y: List D): Void ==_
+    assertEquals(sort(smaller?$D, x), sort(smaller?$D, y))
+@
+
+<<test:vertices>>=
+assertEqualsSortedV(vertices dg, [a,b,c])
+@
+<<test:edges>>=
+assertEqualsSortedE(edges(dg)$DG, eds)
+@
+
+<<test:edgesVa>>=
+assertEqualsSortedE(edg a, [daa, dba, dac, dab])
+@
+
+<<test:edgesVb>>=
+assertEqualsSortedE(edg b, [dbb, dab, dba, dbc])
+@
+
+<<test:edgesVc>>=
+assertEqualsSortedE(edg c, [dac, dbc])
+@
+
+<<test:loopinout>>=
+L ==> List List D
+computed: List L := [[ldg v, idg v, odg v]$L for v in [a,b,c]]
+expected: List L := [[[daa],[dba],[dab,dac]],[[dbb],[dab],[dba,dbc]],[[],[dac,dbc],[]]]
+assertEquals(#computed, #expected)
+for lc in computed for le in expected repeat (_
+    assertEquals(#lc, #le);_
+    for x in lc for y in le repeat assertEqualsSortedE(x, y))
+@
+
+<<test:degreea>>=
+assertEquals([indg a, otdg a, dgdg a], [2, 3, 5])
+@
+
+<<test:degreeb>>=
+assertEquals([indg b, otdg b, dgdg b], [2, 3, 5])
+@
+
+<<test:degreec>>=
+assertEquals([indg c, otdg c, dgdg c], [2, 0, 2])
+@
+
+<<test:remove>>=
+remove!(a, dg)
+assertFalse(member?(dg) a)
+assertTrue(member?(dg) b)
+@
+
+<<test:removeedgesVb>>=
+remove!(a, dg)
+assertEqualsSortedE(edg b, [dbb, dbc])
+@
+
+<<test:removeedgesVc>>=
+remove!(a, dg)
+assertEqualsSortedE(edg c, [dbc])
+@
+
+<<test:remove>>=
+L ==> List List D
+remove!(a, dg)
+computed: List L := [[ldg v, idg v, odg v] for v in [b,c]]
+expected: List L := [[[dbb],[],[dbc]],[[],[dbc],[]]]
+assertEquals(#computed, #expected)
+for lc in computed for le in expected repeat (_
+    assertEquals(#lc, #le);_
+    for x in lc for y in le repeat assertEqualsSortedE(x, y))
+@
+
+<<test:degreeaa>>=
+remove!(a, dg)
+assertEquals([indg a, otdg a, dgdg a], [-1, -1, -1])
+@
+
+<<test:degreebb>>=
+remove!(a, dg)
+assertEquals([indg b, otdg b, dgdg b], [1, 2, 3])
+@
+
+<<test:degreecc>>=
+remove!(a, dg)
+assertEquals([indg c, otdg c, dgdg c], [1, 0, 1])
+@
+
+<<test:adjab>>=
+assertEquals(adjacency(dg)(a,b), 1)
+@
+
+<<test:adjaa>>=
+assertEquals(adjacency(dg)(a,a), 1)
+@
+
+<<test:adjcb>>=
+assertEquals(adjacency(dg)(c,b), 0)
+@
+
+<<test:adjmat>>=
+vs: List V := vertices dg
+m: Matrix NonNegativeInteger := matrix [[0,0,0],[1,1,1],[1,1,1]]
+assertEquals(adjacencyMatrix(dg), m)
+@
+
+<<test:weight>>=
+assertEquals([weight label e for e in eds], [2,1,9,1,3,7])
+@

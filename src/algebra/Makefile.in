@@ -10,7 +10,8 @@ SPADLIST_xgraph=\
     UUEDGE\
     LDEDGE\
     LUEDGE\
-    GGRAPH
+    GGRAPH\
+    NAMEWGHT
 CATLIST_xgraph=\
     GREDGE\
     FGRAPH\

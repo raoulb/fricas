@@ -459,3 +459,26 @@ GenericGraph(V: GraphVertex, E: GraphEdge V): _
             smaller?(v1, v2) => adjacencyAux(x)(v1, v2)
             adjacencyAux(x)(v2, v1)
 @
+
+<<domain NAMEWGHT NameWeight>>=
+<<common>>
+)abbrev domain NAMEWGHT NameWeight
+++ Author: Ralf Hemmecke
+++ Keywords: graph theory
+++ Description:
+++ A label type that includes a name and a weight.
+NameWeight(S: SetCategory, W: SetCategory):
+  Join(SetCategory, WeightedBy W) with
+    construct: (S, W) -> %
+    name: % -> S
+ == add
+    Rep == Record(nm: S, wght: W)
+    construct(n: S, w: W): % == per [n, w]
+    name(x: %): S == (rep x).nm
+    weight(x: %): W == (rep x).wght
+    hash(x: %): SingleInteger == hash name x
+    latex(x: %): String == latex name x
+    coerce(x: %): OutputForm ==
+        hconcat(name(x)::OutputForm, bracket(weight(x)::OutputForm))
+    ((x: %) = (y: %)): Boolean == name x = name y and weight x = weight y
+@
