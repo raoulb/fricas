@@ -2,6 +2,7 @@ SPADLIST_xgraph=\
     GREDGE\
     FGRAPH\
     LABELED\
+    WGHTBY\
     DIRECT\
     UVERTEX\
     LVERTEX\
@@ -14,9 +15,10 @@ CATLIST_xgraph=\
     GREDGE\
     FGRAPH\
     LABELED\
+    WGHTBY\
     DIRECT
 CATDOMS_xgraph=FGRAPH
-# end xgraph
+##end xgraph
 
 ECHO_B=printf '%s\\\n'
 ECHO_T=printf '\t%s\n'
