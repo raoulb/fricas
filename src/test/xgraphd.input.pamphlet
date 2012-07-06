@@ -7,12 +7,12 @@ c: V := vertex "C"
 
 -- the directed situation
 D := LabeledDirectedEdge(Symbol, V)
-dab: D := edge("alpha"::Symbol, a, b)
-dac: D := edge("beta"::Symbol, a, c)
-dbc: D := edge("gamma"::Symbol, b, c)
-dba: D := edge("delta"::Symbol, b, a)
-daa: D := edge("id"::Symbol, a, a)
-dbb: D := edge("id"::Symbol, b, b)
+dab: D := edge(a, b, "alpha"::Symbol)
+dac: D := edge(a, c, "beta"::Symbol)
+dbc: D := edge(b, c, "gamma"::Symbol)
+dba: D := edge(b, a, "delta"::Symbol)
+daa: D := edge(a, a, "id"::Symbol)
+dbb: D := edge(b, b, "id"::Symbol)
 DG := GenericGraph(V,D)
 eds: List D := [dab, dac, dbc, dba, daa, dbb]
 dg := finiteGraph([], eds)$DG

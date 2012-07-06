@@ -7,10 +7,10 @@ c: V := vertex "C"
 
 -- the undirected situation
 U := LabeledUndirectedEdge(Symbol, V)
-uab: U := edge("alpha"::Symbol, a, b)
-uab2:U := edge("alpha2"::Symbol, a, b)
-uaa: U := edge("id"::Symbol, a, a)
-ubc: U := edge("ubc"::Symbol, b, c)
+uab: U := edge(a, b, "alpha"::Symbol)
+uab2:U := edge(a, b, "alpha2"::Symbol)
+uaa: U := edge(a, a, "id"::Symbol)
+ubc: U := edge(b, c, "ubc"::Symbol)
 UG := GenericGraph(V,U)
 eds: List U := [uab, uab2, uaa, ubc]
 ug := finiteGraph([], eds)$UG

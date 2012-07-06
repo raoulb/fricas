@@ -267,13 +267,13 @@ UnlabeledUndirectedEdge(V: GraphVertex): GraphEdge V with
 ++ A domain of labeled directed edges.
 LabeledDirectedEdge(L: SetCategory, V: GraphVertex): _
   Join(Labeled L, Directed, GraphEdge V) with
-    edge: (L, V, V) -> %
-      ++ edge(l, v1, v2) returns a vertex with label l going between
+    edge: (V, V, L) -> %
+      ++ edge(v1, v2, l) returns a vertex with label l going between
       ++ the vertices v1 and v2.
   == add
-    Rep == Record(ident: ID, lab: L, vert1: V, vert2: V)
+    Rep == Record(ident: ID, vert1: V, vert2: V, lab: L)
     id(x: %): ID == (rep x).ident -- local
-    edge(l: L, v1: V, v2: V): % == per [new()$ID, l, v1, v2]
+    edge(v1: V, v2: V, l: L): % == per [new()$ID, v1, v2, l]
     label(x: %): L == (rep x).lab
     vertex1(x: %): V == (rep x).vert1
     vertex2(x: %): V == (rep x).vert2
@@ -306,14 +306,14 @@ LabeledUndirectedEdge(L: SetCategory, V: GraphVertex): _
       ++ vertex2(x) returns the second vertex of an edge.
       ++ In case the edge is undirected, the following holds:
       ++ smaller?(vertex1 x, vertex2 x).
-    edge: (L, V, V) -> %
-      ++ edge(l, v1, v2) returns a vertex with label l going between
+    edge: (V, V, L) -> %
+      ++ edge(v1, v2, l) returns a vertex with label l going between
       ++ the vertices v1 and v2.
   == LabeledDirectedEdge(L, V) add
     Rep == LabeledDirectedEdge(L, V)
-    edge(l: L, v1: V, v2: V): % ==
+    edge(v1: V, v2: V, l: L): % ==
       -- We store the vertex with the smaller id as first node.
-      per(if smaller?(v1, v2) then edge(l, v1, v2)$Rep else edge(l, v2, v1)$Rep)
+      per(if smaller?(v1, v2) then edge(v1, v2, l)$Rep else edge(v2, v1, l)$Rep)
 @
 
 <<domain GGRAPH GenericGraph>>=

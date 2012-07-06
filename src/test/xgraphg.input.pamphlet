@@ -7,12 +7,12 @@ c: V := vertex "C"
 
 -- the directed situation
 D := LabeledDirectedEdge(Symbol, V)
-dab: D := edge("alpha"::Symbol, a, b)
-dac: D := edge("beta"::Symbol, a, c)
-dbc: D := edge("gamma"::Symbol, b, c)
-dba: D := edge("delta"::Symbol, b, a)
-daa: D := edge("id"::Symbol, a, a)
-dbb: D := edge("id"::Symbol, b, b)
+dab: D := edge(a,b, "alpha"::Symbol)
+dac: D := edge(a, c, "beta"::Symbol)
+dbc: D := edge(b, c, "gamma"::Symbol)
+dba: D := edge(b, a, "delta"::Symbol)
+daa: D := edge(a, a, "id"::Symbol)
+dbb: D := edge(b, a, "id"::Symbol)
 DG := GenericGraph(V,D)
 
 -- Prepare for graph of graphs
@@ -23,9 +23,9 @@ dg3: DG := finiteGraph([],[daa,dac,dbb])
 
 -- create some edges, here we create undirected ones
 DE := LabeledUndirectedEdge(Symbol, DG)
-ug12: DE := edge("phi12"::Symbol, dg1, dg2)
-ug23: DE := edge("phi23"::Symbol, dg2, dg3)
-ug31: DE := edge("phi31"::Symbol, dg3, dg1)
+ug12: DE := edge( dg1, dg2, "phi12"::Symbol)
+ug23: DE := edge(dg2, dg3, "phi23"::Symbol)
+ug31: DE := edge(dg3, dg1, "phi31"::Symbol)
 
 UDG := GenericGraph(DG, DE)
 udg: UDG := finiteGraph([], [ug12, ug23])
