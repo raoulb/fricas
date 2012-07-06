@@ -1,0 +1,72 @@
+<<setUp>>=
+-- we need some vertices
+V := LabeledVertex Symbol
+va: V := vertex "A"
+vb: V := vertex "B"
+vc: V := vertex "C"
+vd: V := vertex "D"
+ve: V := vertex "E"
+vf: V := vertex "F"
+
+W := Integer
+L := NameWeight(Symbol, W)
+E := LabeledDirectedEdge(L, V)
+G := GenericGraph(V,E)
+GT := GraphTools(W, L, V, E, G)
+
+-- the directed situation
+assertEqualsSortedE(x: List E, y: List E): Void ==_
+    assertEquals(sort(smaller?$E, x), sort(smaller?$E, y))
+@
+
+<<test:mst1>>=
+eab2: E := edge(va, vb, ["ab"::Symbol, 2]$L)
+ead5: E := edge(va, vd, ["ad"::Symbol, 5]$L)
+eaf6: E := edge(va, vf, ["af"::Symbol, 6]$L)
+ebc8: E := edge(vb, vc, ["bc"::Symbol, 8]$L)
+ebd6: E := edge(vb, vd, ["bd"::Symbol, 6]$L)
+ecd3: E := edge(vc, vd, ["cd"::Symbol, 3]$L)
+ece5: E := edge(vc, ve, ["ce"::Symbol, 5]$L)
+ede6: E := edge(vd, ve, ["de"::Symbol, 6]$L)
+edf7: E := edge(vd, vf, ["df"::Symbol, 7]$L)
+eef2: E := edge(ve, vf, ["ef"::Symbol, 2]$L)
+es: List E := [eab2, ead5, eaf6, ebc8, ebd6, ecd3, ece5, ede6, edf7, eef2]
+g := finiteGraph([], es)$G
+st: List E := [eab2, ead5, ecd3, ece5, eef2]
+gg := minimumSpanningTreePrim(g)$GT
+assertEqualsSortedE(edges gg, st)
+@
+
+<<test:mst2>>=
+eab2: E := edge(va, vb, ["ab"::Symbol, 2]$L)
+ead5: E := edge(va, vd, ["ad"::Symbol, 5]$L)
+eae8: E := edge(va, ve, ["ae"::Symbol, 8]$L)
+ebd4: E := edge(vb, vd, ["bd"::Symbol, 4]$L)
+ecd3: E := edge(vc, vd, ["cd"::Symbol, 3]$L)
+ece7: E := edge(vc, ve, ["ce"::Symbol, 7]$L)
+ede6: E := edge(vd, ve, ["de"::Symbol, 6]$L)
+es: List E := [eab2, ead5, eae8, ebd4, ecd3, ece7, ede6]
+g := finiteGraph([], es)$G
+st: List E := [eab2, ebd4, ecd3, ede6]
+gg := minimumSpanningTreePrim(g)$GT
+assertEqualsSortedE(edges gg, st)
+@
+
+<<test:mst3>>=
+eab4: E := edge(va, vb, ["ab"::Symbol, 4]$L)
+eae7: E := edge(va, ve, ["ae"::Symbol, 7]$L)
+eaf6: E := edge(va, vf, ["af"::Symbol, 6]$L)
+ebc8: E := edge(vb, vc, ["bc"::Symbol, 8]$L)
+ebd8: E := edge(vb, vd, ["bd"::Symbol, 8]$L)
+ebf6: E := edge(vb, vf, ["bf"::Symbol, 6]$L)
+ecd8: E := edge(vc, vd, ["cd"::Symbol, 8]$L)
+ecf7: E := edge(vc, vf, ["cf"::Symbol, 7]$L)
+ede2: E := edge(vd, ve, ["de"::Symbol, 2]$L)
+edf3: E := edge(vd, vf, ["df"::Symbol, 3]$L)
+eef4: E := edge(ve, vf, ["ef"::Symbol, 4]$L)
+es: List E := [eab4, eae7, eaf6, ebc8, ebd8, ebf6, ecd8, ecf7, ede2, edf3, eef4]
+g := finiteGraph([], es)$G
+st: List E := [eab4, eaf6, ecf7, ede2, edf3]
+gg := minimumSpanningTreePrim(g)$GT
+assertEqualsSortedE(edges gg, st)
+@

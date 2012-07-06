@@ -11,7 +11,9 @@ SPADLIST_xgraph=\
     LDEDGE\
     LUEDGE\
     GGRAPH\
-    NAMEWGHT
+    NAMEWGHT\
+    AHSUBGT\
+    GRPHTOOL
 CATLIST_xgraph=\
     GREDGE\
     FGRAPH\

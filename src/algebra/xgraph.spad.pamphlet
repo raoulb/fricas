@@ -12,6 +12,7 @@ N ==> NonNegativeInteger
 Z ==> Integer
 -- Category for vertices of a graph.
 GraphVertex ==> Join(SetCategory, Comparable)
+TABLE ==> Table
 @
 
 
@@ -340,7 +341,7 @@ GenericGraph(V: GraphVertex, E: GraphEdge V): _
     INOUT ==> Record(outgoing: EDGES, ingoing: EDGES, xloops: EDGES)
         -- loops and in- and outgoing edges of a vertex
     VIO ==> Record(key: V, entry: INOUT) -- insert! into the Rep's hashtable
-    HTVIO ==> HashTable(V, INOUT, "ID") -- hashtable of the Rep
+    HTVIO ==> TABLE(V, INOUT) -- hashtable of the Rep
     Rep == Record(ident: ID, hashtablevio: HTVIO)
 
     -- local functions
@@ -481,4 +482,91 @@ NameWeight(S: SetCategory, W: SetCategory):
     coerce(x: %): OutputForm ==
         hconcat(name(x)::OutputForm, bracket(weight(x)::OutputForm))
     ((x: %) = (y: %)): Boolean == name x = name y and weight x = weight y
+@
+
+<<domain AHSUBGT AdHocGraphToolsVE>>=
+<<common>>
+)abbrev domain AHSUBGT AdHocGraphToolsVE
+++ Author: Ralf Hemmecke
+++ Keywords: graph theory
+++ Description:
+++ Auxiliary domain. Would want to have this local inside GraphTools.
+++ This domain serves as a container for edges in a priority heap inside
+++ This domain is most probably not useful outside of GraphTools.
+++ GraphTools and is most probably not useful outside of it.
+
+AdHocGraphToolsVE(
+      W: OrderedAbelianMonoid,_
+      L: WeightedBy W,_
+      V: GraphVertex,_
+      E: Join(GraphEdge V, Labeled L)): OrderedSet with
+    construct: (V, E) -> %
+    vertex: % -> V
+    edge: % -> E
+  == add
+    Rep == Record(xvertex: V, xedge: E)
+    construct(v: V, e: E): % == per [v, e]
+    vertex(x: %): V == (rep x).xvertex
+    edge(x: %): E == (rep x).xedge
+    -- Since we are looking for minimal weight, we have to reverse the order.
+    ((x: %) < (y: %)): Boolean == weight label edge x > weight label edge y
+    ((x: %) <= (y: %)): Boolean == weight label edge x >= weight label edge y
+    ((x: %) = (y: %)): Boolean == edge x = edge y --not needed
+    -- The following function is here to satisfy SetCategory.
+    -- It is never accessed in GraphTools.
+    coerce(x: %): OutputForm ==
+        bracket [vertex(x)::OutputForm, edge(x)::OutputForm]
+@
+
+<<package GRPHTOOL GraphTools>>=
+<<common>>
+)abbrev package GRPHTOOL GraphTools
+++ Author: Ralf Hemmecke
+++ Keywords: graph theory
+++ Description:
+++ GraphTools is a package that provides graph algorithms.
+GraphTools(
+      W: OrderedAbelianMonoid,_
+      L: WeightedBy W,_
+      V: GraphVertex,_
+      E: Join(GraphEdge V, Labeled L),_
+      G: FinGraph(V, E)): with
+    minimumSpanningTreePrim: G -> G
+      ++ m := minimumSpanningTreePrim(g) computes the minimum spanning tree
+      ++ of the graph g. g is assumed to be connected. Furthermore g is
+      ++ considered as a undirected graph. The returned graph is a
+      ++ subgraph of i.e. vertices(m)=vertices(g) and every element of
+      ++ edges(m) is a member of edges(g).
+  == add
+    VE ==> AdHocGraphToolsVE(W, L, V, E)
+    --local
+    insertEdge!(v: V, e: E, vt: TABLE(V, V), h: Heap VE): Heap VE ==
+        -- If the other end of the edge is already in the tree, we
+        -- don't need to consider this edge anymore.
+        index?(v, vt) => h
+        insert!([v, e]$VE, h)
+    minimumSpanningTreePrim(g: G): G ==
+        gg: G := finiteGraph([], [])
+        h: Heap VE := empty()
+        vs: List V := vertices g
+        u: V := first vs
+        vs := rest copy vs
+        ieds: V -> List E := ingoingEdges g
+        oeds: V -> List E := outgoingEdges g
+        vt: TABLE(V, V) := table()
+        while not empty? vs repeat
+            vt.u := u
+            -- add new edges
+            for e in oeds u repeat insertEdge!(vertex2 e, e, vt, h)
+            for e in ieds u repeat insertEdge!(vertex1 e, e, vt, h)
+            -- extract an edge with minimal weight and skip over those
+            -- that connect to a vertex that is already in the tree
+            repeat
+                ve: VE := extract! h
+                u := vertex ve
+                if not member?(u, vt) then break
+            -- update
+            vs := remove!(u, vs)
+            insert!(edge ve, gg)
+        gg
 @
