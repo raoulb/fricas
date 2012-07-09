@@ -148,7 +148,7 @@ FinGraph(V: GraphVertex, E: GraphEdge V): Category == SetCategory with
 ++ Description:
 ++ Category for labeled objects.
 ++ The category Labeled mainly serves as an attribute category.
-Labeled(L: SetCategory): Category == with
+Labeled(L: Type): Category == with
     label: % -> L
       ++ label(x) returns the label corresponding to x.
 @
@@ -159,7 +159,7 @@ Labeled(L: SetCategory): Category == with
 ++ Description:
 ++ Category for weighted objects.
 ++ The category Weighted mainly serves as an attribute category.
-WeightedBy(W: SetCategory): Category == with
+WeightedBy(W: Type): Category == with
     weight: % -> W
       ++ weight(x) returns the weight corresponding to x.
 @
