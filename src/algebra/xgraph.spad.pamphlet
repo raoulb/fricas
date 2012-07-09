@@ -195,7 +195,7 @@ UnlabeledDirectedEdge(V: GraphVertex): _
       n: OutputForm := id(x)::OutputForm
       v1: OutputForm := (vertex1 x) :: OutputForm
       v2: OutputForm := (vertex2 x) :: OutputForm
-      hconcat [n, ": "::OutputForm, v1, " --> "::OutputForm, v2]
+      hconcat [n, ": "::OutputForm, rarrow(v1, v2)]
     hash(x: %): SingleInteger == hash id x
     latex(x: %): String ==
         concat [latex id x, ":", latex vertex1 x, "\to ", latex vertex2 x]
@@ -226,10 +226,6 @@ UnlabeledUndirectedEdge(V: Join(GraphVertex, Comparable)): _
     edge(v1: V, v2: V): % ==
       -- We store the vertex with the smaller id as first node.
       per(if smaller?(v1, v2) then edge(v1, v2)$Rep else edge(v2, v1)$Rep)
-    coerce(x: %): OutputForm ==
-      v1: OutputForm := (vertex1 x) :: OutputForm
-      v2: OutputForm := (vertex2 x) :: OutputForm
-      hconcat [v1, " --- "::OutputForm, v2]
 @
 
 <<domain LDEDGE LabeledDirectedEdge>>=
@@ -256,7 +252,7 @@ LabeledDirectedEdge(L: SetCategory, V: GraphVertex): _
       n: OutputForm := label(x)::OutputForm
       v1: OutputForm := (vertex1 x) :: OutputForm
       v2: OutputForm := (vertex2 x) :: OutputForm
-      hconcat [n, ": "::OutputForm, v1, " --> "::OutputForm, v2]
+      hconcat [n, ": "::OutputForm, rarrow(v1, v2)]
     latex(x: %): String ==
         concat [latex label x, ":", latex vertex1 x, "\to ", latex vertex2 x]
     ((x: %) = (y: %)): Boolean == id x = id y
@@ -288,11 +284,6 @@ LabeledUndirectedEdge(L: SetCategory, V: Join(GraphVertex, Comparable)): _
     edge(l: L, v1: V, v2: V): % ==
       -- We store the vertex with the smaller id as first node.
       per(if smaller?(v1, v2) then edge(l, v1, v2)$Rep else edge(l, v2, v1)$Rep)
-    coerce(x: %): OutputForm ==
-      n: OutputForm := label(x)::OutputForm
-      v1: OutputForm := (vertex1 x) :: OutputForm
-      v2: OutputForm := (vertex2 x) :: OutputForm
-      hconcat [n, ": "::OutputForm, v1, " --- "::OutputForm, v2]
 @
 
 <<domain GGRAPH GenericGraph>>=
