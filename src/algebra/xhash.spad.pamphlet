@@ -5,6 +5,7 @@ per x ==> (x@Rep) pretend %
 -------------------------------------------------------------------
 N ==> NonNegativeInteger
 Z ==> Integer
+I ==> SingleInteger
 @
 
 
@@ -19,41 +20,99 @@ Z ==> Integer
 XHashTable(Key: SetCategory, Entry: SetCategory):
   Join(TableAggregate(Key, Entry), finiteAggregate, shallowlyMutable) == add
     KE ==> Record(key: Key, entry: Entry)
+    UE ==> Union(Entry, "failed")
+    -- None is just a fake domain.
+    Buckets ==> PrimitiveArray None
+    -- numOfEntries: the actual number of hash table entries
+    -- arr: array of length 2*n where n is the number of buckets
+    --      For any i in the range 0<=i<n we have:
+    --      arr(i): NIL or a stored element of type Key
+    --      arr(n+i): NIL or a stored element of type Entry
+    -- We need two distinct values to mark vacant and deleted Key positions
+    -- in the Buckets array.
+    VACANT : None := GENSYM()$Lisp pretend None -- key pos never used
+    DELETED: None := GENSYM()$Lisp pretend None -- key pos is deleted
+    vacant?(x)  ==> EQ(x, VACANT)$Lisp
+    deleted?(x) ==> EQ(x, DELETED)$Lisp
+    key?(x) ==> not (vacant? x or deleted? x)
+    len(a) ==> shift(#a, -1) -- this will be a prime by construction
+    getKey(a, i)    ==> a.i pretend Key
+    setKey!(a, i, k) ==> (a.i := k pretend None) pretend Key
+    getEntry(a, n, i)     ==> a(n+i) pretend Entry
+    setEntry!(a, n, i, e)  ==> (a(n+i) := e pretend None) pretend Entry
+    setKeyEntry!(a, n, i, k, e) ==> (setKey!(a, i, k); setEntry!(a, n, i, e))
+    deleteKeyEntry!(a, n, i) ==> setKeyEntry!(a, n, i, DELETED, VACANT)
 
-    -- Want hash function be part of the structure and want to be able
-    -- to give a hash function at table creation.
-    Rep == Record(numOfEntries: N, arr: FlexibleArray FlexibleArray KE)
+    Rep == Record(numOfEntries: Z, idx: Z, arr: Buckets, hashCode: Key -> I)
     --local
-    -- search(k, x) returns (h, i) where h is the hash of k and
-    -- if k is in x, then (h, i) is its position in the structure,
-    -- if k is not in x then i=0.
-    localsearch(k: Key, x: %): Record(idx: N, bidx: N) ==
-        -- search k in array
-        a := rep(x).arr
-        n: N := #a
-        h: N := ((hash(k)::Z::N) rem n)+1                     -- Call hash$Key
-        bucket := a.h
-        for i in 1..#bucket repeat if bucket.i.key = k then return [h, i]
-        [h, 0]
-    -- Create a new array where each entry is an empty array, but at
-    -- a different memory location.
-    newArr(n: N): FlexibleArray FlexibleArray KE ==
-       a: FlexibleArray FlexibleArray KE := new(n, empty())
-       for i in 2..n repeat a.i := empty()
-       a
+    -- Search key k in a with hash function h.
+    -- Assume that #a is 2*n for n prime. Furthermore n-2 is also prime.
+    -- It returns an index p such that "vacant?(a.p) or a.p=k".
+    -- In other words, if this search fails the key is not in the hash.
+    localSearch(a: Buckets, k: Key, h: Key -> I): Z ==
+        n: Z := len a
+        h1: Z := (h k)::Z
+        p: Z := positiveRemainder(h1, n) -- position in array
+        -- We make sure the second hash is coprime with n.
+        h2: Z := 1 + positiveRemainder(h1, n-2)
+        kk: Key := getKey(a, p)
+        -- We know that there are free slots in the array.
+        -- The while loop must terminate since n and h2 are coprime..
+        while not vacant? kk and (deleted? kk or k ~= kk) repeat
+            p := p + h2
+            if p>=n then p := p-n
+            kk: Key := getKey(a, p)
+        p
+    -- seteltSearch(a,k,h) returns p such that either "not key?(a.p) or a.p=k".
+    -- In other words p is the position to store k and its corresponding entry.
+    -- This is similar to localSearch except that localSearch regards
+    -- deleted positions as not vacant.
+    seteltSearch(a: Buckets, k: Key, h: Key -> I): Z ==
+        n: Z := len a
+        h1: Z := (h k)::Z
+        p: Z := positiveRemainder(h1, n) -- position in array
+        -- We make sure the second hash is coprime with n.
+        h2: Z := 1 + positiveRemainder(h1, n-2)
+        kk: Key := getKey(a, p)
+        -- We know that there are free slots in the array.
+        -- The while loop must terminate since n and h2 are coprime..
+        while key? kk and k ~= kk repeat
+            p := p + h2
+            if p>=n then p := p-n
+            kk: Key := getKey(a, p)
+        p
+    newArr(n: N): Buckets == new(2*n, VACANT)
     -- If the load factor has been reached the number of buckets is
     -- doubled.
-    grow!(x: %): Void ==
-        a := rep(x).arr
-        n: N := #a
-        m: N := 2*n
-        c: FlexibleArray FlexibleArray KE := newArr m
-        for i in 1..n repeat
-            bucket := a.i
-            for j in 1..#bucket repeat
-                h: N := ((hash(bucket.j.key)::Z::N) rem m)+1  -- Call hash$Key
-                concat!(c.h, bucket.j)
-        rep(x).arr := c  --destructively set new array
+    -- localPrimes is just an array of precomputed primes that are used to
+    -- serve as the a new size after growing the array.
+    -- prevTwinPrime(x) ==
+    --     p:=prevPrime(x)
+    --     while p-(q:=prevPrime p) > 2 repeat p:=q
+    --     p
+    -- [[prevTwinPrime(2^i)::N for i in 3..40]]
+    -- We have chosen the primes in such a way, that also p-2 is a prime.
+    -- This will be useful for the second hash function. See Knuth:
+    -- "Art of Computer Programming, Volume 3: Sorting and Searching".
+    arrayLengths: PrimitiveArray N := [[_
+        7, 13, 31, 61, 109, 241, 463, 1021, 2029, 4093, 8089, 16363,_
+        32719, 65521, 131011, 262111, 524221, 1048573, 2097133,_
+        4193803, 8388451, 16777141, 33554011, 67108669, 134217439,_
+        268435009, 536870839, 1073741719, 2147482951, 4294965841,_
+        8589934291, 17179868809, 34359737299, 68719476391,_
+        137438953273, 274877906629, 549755813359, 1099511626399]]
+
+    grow!(r: Rep): Void ==
+        h: Key -> I := r.hashCode
+        a: Buckets := r.arr
+        n: Z := len a
+        r.idx := r.idx + 1
+        m: N := arrayLengths r idx
+        c: Buckets := newArr m
+        for i in 0..n-1 | key?(k: Key := getKey(a, i)) repeat
+            p := seteltSearch(c, k, h)
+            setKeyEntry!(c, m, p, k, getEntry(a, n, i))
+        r.arr := c  --destructively set new array
 
     --exported
 
@@ -61,118 +120,103 @@ XHashTable(Key: SetCategory, Entry: SetCategory):
     -- table(hashfunction: Key -> SingleInteger): % ==
     -- empty(): % == table(hash$Key)
 
-    -- initially we reserve space for 8 buckets
-    empty(): % == per [0, newArr 8]
-    search(k: Key, x: %): Union(Entry, "failed") ==
-        r: Record(idx: N, bidx: N) := localsearch(k, x)
-        i := r.bidx
-        zero? i => "failed"
-        h := r.idx
-        (rep(x).arr.h.i.entry)::Union(Entry, "failed")
+    empty(): % == per [0, 0, newArr arrayLengths 0, hash$Key]
     keys(x: %): List Key ==
         a := rep(x).arr
-        l: List Key := []
-        for i in 1..#a repeat
-            bucket := a.i
-            for j in 1..#bucket repeat l := cons(bucket.j.key, l)
+        l: List Key := empty()
+        for i in 0..len a - 1 | key?(k: Key := getKey(a, i)) repeat
+            l := cons(k, l)
         l
     inspect(x: %): KE ==
         a := rep(x).arr
-        for i in 1..#a repeat
-            bucket := a.i
-            for j in 1..#bucket repeat return bucket j
+        for i in 0..len a - 1 | key?(k: Key := getKey(a, i)) repeat
+            return [k, getEntry(a, len a, i)]
         error "table must be non-empty"
-    #(x: %): N == rep(x).numOfEntries
+    #(x: %): N == rep(x).numOfEntries :: N
+    search(k: Key, x: %): Union(Entry, "failed") ==
+        a := rep(x).arr
+        p: Z := localSearch(a, k, rep(x).hashCode)
+        k: Key := getKey(a, p)
+        key? k => getEntry(a, len a, p)::UE
     elt(x: %, k: Key): Entry ==
-        r: Record(idx: N, bidx: N) := localsearch(k, x)
-        h := r.idx
-        i := r.bidx
-        bucket := rep(x).arr.h
-        not zero? i => bucket.i.entry
+        a := rep(x).arr
+        p := localSearch(a, k, rep(x).hashCode)
+        k: Key := getKey(a, p)
+        key? k => getEntry(a, len a, p)
         error "key not in table"
     elt(x: %, k: Key, e: Entry): Entry ==
-        r: Record(idx: N, bidx: N) := localsearch(k, x)
-        h := r.idx
-        i := r.bidx
-        bucket := rep(x).arr.h
-        not zero? i => bucket.i.entry
+        a := rep(x).arr
+        p := localSearch(a, k, rep(x).hashCode)
+        k: Key := getKey(a, p)
+        key? k => getEntry(a, len a, p)
         e
     setelt(x: %, k: Key, e: Entry): Entry ==
-        r: Record(idx: N, bidx: N) := localsearch(k, x)
-        h := r.idx
-        i := r.bidx
-        bucket := rep(x).arr.h
-        not zero? i => bucket.i.entry := e
-        concat!(bucket, [k, e])
-        -- We choose a load factor of 0.75.
-        if 3*(rep(x).numOfEntries := 1 + #x) > 4*#(rep(x).arr) then grow! x
-        -- we must insert a new entry
-        e
-    remove!(ke: KE, x: %): % ==
-        r: Record(idx: N, bidx: N) := localsearch(ke.key, x)
-        h := r.idx
-        i := r.bidx
-        zero? i => x
-        bucket := rep(x).arr.h
-        bucket.i.entry ~= ke.entry => x
-        n: N := #bucket
-        bucket.i := bucket.n
-        delete!(bucket, n)
-        rep(x).numOfEntries := (#x::Z - 1)::N
-        x
+        -- We choose a load factor of 0.7. Note that arr has lenght 2n.
+        -- 0.7=(2*7)/20.
+        if 20*#x > 7*#(rep(x).arr) then grow! rep x
+        a := rep(x).arr
+        p := localSearch(a, k, rep(x).hashCode)
+        kk: Key := getKey(a, p)
+        n: Z := len a
+        key? kk => setEntry!(a, n, p, e)
+        rep(x).numOfEntries := inc(rep(x).numOfEntries)
+        -- Note that we must search a not vacant of deleted position since
+        -- we want to reuse deleted positions.
+        p := seteltSearch(a, k, rep(x).hashCode)
+        setKeyEntry!(a, n, p, k, e)
     remove!(k: Key, x: %): Union(Entry, "failed") ==
-        r: Record(idx: N, bidx: N) := localsearch(k, x)
-        h := r.idx
-        i := r.bidx
-        zero? i => "failed"
-        bucket := rep(x).arr.h
-        n: N := #bucket
-        e: Entry := bucket.i.entry
-        bucket.i := bucket.n
-        delete!(bucket, n)
-        rep(x).numOfEntries := (#x::Z - 1)::N
-        e::Union(Entry, "failed")
+        -- We cannot simply override an entry with NIL, because this
+        -- might break the chain of entries with the same hash value.
+        -- One solution to the problem is to simply mark the entry
+        -- as "deleted" and change the search routine in such a way
+        -- that a "deleted" entry does not stop a probing sequence.
+        a := rep(x).arr
+        h := rep(x).hashCode
+        p := localSearch(a, k, h)
+        not key? getKey(a, p) => "failed" -- key has not been found
+        -- Remove the entry at p.
+        n: Z := len a
+        e: Entry := getEntry(a, n, p) -- to be returned
+        deleteKeyEntry!(a, n, p)
+        rep(x).numOfEntries := dec(rep(x).numOfEntries)
+        e::UE
 
     -- copy : % -> %
-    copy(x: %): % ==
-        n: N := rep(x).numOfEntries
-        a := rep(x).arr
-        c: FlexibleArray FlexibleArray KE := newArr n
-        for i in 1..#a | not empty? a.i repeat c.i := copy a.i
-        per [n, c]
+    copy(x: %): % == per [rep(x).numOfEntries, rep(x).idx,_
+                          copy(rep(x).arr), rep(x).hashCode]
 
     -- fill! : (%,E) -> % if $ has ATSHMUT
-    fill!(x: %, e: Entry): % == for ke in parts(x)@List(KE) repeat ke.entry:=e
-
-    -- hash : % -> SingleInteger if E has SETCAT or R has SETCAT
-    hash(x: %): SingleInteger == hash(rep(x).numOfEntries) + hash(rep(x).arr)
+    fill!(x: %, e: Entry): % ==
+        a := rep(x).arr
+        n: N := len a
+        for i in 0..n-1 | key?(k: Key := getKey(a, i)) repeat
+            setEntry!(a, n, i, e)
+        x
 
     -- map! : ((E -> E),%) -> % if $ has ATSHMUT
     map!(f: Entry -> Entry, x: %): % ==
         a := rep(x).arr
-        for i in 1..#a repeat
-            bucket := a.i
-            for j in 1..#bucket repeat
-                ke: KE := bucket.j
-                ke.entry := f(ke.entry)
+        n: N := len a
+        for i in 0..n-1 | key?(k: Key := getKey(a, i)) repeat
+            setEntry!(a, n, i, f getEntry(a, n, i))
         x
 
     -- parts : % -> List(E) if $ has ATFINAG
     parts(x: %): List Entry ==
         a := rep(x).arr
+        n: N := len a
         l: List Entry := empty()
-        for i in 1..#a repeat
-            bucket := a.i
-            for j in 1..#bucket repeat l := cons(bucket.j.entry, l)
+        for i in 0..n-1 | key?(k: Key := getKey(a, i)) repeat
+            l := cons(getEntry(a, n, i), l)
         l
 
     -- parts : % -> List(R) if $ has ATFINAG
     parts(x: %): List KE ==
         a := rep(x).arr
+        n: N := len a
         l: List KE := empty()
-        for i in 1..#a repeat
-            bucket := a.i
-            for j in 1..#bucket repeat l := cons(bucket.j, l)
+        for i in 0..n-1 | key?(k: Key := getKey(a, i)) repeat
+            l := cons([k, getEntry(a, n, i)], l)
         l
 
     -- removeDuplicates : % -> % if $ has ATFINAG and R has SETCAT
