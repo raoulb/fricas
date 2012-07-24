@@ -1,8 +1,17 @@
+<<common>>=
+-- These two macros are necessary to distinguish between Rep and %.
+rep x ==> (x@%) pretend Rep
+per x ==> (x@Rep) pretend %
+-------------------------------------------------------------------
+Z ==> Integer
+I ==> SingleInteger
+@
+
 \documentclass{article}
 \usepackage{axiom}
 \begin{document}
 \title{\$SPAD/src/algebra hashstate.spad.pamphlet}
-\author{Waldek Hebisch}
+\author{Waldek Hebisch and Ralf Hemmecke}
 \maketitle
 \begin{abstract}
 \end{abstract}
@@ -34,28 +43,24 @@ like the included example of PrimitiveArray and Integer.
 \end{verbatim}
 
 <<domain HASHSTAT HashState>>=
+<<common>>
 )abbrev domain HASHSTAT HashState
 ++ Description: This domain supports incremental computation of hash
-++  values.
+++ values.
 HashState(): with
     new: () -> %
-      ++ Creates fresh HashState
-    combine: (%, SingleInteger) -> %
-      ++ combine(hs, x) computes new values of HashState from hs
-      ++ and x
-    getVal: % -> SingleInteger
-      ++ converts a HashState to SingleInteger
+      ++ new() return a new HashState.
+    update!: (%, I) -> %
+      ++ update!(hs, x) computes new values of HashState from hs
+      ++ and x and might destructively operate on its first argument.
+    value: % -> I
+      ++ value(x) returns a SingleInteger value corresponding to x.
   == add
-    Rep := SingleInteger
-
-    new() == 230611::SingleInteger
-
-    getVal(hs) == hs pretend SingleInteger
-
-    combine(hs, x) ==
-        xi := x pretend Integer
-        yi := hs pretend Integer
-        SXHASH(xi+1100009*yi + 1)$Lisp
+    Rep == Integer
+    new(): % == per FNVBASIS$Lisp
+    value(hs: %): I == (FNV_-MAKE_-FIXNUM(hs)$Lisp) pretend I
+    update!(hs: %, i: I): % == per FNV_-1A(hs, i)$Lisp
+    modulo(hs: %, i: I): I == (FNV_-MOD(hs, i)$Lisp) pretend I
 @
 \eject
 \begin{thebibliography}{99}

@@ -119,6 +119,8 @@ Character: OrderedFinite() with
           QENUM(PNAME(DOWNCASE(NUM2CHAR(ord c)$Lisp)$Lisp)$Lisp,
                 0$Lisp)$Lisp
 
+        hashUpdate!(hs: HashState, c: %): HashState ==
+            update!(hs, c pretend SingleInteger)$HashState
 @
 
 \section{domain CCLASS CharacterClass}
@@ -419,16 +421,15 @@ IndexedString(mn:Integer): Export == Implementation where
         l < 0 or h >= #s => error "index out of bounds"
         SUBSTRING(s, l, max(0, h-l+1))$Lisp
 
-    hash(s:%):Integer ==
-        n:I := Qsize s
-        zero? n => 0
---      one? n => ord(s.mn)
-        (n = 1) => ord(s.mn)
-        ord(s.mn) * ord s(mn+n-1) * ord s(mn + n quo 2)
+    hash(s:%):Integer == (hash(s)@SingleInteger)::Integer
 
     match(pattern,target,wildcard) ==
         stringMatch(pattern,target,CHARACTER(wildcard::String)$Lisp)$Lisp
 
+    hashUpdate!(hs: HashState, s: %): HashState ==
+        for i in mn .. maxIndex s repeat
+            hs := hashUpdate!(hs, s.i)$Character
+        hs
 @
 
 Up to [[patch--40]] this read

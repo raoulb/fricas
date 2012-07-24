@@ -32,9 +32,9 @@ PrimitiveArray(S:Type): OneDimensionalArrayAggregate S == add
    setelt(x:%, i:Integer, s:S) == Qsetelt(x, i, s)
    fill!(x, s)       == (for i in 0..Qmax x repeat Qsetelt(x, i, s); x)
    if S has SetCategory then
-       hashUpdate(s: HashState, x : %):HashState ==
+       hashUpdate!(s: HashState, x: %): HashState ==
            for i in 0..Qmax x repeat
-               s := hashUpdate(s, Qelt(x, i))$S
+               s := hashUpdate!(s, Qelt(x, i))$S
            s
 @
 

@@ -1870,6 +1870,10 @@ FiniteLinearAggregate(S:Type): Category == Join(LinearAggregate S,_
       sorted? l   == sorted?((x, y) +-> x < y or x = y, l)
       merge(x, y) == merge(_<$S, x, y)
       sort l      == sort(_<$S, l)
+      hashUpdate!(s: HashState, x: %): HashState ==
+         for i in minIndex x..maxIndex x repeat
+             s := hashUpdate!(s, qelt(x, i))$S
+         s
 
     if % has shallowlyMutable then
       reverse x  == reverse! copy x
@@ -2337,6 +2341,11 @@ ListAggregate(S:Type): Category == Join(StreamAggregate S,
           r := f(r, first x)
           x := rest x
         r
+      hashUpdate!(s: HashState, x: %): HashState ==
+          while not empty? x repeat
+              s := hashUpdate!(s, first x)
+              x := rest x
+          s
 
    new(n, s) ==
      l := empty()
