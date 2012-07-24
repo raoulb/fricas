@@ -137,6 +137,7 @@ Integer: Join(IntegerNumberSystem, ConvertibleTo String, OpenMath,_
       inc  x  == x + 1
       dec  x  == x - 1
       hash x == SXHASH(x)$Lisp
+      hashUpdate(hs, x) == combine(hs, SXHASH(x)$Lisp)$HashState
       negative? x == MINUSP(x)$Lisp
       coerce(x):OutputForm == outputForm(x pretend Integer)
       coerce(m:Integer):% == m pretend %

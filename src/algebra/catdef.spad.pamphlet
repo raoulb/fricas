@@ -1786,12 +1786,16 @@ SemiGroup(): Category == SetCategory with
 SetCategory(): Category == Join(BasicType,CoercibleTo OutputForm) with
     --operations
       hash: % -> SingleInteger  ++ hash(s) calculates a hash code for s.
+      hashUpdate : (HashState, %) -> HashState
+         ++ hashUpdate(hs, s) computes new HashState form old and s
+         ++ used for incremental computation of hash values
       latex: % -> String       ++ latex(s) returns a LaTeX-printable output
                                ++ representation of s.
   add
-      hash(s : %):  SingleInteger == 0$SingleInteger
+      hash(s : %):  SingleInteger ==
+          getVal(hashUpdate(new()$HashState, s))$HashState
       latex(s : %): String       == "\mbox{\bf Unimplemented}"
-
+      hashUpdate(hs, s) == combine(hs, 667::SingleInteger)$HashState
 @
 
 \section{category STEP StepThrough}
