@@ -77,7 +77,7 @@ TabulatedComputationPackage(Key ,Entry): Exports == Implementation where
   Key: SetCategory
   Entry: SetCategory
   N ==> NonNegativeInteger
-  H ==> HashTable(Key, Entry, "UEQUAL")
+  H ==> Table(Key, Entry)
   iprintpack ==> InternalPrintPackage()
 
   Exports ==  with

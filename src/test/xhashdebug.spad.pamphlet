@@ -15,7 +15,7 @@ TestXHashTable(Key: SetCategory, Entry: SetCategory):
     probingLength: (%, Key) -> Z
     position: (%, Key) -> Z
     bucketSize: % -> Z
- == XHashTable(Key, Entry) add
+ == Table(Key, Entry) add
     KE ==> Record(key: Key, entry: Entry)
     UE ==> Union(Entry, "failed")
     Buckets ==> PrimitiveArray None

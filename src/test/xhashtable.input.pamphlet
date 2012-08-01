@@ -1,7 +1,7 @@
 <<setUp>>=
 K := String --Key
 E := String --Entry
-T := XHashTable(K, E)
+T := Table(K, E)
 KE := Record(key: K,entry: E)
 t: T := table()
 ks: List K := ["eins", "zwei", "drei"]
@@ -14,7 +14,7 @@ t."drei" := "tres"
 <<test:sxhashcollision>>=
 N := NonNegativeInteger
 V := Vector N
-H := XHashTable(V, V)
+H := Table(V, V)
 h: H := table()
 v0:V := vector([0, 0, 0])$V
 v1:V := vector([1, 2, 0])$V

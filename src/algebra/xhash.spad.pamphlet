@@ -9,15 +9,15 @@ I ==> SingleInteger
 @
 
 
-<<domain XHASHTBL XHashTable>>=
+<<domain TABLE Table>>=
 <<common>>
-)abbrev domain XHASHTBL XHashTable
+)abbrev domain TABLE Table
 ++ Author: Ralf Hemmecke
-++ Keywords: graph theory
+++ Keywords:
 ++ Description:
 ++ An implementation of a hashtable that uses equality of the key domain
 ++ to decide upon equality of keys.
-XHashTable(Key: SetCategory, Entry: SetCategory):
+Table(Key: SetCategory, Entry: SetCategory):
   Join(TableAggregate(Key, Entry), finiteAggregate, shallowlyMutable) == add
     KE ==> Record(key: Key, entry: Entry)
     UE ==> Union(Entry, "failed")

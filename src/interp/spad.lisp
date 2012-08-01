@@ -129,9 +129,3 @@
   (let ((fun (|compiledLookup| '= '((|Boolean|) $ $) dom)))
     (if fun (get (bpiname (car fun)) '|SPADreplace|)
       nil)))
-
-(defun |hashable| (dom)
-  (memq (|knownEqualPred| dom)
-        #-Lucid '(EQ EQL EQUAL)
-        #+Lucid '(EQ EQL EQUAL EQUALP)
-        ))
