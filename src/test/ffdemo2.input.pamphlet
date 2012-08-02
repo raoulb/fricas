@@ -1,0 +1,81 @@
+<<copyright>>=
+--Copyright The Numerical Algorithms Group Limited 1994.
+--Rewritten to test file syntax by Ralf Hemmecke.
+@
+<<setUp>>=
+p:=7
+d:=6
+F ==> PrimeField p
+P ==> SparseUnivariatePolynomial F
+FF ==> FiniteFieldExtensionByPolynomial(F, f)
+FP ==> SparseUnivariatePolynomial FF
+f := createIrreduciblePoly(d)$FiniteFieldPolynomialPackage(F)
+-- The field FF is the same as constructed by FiniteFieldExtension(F,d)
+-- or FiniteField(p,d).
+@
+
+<<ab>>=
+a:=index(size()$FF quo 3)$FF
+b:=index(size()$FF quo 7)$FF
+g := generator()$FF
+@
+
+<<test:ab>>=
+<<ab>>
+assertEquals(a, 2*(g^5+g^4+g^3+g^2+g+1))
+assertEquals(b, g^5)
+@
+
+<<test:field>>=
+<<ab>>
+assertEquals(size()$FF, 117649)
+assertEquals(extensionDegree()$FF, 6)
+assertEquals(normalElement()$FF, 5*g^5+3*g^4+3*g^3+5*g^2+g+5)
+@
+
+<<test:generator>>=
+g := generator()$FF
+assertEquals(f, (x^6+2)::P)
+ff := definingPolynomial()$FF
+assertEquals(ff, f)
+assertEquals((f::FP) g, 0::FF)
+@
+
+<<test:arith>>=
+-- simple arithmetic
+<<ab>>
+assertEquals(a+b, 3*g^5+2*g^4+2*g^3+2*g^2+2*g+2)
+assertEquals(a-b,   g^5+2*g^4+2*g^3+2*g^2+2*g+2)
+assertEquals(a*b, 2*g^5+3*g^4+3*g^3+3*g^2+3*g+3)
+assertEquals(a/b, 6*g^5+6*g^4+6*g^3+6*g^2+6*g+2)
+assertEquals(a^1234, 5*g^5+g^4+3*g^3+3*g+4)
+assertEquals(a^(-1), g+6)
+@
+
+<<test:order>>=
+-- functions concerning the multiplicative cyclic group
+<<ab>>
+assertEquals(order(a), 117648)
+@
+
+<<test:discretelog>>=
+<<ab>>
+assertEquals(discreteLog(a), 58481)
+pe:=primitiveElement()$FF
+assertEquals(pe, g+1)
+assertEquals(pe^58481, a)
+@
+
+<<test:discretelog2>>=
+<<ab>>
+assertTrue(discreteLog(b,a) case "failed")
+@
+
+<<test:various>>=
+<<ab>>
+assertEquals(degree(a), 6)
+assertEquals(minimalPolynomial(a), (x^6+2*x^5+5*x^4+2*x^3+5*x^2+2*x+5)::FP)
+assertEquals(Frobenius(a), (6*g^5+4*g^4+5*g^3+g^2+3*g+2)::FP)
+assertEquals(linearAssociatedOrder(a), (x^6+6)::P)
+assertEquals(linearAssociatedLog(a), (2*x^5+3*x^4+3*x^3+3*x^2+2)::P)
+assertEquals([[norm(a, d::PI), trace(a, d::PI)] for d in divisors extensionDegree()$FF], [[5,5],[2*g^3+2,6*g^3+6],[5*g^4+5*g^2+5,4*g^4+4*g^2+4],[2*g^5+2*g^4+2*g^3+2*g^2+2*g+2,2*g^5+2*g^4+2*g^3+2*g^2+2*g+2]])

@@ -1,0 +1,70 @@
+<<copyright>>=
+--Copyright The Numerical Algorithms Group Limited 1994.
+--Rewritten to test file syntax by Ralf Hemmecke.
+@
+<<setUp>>=
+p := 4817
+F ==> PrimeField p
+P ==> SparseUnivariatePolynomial F
+@
+
+<<ab>>=
+a := 1605::F
+b := 688::F
+@
+
+<<test:field>>=
+assertEquals(size()$F, p)
+assertEquals(extensionDegree()$F, 1)
+assertEquals(normalElement()$F, 1)
+@
+
+<<test:generator>>=
+g := generator()$F
+f := definingPolynomial()$F::P
+assertEquals(f, (x+p-1)::P
+assertEquals(f g, 0::F)
+@
+
+<<test:arith>>=
+-- simple arithmetic
+<<ab>>
+assertEquals(a+b, 2293::F)
+assertEquals(a-b, 917::F)
+assertEquals(a*b, 1147::F)
+assertEquals(a/b, 3216::F)
+assertEquals(a^1234, 2068::F)
+assertEquals(a^(-1), 2407::F)
+@
+
+<<test:order>>=
+-- functions concerning the multiplicative cyclic group
+assertEquals(order(1605::F), 688)
+@
+
+<<test:discretelog>>=
+<<ab>>
+assertEquals(discreteLog(a), 987)
+pe := primitiveElement()$F
+assertEquals(pe, 3::F)
+assertEquals(pe^987, a)
+@
+
+<<test:discretelog2>>=
+<<ab>>
+assertTrue(discreteLog(b,a) case "failed")
+assertEquals(discreteLog(a, a), 1)
+assertEquals(discreteLog(a, a^2), 2)
+assertEquals(discreteLog(a, a^128), 1234)
+@
+
+<<test:various>>=
+<<ab>>
+assertEquals(degree(a), 1)
+assertEquals(minimalPolynomial(a), (x+3212)::P)
+assertEquals(Frobenius(a), a)
+assertEquals(linearAssociatedOrder(a), (x+p-1)::P)
+assertEquals(linearAssociatedLog(a), a)
+assertEquals(norm(a, 1), a)
+assertEquals(trace(a, 1), a)
+@

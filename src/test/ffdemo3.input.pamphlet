@@ -1,0 +1,143 @@
+<<setUp>>=
+p:=7
+d:=6
+F ==> PrimeField p
+P ==> SparseUnivariatePolynomial F
+V ==> Vector F
+FF ==> FiniteFieldNormalBasisExtensionByPolynomial(F, f)
+FP ==> SparseUnivariatePolynomial FF
+f := createNormalPoly(d)$FiniteFieldPolynomialPackage(F)
+@
+
+<<ab>>=
+a:=index(size()$FF quo 3)$FF
+b:=index(size()$FF quo 7)$FF
+g := generator()$FF
+@
+
+<<test:ab>>=
+<<ab>>
+assertEquals(coordinates a, [[2,2,2,2,2,2]]$V)
+assertEquals(coordinates b, [[0,0,0,0,0,1]]$V)
+@
+
+<<test:field>>=
+<<ab>>
+assertEquals(size()$FF, 117649)
+assertEquals(extensionDegree()$FF, 6)
+assertEquals(coordinates(normalElement()$FF), [[1,0,0,0,0,0]]$V)
+@
+
+<<test:generator>>=
+assertEquals(f, (x^6+6*x^5+2*x+4)::P)
+ff := definingPolynomial()$FF
+assertEquals(ff, f)
+g := generator()$FF
+assertEquals((f::FP) g, 0::FF)
+@
+
+<<test:arith>>=
+-- simple arithmetic
+<<ab>>
+assertEquals(coordinates(a+b), [[2,2,2,2,2,3]]$V)
+assertEquals(coordinates(a-b), [[2,2,2,2,2,1]]$V)
+assertEquals(coordinates(a*b), [[0,0,0,0,0,2]]$V)
+assertEquals(coordinates(a/b), [[3,1,4,2,3,0]]$V)
+assertEquals(coordinates(a^1234), [[2,2,2,2,2,2]]$V)
+assertEquals(coordinates(a^(-1)), [[4,4,4,4,4,4]]$V)
+@
+
+<<test:order>>=
+-- functions concerning the multiplicative cyclic group
+<<ab>>
+assertEquals(order(a), 3)
+@
+
+<<test:discretelog>>=
+<<ab>>
+assertEquals(discreteLog(a), 39216)
+pe:=primitiveElement()$FF
+assertEquals(coordinates pe, [[1,0,1,0,0,0]]$V)
+assertEquals(pe^39216, a)
+@
+
+
+<<test:discretelog2>>=
+<<ab>>
+assertEquals(discreteLog(b,a), 9804)
+@
+
+
+-- special finite field functions
+assertEquals(extensionDegree()$F
+ 
+
+   (76)  6
+                                                        Type: PositiveInteger
+assertEquals(degree(a)
+ 
+
+   (77)  1
+                                                        Type: PositiveInteger
+assertEquals(normalElement()$F
+ 
+
+   (78)  %B
+assertEquals(Type: FiniteFieldNormalBasisExtensionByPolynomial(PrimeField(7),?^6+6*?^5+2*?+4)
+assertEquals(definingPolynomial()$F
+ 
+
+          6     5
+   (79)  ?  + 6?  + 2? + 4
+                              Type: SparseUnivariatePolynomial(PrimeField(7))
+assertEquals(minimalPolynomial(a)
+ 
+
+   (80)  ? + 5
+                              Type: SparseUnivariatePolynomial(PrimeField(7))
+assertEquals(Frobenius(a)
+ 
+
+             5       4       3       2
+            q       q       q       q       q
+   (81)  2%B   + 2%B   + 2%B   + 2%B   + 2%B  + 2%B
+assertEquals(Type: FiniteFieldNormalBasisExtensionByPolynomial(PrimeField(7),?^6+6*?^5+2*?+4)
+assertEquals(linearAssociatedOrder(a)
+ 
+
+   (82)  ? + 6
+                              Type: SparseUnivariatePolynomial(PrimeField(7))
+assertEquals(linearAssociatedLog(a)
+ 
+
+           5     4     3     2
+   (83)  2?  + 2?  + 2?  + 2?  + 2? + 2
+                              Type: SparseUnivariatePolynomial(PrimeField(7))
+assertEquals(for d in divisors extensionDegree()$F repeat
+        print(norm(a,d::PI)::OUTFORM)
+        print(trace(a,d::PI)::OUTFORM)
+ 
+      5      4      3      2
+     q      q      q      q      q
+   %B   + %B   + %B   + %B   + %B  + %B
+       5       4       3       2
+      q       q       q       q       q
+   5%B   + 5%B   + 5%B   + 5%B   + 5%B  + 5%B
+      5      4      3      2
+     q      q      q      q      q
+   %B   + %B   + %B   + %B   + %B  + %B
+       5       4       3       2
+      q       q       q       q       q
+   6%B   + 6%B   + 6%B   + 6%B   + 6%B  + 6%B
+       5       4       3       2
+      q       q       q       q       q
+   4%B   + 4%B   + 4%B   + 4%B   + 4%B  + 4%B
+       5       4       3       2
+      q       q       q       q       q
+   4%B   + 4%B   + 4%B   + 4%B   + 4%B  + 4%B
+       5       4       3       2
+      q       q       q       q       q
+   2%B   + 2%B   + 2%B   + 2%B   + 2%B  + 2%B
+       5       4       3       2
+      q       q       q       q       q
+   2%B   + 2%B   + 2%B   + 2%B   + 2%B  + 2%B
