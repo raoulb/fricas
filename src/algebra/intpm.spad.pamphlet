@@ -18,7 +18,7 @@
 ++ Description:
 ++ \spadtype{PatternMatchIntegration} provides functions that use
 ++ the pattern matcher to find some indefinite and definite integrals
-++ involving special functions and found in the litterature.
+++ involving special functions and found in the literature.
 PatternMatchIntegration(R, F): Exports == Implementation where
   R : Join(Comparable, RetractableTo Integer, GcdDomain,
            LinearlyExplicitRingOver Integer)
