@@ -43,6 +43,9 @@ PatternMatchIntegration(R, F): Exports == Implementation where
   CI   ==> 4
   GAM2 ==> 5
   CI0  ==> 6
+  SHI  ==> 9
+  CHI  ==> 10
+
 
   Exports ==> with
     splitConstant: (F, SY) -> Record(const:F, nconst:F)
@@ -134,6 +137,7 @@ PatternMatchIntegration(R, F): Exports == Implementation where
            matchei    : (F, SY) -> REC
            matcherfei : (F, SY, Boolean) -> REC
            matchsici  : (F, SY) -> REC
+           matchshichi: (F, SY) -> REC
            matchli    : (F, SY) -> List F
            matchli0   : (F, K, SY) -> List F
            matchdilog : (F, SY) -> List F
@@ -263,6 +267,36 @@ PatternMatchIntegration(R, F): Exports == Implementation where
                  [SI, na, d/(2::F)]
              [NONE, 0, 0]
 
+-- matches the integral to a result of the form d * Shi(u) or d * Chi(u)
+-- returns [case, u, d]
+           matchshichi(f, x) ==
+             res0 := new()$RES
+             b := pmb::F
+             t := exp(a := pma::F)
+             patden := opt_e * t
+             patshi := (opt_d*t^2 - b) / patden
+             patchi := (opt_d*t^2 + b) / patden
+
+             shi?:Boolean
+             chi?:Boolean
+
+             shi? := failed?(res := patternMatch(f, convert(patshi)@PAT, res0))
+             chi? := failed?(res := patternMatch(f, convert(patchi)@PAT, res0))
+
+             shi? and chi? => [NONE, 0, 0]
+
+             l := mkalist res
+             ax := l.pma
+
+             zero? differentiate(ax, x, 2) =>
+               a := differentiate(ax, x)
+               d := l.pmb
+               not shi? =>
+                 [SHI, ax, d/a]
+               not chi? =>
+                 [CHI, ax, d/a]
+             [NONE, 0, 0]
+
 -- returns a simplified sqrt(y)
            insqrt y ==
              rec := froot(y, 2)$PolynomialRoots(IndexedExponents K, K, R, P, F)
@@ -287,6 +321,10 @@ PatternMatchIntegration(R, F): Exports == Implementation where
              cse = CI => [rec.coeff * Ci(rec.exponent), 0]
              cse = CI0 => [rec.coeff * Ci(rec.exponent)
                            + rec.coeff * log(rec.exponent), 0]
+             cse := (rec := matchshichi(f, x)).which
+             cse = SHI => [rec.coeff * Shi(rec.exponent), 0]
+             cse = CHI => [rec.coeff * Chi(rec.exponent), 0]
+
              "failed"
 
            pmComplexintegrate(f, x) ==
