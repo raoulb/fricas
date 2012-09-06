@@ -307,7 +307,7 @@ PatternMatchIntegration(R, F): Exports == Implementation where
                  h := differentiate(l.pma, x, 2) * twoopi
                  newarg := sqrt(l.pma * twoopi * 2::F)
                  prefactor := g / sqrt(h)
-                 [FS, newarg, prefactor]
+                 [FC, newarg, prefactor]
                [NONE, 0, 0]
 
              -- Nothing fits
