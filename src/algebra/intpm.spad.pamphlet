@@ -288,24 +288,24 @@ PatternMatchIntegration(R, F): Exports == Implementation where
              cx? := failed?(res := patternMatch(f, convert(patc)@PAT, res0))
              sx? := failed?(res := patternMatch(f, convert(pats)@PAT, res0))
 
-	     -- Could not match
-	     sx? and cx? => [NONE, 0, 0]
+             -- Could not match
+             sx? and cx? => [NONE, 0, 0]
 
              -- post-process the match result
              l := mkalist res
-	     arg := l.pma
+             arg := l.pma
 
-	     zero? differentiate(arg, x, 3) =>
+             zero? differentiate(arg, x, 3) =>
                not sx? =>
                  g := l.pmc / 2::F
                  h := differentiate(l.pma, x, 2) * twoopi
-		 newarg := sqrt(l.pma * twoopi * 2::F)
+                 newarg := sqrt(l.pma * twoopi * 2::F)
                  prefactor := g / sqrt(h)
                  [FS, newarg, prefactor]
                not cx? =>
                  g := l.pmc
                  h := differentiate(l.pma, x, 2) * twoopi
-		 newarg := sqrt(l.pma * twoopi * 2::F)
+                 newarg := sqrt(l.pma * twoopi * 2::F)
                  prefactor := g / sqrt(h)
                  [FS, newarg, prefactor]
                [NONE, 0, 0]
