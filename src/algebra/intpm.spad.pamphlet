@@ -279,7 +279,7 @@ PatternMatchIntegration(R, F): Exports == Implementation where
              patden := (t^2 + b)
              pats := c*t / patden
              --patc := (c - c * t^2) / patden
-	     patc := b / patden
+	     patc := c / patden
 
              -- can we match the pattern?
              ress := new()$RES
@@ -309,11 +309,13 @@ PatternMatchIntegration(R, F): Exports == Implementation where
                l := mkalist resc
                arg := l.pma
 
-	       zero? differentiate(arg, x, 3) =>
-                 a := differentiate(arg, x, 2)
-                 newarg := s2opi * x::F * sqrt(a)
-                 prefactor := spio2 / (2::F * sqrt(a))
-		 linpart := (x::F / 2::F)
+               al := sqrt(4::F/pi()$F * arg)
+               ald := l.pmc
+
+               zero? D(ald / D(al, x), x) =>
+                 newarg := al
+                 prefactor := ald / (2::F * D(al, x))
+		 linpart := al / (2::F * (D(al,x)/ald))
                  [FC, newarg, prefactor, linpart]
 
                [NONE, 0, 0, 0]
