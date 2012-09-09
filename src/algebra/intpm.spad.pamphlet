@@ -270,13 +270,13 @@ PatternMatchIntegration(R, F): Exports == Implementation where
 
 -- matches the integral of the form sin(h*u^2) or cos(h*u^2) to a result
 -- of the form d(h)*fresnel(f(u))
--- returns [case, u, d]
+-- returns [case, f, d]
            matchfresnel(f, x) ==
              b := pmb::F
              --c := pmc::F
              t := tan(a := pma::F)
              patden := (t^2 + b)
-             pats := t / patden
+             pats := c*t / patden
              --patc := (c - c * t^2) / patden
 	     patc := b / patden
 
@@ -294,10 +294,12 @@ PatternMatchIntegration(R, F): Exports == Implementation where
                l := mkalist ress
                arg := l.pma
 
-               zero? differentiate(arg, x, 3) =>
-                 a := differentiate(arg, x, 2)
-                 newarg := s2opi * x::F * sqrt(a)
-                 prefactor := spio2 / (2::F * sqrt(a))
+               al := sqrt(4::F/pi()$F * arg)
+               ald := l.pmc
+
+               zero? D(ald / D(al, x), x) =>
+                 newarg := al
+                 prefactor := ald / (2::F * D(al, x))
                  [FS, newarg, prefactor]
 
                [NONE, 0, 0]
