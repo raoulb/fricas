@@ -276,7 +276,7 @@ PatternMatchIntegration(R, F): Exports == Implementation where
              --c := pmc::F
              t := tan(a := pma::F)
              patden := (t^2 + b)
-             pats := c * t / patden
+             pats := t / patden
              --patc := (c - c * t^2) / patden
 	     patc := b / patden
 
@@ -297,7 +297,7 @@ PatternMatchIntegration(R, F): Exports == Implementation where
                zero? differentiate(arg, x, 3) =>
                  a := differentiate(arg, x, 2)
                  newarg := s2opi * x::F * sqrt(a)
-                 prefactor := spio2 / sqrt(a)
+                 prefactor := spio2 / (2::F * sqrt(a))
                  [FS, newarg, prefactor]
 
                [NONE, 0, 0]
@@ -309,7 +309,7 @@ PatternMatchIntegration(R, F): Exports == Implementation where
 	       zero? differentiate(arg, x, 3) =>
                  a := differentiate(arg, x, 2)
                  newarg := s2opi * x::F * sqrt(a)
-                 prefactor := spio2 / sqrt(a)
+                 prefactor := spio2 / (2::F * sqrt(a))
                  [FC, newarg, prefactor]
 
                [NONE, 0, 0]
@@ -344,7 +344,7 @@ PatternMatchIntegration(R, F): Exports == Implementation where
 
              cse := (rec := matchfresnel(f, x)).which
              cse = FS => [rec.coeff * fresnelS(rec.exponent), 0]
-             cse = FC => [rec.coeff * fresnelC(rec.exponent), 0]
+             cse = FC => [rec.coeff * fresnelC(rec.exponent) + (x::F / 2::F), 0]
 
              "failed"
 
