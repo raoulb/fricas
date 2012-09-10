@@ -278,7 +278,7 @@ PatternMatchIntegration(R, F): Exports == Implementation where
              patden := (t^2 + b)
              pats := c*t / patden
              --patc := (c - c * t^2) / patden
-	     patc := c / patden
+             patc := c / patden
 
              -- can we match the pattern?
              ress := new()$RES
@@ -303,7 +303,7 @@ PatternMatchIntegration(R, F): Exports == Implementation where
 
                [NONE, 0, 0, 0]
 
-	     not cx? =>
+             not cx? =>
                l := mkalist resc
                al := sqrt(4::F/pi()$F * l.pma)
                ald := l.pmc
@@ -312,7 +312,7 @@ PatternMatchIntegration(R, F): Exports == Implementation where
                zero? D(gamma, x) =>
                  newarg := al
                  prefactor := inv gamma / 2::F
-		 linpart := al / (2::F * gamma)
+                 linpart := al / (2::F * gamma)
                  [FC, newarg, prefactor, linpart]
 
                [NONE, 0, 0, 0]
@@ -345,9 +345,9 @@ PatternMatchIntegration(R, F): Exports == Implementation where
              cse = CI0 => [rec.coeff * Ci(rec.exponent)
                            + rec.coeff * log(rec.exponent), 0]
 
-             cse := (rec:REC2 := matchfresnel(f, x)).which
-             cse = FS => [rec.coeff * fresnelS(rec.exponent) + rec.addpart, 0]
-             cse = FC => [rec.coeff * fresnelC(rec.exponent) + rec.addpart, 0]
+             cse := (rec2:REC2 := matchfresnel(f, x)).which
+             cse = FS => [rec2.coeff * fresnelS(rec2.exponent) + rec2.addpart, 0]
+             cse = FC => [rec2.coeff * fresnelC(rec2.exponent) + rec2.addpart, 0]
 
              "failed"
 
