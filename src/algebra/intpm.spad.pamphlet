@@ -269,12 +269,11 @@ PatternMatchIntegration(R, F): Exports == Implementation where
                  [SI, na, d/(2::F)]
              [NONE, 0, 0]
 
--- matches the integral of the form sin(h*u^2) or cos(h*u^2) to a result
--- of the form d(h)*fresnel(f(u))
--- returns [case, f, d]
+-- matches the integral of the form sin(pi/2*f(u)^2)*f'(u) or cos(pi/2*f(u)^2)*f'(u)
+-- to a result of the form p(f(u))*fresnel(f(u))+l(f(u))
+-- returns [case, f, d, l]
            matchfresnel(f, x) ==
              b := pmb::F
-             --c := pmc::F
              t := tan(a := pma::F)
              patden := (t^2 + b)
              pats := c*t / patden
@@ -293,29 +292,27 @@ PatternMatchIntegration(R, F): Exports == Implementation where
              -- post-process the match result
              not sx? =>
                l := mkalist ress
-               arg := l.pma
-
-               al := sqrt(4::F/pi()$F * arg)
+               al := sqrt(4::F/pi()$F * l.pma)
                ald := l.pmc
+               gamma := D(al,x) / ald
 
-               zero? D(ald / D(al, x), x) =>
+               zero? D(gamma, x) =>
                  newarg := al
-                 prefactor := ald / (2::F * D(al, x))
+                 prefactor := inv gamma / 2::F
                  [FS, newarg, prefactor, 0]
 
                [NONE, 0, 0, 0]
 
 	     not cx? =>
                l := mkalist resc
-               arg := l.pma
-
-               al := sqrt(4::F/pi()$F * arg)
+               al := sqrt(4::F/pi()$F * l.pma)
                ald := l.pmc
+               gamma := D(al,x) / ald
 
-               zero? D(ald / D(al, x), x) =>
+               zero? D(gamma, x) =>
                  newarg := al
-                 prefactor := ald / (2::F * D(al, x))
-		 linpart := al / (2::F * (D(al,x)/ald))
+                 prefactor := inv gamma / 2::F
+		 linpart := al / (2::F * gamma)
                  [FC, newarg, prefactor, linpart]
 
                [NONE, 0, 0, 0]
