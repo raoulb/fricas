@@ -292,27 +292,27 @@ PatternMatchIntegration(R, F): Exports == Implementation where
              -- post-process the match result
              not sx? =>
                l := mkalist ress
-               al := sqrt(4::F/pi()$F * l.pma)
+               al := insqrt(4::F/pi()$F * (l.pma)::F)
                ald := l.pmc
-               gamma := D(al,x) / ald
+               gamma := ald / D(al, x)
 
                zero? D(gamma, x) =>
                  newarg := al
-                 prefactor := inv gamma / 2::F
+                 prefactor := gamma / 2::F
                  [FS, newarg, prefactor, 0]
 
                [NONE, 0, 0, 0]
 
              not cx? =>
                l := mkalist resc
-               al := sqrt(4::F/pi()$F * l.pma)
+               al := insqrt(4::F/pi()$F * (l.pma)::F)
                ald := l.pmc
-               gamma := D(al,x) / ald
+               gamma := ald / D(al, x)
 
                zero? D(gamma, x) =>
                  newarg := al
-                 prefactor := inv gamma / 2::F
-                 linpart := al / (2::F * gamma)
+                 prefactor := gamma / 2::F
+                 linpart := al*prefactor
                  [FC, newarg, prefactor, linpart]
 
                [NONE, 0, 0, 0]
