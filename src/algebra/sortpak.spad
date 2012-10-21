@@ -20,6 +20,10 @@ SortPackage(S, A) : Exports == Implementation where
     insertionSort! : (A, (S, S) -> Boolean) -> A
         ++ insertionSort!(a, f) \undocumented
 
+    if A has UnaryRecursiveAggregate(S) then
+      mergeSort : (A, (S, S) -> Boolean) -> A
+        ++ merge sort
+
     if S has OrderedSet then
       bubbleSort! : A -> A
         ++ bubbleSort!(a) \undocumented
@@ -32,6 +36,10 @@ SortPackage(S, A) : Exports == Implementation where
 
       insertionSort! : A -> A
         ++ insertionSort! \undocumented
+
+      if A has UnaryRecursiveAggregate(S) then
+        mergeSort : A -> A
+          ++ merge sort
 
   Implementation == add
 
@@ -73,6 +81,9 @@ SortPackage(S, A) : Exports == Implementation where
       countingBubbleSort!(m) == countingBubbleSort!(m, _<$S)
 
     if A has UnaryRecursiveAggregate(S) then
+      -- Put the code here as we need first, rest functions which
+      -- are not available for the general A defined above
+
       bubbleSort!(m, fn) ==
         empty? m => m
         l := m
@@ -85,6 +96,43 @@ SortPackage(S, A) : Exports == Implementation where
            l.rest := r
            l := l.rest
         m
+
+      mergeSort(m, f) ==
+        n : NNI := #m
+        n <= 1 => m
+
+        -- Split and descend
+        na : NNI := shift(n, -1)
+        nb : NNI := (n - na)::NNI
+        sla := mergeSort(first(m,na), f)
+        slb := mergeSort(rest(m,na), f)
+
+        -- Merge
+        result := copy m
+
+        for i in 1..n repeat
+          if #sla > 0 and #slb > 0 then
+            fsla := first sla
+            fslb := first slb
+            if f(fsla, fslb) then
+              result(i) := fsla
+              sla := rest(sla)
+            else
+              result(i) := fslb
+              slb := rest(slb)
+          else if #sla > 0 then
+            result(i) := first sla
+            sla := rest(sla)
+          else if #slb > 0 then
+            result(i) := first slb
+            slb := rest(slb)
+
+        result
+
+
+      if S has OrderedSet then
+        mergeSort(m) == mergeSort(m, _<$S)
+
 
 --Copyright (c) 1991-2002, The Numerical ALgorithms Group Ltd.
 --All rights reserved.
