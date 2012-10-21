@@ -21,6 +21,9 @@ SortPackage(S, A) : Exports == Implementation where
         ++ insertionSort!(a, f) \undocumented
 
     if A has UnaryRecursiveAggregate(S) then
+      countingMergeSort : (A, (S, S) -> Boolean) -> Record(sorted:A, exchanges:NNI)
+        ++ Counting version of merge sort
+
       mergeSort : (A, (S, S) -> Boolean) -> A
         ++ merge sort
 
@@ -38,6 +41,9 @@ SortPackage(S, A) : Exports == Implementation where
         ++ insertionSort! \undocumented
 
       if A has UnaryRecursiveAggregate(S) then
+        countingMergeSort : A -> Record(sorted:A, exchanges:NNI)
+          ++ Counting version of merge sort
+
         mergeSort : A -> A
           ++ merge sort
 
@@ -102,37 +108,88 @@ SortPackage(S, A) : Exports == Implementation where
         n <= 1 => m
 
         -- Split and descend
-        na : NNI := shift(n, -1)
-        nb : NNI := (n - na)::NNI
-        sla := mergeSort(first(m,na), f)
-        slb := mergeSort(rest(m,na), f)
+        nhalf : NNI := shift(n, -1)
+        sla := mergeSort(first(m,nhalf), f)
+        slb := mergeSort(rest(m,nhalf), f)
 
         -- Merge
         result := copy m
+        na : NNI := #sla
+        nb : NNI := #slb
+        ia : NNI := 1
+        ib : NNI := 1
 
-        for i in 1..n repeat
-          if #sla > 0 and #slb > 0 then
-            fsla := first sla
-            fslb := first slb
-            if f(fsla, fslb) then
-              result(i) := fsla
-              sla := rest(sla)
+        for j in 1..n repeat
+          if ia <= na and ib <= nb then
+            if f(sla(ia), slb(ib)) then
+              result(j) := sla(ia)
+              ia := ia + 1
             else
-              result(i) := fslb
-              slb := rest(slb)
-          else if #sla > 0 then
-            result(i) := first sla
-            sla := rest(sla)
-          else if #slb > 0 then
-            result(i) := first slb
-            slb := rest(slb)
+              result(j) := slb(ib)
+              ib := ib + 1
+          else if ia <= na then
+            result(j) := sla(ia)
+            ia := ia + 1
+          else if ib <= nb then
+            result(j) := slb(ib)
+            ib := ib + 1
 
         result
+
+      countingMergeSort(m, f) ==
+        n : NNI := #m
+        n <= 1 => [m, 0]
+
+        -- Split and descend
+        nhalf : NNI := shift(n, -1)
+        ra := countingMergeSort(first(m,nhalf), f)
+        rb := countingMergeSort(rest(m,nhalf), f)
+        sla := ra.sorted
+        slb := rb.sorted
+        nrexchanges := ra.exchanges + rb.exchanges
+
+        -- Merge
+        result := copy m
+        na : NNI := #sla
+        nb : NNI := #slb
+        ia : NNI := 1
+        ib : NNI := 1
+
+        for j in 1..n repeat
+          if ia <= na and ib <= nb then
+            if f(sla(ia), slb(ib)) then
+              -- We have to take the element from the first list
+              result(j) := sla(ia)
+              diff : NNI := 0
+              ia := ia + 1
+            else if f(slb(ib), sla(ia)) then
+              -- We can take the element from the second list
+              result(j) := slb(ib)
+              diff : NNI := (na - ia + 1)::NNI
+              ib := ib + 1
+            else
+              -- Heads of both lists compare equal, take from the
+              -- first list to avoid unnecessary transpositions
+              result(j) := sla(ia)
+              diff : NNI := 0
+	      ia := ia + 1
+	    nrexchanges := nrexchanges + diff
+
+          -- Only one list still has elements
+          else if ia <= na then
+            result(j) := sla(ia)
+            ia := ia + 1
+
+          else if ib <= nb then
+            result(j) := slb(ib)
+            ib := ib + 1
+
+        [result, nrexchanges]
 
 
       if S has OrderedSet then
         mergeSort(m) == mergeSort(m, _<$S)
-
+        countingMergeSort(m) == countingMergeSort(m, _<$S)
 
 --Copyright (c) 1991-2002, The Numerical ALgorithms Group Ltd.
 --All rights reserved.
