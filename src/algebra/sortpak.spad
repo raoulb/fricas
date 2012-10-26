@@ -20,6 +20,9 @@ SortPackage(S, A) : Exports == Implementation where
     insertionSort! : (A, (S, S) -> Boolean) -> A
         ++ insertionSort!(a, f) \undocumented
 
+    countingInsertionSort! : (A, (S, S) -> Boolean) -> Record(sorted:A, exchanges:NNI)
+        ++ countingInsertionSort!(a, f) \undocumented
+
     if A has UnaryRecursiveAggregate(S) then
       countingMergeSort : (A, (S, S) -> Boolean) -> Record(sorted:A, exchanges:NNI)
         ++ Counting version of merge sort
@@ -39,6 +42,9 @@ SortPackage(S, A) : Exports == Implementation where
 
       insertionSort! : A -> A
         ++ insertionSort! \undocumented
+
+      countingInsertionSort! : A -> Record(sorted:A, exchanges:NNI)
+        ++ countingInsertionSort! \undocumented
 
       if A has UnaryRecursiveAggregate(S) then
         countingMergeSort : A -> Record(sorted:A, exchanges:NNI)
@@ -64,20 +70,27 @@ SortPackage(S, A) : Exports == Implementation where
           j := qcoerce(j - 1)@PositiveInteger
       m
 
+    countingBubbleSort!(m, f) ==
+      nrexchanges : NNI := 0
+      n := #m
+      for i in 1..(n-1) repeat
+        for j in n..(i+1) by -1 repeat
+          if f(m.j, m.(j-1)) then
+            swap!(m, j, j-1)
+            nrexchanges := nrexchanges + 1
+      [m, nrexchanges]
+
     countingBubbleSort(m, f) ==
       countingBubbleSort!(copy m, f)
 
-    countingBubbleSort!(m, f) ==
-      wasordered : Boolean := false
+    countingInsertionSort!(m, f) ==
       nrexchanges : NNI := 0
-      n := #m
-      while not wasordered repeat
-        wasordered := true
-        for i in 1..(n-1) repeat
-          if f(m.(i+1), m.i) then
-            swap!(m, i+1, i)
-            nrexchanges := nrexchanges + 1
-            wasordered := false
+      for i in 2..#m repeat
+        j := i
+        while j > 1 and f(m.j, m.(j-1)) repeat
+          swap!(m, j, j-1)
+          nrexchanges := nrexchanges + 1
+          j := qcoerce(j - 1)@PositiveInteger
       [m, nrexchanges]
 
     if S has OrderedSet then
@@ -85,6 +98,7 @@ SortPackage(S, A) : Exports == Implementation where
       insertionSort!(m) == insertionSort!(m, _<$S)
       countingBubbleSort(m) == countingBubbleSort(m, _<$S)
       countingBubbleSort!(m) == countingBubbleSort!(m, _<$S)
+      countingInsertionSort!(m) == countingInsertionSort!(m, _<$S)
 
     if A has UnaryRecursiveAggregate(S) then
       -- Put the code here as we need first, rest functions which
@@ -172,8 +186,8 @@ SortPackage(S, A) : Exports == Implementation where
               -- first list to avoid unnecessary transpositions
               result(j) := sla(ia)
               diff : NNI := 0
-	      ia := ia + 1
-	    nrexchanges := nrexchanges + diff
+              ia := ia + 1
+            nrexchanges := nrexchanges + diff
 
           -- Only one list still has elements
           else if ia <= na then
