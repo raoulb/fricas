@@ -122,7 +122,7 @@ MatrixCategory(R, Row, Col) : Category == Definition where
      zero : (NonNegativeInteger, NonNegativeInteger) -> %
        ++ \spad{zero(m, n)} returns an m-by-n zero matrix.
      one : (NonNegativeInteger, NonNegativeInteger) -> %
-       ++ \spad{one(m, n)} returns an m-by-n matrix with all elements 1.
+       ++ \spad{one(m, n)} returns an m-by-n matrix with all elements one.
      matrix : List List R -> %
        ++ \spad{matrix(l)} converts the list of lists l to a matrix, where the
        ++ list of lists is viewed as a list of the rows of the matrix.
@@ -131,6 +131,9 @@ MatrixCategory(R, Row, Col) : Category == Definition where
        ++ the \spad{(i,j)} entry equal to \spad{f(i,j)}.
      scalarMatrix : (NonNegativeInteger, R) -> %
        ++ \spad{scalarMatrix(n, r)} returns an n-by-n matrix with r's on the
+       ++ diagonal and zeroes elsewhere.
+     identity : NonNegativeInteger -> %
+       ++ \spad{identity(n)} returns an n-by-n identity matrix with ones on the
        ++ diagonal and zeroes elsewhere.
      diagonalMatrix : List R -> %
        ++ \spad{diagonalMatrix(l)} returns a diagonal matrix with the elements
@@ -375,6 +378,8 @@ MatrixCategory(R, Row, Col) : Category == Definition where
        for i in minr(ans)..maxr(ans) for j in minc(ans)..maxc(ans) repeat
          qsetelt!(ans, i, j, r)
        ans
+
+     identity(n) == scalarMatrix(n, maybe_1::R)
 
      diagonalMatrix(l : List R) ==
        n := #l; ans := zero(n, n)
