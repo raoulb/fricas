@@ -121,6 +121,8 @@ MatrixCategory(R, Row, Col) : Category == Definition where
 
      zero : (NonNegativeInteger, NonNegativeInteger) -> %
        ++ \spad{zero(m, n)} returns an m-by-n zero matrix.
+     one : (NonNegativeInteger, NonNegativeInteger) -> %
+       ++ \spad{one(m, n)} returns an m-by-n matrix with all elements 1.
      matrix : List List R -> %
        ++ \spad{matrix(l)} converts the list of lists l to a matrix, where the
        ++ list of lists is viewed as a list of the rows of the matrix.
@@ -337,7 +339,15 @@ MatrixCategory(R, Row, Col) : Category == Definition where
 
 --% Creation of matrices
 
+     maybe_1 : UR :=
+         R has SemiRing => 1
+         "one"
+
      zero(rows, cols) == new(rows, cols, 0)
+
+     one(rows, cols) ==
+       maybe_1 case R => new(rows, cols, maybe_1::R)
+       error "need 1"
 
      matrix(l : List List R) ==
        null l => new(0, 0, 0)
@@ -371,10 +381,6 @@ MatrixCategory(R, Row, Col) : Category == Definition where
        for i in minr(ans)..maxr(ans) for j in minc(ans)..maxc(ans) _
            for r in l repeat qsetelt!(ans, i, j, r)
        ans
-
-     maybe_1 : UR :=
-         R has SemiRing => 1
-         "one"
 
      get_dims(l : List(%)) : List(List(NNI)) ==
         [[nrows(a), ncols(a)] for a in l]
