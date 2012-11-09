@@ -121,8 +121,6 @@ MatrixCategory(R, Row, Col) : Category == Definition where
 
      zero : (NonNegativeInteger, NonNegativeInteger) -> %
        ++ \spad{zero(m, n)} returns an m-by-n zero matrix.
-     one : (NonNegativeInteger, NonNegativeInteger) -> %
-       ++ \spad{one(m, n)} returns an m-by-n matrix with all elements one.
      matrix : List List R -> %
        ++ \spad{matrix(l)} converts the list of lists l to a matrix, where the
        ++ list of lists is viewed as a list of the rows of the matrix.
@@ -132,9 +130,16 @@ MatrixCategory(R, Row, Col) : Category == Definition where
      scalarMatrix : (NonNegativeInteger, R) -> %
        ++ \spad{scalarMatrix(n, r)} returns an n-by-n matrix with r's on the
        ++ diagonal and zeroes elsewhere.
-     identity : NonNegativeInteger -> %
-       ++ \spad{identity(n)} returns an n-by-n identity matrix with ones on the
-       ++ diagonal and zeroes elsewhere.
+
+     if R has SemiRing then
+
+       identity : NonNegativeInteger -> %
+         ++ \spad{identity(n)} returns an n-by-n identity matrix with ones on the
+         ++ diagonal and zeroes elsewhere.
+
+       one : (NonNegativeInteger, NonNegativeInteger) -> %
+         ++ \spad{one(m, n)} returns an m-by-n matrix with all elements one.
+
      diagonalMatrix : List R -> %
        ++ \spad{diagonalMatrix(l)} returns a diagonal matrix with the elements
        ++ of l on the diagonal.
@@ -348,10 +353,6 @@ MatrixCategory(R, Row, Col) : Category == Definition where
 
      zero(rows, cols) == new(rows, cols, 0)
 
-     one(rows, cols) ==
-       maybe_1 case R => new(rows, cols, maybe_1::R)
-       error "need 1"
-
      matrix(l : List List R) ==
        null l => new(0, 0, 0)
        -- error check: this is a top level function
@@ -379,7 +380,11 @@ MatrixCategory(R, Row, Col) : Category == Definition where
          qsetelt!(ans, i, j, r)
        ans
 
-     identity(n) == scalarMatrix(n, maybe_1::R)
+     if R has SemiRing then
+
+       identity(n) == scalarMatrix(n, 1::R)
+
+       one(rows, cols) == new(rows, cols, 1::R)
 
      diagonalMatrix(l : List R) ==
        n := #l; ans := zero(n, n)
