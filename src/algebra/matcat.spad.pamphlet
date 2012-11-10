@@ -382,9 +382,9 @@ MatrixCategory(R, Row, Col) : Category == Definition where
 
      if R has SemiRing then
 
-       identity(n) == scalarMatrix(n, 1::R)
+       identity(n) == scalarMatrix(n, 1)
 
-       one(rows, cols) == new(rows, cols, 1::R)
+       one(rows, cols) == new(rows, cols, 1)
 
      diagonalMatrix(l : List R) ==
        n := #l; ans := zero(n, n)
