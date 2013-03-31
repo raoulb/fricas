@@ -75,6 +75,7 @@ ExpressionToOpenMath(R : Join(OpenMath, OrderedSet, Ring)) : with
 
     -- Still need the following unary functions:
     --  digamma
+    --  trigamma
     --  Gamma
     --  airyAi
     --  airyBi

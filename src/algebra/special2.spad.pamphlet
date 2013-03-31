@@ -30,7 +30,11 @@ FloatSpecialFunctions() : Exports == Implementation where
     digamma : Float -> Float
       ++ digamma(z) is the logarithmic derivative of \spad{Gamma(x)}.
     digamma : (Complex Float) -> (Complex Float)
-      ++ digamma(z) is the logarithmic derivative of \spad{Gamma(x)}.
+      ++ digamma(z) is the logarithmic derivative of \spad{Gamma(z)}.
+    --trigamma : Float -> Float
+    --  ++ trigamma(z) is the derivative of \spad{psi(x)}.
+    --trigamma : (Complex Float) -> (Complex Float)
+    --  ++ trigamma(z) is the derivative of \spad{psi(z)}.
     Beta : (Float, Float) -> Float
       ++ Beta(x, y) is the Euler Beta function.
     Beta : (Complex Float, Complex Float) -> Complex Float

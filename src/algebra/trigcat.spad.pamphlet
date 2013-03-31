@@ -319,6 +319,9 @@ SpecialFunctionCategory() : Category == with
     digamma :   % -> %
         ++ digamma(x) is the logarithmic derivative of \spad{Gamma(x)}
         ++ (often written \spad{psi(x)} in the literature).
+    trigamma :  % -> %
+        ++ trigamma(x) is the derivative of \spad{psi(x)}
+        ++ (often written \spad{psi_1(x)} in the literature).
     polygamma : (%, %) -> %
         ++ polygamma(k, x) is the \spad{k-th} derivative of \spad{digamma(x)},
         ++ (often written \spad{psi(k, x)} in the literature).

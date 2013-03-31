@@ -719,6 +719,8 @@ FunctionalSpecialFunction(R, F) : Exports == Implementation where
       ++ Beta(x, y) returns the beta function applied to x and y
     digamma :   F->F
       ++ digamma(x) returns the digamma function applied to x
+    trigamma :   F->F
+      ++ trigamma(x) returns the trigamma function applied to x
     polygamma : (F, F) ->F
       ++ polygamma(x, y) returns the polygamma function applied to x and y
     besselJ :   (F, F) -> F
@@ -871,6 +873,8 @@ might not re-evaluate the operator.
       ++ iiBeta(x) should be local but conditional;
     iidigamma  : F -> F
       ++ iidigamma(x) should be local but conditional;
+    iitrigamma  : F -> F
+      ++ iitrigamma(x) should be local but conditional;
     iipolygamma : List F -> F
       ++ iipolygamma(x) should be local but conditional;
     iiBesselJ  : List F -> F
@@ -916,6 +920,7 @@ might not re-evaluate the operator.
     iGamma    : F -> F
     iBeta     : (F, F) -> F
     idigamma  : F -> F
+    itrigamma : F -> F
     iiipolygamma : (F, F) -> F
     iiiBesselJ  : (F, F) -> F
     iiiBesselY  : (F, F) -> F
@@ -940,6 +945,7 @@ might not re-evaluate the operator.
     opGamma2    := operator('Gamma2)$CommonOperators
     opBeta      := operator('Beta)$CommonOperators
     opdigamma   := operator('digamma)$CommonOperators
+    optrigamma  := operator('trigamma)$CommonOperators
     oppolygamma := operator('polygamma)$CommonOperators
     opBesselJ   := operator('besselJ)$CommonOperators
     opBesselY   := operator('besselY)$CommonOperators
@@ -962,7 +968,8 @@ might not re-evaluate the operator.
     Gamma(x)      == opGamma(x)
     Gamma(a, x)    == opGamma2(a, x)
     Beta(x, y)     == opBeta(x, y)
-    digamma x     == opdigamma(x)
+    digamma x      == opdigamma(x)
+    trigamma x     == optrigamma(x)
     polygamma(k, x)== oppolygamma(k, x)
     besselJ(a, x)  == opBesselJ(a, x)
     besselY(a, x)  == opBesselY(a, x)
@@ -1795,6 +1802,7 @@ might not re-evaluate the operator.
       is?(op, 'Gamma2)   => opGamma2
       is?(op, 'Beta)     => opBeta
       is?(op, 'digamma)  => opdigamma
+      is?(op, 'trigamma) => optrigamma
       is?(op, 'polygamma)=> oppolygamma
       is?(op, 'besselJ)  => opBesselJ
       is?(op, 'besselY)  => opBesselY
@@ -1860,6 +1868,7 @@ might not re-evaluate the operator.
 
     iBeta(x, y) == kernel(opBeta, [x, y])
     idigamma x == kernel(opdigamma, x)
+    itrigamma x == kernel(optrigamma, x)
     iiipolygamma(n, x) == kernel(oppolygamma, [n, x])
     iiiBesselJ(x, y) == kernel(opBesselJ, [x, y])
     iiiBesselY(x, y) == kernel(opBesselY, [x, y])
@@ -1950,6 +1959,10 @@ might not re-evaluate the operator.
         (r := retractIfCan(x)@Union(R,"failed")) case "failed" => idigamma x
         digamma(r::R)::F
 
+      iitrigamma x ==
+        (r := retractIfCan(x)@Union(R,"failed")) case "failed" => itrigamma x
+        trigamma(r::R)::F
+
       iipolygamma l ==
         (s := retractIfCan(first l)@Union(R,"failed")) case "failed" or _
         (r := retractIfCan(second l)@Union(R,"failed")) case "failed" _
@@ -2007,6 +2020,7 @@ might not re-evaluate the operator.
 
       iiBeta l == iBeta(first l, second l)
       iidigamma x == idigamma x
+      iitrigamma x == itrigamma x
       iipolygamma l == iiipolygamma(first l, second l)
       iiBesselJ l == iiiBesselJ(first l, second l)
       iiBesselY l == iiiBesselY(first l, second l)
@@ -2028,6 +2042,7 @@ might not re-evaluate the operator.
 --    evaluate(opGamma2    , iiGamma2   )$BasicOperatorFunctions1(F)
     evaluate(opBeta      , iiBeta     )$BasicOperatorFunctions1(F)
     evaluate(opdigamma   , iidigamma  )$BasicOperatorFunctions1(F)
+    evaluate(optrigamma  , iitrigamma )$BasicOperatorFunctions1(F)
     evaluate(oppolygamma , iipolygamma)$BasicOperatorFunctions1(F)
     evaluate(opBesselJ   , iiBesselJ  )$BasicOperatorFunctions1(F)
     evaluate(opBesselY   , iiBesselY  )$BasicOperatorFunctions1(F)
@@ -2507,6 +2522,7 @@ component of the gradient failed, it resulted in an infinite loop for
     derivative(opGamma,     (x : F) : F +-> digamma(x)*Gamma(x))
     derivative(opBeta,      [iBetaGrad1, iBetaGrad2])
     derivative(opdigamma,   (x : F) : F +-> polygamma(1, x))
+    derivative(optrigamma,  (x : F) : F +-> polygamma(2, x))
     derivative(opAiryAi,    (x : F) : F +-> airyAiPrime(x))
     derivative(opAiryAiPrime,    (x : F) : F +-> x*airyAi(x))
     derivative(opAiryBi,    (x : F) : F +-> airyBiPrime(x))

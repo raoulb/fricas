@@ -402,6 +402,7 @@ CommonOperators() : Exports == Implementation where
     opGamma2    := operator('Gamma2, 2)
     opBeta      := operator('Beta, 2)
     opdigamma   := operator('digamma, 1)
+    optrigamma  := operator('trigamma, 1)
     oppolygamma := operator('polygamma, 2)
     opBesselJ   := operator('besselJ, 2)
     opBesselY   := operator('besselY, 2)
@@ -479,7 +480,7 @@ CommonOperators() : Exports == Implementation where
                    opint, opdint, opfis, opfic, opiint]
     combop  := [opfact, opperm, opbinom, oppow,
                                          opsum, opdsum, opprod, opdprod]
-    specop  := [opGamma, opGamma2, opBeta, opdigamma, oppolygamma, opabs,
+    specop  := [opGamma, opGamma2, opBeta, opdigamma, optrigamma, oppolygamma, opabs,
                 opBesselJ, opBesselY, opBesselI, opBesselK, opAiryAi, opAiryBi,
                  opAiryAiPrime, opAiryBiPrime, opLambertW, opPolylog,
                   opWeierstrassP, opWeierstrassPPrime, opWeierstrassZeta,

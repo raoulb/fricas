@@ -64,6 +64,13 @@ DoubleFloatSpecialFunctions() : Exports == Impl where
             ++ digamma(x) is the function, \spad{psi(x)}, defined by
             ++   \spad{psi(x) = Gamma'(x)/Gamma(x)}.
 
+        trigamma : R -> R
+            ++ trigamma(x) is the function, \spad{psi_1(x)}, defined by
+            ++   \spad{psi_1(x) = psi'(x)}.
+        trigamma : C -> C
+            ++ trigamma(x) is the function, \spad{psi_1(x)}, defined by
+            ++   \spad{psi_1(x) = psi'(x)}.
+
         polygamma : (NNI, R) -> R
             ++ polygamma(n, x) is the n-th derivative of \spad{digamma(x)}.
         polygamma : (NNI, C) -> C
@@ -179,6 +186,9 @@ DoubleFloatSpecialFunctions() : Exports == Impl where
         -- All others are defined in terms of these.
         digamma x == polygamma(0, x)
         digamma z == polygamma(0, z)
+
+        trigamma x == polygamma(1, x)
+        trigamma z == polygamma(1, z)
 
         Beta(x, y) == Gamma(x)*Gamma(y)/Gamma(x+y)
         Beta(w, z) == Gamma(w)*Gamma(z)/Gamma(w+z)

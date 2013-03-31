@@ -319,6 +319,7 @@ Expression(R : Comparable) : Exports == Implementation where
             Gamma(a, x)               == Gamma(a, x)$FSF
             Beta(x, y)                == Beta(x, y)$FSF
             digamma x                 == digamma(x)$FSF
+            trigamma x                == trigamma(x)$FSF
             polygamma(k, x)           == polygamma(k, x)$FSF
             besselJ(v, x)             == besselJ(v, x)$FSF
             besselY(v, x)             == besselY(v, x)$FSF
