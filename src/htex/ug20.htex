@@ -1,0 +1,125 @@
+
+% Copyright (c) 1991-2002, The Numerical ALgorithms Group Ltd.
+% All rights reserved.
+% 
+% Redistribution and use in source and binary forms, with or without
+% modification, are permitted provided that the following conditions are
+% met:
+% 
+%     - Redistributions of source code must retain the above copyright
+%       notice, this list of conditions and the following disclaimer.
+% 
+%     - Redistributions in binary form must reproduce the above copyright
+%       notice, this list of conditions and the following disclaimer in
+%       the documentation and/or other materials provided with the
+%       distribution.
+% 
+%     - Neither the name of The Numerical ALgorithms Group Ltd. nor the
+%       names of its contributors may be used to endorse or promote products
+%       derived from this software without specific prior written permission.
+% 
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+% IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+% TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+% PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+% OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+% EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+% PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES-- LOSS OF USE, DATA, OR
+% PROFITS-- OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+% LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+% NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+% SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+\texht{\setcounter{chapter}{4}}{} % Appendix E
+%
+{
+\twocolumn[%
+% *********************************************************************
+\head{chapter}{Operations}{ugAppOperations}
+% *********************************************************************
+\useFullPage{}
+
+This appendix contains a partial list of \Language{} operations
+with brief descriptions.
+For more details, use the \Browse{} facility of \HyperName{}:
+enter the name of the operation for which you want more information
+in the input area on the main \Browse{} menu and then click on
+{\bf Operations.}
+
+\vskip \baselineskip
+]
+\useFullPage{}
+\appendixMark{Operations}
+\baselineskip=10pt\parskip=.4\baselineskip\ixpt{}\parindent=0pt\xmpWidth=\hsize
+%
+\def\alt#1#2{{$\lbrace$#1$\mid$#2$\rbrace$}}
+\def\altx#1#2#3{{$\lbrace$#1$\mid$#2$\mid$#3$\rbrace$}}
+\def\opt#1{{$\,\lbrack$#1$\rbrack$}}
+\def\bigLeftBrack{{\tt \[}}
+\def\bigRightBrack{{\tt \]}}
+\def\smallLeftBrack{{\tt \[}}
+\def\smallRightBrack{{\tt \]}}
+\def\optinit#1{{$\lbrack$#1$\rbrack$}}
+\def\optfirst#1{{\lbrack#1\rbrack}}
+\def\from#1{{From \spadtype{#1}.}}
+\def\consultType#1{{Consult \spadtype{#1} using \Browse{} for details.}}
+\def\colx#1#2#3{{\lbrack#1,#2,\ldots,#3\rbrack}}
+\def\col#1#2{{\lbrack#1,\ldots,\rbrack}}
+\def\code#1{{\tt #1}}
+\def\Unix{{\bf Unix}}
+\def\Script{IBM SCRIPT Formula Formatter}
+
+\def\smallbreak{{\hfill{\break}}}
+\def\newitem{{\smallbreak}}
+\def\bigitem{{\medbreak}}
+\def\largerbreak{{\hfill{\smallskip\break}}}
+\def\medbreak{{\hfill{\medskip\break}}}
+\def\bigbreak{{\hfill{\bigskip\break}}}
+\long\def\bigopkey#1{{#1}}
+\long\def\opkey#1{{#1}}
+
+\def\and{{\ {\bf and}\ }}
+\def\or{{\ {\bf or}\ }}
+\def\mod{{\ {\bf mod}\ }}
+\def\quo{{\ {\bf quo}\ }}
+\def\rem{{\ {\bf rem}\ }}
+\def\opLeftPren{\nobreak\,{\tt (}}
+\def\opRightPren{\nobreak{\tt )}\allowbreak}
+
+\def\seeType#1{{See \spadtype{#1} using \Browse{}.}}
+\def\seeAlso#1{{See also #1}.}
+\def\seeOther#1{{For additional information on $#1$, consult \Browse{}.}}
+\def\sayOption#1#2{{This command may be given as a draw option: \spad{#1 == #2}.}}
+\def\seeDetails#1{{Consult \spadtype{#1} using \Browse{} for details.}}
+
+\long\def\opdataQual#1#2#3#4#5#6{{
+  \opdata{#1}{#2}{#3}{#4}{#5\newitem#6}
+}}
+
+\long\def\opdata#1#2#3#4#5{{
+  %#1 name  #2 number of args #3 sig  #4 con  #5 documentation
+   \hyphenpenalty=1000
+   \exhyphenpenalty=1000
+   \par\vskip 4pt\optitle{#1}\nopagebreak\par\vskip -\parskip\vskip 2pt\nopagebreak\noindent%
+   {\def\TYsize{\SMTYfont}#5}\par}}
+
+\def\keydata#1#2#3#4#5{{\opdata{#1}{#2}{#3}{#4}{#5}}}
+\def\keyop#1{{{\large{$#1$}}}}
+\def\optitle#1{{\bf #1}}
+\def\opand{\optand}
+\def\optand{{\par\vskip -\parskip}}
+\def\optinner#1{{\lbrack#1\rbrack}}
+\def\opname#1{{\tt #1}}
+\def\opoption#1#2{{{\tt #1}\spad{== #2}}}
+
+\long\def\xxdata#1#2#3#4#5{{}}
+
+\def\indented#1{{#1}}
+\def\spadsyscom#1{{#1}}
+
+\sloppy\raggedright
+\input{oplist}
+
+\fussy
+}\onecolumn

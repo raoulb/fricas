@@ -1,0 +1,824 @@
+
+% Copyright (c) 1991-2002, The Numerical ALgorithms Group Ltd.
+% All rights reserved.
+% 
+% Redistribution and use in source and binary forms, with or without
+% modification, are permitted provided that the following conditions are
+% met:
+% 
+%     - Redistributions of source code must retain the above copyright
+%       notice, this list of conditions and the following disclaimer.
+% 
+%     - Redistributions in binary form must reproduce the above copyright
+%       notice, this list of conditions and the following disclaimer in
+%       the documentation and/or other materials provided with the
+%       distribution.
+% 
+%     - Neither the name of The Numerical ALgorithms Group Ltd. nor the
+%       names of its contributors may be used to endorse or promote products
+%       derived from this software without specific prior written permission.
+% 
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+% IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+% TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+% PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+% OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+% EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+% PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES-- LOSS OF USE, DATA, OR
+% PROFITS-- OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+% LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+% NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+% SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+\texht{\setcounter{chapter}{3}}{} % Appendix D
+
+\twocolumn[%
+% *********************************************************************
+\head{chapter}{Packages}{ugAppPackages}
+% *********************************************************************
+\useFullPage{}
+
+This is a listing of all packages in the \Language{} library at the
+time this book was produced.
+Use the \Browse{} facility (described in \chapref{ugBrowse})
+to get more information about these constructors.
+
+% ----------------------------------------------------------------------
+\beginImportant
+This sample entry will help you read the following table:
+\medskip
+\sampdata{PackageAbbreviation}{PackageName}{\subscriptIt{{\sf Category}}{1}
+\ldots \subscriptIt{{\sf Category}}{N}}%
+{\subscriptIt{{\rm operation}}{1} \ldots \subscriptIt{{\rm operation}}{M}}
+\medskip
+where
+
+\begin{tabular}{@{\quad}ll}
+\sf PackageName & is the full package name, for example, {\sf PadeApproximantPackage}. \\
+\sf PackageAbbreviation & is the package abbreviation, for example, {\sf PADEPAC}. \\
+\subscriptIt{{\sf Category}}{i} & is a category to which the package belongs. \\
+\subscriptIt{{\rm operation}}{j} & is an operation exported by the package.
+\end{tabular}
+\endImportant
+% ----------------------------------------------------------------------
+]
+\appendixMark{Packages}
+
+% ----------------------------------------------------------------------
+\begin{constructorListing}
+% ----------------------------------------------------------------------
+\condata{AF}{AlgebraicFunction}{}{{\tt ^} belong? definingPolynomial inrootof iroot minPoly operator rootOf}
+%
+\condata{INTHERAL}{AlgebraicHermiteIntegration}{}{HermiteIntegrate}
+%
+\condata{INTALG}{AlgebraicIntegrate}{}{algintegrate palginfieldint palgintegrate}
+%
+\condata{INTAF}{AlgebraicIntegration}{}{algint}
+%
+\condata{ALGMANIP}{AlgebraicManipulations}{}{ratDenom ratPoly rootKerSimp rootSimp rootSplit}
+%
+\condata{ALGMFACT}{AlgebraicMultFact}{}{factor}
+%
+\condata{ALGPKG}{AlgebraPackage}{}{basisOfCenter basisOfCentroid basisOfCommutingElements basisOfLeftAnnihilator
+   basisOfLeftNucleus basisOfLeftNucloid basisOfMiddleNucleus basisOfNucleus basisOfRightAnnihilator basisOfRightNucleus
+   basisOfRightNucloid biRank doubleRank leftRank radicalOfLeftTraceForm rightRank weakBiRank}
+%
+\condata{ALGFACT}{AlgFactor}{}{doublyTransitive? factor split}
+%
+\condata{ANY1}{AnyFunctions1}{}{coerce retract retractIfCan retractable?}
+%
+\condata{APPRULE}{ApplyRules}{}{applyRules localUnquote}
+%
+\condata{PMPRED}{AttachPredicates}{}{suchThat}
+%
+\condata{BALFACT}{BalancedFactorisation}{}{balancedFactorisation}
+%
+\condata{BOP1}{BasicOperatorFunctions1}{}{constantOpIfCan constantOperator derivative evaluate}
+%
+\condata{BEZOUT}{BezoutMatrix}{}{bezoutDiscriminant bezoutMatrix bezoutResultant}
+%
+\condata{BOUNDZRO}{BoundIntegerRoots}{}{integerBound}
+%
+\condata{CARTEN2}{CartesianTensorFunctions2}{}{map reshape}
+%
+\condata{CHVAR}{ChangeOfVariable}{}{chvar eval goodPoint mkIntegral radPoly rootPoly}
+%
+\condata{CHARPOL}{CharacteristicPolynomialPackage}{}{characteristicPolynomial}
+%
+\condata{CVMP}{CoerceVectorMatrixPackage}{}{coerce coerceP}
+%
+\condata{COMBF}{CombinatorialFunction}{}{{\tt ^} belong? binomial factorial factorials iibinom iidprod iidsum iifact
+   iiperm iipow ipow operator permutation product summation}
+%
+\condata{CDEN}{CommonDenominator}{}{clearDenominator commonDenominator splitDenominator}
+%
+\condata{COMMONOP}{CommonOperators}{}{operator}
+%
+\condata{COMMUPC}{CommuteUnivariatePolynomialCategory}{}{swap}
+%
+\condata{COMPFACT}{ComplexFactorization}{}{factor}
+%
+\condata{COMPLEX2}{ComplexFunctions2}{}{map}
+%
+\condata{CINTSLPE}{ComplexIntegerSolveLinearPolynomialEquation}{}{solveLinearPolynomialEquation}
+%
+\condata{CRFP}{ComplexRootFindingPackage}{}{complexZeros divisorCascade factor graeffe norm pleskenSplit
+   reciprocalPolynomial rootRadius schwerpunkt setErrorBound startPolynomial}
+%
+\condata{CMPLXRT}{ComplexRootPackage}{}{complexZeros}
+%
+\condata{ODECONST}{ConstantLODE}{}{constDsolve}
+%
+\condata{COORDSYS}{CoordinateSystems}{}{bipolar bipolarCylindrical cartesian conical cylindrical elliptic
+   ellipticCylindrical oblateSpheroidal parabolic parabolicCylindrical paraboloidal polar prolateSpheroidal spherical
+   toroidal}
+%
+\condata{CRAPACK}{CRApackage}{}{chineseRemainder modTree multiEuclideanTree}
+%
+\condata{CYCLES}{CycleIndicators}{}{SFunction alternating cap complete cup cyclic dihedral elementary eval graphs
+   powerSum skewSFunction wreath}
+%
+\condata{CSTTOOLS}{CyclicStreamTools}{}{computeCycleEntry computeCycleLength cycleElt}
+%
+\condata{CYCLOTOM}{CyclotomicPolynomialPackage}{}{cyclotomic cyclotomicDecomposition cyclotomicFactorization}
+%
+\condata{DEGRED}{DegreeReductionPackage}{}{expand reduce}
+%
+\condata{DIOSP}{DiophantineSolutionPackage}{}{dioSolve}
+%
+\condata{DIRPROD2}{DirectProductFunctions2}{}{map reduce scan}
+%
+\condata{DLP}{DiscreteLogarithmPackage}{}{shanksDiscLogAlgorithm}
+%
+\condata{DISPLAY}{DisplayPackage}{}{bright center copies newLine say sayLength}
+%
+\condata{DDFACT}{DistinctDegreeFactorize}{}{distdfact exptMod factor irreducible? separateDegrees separateFactors
+   tracePowMod}
+%
+\condata{DBLRESP}{DoubleResultantPackage}{}{doubleResultant}
+%
+\condata{DRAWHACK}{DrawNumericHack}{}{coerce}
+%
+\condata{DROPT0}{DrawOptionFunctions0}{}{adaptive clipBoolean coordinate curveColorPalette pointColorPalette ranges
+   space style title toScale tubePoints tubeRadius units var1Steps var2Steps}
+%
+\condata{DROPT1}{DrawOptionFunctions1}{}{option}
+%
+\condata{EP}{EigenPackage}{}{characteristicPolynomial eigenvalues eigenvector eigenvectors inteigen}
+%
+\condata{ODEEF}{ElementaryFunctionODESolver}{}{solve}
+%
+\condata{SIGNEF}{ElementaryFunctionSign}{}{sign}
+%
+\condata{EFSTRUC}{ElementaryFunctionStructurePackage}{}{normalize realElementary rischNormalize validExponential}
+%
+\condata{EFUTS}{ElementaryFunctionsUnivariateTaylorSeries}{}{{\tt ^} acos acosh acot acoth acsc acsch asec asech asin
+   asinh atan atanh cos cosh cot coth csc csch exp log sec sech sin sincos sinh sinhcosh tan tanh}
+%
+\condata{EF}{ElementaryFunction}{}{acos acosh acot acoth acsc acsch asec asech asin asinh atan atanh belong? cos cosh
+   cot coth csc csch exp iiacos iiacosh iiacot iiacoth iiacsc iiacsch iiasec iiasech iiasin iiasinh iiatan iiatanh iicos
+   iicosh iicot iicoth iicsc iicsch iiexp iilog iisec iisech iisin iisinh iitan iitanh log operator pi sec sech sin sinh
+   specialTrigs tan tanh}
+%
+\condata{INTEF}{ElementaryIntegration}{}{lfextendedint lfextlimint lfinfieldint lfintegrate lflimitedint}
+%
+\condata{RDEEF}{ElementaryRischDE}{}{rischDE}
+%
+\condata{ELFUTS}{EllipticFunctionsUnivariateTaylorSeries}{}{cn dn sn sncndn}
+%
+\condata{EQ2}{EquationFunctions2}{}{map}
+%
+\condata{ERROR}{ErrorFunctions}{}{error}
+%
+\condata{GBEUCLID}{EuclideanGroebnerBasisPackage}{}{euclideanGroebner euclideanNormalForm}
+%
+\condata{EVALCYC}{EvaluateCycleIndicators}{}{eval}
+%
+\condata{EXPR2}{ExpressionFunctions2}{}{map}
+%
+\condata{ES1}{ExpressionSpaceFunctions1}{}{map}
+%
+\condata{ES2}{ExpressionSpaceFunctions2}{}{map}
+%
+\condata{EXPRODE}{ExpressionSpaceODESolver}{}{seriesSolve}
+%
+\condata{EXPR2UPS}{ExpressionToUnivariatePowerSeries}{}{laurent puiseux series taylor}
+%
+\condata{EXPRTUBE}{ExpressionTubePlot}{}{constantToUnaryFunction tubePlot}
+%
+\condata{FR2}{FactoredFunctions2}{}{map}
+%
+\condata{FACTFUNC}{FactoredFunctions}{}{log nthRoot}
+%
+\condata{FRUTIL}{FactoredFunctionUtilities}{}{mergeFactors refine}
+%
+\condata{FACUTIL}{FactoringUtilities}{}{completeEval degree lowerPolynomial normalDeriv raisePolynomial ran variables}
+%
+\condata{FORDER}{FindOrderFinite}{}{order}
+%
+\condata{FDIV2}{FiniteDivisorFunctions2}{}{map}
+%
+\condata{FFF}{FiniteFieldFunctions}{}{createMultiplicationMatrix createMultiplicationTable createZechTable
+   sizeMultiplication}
+%
+\condata{FFHOM}{FiniteFieldHomomorphisms}{}{coerce}
+%
+\condata{FFPOLY2}{FiniteFieldPolynomialPackage2}{}{rootOfIrreduciblePoly}
+%
+\condata{FFPOLY}{FiniteFieldPolynomialPackage}{}{createIrreduciblePoly createNormalPoly createNormalPrimitivePoly
+   createPrimitiveNormalPoly createPrimitivePoly leastAffineMultiple nextIrreduciblePoly nextNormalPoly
+   nextNormalPrimitivePoly nextPrimitiveNormalPoly nextPrimitivePoly normal? numberOfIrreduciblePoly numberOfNormalPoly
+   numberOfPrimitivePoly primitive? random reducedQPowers}
+%
+\condata{FFSLPE}{FiniteFieldSolveLinearPolynomialEquation}{}{solveLinearPolynomialEquation}
+%
+\condata{FLAGG2}{FiniteLinearAggregateFunctions2}{}{map reduce scan}
+%
+\condata{FLASORT}{FiniteLinearAggregateSort}{}{heapSort quickSort shellSort}
+%
+\condata{FSAGG2}{FiniteSetAggregateFunctions2}{}{map reduce scan}
+%
+\condata{FLOATCP}{FloatingComplexPackage}{}{complexRoots complexSolve}
+%
+\condata{FLOATRP}{FloatingRealPackage}{}{realRoots solve}
+%
+\condata{FRIDEAL2}{FractionalIdealFunctions2}{}{map}
+%
+\condata{FRAC2}{FractionFunctions2}{}{map}
+%
+\condata{FSPECF}{FunctionalSpecialFunction}{}{Beta Gamma abs airyAi airyBi belong? besselI besselJ besselK besselY
+   digamma iiGamma iiabs operator polygamma}
+%
+\condata{FFCAT2}{FunctionFieldCategoryFunctions2}{}{map}
+%
+\condata{FFINTBAS}{FunctionFieldIntegralBasis}{}{integralBasis}
+%
+\condata{PMASSFS}{FunctionSpaceAssertions}{}{assert constant multiple optional}
+%
+\condata{PMPREDFS}{FunctionSpaceAttachPredicates}{}{suchThat}
+%
+\condata{FSCINT}{FunctionSpaceComplexIntegration}{}{complexIntegrate internalIntegrate}
+%
+\condata{FS2}{FunctionSpaceFunctions2}{}{map}
+%
+\condata{FSINT}{FunctionSpaceIntegration}{}{integrate}
+%
+\condata{FSPRMELT}{FunctionSpacePrimitiveElement}{}{primitiveElement}
+%
+\condata{FSRED}{FunctionSpaceReduce}{}{bringDown newReduc}
+%
+\condata{SUMFS}{FunctionSpaceSum}{}{sum}
+%
+\condata{FS2UPS}{FunctionSpaceToUnivariatePowerSeries}{}{exprToGenUPS exprToUPS}
+%
+\condata{FSUPFACT}{FunctionSpaceUnivariatePolynomialFactor}{}{ffactor qfactor}
+%
+\condata{GAUSSFAC}{GaussianFactorizationPackage}{}{factor prime? sumSquares}
+%
+\condata{GHENSEL}{GeneralHenselPackage}{}{HenselLift completeHensel}
+%
+\condata{GENPGCD}{GeneralPolynomialGcdPackage}{}{gcdPolynomial randomR}
+%
+\condata{GENUPS}{GenerateUnivariatePowerSeries}{}{laurent puiseux series taylor}
+%
+\condata{GENEEZ}{GenExEuclid}{}{compBound reduction solveid tablePow testModulus}
+%
+\condata{GENUFACT}{GenUFactorize}{}{factor}
+%
+\condata{INTG0}{GenusZeroIntegration}{}{palgLODE0 palgRDE0 palgextint0 palgint0 palglimint0}
+%
+\condata{GOSPER}{GosperSummationMethod}{}{GospersMethod}
+%
+\condata{GRDEF}{GraphicsDefaults}{}{adaptive clipPointsDefault drawToScale maxPoints minPoints screenResolution}
+%
+\condata{GRAY}{GrayCode}{}{firstSubsetGray nextSubsetGray}
+%
+\condata{GBF}{GroebnerFactorizationPackage}{}{factorGroebnerBasis groebnerFactorize}
+%
+\condata{GBINTERN}{GroebnerInternalPackage}{}{credPol critB critBonD critM critMTonD1 critMonD1 critT critpOrder
+   fprindINFO gbasis hMonic lepol makeCrit minGbasis prinb prindINFO prinpolINFO prinshINFO redPo redPol sPol updatD
+   updatF virtualDegree}
+%
+\condata{GB}{GroebnerPackage}{}{groebner normalForm}
+%
+\condata{GROEBSOL}{GroebnerSolve}{}{genericPosition groebSolve testDim}
+%
+\condata{HB}{HallBasis}{}{generate inHallBasis? lfunc}
+%
+\condata{HEUGCD}{HeuGcd}{}{content contprim gcd gcdcofact gcdcofactprim gcdprim lintgcd}
+%
+\condata{IDECOMP}{IdealDecompositionPackage}{}{primaryDecomp prime? radical zeroDimPrimary? zeroDimPrime?}
+%
+\condata{INCRMAPS}{IncrementingMaps}{}{increment incrementBy}
+%
+\condata{ITFUN2}{InfiniteTupleFunctions2}{}{map}
+%
+\condata{ITFUN3}{InfiniteTupleFunctions3}{}{map}
+%
+\condata{INFINITY}{Infinity}{}{infinity minusInfinity plusInfinity}
+%
+\condata{IALGFACT}{InnerAlgFactor}{}{factor}
+%
+\condata{ICDEN}{InnerCommonDenominator}{}{clearDenominator commonDenominator splitDenominator}
+%
+\condata{IMATLIN}{InnerMatrixLinearAlgebraFunctions}{}{determinant inverse nullSpace nullity rank rowEchelon}
+%
+\condata{IMATQF}{InnerMatrixQuotientFieldFunctions}{}{inverse nullSpace nullity rank rowEchelon}
+%
+\condata{INMODGCD}{InnerModularGcd}{}{modularGcd reduction}
+%
+\condata{INNMFACT}{InnerMultFact}{}{factor}
+%
+\condata{INBFF}{InnerNormalBasisFieldFunctions}{}{{\tt *} {\tt ^} {\tt /} basis dAndcExp expPot index inv lookup
+   minimalPolynomial norm normal? normalElement pol qPot random repSq setFieldInfo trace xn}
+%
+\condata{INEP}{InnerNumericEigenPackage}{}{charpol innerEigenvectors}
+%
+\condata{INFSP}{InnerNumericFloatSolvePackage}{}{innerSolve innerSolve1 makeEq}
+%
+\condata{INPSIGN}{InnerPolySign}{}{signAround}
+%
+\condata{ISUMP}{InnerPolySum}{}{sum}
+%
+\condata{ITRIGMNP}{InnerTrigonometricManipulations}{}{F2FG FG2F GF2FG explogs2trigs trigs2explogs}
+%
+\condata{INFORM1}{InputFormFunctions1}{}{interpret packageCall}
+%
+\condata{COMBINAT}{IntegerCombinatoricFunctions}{}{binomial factorial multinomial partition permutation stirling1
+   stirling2}
+%
+\condata{INTFACT}{IntegerFactorizationPackage}{}{BasicMethod PollardSmallFactor factor squareFree}
+%
+\condata{ZLINDEP}{IntegerLinearDependence}{}{linearDependenceOverZ linearlyDependentOverZ? solveLinearlyOverQ}
+%
+\condata{INTHEORY}{IntegerNumberTheoryFunctions}{}{bernoulli chineseRemainder divisors euler eulerPhi fibonacci
+   harmonic jacobi legendre moebiusMu numberOfDivisors sumOfDivisors sumOfKthPowerDivisors}
+%
+\condata{PRIMES}{IntegerPrimesPackage}{}{nextPrime prevPrime prime? primes}
+%
+\condata{INTRET}{IntegerRetractions}{}{integer integer? integerIfCan}
+%
+\condata{IROOT}{IntegerRoots}{}{approxNthRoot approxSqrt perfectNthPower? perfectNthRoot perfectSqrt perfectSquare?}
+%
+\condata{IBATOOL}{IntegralBasisTools}{}{diagonalProduct idealiser leastPower}
+%
+\condata{IR2}{IntegrationResultFunctions2}{}{map}
+%
+\condata{IRRF2F}{IntegrationResultRFToFunction}{}{complexExpand complexIntegrate expand integrate split}
+%
+\condata{IR2F}{IntegrationResultToFunction}{}{complexExpand expand split}
+%
+\condata{INTTOOLS}{IntegrationTools}{}{kmax ksec mkPrim union vark varselect}
+%
+\condata{INVLAPLA}{InverseLaplaceTransform}{}{inverseLaplace}
+%
+\condata{IRREDFFX}{IrredPolyOverFiniteField}{}{generateIrredPoly}
+%
+\condata{IRSN}{IrrRepSymNatPackage}{}{dimensionOfIrreducibleRepresentation irreducibleRepresentation}
+%
+\condata{KERNEL2}{KernelFunctions2}{}{constantIfCan constantKernel}
+%
+\condata{KOVACIC}{Kovacic}{}{kovacic}
+%
+\condata{LAPLACE}{LaplaceTransform}{}{laplace}
+%
+\condata{LEADCDET}{LeadingCoefDetermination}{}{distFact polCase}
+%
+\condata{LINDEP}{LinearDependence}{}{linearDependence linearlyDependent? solveLinear}
+%
+\condata{LPEFRAC}{LinearPolynomialEquationByFractions}{}{solveLinearPolynomialEquationByFractions}
+%
+\condata{LSMP}{LinearSystemMatrixPackage}{}{aSolution hasSolution? rank solve}
+%
+\condata{LSPP}{LinearSystemPolynomialPackage}{}{linSolve}
+%
+\condata{LGROBP}{LinGrobnerPackage}{}{anticoord choosemon computeBasis coordinate groebgen intcompBasis linGenPos
+   minPol totolex transform}
+%
+\condata{LF}{LiouvillianFunction}{}{Ci Ei Si belong? dilog erf integral li operator}
+%
+\condata{LIST2}{ListFunctions2}{}{map reduce scan}
+%
+\condata{LIST3}{ListFunctions3}{}{map}
+%
+\condata{LIST2MAP}{ListToMap}{}{match}
+%
+\condata{MKBCFUNC}{MakeBinaryCompiledFunction}{}{binaryFunction compiledFunction}
+%
+\condata{MKFLCFN}{MakeFloatCompiledFunction}{}{makeFloatFunction}
+%
+\condata{MKFUNC}{MakeFunction}{}{function}
+%
+\condata{MKRECORD}{MakeRecord}{}{makeRecord}
+%
+\condata{MKUCFUNC}{MakeUnaryCompiledFunction}{}{compiledFunction unaryFunction}
+%
+\condata{MAPPKG1}{MappingPackage1}{}{{\tt ^} coerce fixedPoint id nullary recur}
+%
+\condata{MAPPKG2}{MappingPackage2}{}{const constant curry diag}
+%
+\condata{MAPPKG3}{MappingPackage3}{}{{\tt *} constantLeft constantRight curryLeft curryRight twist}
+%
+\condata{MAPHACK1}{MappingPackageInternalHacks1}{}{iter recur}
+%
+\condata{MAPHACK2}{MappingPackageInternalHacks2}{}{arg1 arg2}
+%
+\condata{MAPHACK3}{MappingPackageInternalHacks3}{}{comp}
+%
+\condata{MATCAT2}{MatrixCategoryFunctions2}{}{map reduce}
+%
+\condata{MCDEN}{MatrixCommonDenominator}{}{clearDenominator commonDenominator splitDenominator}
+%
+\condata{MATLIN}{MatrixLinearAlgebraFunctions}{}{determinant inverse minordet nullSpace nullity rank rowEchelon}
+%
+\condata{MTHING}{MergeThing}{}{mergeDifference}
+%
+\condata{MESH}{MeshCreationRoutinesForThreeDimensions}{}{meshFun2Var meshPar1Var meshPar2Var ptFunc}
+%
+\condata{MDDFACT}{ModularDistinctDegreeFactorizer}{}{ddFact exptMod factor gcd separateFactors}
+%
+\condata{MHROWRED}{ModularHermitianRowReduction}{}{rowEch rowEchelon}
+%
+\condata{MRF2}{MonoidRingFunctions2}{}{map}
+%
+\condata{MSYSCMD}{MoreSystemCommands}{}{systemCommand}
+%
+\condata{MPC2}{MPolyCatFunctions2}{}{map reshape}
+%
+\condata{MPC3}{MPolyCatFunctions3}{}{map}
+%
+\condata{MPRFF}{MPolyCatRationalFunctionFactorizer}{}{factor pushdown pushdterm pushucoef pushuconst pushup totalfract}
+%
+\condata{MRATFAC}{MRationalFactorize}{}{factor}
+%
+\condata{MFINFACT}{MultFiniteFactorize}{}{factor}
+%
+\condata{MMAP}{MultipleMap}{}{map}
+%
+\condata{MULTFACT}{MultivariateFactorize}{}{factor}
+%
+\condata{MLIFT}{MultivariateLifting}{}{corrPoly lifting lifting1}
+%
+\condata{MULTSQFR}{MultivariateSquareFree}{}{squareFree squareFreePrim}
+%
+\condata{NCODIV}{NonCommutativeOperatorDivision}{}{leftDivide leftExactQuotient leftGcd leftLcm leftQuotient
+   leftRemainder}
+%
+\condata{NONE1}{NoneFunctions1}{}{coerce}
+%
+\condata{NODE1}{NonLinearFirstOrderODESolver}{}{solve}
+%
+\condata{NLINSOL}{NonLinearSolvePackage}{}{solve solveInField}
+%
+\condata{NPCOEF}{NPCoef}{}{listexp npcoef}
+%
+\condata{NFINTBAS}{NumberFieldIntegralBasis}{}{discriminant integralBasis}
+%
+\condata{NUMFMT}{NumberFormats}{}{FormatArabic FormatRoman ScanArabic ScanRoman}
+%
+\condata{NTPOLFN}{NumberTheoreticPolynomialFunctions}{}{bernoulliB cyclotomic eulerE}
+%
+\condata{NUMODE}{NumericalOrdinaryDifferentialEquations}{}{rk4 rk4a rk4f rk4qc}
+%
+\condata{NUMQUAD}{NumericalQuadrature}{}{aromberg asimpson atrapezoidal romberg rombergo simpson simpsono trapezoidal
+   trapezoidalo}
+%
+\condata{NCEP}{NumericComplexEigenPackage}{}{characteristicPolynomial complexEigenvalues complexEigenvectors}
+%
+\condata{NCNTFRAC}{NumericContinuedFraction}{}{continuedFraction}
+%
+\condata{NREP}{NumericRealEigenPackage}{}{characteristicPolynomial realEigenvalues realEigenvectors}
+%
+\condata{NUMTUBE}{NumericTubePlot}{}{tube}
+%
+\condata{NUMERIC}{Numeric}{}{complexNumeric numeric}
+%
+\condata{OCTCT2}{OctonionCategoryFunctions2}{}{map}
+%
+\condata{ODEINT}{ODEIntegration}{}{expint int}
+%
+\condata{ODETOOLS}{ODETools}{}{particularSolution variationOfParameters wronskianMatrix}
+%
+\condata{ARRAY12}{OneDimensionalArrayFunctions2}{}{map reduce scan}
+%
+\condata{ONECOMP2}{OnePointCompletionFunctions2}{}{map}
+%
+\condata{OPQUERY}{OperationsQuery}{}{getDatabase}
+%
+\condata{ORDCOMP2}{OrderedCompletionFunctions2}{}{map}
+%
+\condata{ORDFUNS}{OrderingFunctions}{}{pureLex reverseLex totalLex}
+%
+\condata{ORTHPOL}{OrthogonalPolynomialFunctions}{}{ChebyshevU chebyshevT hermiteH laguerreL legendreP}
+%
+\condata{OUT}{OutputPackage}{}{output}
+%
+\condata{PADEPAC}{PadeApproximantPackage}{}{pade}
+%
+\condata{PADE}{PadeApproximants}{}{pade padecf}
+%
+\condata{YSTREAM}{ParadoxicalCombinatorsForStreams}{}{Y}
+%
+\condata{PARTPERM}{PartitionsAndPermutations}{}{conjugate conjugates partitions permutations sequences shuffle
+   shufflein}
+%
+\condata{PATTERN1}{PatternFunctions1}{}{addBadValue badValues predicate satisfy? suchThat}
+%
+\condata{PATTERN2}{PatternFunctions2}{}{map}
+%
+\condata{PMASS}{PatternMatchAssertions}{}{assert constant multiple optional}
+%
+\condata{PMFS}{PatternMatchFunctionSpace}{}{patternMatch}
+%
+\condata{PMINS}{PatternMatchIntegerNumberSystem}{}{patternMatch}
+%
+\condata{PMKERNEL}{PatternMatchKernel}{}{patternMatch}
+%
+\condata{PMLSAGG}{PatternMatchListAggregate}{}{patternMatch}
+%
+\condata{PMPLCAT}{PatternMatchPolynomialCategory}{}{patternMatch}
+%
+\condata{PMDOWN}{PatternMatchPushDown}{}{fixPredicate patternMatch}
+%
+\condata{PMQFCAT}{PatternMatchQuotientFieldCategory}{}{patternMatch}
+%
+\condata{PATRES2}{PatternMatchResultFunctions2}{}{map}
+%
+\condata{PMSYM}{PatternMatchSymbol}{}{patternMatch}
+%
+\condata{PMTOOLS}{PatternMatchTools}{}{patternMatch patternMatchTimes}
+%
+\condata{PATMATCH}{PatternMatch}{}{Is is?}
+%
+\condata{PERMAN}{Permanent}{}{permanent}
+%
+\condata{PGE}{PermutationGroupExamples}{}{abelianGroup alternatingGroup cyclicGroup dihedralGroup janko2 mathieu11
+   mathieu12 mathieu22 mathieu23 mathieu24 rubiksGroup symmetricGroup youngGroup}
+%
+\condata{PICOERCE}{PiCoercions}{}{coerce}
+%
+\condata{PLOT1}{PlotFunctions1}{}{plot plotPolar}
+%
+\condata{PLOTTOOL}{PlotTools}{}{calcRanges}
+%
+\condata{PTFUNC2}{PointFunctions2}{}{map}
+%
+\condata{PTPACK}{PointPackage}{}{color hue phiCoord rCoord shade thetaCoord xCoord yCoord zCoord}
+%
+\condata{PFOQ}{PointsOfFiniteOrderRational}{}{order torsion? torsionIfCan}
+%
+\condata{PFOTOOLS}{PointsOfFiniteOrderTools}{}{badNum doubleDisc getGoodPrime mix polyred}
+%
+\condata{PFO}{PointsOfFiniteOrder}{}{order torsion? torsionIfCan}
+%
+\condata{POLTOPOL}{PolToPol}{}{dmpToNdmp dmpToP ndmpToDmp ndmpToP pToDmp pToNdmp}
+%
+\condata{PGROEB}{PolyGroebner}{}{lexGroebner totalGroebner}
+%
+\condata{PAN2EXPR}{PolynomialAN2Expression}{}{coerce}
+%
+\condata{POLYLIFT}{PolynomialCategoryLifting}{}{map}
+%
+\condata{POLYCATQ}{PolynomialCategoryQuotientFunctions}{}{isExpt isPlus isPower isTimes mainVariable multivariate
+   univariate variables}
+%
+\condata{PFBRU}{PolynomialFactorizationByRecursionUnivariate}{}{bivariateSLPEBR factorByRecursion factorSFBRlcUnit
+   factorSquareFreeByRecursion randomR solveLinearPolynomialEquationByRecursion}
+%
+\condata{PFBR}{PolynomialFactorizationByRecursion}{}{bivariateSLPEBR factorByRecursion factorSFBRlcUnit
+   factorSquareFreeByRecursion randomR solveLinearPolynomialEquationByRecursion}
+%
+\condata{POLY2}{PolynomialFunctions2}{}{map}
+%
+\condata{PGCD}{PolynomialGcdPackage}{}{gcd gcdPrimitive}
+%
+\condata{PINTERPA}{PolynomialInterpolationAlgorithms}{}{LagrangeInterpolation}
+%
+\condata{PINTERP}{PolynomialInterpolation}{}{interpolate}
+%
+\condata{PNTHEORY}{PolynomialNumberTheoryFunctions}{}{bernoulli chebyshevT chebyshevU cyclotomic euler fixedDivisor
+   hermite laguerre legendre}
+%
+\condata{POLYROOT}{PolynomialRoots}{}{froot qroot rroot}
+%
+\condata{SOLVEFOR}{PolynomialSolveByFormulas}{}{aCubic aLinear aQuadratic aQuartic aSolution cubic linear mapSolve
+   quadratic quartic solve}
+%
+\condata{PSQFR}{PolynomialSquareFree}{}{squareFree}
+%
+\condata{POLY2UP}{PolynomialToUnivariatePolynomial}{}{univariate}
+%
+\condata{LIMITPS}{PowerSeriesLimitPackage}{}{complexLimit limit}
+%
+\condata{PRIMARR2}{PrimitiveArrayFunctions2}{}{map reduce scan}
+%
+\condata{PRIMELT}{PrimitiveElement}{}{primitiveElement}
+%
+\condata{ODEPRIM}{PrimitiveRatDE}{}{denomLODE}
+%
+\condata{ODEPRRIC}{PrimitiveRatRicDE}{}{changevar constantCoefficientRicDE denomRicDE leadingCoefficientRicDE polyRicDE
+   singRicDE}
+%
+\condata{PRINT}{PrintPackage}{}{print}
+%
+\condata{INTPAF}{PureAlgebraicIntegration}{}{palgLODE palgRDE palgextint palgint palglimint}
+%
+\condata{ODEPAL}{PureAlgebraicLODE}{}{algDsolve}
+%
+\condata{QALGSET2}{QuasiAlgebraicSet2}{}{radicalSimplify}
+%
+\condata{QUATCT2}{QuaternionCategoryFunctions2}{}{map}
+%
+\condata{QFCAT2}{QuotientFieldCategoryFunctions2}{}{map}
+%
+\condata{REP}{RadicalEigenPackage}{}{eigenMatrix gramschmidt normalise orthonormalBasis radicalEigenvalues
+   radicalEigenvector radicalEigenvectors}
+%
+\condata{SOLVERAD}{RadicalSolvePackage}{}{contractSolve radicalRoots radicalSolve}
+%
+\condata{RADUTIL}{RadixUtilities}{}{radix}
+%
+\condata{RANDSRC}{RandomNumberSource}{}{randnum reseed size}
+%
+\condata{RATFACT}{RationalFactorize}{}{factor}
+%
+\condata{DEFINTRF}{RationalFunctionDefiniteIntegration}{}{integrate}
+%
+\condata{RFFACTOR}{RationalFunctionFactorizer}{}{factorFraction}
+%
+\condata{RFFACT}{RationalFunctionFactor}{}{factor}
+%
+\condata{INTRF}{RationalFunctionIntegration}{}{extendedIntegrate infieldIntegrate internalIntegrate limitedIntegrate}
+%
+\condata{LIMITRF}{RationalFunctionLimitPackage}{}{complexLimit limit}
+%
+\condata{SIGNRF}{RationalFunctionSign}{}{sign}
+%
+\condata{SUMRF}{RationalFunctionSum}{}{sum}
+%
+\condata{RF}{RationalFunction}{}{coerce eval mainVariable multivariate univariate variables}
+%
+\condata{INTRAT}{RationalIntegration}{}{extendedint infieldint integrate limitedint}
+%
+\condata{ODERAT}{RationalLODE}{}{ratDsolve}
+%
+\condata{RATRET}{RationalRetractions}{}{rational rational? rationalIfCan}
+%
+\condata{ODERTRIC}{RationalRicDE}{}{changevar constantCoefficientRicDE polyRicDE ricDsolve singRicDE}
+%
+\condata{RTODETLS}{RatODETools}{}{genericPolynomial}
+%
+\condata{REALSOLV}{RealSolvePackage}{}{realSolve solve}
+%
+\condata{REAL0Q}{RealZeroPackageQ}{}{realZeros refine}
+%
+\condata{REAL0}{RealZeroPackage}{}{midpoint midpoints realZeros refine}
+%
+\condata{RMCAT2}{RectangularMatrixCategoryFunctions2}{}{map reduce}
+%
+\condata{RDIV}{ReducedDivisor}{}{order}
+%
+\condata{ODERED}{ReduceLODE}{}{reduceLODE}
+%
+\condata{REDORDER}{ReductionOfOrder}{}{ReduceOrder}
+%
+\condata{REPDB}{RepeatedDoubling}{}{double}
+%
+\condata{REPSQ}{RepeatedSquaring}{}{expt}
+%
+\condata{REP1}{RepresentationPackage1}{}{antisymmetricTensors createGenericMatrix permutationRepresentation
+   symmetricTensors tensorProduct}
+%
+\condata{REP2}{RepresentationPackage2}{}{areEquivalent? completeEchelonBasis createRandomElement cyclicSubmodule
+   isAbsolutelyIrreducible? meatAxe scanOneDimSubspaces split standardBasisOfCyclicSubmodule}
+%
+\condata{RESLATC}{ResolveLatticeCompletion}{}{coerce}
+%
+\condata{RETSOL}{RetractSolvePackage}{}{solveRetract}
+%
+\condata{SAERFFC}{SAERationalFunctionAlgFactor}{}{factor}
+%
+\condata{SEGBIND2}{SegmentBindingFunctions2}{}{map}
+%
+\condata{SEG2}{SegmentFunctions2}{}{map}
+%
+\condata{SAEFACT}{SimpleAlgebraicExtensionAlgFactor}{}{factor}
+%
+\condata{DFLOATSFUN}{DoubleFloatSpecialFunctions}{}{Beta Gamma airyAi airyBi besselI besselJ besselK besselY digamma
+   hypergeometric0F1 logGamma polygamma}
+%
+\condata{SCACHE}{SortedCache}{}{cache clearCache enterInCache}
+%
+\condata{SUP2}{SparseUnivariatePolynomialFunctions2}{}{map}
+%
+\condata{SPECOUT}{SpecialOutputPackage}{}{outputAsFortran outputAsScript outputAsTex}
+%
+\condata{MATSTOR}{StorageEfficientMatrixOperations}{}{{\tt ^} copy! leftScalarTimes! minus! plus! power!
+   rightScalarTimes! times!}
+%
+\condata{STREAM1}{StreamFunctions1}{}{concat}
+%
+\condata{STREAM2}{StreamFunctions2}{}{map reduce scan}
+%
+\condata{STREAM3}{StreamFunctions3}{}{map}
+%
+\condata{STTAYLOR}{StreamTaylorSeriesOperations}{}{{\tt *} {\tt +} {\tt -} {\tt /} addiag coerce compose deriv eval
+   evenlambert gderiv generalLambert int integers integrate invmultisect lagrange lambert lazyGintegrate lazyIntegrate
+   mapdiv mapmult monom multisect nlde oddintegers oddlambert power powern recip revert}
+%
+\condata{STTF}{StreamTranscendentalFunctions}{}{{\tt ^} acos acosh acot acoth acsc acsch asec asech asin asinh atan
+   atanh cos cosh cot coth csc csch exp log sec sech sin sincos sinh sinhcosh tan tanh}
+%
+\condata{SUBRESP}{SubResultantPackage}{}{primitivePart subresultantVector}
+%
+\condata{SYMFUNC}{SymmetricFunctions}{}{symFunc}
+%
+\condata{SGCF}{SymmetricGroupCombinatoricFunctions}{}{coleman inverseColeman listYoungTableaus makeYoungTableau
+   nextColeman nextLatticePermutation nextPartition numberOfImproperPartitions subSet unrankImproperPartitions0
+   unrankImproperPartitions1}
+%
+\condata{ODESYS}{SystemODESolver}{}{solveInField triangulate}
+%
+\condata{SYSSOLP}{SystemSolvePackage}{}{solve triangularSystems}
+%
+\condata{TABLBUMP}{TableauxBumpers}{}{bat bat1 bumprow bumptab bumptab1 inverse lex maxrow mr slex tab tab1 untab}
+%
+\condata{TANEXP}{TangentExpansions}{}{tanAn tanNa tanSum}
+%
+\condata{TOOLSIGN}{ToolsForSign}{}{direction nonQsign sign}
+%
+\condata{DRAWCURV}{TopLevelDrawFunctionsForAlgebraicCurves}{}{draw}
+%
+\condata{DRAWCFUN}{TopLevelDrawFunctionsForCompiledFunctions}{}{draw makeObject recolor}
+%
+\condata{DRAW}{TopLevelDrawFunctions}{}{draw makeObject}
+%
+\condata{TOPSP}{TopLevelThreeSpace}{}{createThreeSpace}
+%
+\condata{INTHERTR}{TranscendentalHermiteIntegration}{}{HermiteIntegrate}
+%
+\condata{INTTR}{TranscendentalIntegration}{}{expextendedint expintegrate expintfldpoly explimitedint primextendedint
+   primextintfrac primintegrate primintegratefrac primintfldpoly primlimintfrac primlimitedint}
+%
+\condata{TRMANIP}{TranscendentalManipulations}{}{cos2sec cosh2sech cot2tan cot2trig coth2tanh coth2trigh csc2sin
+   csch2sinh expand expandLog expandPower htrigs removeCosSq removeCoshSq removeSinSq removeSinhSq sec2cos sech2cosh
+   simplify simplifyExp sin2csc sinh2csch tan2cot tan2trig tanh2coth tanh2trigh}
+%
+\condata{RDETR}{TranscendentalRischDE}{}{DSPDE SPDE baseRDE expRDE primRDE}
+%
+\condata{SOLVESER}{TransSolvePackageService}{}{decomposeFunc unvectorise}
+%
+\condata{SOLVETRA}{TransSolvePackage}{}{solve}
+%
+\condata{TRIMAT}{TriangularMatrixOperations}{}{LowTriBddDenomInv UpTriBddDenomInv}
+%
+\condata{TRIGMNIP}{TrigonometricManipulations}{}{complexElementary complexNormalize imag real real? trigs}
+%
+\condata{TUBETOOL}{TubePlotTools}{}{{\tt *} {\tt +} {\tt -} cosSinInfo cross dot loopPoints point unitVector}
+%
+\condata{CLIP}{TwoDimensionalPlotClipping}{}{clip clipParametric clipWithRanges}
+%
+\condata{TWOFACT}{TwoFactorize}{}{generalSqFr generalTwoFactor twoFactor}
+%
+\condata{UNIFACT}{UnivariateFactorize}{}{factor factorSquareFree genFact henselFact henselfact quadratic sqroot
+   trueFactors}
+%
+\condata{ULS2}{UnivariateLaurentSeriesFunctions2}{}{map}
+%
+\condata{UPOLYC2}{UnivariatePolynomialCategoryFunctions2}{}{map}
+%
+\condata{UPCDEN}{UnivariatePolynomialCommonDenominator}{}{clearDenominator commonDenominator splitDenominator}
+%
+\condata{UP2}{UnivariatePolynomialFunctions2}{}{map}
+%
+\condata{UPSQFREE}{UnivariatePolynomialSquareFree}{}{BumInSepFFE squareFree squareFreePart}
+%
+\condata{UPXS2}{UnivariatePuiseuxSeriesFunctions2}{}{map}
+%
+\condata{UTS2}{UnivariateTaylorSeriesFunctions2}{}{map}
+%
+\condata{UTSODE}{UnivariateTaylorSeriesODESolver}{}{mpsode ode ode1 ode2 stFunc1 stFunc2 stFuncN}
+%
+\condata{UNISEG2}{UniversalSegmentFunctions2}{}{map}
+%
+\condata{UDPO}{UserDefinedPartialOrdering}{}{getOrder largest less? more? setOrder userOrdered?}
+%
+\condata{UDVO}{UserDefinedVariableOrdering}{}{getVariableOrder resetVariableOrder setVariableOrder}
+%
+\condata{VECTOR2}{VectorFunctions2}{}{map reduce scan}
+%
+\condata{VIEWDEF}{ViewDefaultsPackage}{}{axesColorDefault lineColorDefault pointColorDefault pointSizeDefault
+   tubePointsDefault tubeRadiusDefault unitsColorDefault var1StepsDefault var2StepsDefault viewDefaults viewPosDefault
+   viewSizeDefault viewWriteAvailable viewWriteDefault}
+%
+\condata{VIEW}{ViewportPackage}{}{coerce drawCurves graphCurves}
+%
+\condata{WEIER}{WeierstrassPreparation}{}{cfirst clikeUniv crest qqq sts2stst weierstrass}
+%
+\condata{WFFINTBS}{WildFunctionFieldIntegralBasis}{}{integralBasis listSquaredFactors}
+%
+%
+% ----------------------------------------------------------------------
+\end{constructorListing}
+% ----------------------------------------------------------------------

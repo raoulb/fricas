@@ -1,0 +1,71 @@
+Errata and corrections to first printing of
+        AXIOM: The Scientific Computation System
+
+Please sort in ascending order on page number.
+
+
+General:
+    1.  Capital greek letters did not display in final book.
+    2.  We don't always display what we promise in chapter 7.
+
+
+
+Date     Reporter  Pages  Fixed Problem/Solution
+-------- --------  -----  ----- ------------------------------------------------
+
+11/18/92 TD       xxiv      N   Florian Bundschuh appears twice in 'Other
+                                group members'
+
+09/08/92 RSS         6      N   log(-1) appears. Fixed in library. Regenerate
+                                output.
+
+09/09/92 RSS        33      Y   One instance of ratForm should be ratDenom.
+
+10/23/92 GK         36      Y   'than to all' --> 'than all'
+
+10/23/92 GK         65      Y   'our the discussion' --> 'our discussion'
+
+10/23/92 GK         75      Y   'can sometimes have' --> 'can have'
+
+10/23/92 GK       105-6     N   Bad FORTRAN 77 continuation indentation (?)
+
+09/08/92 TD/RSS    116      N   Some if-then-else formats are not legal.
+
+10/23/92 GK        134      Y   STYLE: "you've gotten" --> "it has progressed"
+
+10/23/92 GK        162      Y   "is still be local" --> "is still local"
+
+10/23/92 JG        181      N   We don't actually show a title on the graph.
+
+10/23/92 JG        280      Y   "For For" --> "For" in footnote
+
+10/23/92 GK        328      Y   First sentence in 9.9 fixed.
+
+11/18/92 TD        389      N   subscript of summation has missing left paren
+                                d|n) should be (d|n)
+
+10/23/92 JG        425      Y   "norm(o*p)-norm(p*o)" --> "norm(o*p)-norm(o)*norm(p)"
+
+10/23/92 GK        474      Y   "resepect" --> "respect"
+
+09/09/92 JCW       557      Y   Missing \UpBitMap{} at beginning of step 3 at
+                                top of page.
+
+10/23/92 GK        640      N   Bad line breaking near end of "D".
+
+09/09/92 SCM       698      Y   Two instances of the 'draw' function name appear
+                                as axiomFundraw.
+
+10/23/92 GK        711      N   parse: now "2." after "1."
+
+09/08/92 RSS       717...   N   Remove/merge duplicate entries.
+                                Fix Moebious strangeness.
+
+
+Names:
+    RSS     Robert S. Sutor
+    TD      Tim Daly
+    SCM     Scott C. Morrison
+    JCW     Jim C. Wen
+    GK      Grant Keady
+    JG      Johannes Grabmeier

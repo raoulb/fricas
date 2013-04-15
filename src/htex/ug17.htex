@@ -1,0 +1,507 @@
+
+% Copyright (c) 1991-2002, The Numerical ALgorithms Group Ltd.
+% All rights reserved.
+% 
+% Redistribution and use in source and binary forms, with or without
+% modification, are permitted provided that the following conditions are
+% met:
+% 
+%     - Redistributions of source code must retain the above copyright
+%       notice, this list of conditions and the following disclaimer.
+% 
+%     - Redistributions in binary form must reproduce the above copyright
+%       notice, this list of conditions and the following disclaimer in
+%       the documentation and/or other materials provided with the
+%       distribution.
+% 
+%     - Neither the name of The Numerical ALgorithms Group Ltd. nor the
+%       names of its contributors may be used to endorse or promote products
+%       derived from this software without specific prior written permission.
+% 
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+% IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+% TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+% PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+% OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+% EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+% PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES-- LOSS OF USE, DATA, OR
+% PROFITS-- OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+% LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+% NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+% SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+\texht{\setcounter{chapter}{1}}{} % Appendix B
+
+\twocolumn[%
+% *********************************************************************
+\head{chapter}{Categories}{ugAppCategories}
+% *********************************************************************
+\useFullPage{}
+
+This is a listing of all categories in the \Language{} library at the
+time this book was produced.
+Use the \Browse{} facility (described in \chapref{ugBrowse})
+to get more information about these constructors.
+
+% ----------------------------------------------------------------------
+\beginImportant
+This sample entry will help you read the following table:
+\medskip
+\sampdata{CategoryAbbreviation}{CategoryName}{\subscriptIt{{\sf Category}}{1}
+\ldots \subscriptIt{{\sf Category}}{N}}%
+{\subscriptIt{{\rm operation}}{1} \ldots \subscriptIt{{\rm operation}}{M}}
+\medskip
+where
+
+\begin{tabular}{@{\quad}ll}
+\sf CategoryName & is the full category name, for example, {\sf CommutativeRing}. \\
+\sf CategoryAbbreviation & is the category abbreviation, for example, {\sf COMRING}. \\
+\subscriptIt{{\sf Category}}{i} & is a category to which the category belongs. \\
+\subscriptIt{{\rm operation}}{j} & is an operation explicitly exported by the category.
+\end{tabular}
+\endImportant
+% ----------------------------------------------------------------------
+]
+\appendixMark{Categories}
+
+% ----------------------------------------------------------------------
+\begin{constructorListing}
+% ----------------------------------------------------------------------
+%
+\condata{ABELGRP}{AbelianGroup}{CancellationAbelianMonoid}{{\tt *} {\tt -}}
+%
+\condata{AMR}{AbelianMonoidRing}{Algebra BiModule CharacteristicNonZero CharacteristicZero CommutativeRing
+   IntegralDomain Ring}{{\tt /} coefficient degree leadingCoefficient leadingMonomial map monomial monomial? reductum}
+%
+\condata{ABELMON}{AbelianMonoid}{AbelianSemiGroup}{{\tt *} Zero zero?}
+%
+\condata{ABELSG}{AbelianSemiGroup}{SetCategory}{{\tt *} {\tt +}}
+%
+\condata{AGG}{Aggregate}{Object}{{\tt \#} copy empty empty? eq? less? more? size?}
+%
+\condata{ACF}{AlgebraicallyClosedField}{Field RadicalCategory}{rootOf rootsOf zeroOf zerosOf}
+%
+\condata{ACFS}{AlgebraicallyClosedFunctionSpace}{AlgebraicallyClosedField FunctionSpace}{rootOf rootsOf zeroOf zerosOf}
+%
+\condata{ALGEBRA}{Algebra}{Module Ring}{coerce}
+%
+\condata{AHYP}{ArcHyperbolicFunctionCategory}{}{acosh acoth acsch asech asinh atanh}
+%
+\condata{ATRIG}{ArcTrigonometricFunctionCategory}{}{acos acot acsc asec asin atan}
+%
+\condata{ALAGG}{AssociationListAggregate}{ListAggregate TableAggregate}{assoc}
+%
+\condata{ATTREG}{AttributeRegistry}{}{}
+%
+\condata{BGAGG}{BagAggregate}{HomogeneousAggregate}{bag extract! insert! inspect}
+%
+\condata{BMODULE}{BiModule}{LeftModule RightModule}{}
+%
+\condata{BRAGG}{BinaryRecursiveAggregate}{RecursiveAggregate}{elt left right setelt setleft! setright!}
+%
+\condata{BTCAT}{BinaryTreeCategory}{BinaryRecursiveAggregate}{node}
+%
+\condata{BTAGG}{BitAggregate}{OneDimensionalArrayAggregate OrderedSet}{{\tt \^{}} and nand nor not or xor}
+%
+\condata{CACHSET}{CachableSet}{OrderedSet}{position setPosition}
+%
+\condata{CABMON}{CancellationAbelianMonoid}{AbelianMonoid}{{\tt -}}
+%
+\condata{CHARNZ}{CharacteristicNonZero}{Ring}{charthRoot}
+%
+\condata{CHARZ}{CharacteristicZero}{Ring}{}
+%
+\condata{KOERCE}{CoercibleTo}{}{coerce}
+%
+\condata{CLAGG}{Collection}{ConvertibleTo HomogeneousAggregate}{construct find reduce remove removeDuplicates select}
+%
+\condata{CFCAT}{CombinatorialFunctionCategory}{}{binomial factorial permutation}
+%
+\condata{COMBOPC}{CombinatorialOpsCategory}{CombinatorialFunctionCategory}{factorials product summation}
+%
+\condata{COMRING}{CommutativeRing}{BiModule Ring}{}
+%
+\condata{COMPCAT}{ComplexCategory}{CharacteristicNonZero CharacteristicZero CommutativeRing ConvertibleTo
+   DifferentialExtension EuclideanDomain Field FullyEvalableOver FullyLinearlyExplicitRingOver FullyRetractableTo
+   IntegralDomain MonogenicAlgebra OrderedSet PolynomialFactorizationExplicit RadicalCategory
+   TranscendentalFunctionCategory}{abs argument complex conjugate exquo imag imaginary norm polarCoordinates rational
+   rational? rationalIfCan real}
+%
+\condata{KONVERT}{ConvertibleTo}{}{convert}
+%
+\condata{DQAGG}{DequeueAggregate}{QueueAggregate StackAggregate}{bottom! dequeue extractBottom! extractTop! height
+   insertBottom! insertTop! reverse! top!}
+%
+\condata{DIOPS}{DictionaryOperations}{BagAggregate Collection}{dictionary remove! select!}
+%
+\condata{DIAGG}{Dictionary}{DictionaryOperations}{}
+%
+\condata{DIFEXT}{DifferentialExtension}{DifferentialRing PartialDifferentialRing Ring}{D differentiate}
+%
+\condata{DPOLCAT}{DifferentialPolynomialCategory}{DifferentialExtension Evalable InnerEvalable PolynomialCategory
+   RetractableTo}{degree differentialVariables initial isobaric? leader makeVariable order separant weight weights}
+%
+\condata{DIFRING}{DifferentialRing}{Ring}{D differentiate}
+%
+\condata{DVARCAT}{DifferentialVariableCategory}{OrderedSet RetractableTo}{D coerce differentiate makeVariable order
+   variable weight}
+%
+\condata{DIRPCAT}{DirectProductCategory}{AbelianSemiGroup Algebra BiModule CancellationAbelianMonoid CoercibleTo
+   CommutativeRing DifferentialExtension Finite FullyLinearlyExplicitRingOver FullyRetractableTo IndexedAggregate
+   OrderedAbelianMonoidSup OrderedRing VectorSpace}{{\tt *} directProduct dot unitVector}
+%
+\condata{DIVRING}{DivisionRing}{Algebra EntireRing}{{\tt ^} inv}
+%
+\condata{DLAGG}{DoublyLinkedAggregate}{RecursiveAggregate}{concat! head last next previous setnext! setprevious! tail}
+%
+\condata{ELEMFUN}{ElementaryFunctionCategory}{}{{\tt ^} exp log}
+%
+\condata{ELTAGG}{EltableAggregate}{Eltable}{elt qelt qsetelt! setelt}
+%
+\condata{ELTAB}{Eltable}{}{elt}
+%
+\condata{ENTIRER}{EntireRing}{BiModule Ring}{}
+%
+\condata{EUCDOM}{EuclideanDomain}{PrincipalIdealDomain}{divide euclideanSize extendedEuclidean multiEuclidean quo rem
+   sizeLess?}
+%
+\condata{EVALAB}{Evalable}{}{eval}
+%
+\condata{ES}{ExpressionSpace}{Evalable InnerEvalable OrderedSet RetractableTo}{belong? box definingPolynomial
+   distribute elt eval freeOf? height is? kernel kernels mainKernel map minPoly operator operators paren subst tower}
+%
+\condata{ELAGG}{ExtensibleLinearAggregate}{LinearAggregate}{concat! delete! insert! merge! remove! removeDuplicates!
+   select!}
+%
+\condata{XF}{ExtensionField}{CharacteristicZero Field FieldOfPrimeCharacteristic RetractableTo VectorSpace}{Frobenius
+   algebraic? degree extensionDegree inGroundField? transcendenceDegree transcendent?}
+%
+\condata{FPC}{FieldOfPrimeCharacteristic}{CharacteristicNonZero Field}{discreteLog order primeFrobenius}
+%
+\condata{FIELD}{Field}{DivisionRing EuclideanDomain UniqueFactorizationDomain}{{\tt /}}
+%
+\condata{FILECAT}{FileCategory}{SetCategory}{close! iomode name open read! reopen! write!}
+%
+\condata{FNCAT}{FileNameCategory}{SetCategory}{coerce directory exists? extension filename name new readable? writable?}
+%
+\condata{FAMR}{FiniteAbelianMonoidRing}{AbelianMonoidRing FullyRetractableTo}{coefficients content exquo ground ground?
+   mapExponents minimumDegree numberOfMonomials primitivePart}
+%
+\condata{FAXF}{FiniteAlgebraicExtensionField}{ExtensionField FiniteFieldCategory RetractableTo}{basis coordinates
+   createNormalElement definingPolynomial degree extensionDegree generator minimalPolynomial norm normal? normalElement
+   represents trace}
+%
+\condata{FFIELDC}{FiniteFieldCategory}{FieldOfPrimeCharacteristic Finite StepThrough}{charthRoot conditionP
+   createPrimitiveElement discreteLog factorsOfCyclicGroupSize order primitive? primitiveElement representationType
+   tableForDiscreteLogarithm}
+%
+\condata{FLAGG}{FiniteLinearAggregate}{LinearAggregate OrderedSet}{copyInto! merge position reverse reverse! sort sort!
+   sorted?}
+%
+\condata{FINRALG}{FiniteRankAlgebra}{Algebra CharacteristicNonZero CharacteristicZero}{characteristicPolynomial
+   coordinates discriminant minimalPolynomial norm rank regularRepresentation represents trace traceMatrix}
+%
+\condata{FINAALG}{FiniteRankNonAssociativeAlgebra}{NonAssociativeAlgebra}{JacobiIdentity? JordanAlgebra? alternative?
+   antiAssociative? antiCommutative? associative? associatorDependence commutative? conditionsForIdempotents coordinates
+   flexible? jordanAdmissible? leftAlternative? leftCharacteristicPolynomial leftDiscriminant leftMinimalPolynomial
+   leftNorm leftRecip leftRegularRepresentation leftTrace leftTraceMatrix leftUnit leftUnits lieAdmissible? lieAlgebra?
+   noncommutativeJordanAlgebra? powerAssociative? rank recip represents rightAlternative? rightCharacteristicPolynomial
+   rightDiscriminant rightMinimalPolynomial rightNorm rightRecip rightRegularRepresentation rightTrace rightTraceMatrix
+   rightUnit rightUnits someBasis structuralConstants unit}
+%
+\condata{FSAGG}{FiniteSetAggregate}{Dictionary Finite SetAggregate}{cardinality complement max min universe}
+%
+\condata{FINITE}{Finite}{SetCategory}{index lookup random size}
+%
+\condata{FPS}{FloatingPointSystem}{RealNumberSystem}{base bits decreasePrecision digits exponent float
+   increasePrecision mantissa max order precision}
+%
+\condata{FRAMALG}{FramedAlgebra}{FiniteRankAlgebra}{basis convert coordinates discriminant regularRepresentation
+   represents traceMatrix}
+%
+\condata{FRNAALG}{FramedNonAssociativeAlgebra}{FiniteRankNonAssociativeAlgebra}{apply basis conditionsForIdempotents
+   convert coordinates elt leftDiscriminant leftRankPolynomial leftRegularRepresentation leftTraceMatrix represents
+   rightDiscriminant rightRankPolynomial rightRegularRepresentation rightTraceMatrix structuralConstants}
+%
+\condata{FAMONC}{FreeAbelianMonoidCategory}{CancellationAbelianMonoid RetractableTo}{{\tt *} {\tt +} coefficient
+   highCommonTerms mapCoef mapGen nthCoef nthFactor size terms}
+%
+\condata{FEVALAB}{FullyEvalableOver}{Eltable Evalable InnerEvalable}{map}
+%
+\condata{FLINEXP}{FullyLinearlyExplicitRingOver}{LinearlyExplicitRingOver}{}
+%
+\condata{FPATMAB}{FullyPatternMatchable}{Object PatternMatchable}{}
+%
+\condata{FRETRCT}{FullyRetractableTo}{RetractableTo}{}
+%
+\condata{FFCAT}{FunctionFieldCategory}{MonogenicAlgebra}{D absolutelyIrreducible? branchPoint? branchPointAtInfinity?
+   complementaryBasis differentiate elt genus integral? integralAtInfinity? integralBasis integralBasisAtInfinity
+   integralCoordinates integralDerivationMatrix integralMatrix integralMatrixAtInfinity integralRepresents
+   inverseIntegralMatrix inverseIntegralMatrixAtInfinity nonSingularModel normalizeAtInfinity numberOfComponents
+   primitivePart ramified? ramifiedAtInfinity? rationalPoint? rationalPoints reduceBasisAtInfinity represents singular?
+   singularAtInfinity? yCoordinates}
+%
+\condata{FS}{FunctionSpace}{AbelianGroup AbelianMonoid Algebra CharacteristicNonZero CharacteristicZero ConvertibleTo
+   ExpressionSpace Field FullyLinearlyExplicitRingOver FullyPatternMatchable FullyRetractableTo Group Monoid
+   PartialDifferentialRing Patternable RetractableTo Ring}{{\tt ^} {\tt /} applyQuote coerce convert denom denominator
+   eval ground ground? isExpt isMult isPlus isPower isTimes numer numerator univariate variables}
+%
+\condata{GCDDOM}{GcdDomain}{IntegralDomain}{gcd lcm}
+%
+\condata{GRALG}{GradedAlgebra}{GradedModule}{One product}
+%
+\condata{GRMOD}{GradedModule}{RetractableTo SetCategory}{{\tt *} {\tt +} {\tt -} Zero degree}
+%
+\condata{GROUP}{Group}{Monoid}{{\tt ^} {\tt /} commutator conjugate inv}
+%
+\condata{HOAGG}{HomogeneousAggregate}{Aggregate SetCategory}{any? count every? map map! member? members parts}
+%
+\condata{HYPCAT}{HyperbolicFunctionCategory}{}{cosh coth csch sech sinh tanh}
+%
+\condata{IXAGG}{IndexedAggregate}{EltableAggregate HomogeneousAggregate}{entries entry? fill! first index? indices
+   maxIndex minIndex swap!}
+%
+\condata{IDPC}{IndexedDirectProductCategory}{SetCategory}{leadingCoefficient leadingSupport map monomial reductum}
+%
+\condata{IEVALAB}{InnerEvalable}{}{eval}
+%
+\condata{INS}{IntegerNumberSystem}{CharacteristicZero CombinatorialFunctionCategory ConvertibleTo DifferentialRing
+   EuclideanDomain LinearlyExplicitRingOver OrderedRing PatternMatchable RealConstant RetractableTo StepThrough
+   UniqueFactorizationDomain}{addmod base bit? copy dec even? hash inc invmod length mask mulmod odd? positiveRemainder
+   powmod random rational rational? rationalIfCan shift submod symmetricRemainder}
+%
+\condata{INTDOM}{IntegralDomain}{Algebra CommutativeRing EntireRing}{associates? exquo unit? unitCanonical unitNormal}
+%
+\condata{KDAGG}{KeyedDictionary}{Dictionary}{key? keys remove! search}
+%
+\condata{LZSTAGG}{LazyStreamAggregate}{StreamAggregate}{complete explicitEntries? explicitlyEmpty? extend frst lazy?
+   lazyEvaluate numberOfComputedEntries remove rst select}
+%
+\condata{LALG}{LeftAlgebra}{LeftModule Ring}{coerce}
+%
+\condata{LMODULE}{LeftModule}{AbelianGroup}{{\tt *}}
+%
+\condata{LNAGG}{LinearAggregate}{Collection IndexedAggregate}{concat delete elt insert map new setelt}
+%
+\condata{LINEXP}{LinearlyExplicitRingOver}{Ring}{reducedSystem}
+%
+\condata{LFCAT}{LiouvillianFunctionCategory}{PrimitiveFunctionCategory TranscendentalFunctionCategory}{Ci Ei Si dilog
+   erf li}
+%
+\condata{LSAGG}{ListAggregate}{ExtensibleLinearAggregate FiniteLinearAggregate StreamAggregate}{list}
+%
+\condata{MATCAT}{MatrixCategory}{TwoDimensionalArrayCategory}{{\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} antisymmetric?
+   coerce determinant diagonal? diagonalMatrix elt exquo horizConcat inverse listOfLists matrix minordet nullSpace nullity
+   rank rowEchelon scalarMatrix setelt setsubMatrix! square? squareTop subMatrix swapColumns! swapRows! symmetric?
+   transpose vertConcat zero}
+%
+\condata{MODULE}{Module}{BiModule}{}
+%
+\condata{MONADWU}{MonadWithUnit}{Monad}{{\tt ^} One leftPower leftRecip one? recip rightPower rightRecip}
+%
+\condata{MONAD}{Monad}{SetCategory}{{\tt *} {\tt ^} leftPower rightPower}
+%
+\condata{MONOGEN}{MonogenicAlgebra}{CommutativeRing ConvertibleTo DifferentialExtension Field Finite
+   FiniteFieldCategory FramedAlgebra FullyLinearlyExplicitRingOver FullyRetractableTo}{convert definingPolynomial
+   derivationCoordinates generator lift reduce}
+%
+\condata{MLO}{MonogenicLinearOperator}{Algebra BiModule Ring}{coefficient degree leadingCoefficient minimumDegree
+   monomial reductum}
+%
+\condata{MONOID}{Monoid}{SemiGroup}{{\tt ^} One one? recip}
+%
+\condata{MDAGG}{MultiDictionary}{DictionaryOperations}{duplicates insert! removeDuplicates!}
+%
+\condata{MSAGG}{MultiSetAggregate}{MultiDictionary SetAggregate}{}
+%
+\condata{MTSCAT}{MultivariateTaylorSeriesCategory}{Evalable InnerEvalable PartialDifferentialRing PowerSeriesCategory
+   RadicalCategory TranscendentalFunctionCategory}{coefficient extend integrate monomial order polynomial}
+%
+\condata{NAALG}{NonAssociativeAlgebra}{Module NonAssociativeRng}{plenaryPower}
+%
+\condata{NASRING}{NonAssociativeRing}{MonadWithUnit NonAssociativeRng}{characteristic coerce}
+%
+\condata{NARNG}{NonAssociativeRng}{AbelianGroup Monad}{antiCommutator associator commutator}
+%
+\condata{OBJECT}{Object}{}{}
+%
+\condata{OC}{OctonionCategory}{Algebra CharacteristicNonZero CharacteristicZero ConvertibleTo Finite FullyEvalableOver
+   FullyRetractableTo OrderedSet}{abs conjugate imagE imagI imagJ imagK imagi imagj imagk inv norm octon rational
+   rational? rationalIfCan real}
+%
+\condata{A1AGG}{OneDimensionalArrayAggregate}{FiniteLinearAggregate}{}
+%
+\condata{OAGROUP}{OrderedAbelianGroup}{AbelianGroup OrderedCancellationAbelianMonoid}{}
+%
+\condata{OAMONS}{OrderedAbelianMonoidSup}{OrderedCancellationAbelianMonoid}{sup}
+%
+\condata{OAMON}{OrderedAbelianMonoid}{AbelianMonoid OrderedAbelianSemiGroup}{}
+%
+\condata{OASGP}{OrderedAbelianSemiGroup}{AbelianMonoid OrderedSet}{}
+%
+\condata{OCAMON}{OrderedCancellationAbelianMonoid}{CancellationAbelianMonoid OrderedAbelianMonoid}{}
+%
+\condata{ORDFIN}{OrderedFinite}{Finite OrderedSet}{}
+%
+\condata{ORDMON}{OrderedMonoid}{Monoid OrderedSet}{}
+%
+\condata{OMAGG}{OrderedMultiSetAggregate}{MultiSetAggregate PriorityQueueAggregate}{min}
+%
+\condata{ORDRING}{OrderedRing}{OrderedAbelianGroup OrderedMonoid Ring}{abs negative? positive? sign}
+%
+\condata{ORDSET}{OrderedSet}{SetCategory}{{\tt <} max min}
+%
+\condata{PADICCT}{PAdicIntegerCategory}{CharacteristicZero EuclideanDomain}{approximate complete digits extend moduloP
+   modulus order quotientByP sqrt}
+%
+\condata{PDRING}{PartialDifferentialRing}{Ring}{D differentiate}
+%
+\condata{PTRANFN}{PartialTranscendentalFunctions}{}{acosIfCan acoshIfCan acotIfCan acothIfCan acscIfCan acschIfCan
+   asecIfCan asechIfCan asinIfCan asinhIfCan atanIfCan atanhIfCan cosIfCan coshIfCan cotIfCan cothIfCan cscIfCan cschIfCan
+   expIfCan logIfCan nthRootIfCan secIfCan sechIfCan sinIfCan sinhIfCan tanIfCan tanhIfCan}
+%
+\condata{PATAB}{Patternable}{ConvertibleTo Object}{}
+%
+\condata{PATMAB}{PatternMatchable}{SetCategory}{patternMatch}
+%
+\condata{PERMCAT}{PermutationCategory}{Group OrderedSet}{{\tt <} cycle cycles elt eval orbit}
+%
+\condata{PPCURVE}{PlottablePlaneCurveCategory}{CoercibleTo}{listBranches xRange yRange}
+%
+\condata{PSCURVE}{PlottableSpaceCurveCategory}{CoercibleTo}{listBranches xRange yRange zRange}
+%
+\condata{PTCAT}{PointCategory}{VectorCategory}{convert cross dimension extend length point}
+%
+\condata{POLYCAT}{PolynomialCategory}{ConvertibleTo Evalable FiniteAbelianMonoidRing FullyLinearlyExplicitRingOver
+   GcdDomain InnerEvalable OrderedSet PartialDifferentialRing PatternMatchable PolynomialFactorizationExplicit
+   RetractableTo}{coefficient content degree discriminant isExpt isPlus isTimes mainVariable minimumDegree monicDivide
+   monomial monomials multivariate primitiveMonomials primitivePart resultant squareFree squareFreePart totalDegree
+   univariate variables}
+%
+\condata{PFECAT}{PolynomialFactorizationExplicit}{UniqueFactorizationDomain}{charthRoot conditionP factorPolynomial
+   factorSquareFreePolynomial gcdPolynomial solveLinearPolynomialEquation squareFreePolynomial}
+%
+\condata{PSCAT}{PowerSeriesCategory}{AbelianMonoidRing}{complete monomial pole? variables}
+%
+\condata{PRIMCAT}{PrimitiveFunctionCategory}{}{integral}
+%
+\condata{PID}{PrincipalIdealDomain}{GcdDomain}{expressIdealMember principalIdeal}
+%
+\condata{PRQAGG}{PriorityQueueAggregate}{BagAggregate}{max merge merge!}
+%
+\condata{QUATCAT}{QuaternionCategory}{Algebra CharacteristicNonZero CharacteristicZero ConvertibleTo
+   DifferentialExtension DivisionRing EntireRing FullyEvalableOver FullyLinearlyExplicitRingOver FullyRetractableTo
+   OrderedSet}{abs conjugate imagI imagJ imagK norm quatern rational rational? rationalIfCan real}
+%
+\condata{QUAGG}{QueueAggregate}{BagAggregate}{back dequeue! enqueue! front length rotate!}
+%
+\condata{QFCAT}{QuotientFieldCategory}{Algebra CharacteristicNonZero CharacteristicZero ConvertibleTo
+   DifferentialExtension Field FullyEvalableOver FullyLinearlyExplicitRingOver FullyPatternMatchable OrderedRing
+   OrderedSet Patternable PolynomialFactorizationExplicit RealConstant RetractableTo StepThrough}{{\tt /} ceiling denom
+   denominator floor fractionPart numer numerator random wholePart}
+%
+\condata{RADCAT}{RadicalCategory}{}{{\tt ^} nthRoot sqrt}
+%
+\condata{REAL}{RealConstant}{ConvertibleTo}{}
+%
+\condata{RNS}{RealNumberSystem}{CharacteristicZero ConvertibleTo Field OrderedRing PatternMatchable RadicalCategory
+   RealConstant RetractableTo}{abs ceiling floor fractionPart norm round truncate wholePart}
+%
+\condata{RMATCAT}{RectangularMatrixCategory}{BiModule HomogeneousAggregate Module}{{\tt /} antisymmetric? column
+   diagonal? elt exquo listOfLists map matrix maxColIndex maxRowIndex minColIndex minRowIndex ncols nrows nullSpace
+   nullity qelt rank row rowEchelon square? symmetric?}
+%
+\condata{RCAGG}{RecursiveAggregate}{HomogeneousAggregate}{children cyclic? elt leaf? leaves node? nodes setchildren!
+   setelt setvalue! value}
+%
+\condata{RETRACT}{RetractableTo}{}{coerce retract retractIfCan}
+%
+\condata{RMODULE}{RightModule}{AbelianGroup}{{\tt *}}
+%
+\condata{RING}{Ring}{LeftModule Monoid Rng}{characteristic coerce}
+%
+\condata{RNG}{Rng}{AbelianGroup SemiGroup}{}
+%
+\condata{SEGCAT}{SegmentCategory}{SetCategory}{BY SEGMENT convert hi high incr lo low segment}
+%
+\condata{SEGXCAT}{SegmentExpansionCategory}{SegmentCategory}{expand map}
+%
+\condata{SGROUP}{SemiGroup}{SetCategory}{{\tt *} {\tt ^}}
+%
+\condata{SETAGG}{SetAggregate}{Collection SetCategory}{{\tt <} brace difference intersect subset? symmetricDifference
+   union}
+%
+\condata{SETCAT}{SetCategory}{CoercibleTo Object}{{\tt =}}
+%
+\condata{SEXCAT}{SExpressionCategory}{SetCategory}{{\tt \#} atom? car cdr convert destruct elt eq expr float float?
+   integer integer? list? null? pair? string string? symbol symbol? uequal}
+%
+\condata{SPFCAT}{SpecialFunctionCategory}{}{Beta Gamma abs airyAi airyBi besselI besselJ besselK besselY digamma
+   polygamma}
+%
+\condata{SMATCAT}{SquareMatrixCategory}{Algebra BiModule DifferentialExtension FullyLinearlyExplicitRingOver
+   FullyRetractableTo Module RectangularMatrixCategory}{{\tt *} {\tt ^} determinant diagonal diagonalMatrix
+   diagonalProduct inverse minordet scalarMatrix trace}
+%
+\condata{SKAGG}{StackAggregate}{BagAggregate}{depth pop! push! top}
+%
+\condata{STEP}{StepThrough}{SetCategory}{init nextItem}
+%
+\condata{STAGG}{StreamAggregate}{LinearAggregate UnaryRecursiveAggregate}{explicitlyFinite? possiblyInfinite?}
+%
+\condata{SRAGG}{StringAggregate}{OneDimensionalArrayAggregate}{coerce elt leftTrim lowerCase lowerCase! match match?
+   position prefix? replace rightTrim split substring? suffix? trim upperCase upperCase!}
+%
+\condata{STRICAT}{StringCategory}{StringAggregate}{string}
+%
+\condata{TBAGG}{TableAggregate}{IndexedAggregate KeyedDictionary}{map setelt table}
+%
+\condata{SPACEC}{ThreeSpaceCategory}{SetCategory}{check closedCurve closedCurve? coerce components composite composites
+   copy create3Space curve curve? enterPointData lllip lllp llprop lp lprop merge mesh mesh? modifyPointData
+   numberOfComponents numberOfComposites objects point point? polygon polygon? subspace}
+%
+\condata{TRANFUN}{TranscendentalFunctionCategory}{ArcHyperbolicFunctionCategory ArcTrigonometricFunctionCategory
+   ElementaryFunctionCategory HyperbolicFunctionCategory TrigonometricFunctionCategory}{pi}
+%
+\condata{TRIGCAT}{TrigonometricFunctionCategory}{}{cos cot csc sec sin tan}
+%
+\condata{ARR2CAT}{TwoDimensionalArrayCategory}{HomogeneousAggregate}{column elt fill! map map! maxColIndex maxRowIndex
+   minColIndex minRowIndex ncols new nrows parts qelt qsetelt! row setColumn! setRow! setelt}
+%
+\condata{URAGG}{UnaryRecursiveAggregate}{RecursiveAggregate}{concat concat! cycleEntry cycleLength cycleSplit!
+   cycleTail elt first last rest second setelt setfirst! setlast! setrest! split! tail third}
+%
+\condata{UFD}{UniqueFactorizationDomain}{GcdDomain}{factor prime? squareFree squareFreePart}
+%
+\condata{ULSCAT}{UnivariateLaurentSeriesCategory}{Field RadicalCategory TranscendentalFunctionCategory
+   UnivariatePowerSeriesCategory}{integrate multiplyCoefficients rationalFunction}
+%
+\condata{ULSCCAT}{UnivariateLaurentSeriesConstructorCategory}{QuotientFieldCategory RetractableTo
+   UnivariateLaurentSeriesCategory}{coerce degree laurent removeZeroes taylor taylorIfCan taylorRep}
+%
+\condata{UPOLYC}{UnivariatePolynomialCategory}{DifferentialExtension DifferentialRing Eltable EuclideanDomain
+   PolynomialCategory StepThrough}{D composite differentiate discriminant divideExponents elt integrate makeSUP
+   monicDivide multiplyExponents order pseudoDivide pseudoQuotient pseudoRemainder resultant separate subResultantGcd
+   unmakeSUP vectorise}
+%
+\condata{UPSCAT}{UnivariatePowerSeriesCategory}{DifferentialRing Eltable PowerSeriesCategory}{approximate center elt
+   eval extend multiplyExponents order series terms truncate variable}
+%
+\condata{UPXSCAT}{UnivariatePuiseuxSeriesCategory}{Field RadicalCategory TranscendentalFunctionCategory
+   UnivariatePowerSeriesCategory}{integrate multiplyExponents}
+%
+\condata{UPXSCCA}{UnivariatePuiseuxSeriesConstructorCategory}{RetractableTo UnivariatePuiseuxSeriesCategory}{coerce
+   degree laurent laurentIfCan laurentRep puiseux rationalPower}
+%
+\condata{UTSCAT}{UnivariateTaylorSeriesCategory}{RadicalCategory TranscendentalFunctionCategory
+   UnivariatePowerSeriesCategory}{{\tt ^} coefficients integrate multiplyCoefficients polynomial quoByVar series}
+%
+\condata{VECTCAT}{VectorCategory}{OneDimensionalArrayAggregate}{{\tt *} {\tt +} {\tt -} dot zero}
+%
+\condata{VSPACE}{VectorSpace}{Module}{{\tt /} dimension}
+%
+%
+% ----------------------------------------------------------------------
+\end{constructorListing}
+% ----------------------------------------------------------------------

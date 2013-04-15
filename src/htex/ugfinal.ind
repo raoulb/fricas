@@ -1,0 +1,1749 @@
+\begin{theindex}
+
+  \item {\tt '}, 652
+  \item {\bf *}, 432, 633
+  \item {\tt *}, 4, 36, 44, 63, 253, 309, 400, 648, 651
+  \item {\tt **}, 4, 63, 271
+  \item {\tt +}, 4, 36, 44, 45, 62, 63, 73, 143--145, 152, 253, 309,
+		627, 648, 653
+  \item {\tt ++}, 8, 39
+  \item {\tt +->}, 168
+  \item {\tt ,}, 631
+  \item {\tt -}, 4, 69, 144, 309, 627
+  \item {\tt --}, 8, 39
+  \item {\tt ->}, 145, 146
+  \item {\tt .}, 125, 126
+  \item {\tt ..}, 128, 499
+  \item {\tt /}, 4, 45, 61, 152, 309, 455, 535
+  \item {\tt :}, 40, 50, 184
+  \item {\tt ::}, 6, 10, 64
+  \item {\tt :=}, 5, 103
+  \item {\tt ;}, 36
+  \item {\bf =}, 428, 429
+  \item {\tt =}, 45, 110, 298
+  \item {\tt ==}, 41, 104, 168, 179
+  \item {\tt =>}, 109, 116, 117, 631
+  \item {\tt ?}, 146, 349, 631
+  \item {\tt @}, 62
+  \item {\bf \#}, 478, 495, 575
+  \item {\tt \#}, 520, 563, 593
+  \item {\tt \%}, 4, 610
+  \item {\tt \%\%}, 5, 610
+  \item \%e, 7, 8
+  \item \%i, 7, 8
+  \item \%infinity, 7, 8
+  \item \%minusinfinity, 7, 8
+  \item \%pi, 7, 8
+  \item \%plusinfinity, 7, 8
+  \item {\tt \pdollar}, 62, 619
+  \item {\tt {\ptt ::}}, 637
+  \item {\tt {\ptt ==}}, 643
+  \item {\ptt =>}, 641
+  \item {\ptt KCL}, 632
+  \item {\tt |}, 130, 132, 133, 181, 655
+
+  \indexspace
+
+  \item {\tt }, 638, 655
+
+  \indexspace
+
+  \item abbreviation
+    \subitem constructor, 49
+      \subsubitem discovering, 49
+  \item {\tt )abbreviation}, 49, 598
+  \item {\tt )abbreviation category}, 599
+  \item {\tt )abbreviation domain}, 599
+  \item {\tt )abbreviation package}, 599
+  \item {\tt )abbreviation query}, 76, 599
+  \item {\tt )abbreviation remove}, 600
+  \item {\bf abs}, 139, 144
+  \item abstract datatype, 631
+  \item abstract datatypes, 653
+  \item abstraction, 631
+  \item accuracy, 632
+  \item {\bf acos}, 271
+  \item {\bf acosh}, 271
+  \item {\bf acot}, 271
+  \item {\bf acoth}, 271
+  \item {\bf acsc}, 271
+  \item {\bf acsch}, 271
+  \item {\bf adaptive}, 201, 210
+  \item {\bf adaptive3D?}, 237
+  \item {\tt add}, 38
+  \item add-chain, 632, 640
+  \item add-chains, 639
+  \item aggregate, 632
+  \item {\bf AiryAi}, 274
+  \item {\bf AiryBi}, 274
+  \item AKCL, 632
+  \item algorithm, 632, 651
+  \item ancestor, 632
+  \item ancestors, 379, 646
+  \item {\bf and}, 159
+  \item {\tt and}, 38
+  \item anonymous function, 168
+  \item {\sf Any}, 60
+  \item {\bf append}, 494
+  \item application, 632, 642, 645, 649
+  \item applications, 656
+  \item apply, 139, 632
+  \item {\bf approximants}, 420
+  \item {\tt )apropos}, 628
+  \item argument, 139, 632, 633, 642, 645, 649
+  \item arguments, 7
+  \item arguments to a function, 139
+  \item arithmetic
+    \subitem modular, 330
+  \item arity, 150, 632, 633, 648, 656
+  \item array
+    \subitem 2 dimensional, 22, 578
+  \item {\bf asec}, 271
+  \item {\bf asech}, 271
+  \item {\bf asin}, 271
+  \item {\bf asinh}, 271
+  \item assignment, 5, 103, 633, 645
+    \subitem delayed, 104
+    \subitem immediate, 103
+    \subitem multiple immediate, 105
+  \item assignments, 657
+  \item {\bf atan}, 271
+  \item {\bf atanh}, 271
+  \item attribute, 633, 641, 644
+  \item attributes, 635, 639
+  \item {\bf axes}, 212, 238
+  \item {\bf axesColorDefault}, 210
+  \item {\bf axiom}, 1
+
+  \indexspace
+
+  \item basis, 633
+    \subitem normal, 343
+    \subitem orthonormal, 294
+  \item benefactor, 382, 633
+  \item Bernoulii
+    \subitem polynomial, 314
+  \item Bernoulli
+    \subitem polynomial, 319
+  \item {\bf BernoulliB}, 278
+  \item {\bf BesselI}, 274
+  \item {\bf BesselJ}, 273
+  \item {\bf BesselK}, 274
+  \item {\bf BesselY}, 273
+  \item {\bf Beta}, 273
+  \item binary, 633, 650, 655
+  \item {\bf binary}, 391
+  \item {\sf BinaryExpansion}, 391
+  \item binding, 633, 657
+  \item bindings, 640
+  \item {\tt blank}, 38
+  \item {\bf blanksep}, 178
+  \item block, 103, 106, 633, 641, 650
+  \item blocks, 637
+  \item {\bf blue}, 253
+  \item body, 633, 638
+  \item boolean, 633
+  \item {\sf Boolean}, 130
+  \item booleans, 646
+  \item {\tt )boot}, 600
+  \item bound, 633, 645
+  \item branch, 56
+  \item {\bf bright}, 255
+  \item built-in function, 633, 657
+  \item {\tt by}, 38, 127
+
+  \indexspace
+
+  \item C
+    \subitem ?:, 110
+    \subitem assignment, 104
+  \item cache, 634, 652
+  \item call, 139
+  \item capsule, 634
+  \item {\sf CardinalNumber}, 393
+  \item {\bf cartesian}, 266, 269
+  \item {\sf CartesianTensor}, 396
+  \item case, 634, 637, 657
+  \item {\tt case}, 38, 56, 575
+  \item Category, 634, 641
+  \item category, 44, 67, 635, 637, 638, 641, 644, 646, 656
+  \item category constructor, 635, 656
+  \item category constructors, 635
+  \item category extension, 382, 635, 641
+  \item category hierarchy, 636
+  \item {\tt )cd}, 90, 92, 601, 620
+  \item {\bf center}, 178
+  \item character, 636, 638
+  \item {\sf Character}, 407, 409
+  \item {\sf CharacterClass}, 409
+  \item characteristic, 330
+  \item {\bf characteristic}, 45, 648
+  \item characteristic value, 291
+  \item characteristic vector, 291
+  \item characters, 655
+  \item {\bf ChebyshevT}, 275
+  \item {\bf ChebyshevU}, 275
+  \item class number, 476
+  \item {\tt )clear}, 602
+  \item {\tt )clear prop}, 80
+  \item {\tt )clear type}, 80
+  \item {\Clef}, 81
+  \item client, 636
+  \item {\sf CliffordAlgebra}, 411
+  \item {\bf clipPointsDefault}, 201, 210
+  \item {\bf close}, 212, 238
+  \item {\tt )close}, 87
+  \item {\bf coefficients}, 586, 587
+  \item coercion, 64, 636
+  \item coercions, 637
+  \item color, 87
+  \item {\bf color}, 253
+  \item {\bf colorDef}, 238
+  \item {\bf colorFunction}, 227
+  \item {\bf column}, 508, 580
+  \item command line editor, 81
+  \item comment, 636
+  \item Common LISP, 636, 643, 646
+  \item {\bf compactFraction}, 523
+  \item compilation, 112, 152
+  \item compile, 140
+  \item {\tt )compile}, 601, 603
+  \item compile-time, 636, 640, 653
+  \item compiler, 636
+  \item {\sf Complex}, 417
+  \item {\bf complex}, 78, 79, 417, 605
+  \item complex numbers, 11
+  \item {\bf complexEigenvectors}, 293
+  \item {\bf complexIntegrate}, 302
+  \item {\bf complexSolve}, 298, 300
+  \item computation
+    \subitem stopping, 39
+  \item computation timings
+    \subitem displaying, 618
+  \item computational object, 636
+  \item {\bf concat}, 142, 564
+  \item conditional, 110, 637
+  \item conditionals, 637
+  \item {\bf conjugate}, 418
+  \item {\bf connect}, 212
+  \item constant, 637
+  \item constant function argument, 154
+  \item constructor, 44, 637
+    \subitem abbreviation, 49
+    \subitem category, 44
+    \subitem domain, 44
+    \subitem exposed, 71
+    \subitem hidden, 71
+    \subitem package, 45
+  \item {\bf content}, 530, 587
+  \item continuation, 637
+  \item {\sf ContinuedFraction}, 419
+  \item {\bf continuedFraction}, 419, 421, 457
+  \item {\bf contract}, 399
+  \item control structure, 637
+  \item {\bf controlPanel}, 212, 216, 238, 245
+  \item {\bf convergents}, 420
+  \item conversion, 6, 64, 636, 637
+  \item {\bf coordinates}, 229, 269
+  \item {\bf copy}, 503, 504, 581
+  \item copying semantics, 637, 648, 651
+  \item {\bf cos}, 271
+  \item {\bf cosh}, 271, 310
+  \item {\bf cot}, 271
+  \item {\bf coth}, 271
+  \item {\bf count}, 582
+  \item {\bf countable?}, 394
+  \item {\bf create3Space()}, 261
+  \item {\bf createIrreduciblePoly}, 350, 352
+  \item {\bf createNormalPrimitivePoly}, 351
+  \item {\bf createPrimitiveNormalPoly}, 351
+  \item {\bf csc}, 271
+  \item {\bf csch}, 271
+  \item curvd3d
+    \subitem parametric space curve, 223
+  \item curve
+    \subitem non-singular, 199
+    \subitem one variable function, 193
+    \subitem parametric plane curve, 196
+    \subitem plane algebraic, 199
+    \subitem smooth, 199
+  \item {\bf curve}, 196, 223
+  \item {\bf cycleRagits}, 543
+  \item {\bf cyclotomic}, 278
+  \item {\bf cylindrical}, 266, 268
+
+  \indexspace
+
+  \item {\bf D}, 482
+  \item {\bf dark}, 255
+  \item data structure, 637
+  \item datatype, 637
+  \item {\bf decimal}, 425
+  \item {\sf DecimalExpansion}, 425
+  \item declaration, 5, 40, 50, 633, 637
+  \item declarations, 657
+  \item {\tt default}, 38
+  \item default definition, 638
+  \item default package, 638
+  \item default packages, 381, 640, 646
+  \item {\tt define}, 38
+  \item {\bf definingPolynomial}, 288, 290
+  \item definition, 638, 647
+  \item definitions, 657
+  \item {\bf degree}, 406, 485, 531, 584
+  \item {\tt delay}, 38
+  \item delayed assignment, 104
+  \item delimiter, 638
+  \item {\bf denom}, 456
+  \item dependents, 380
+  \item destructive operation, 638, 654
+  \item destructive operations, 631
+  \item {\bf determinant}, 454, 510, 525
+  \item {\bf diagonalMatrix}, 378, 504
+  \item {\bf diagonals}, 238
+  \item {\bf difference}, 551
+  \item differential equations, 322
+  \item {\bf differentiate}, 140, 533, 585
+  \item {\bf digamma}, 273
+  \item {\bf digits}, 11, 450, 455
+  \item {\bf dim}, 255
+  \item {\bf dimension}, 393
+  \item directory
+    \subitem default for searching, 90
+    \subitem for spool files, 620
+  \item discrete logarithm, 333, 338
+  \item {\bf discreteLog}, 333, 338
+  \item {\tt )display}, 33, 604
+  \item {\tt )display all}, 79
+  \item {\tt )display operation}, 78
+  \item {\tt )display prop}, 80
+  \item {\tt )display type}, 80
+  \item {\sf DistributedMultivariatePolynomial}, 19, 426
+  \item {\bf divide}, 466, 588
+  \item {\bf divisors}, 472
+  \item {\tt do}, 38
+  \item documentation, 638
+  \item domain, 43, 637, 639--641, 644, 646, 649, 653, 655, 656
+  \item domain constructor, 44, 634, 639, 649, 656
+  \item domain extension, 639, 641
+  \item domain extensions, 632
+  \item domain of computation, 43
+  \item domains, 380, 651
+  \item dot notation, 639, 652
+  \item {\bf draw}, 193, 196, 201, 221, 223--225, 227, 228, 256,
+		269, 270, 279
+  \item {\bf drawStyle}, 239
+  \item {\bf drawToScale}, 202, 210
+  \item dynamic, 640, 653, 654
+  \item dynamic lookup, 639, 640, 646
+
+  \indexspace
+
+  \item {\tt )edit}, 601, 605
+  \item editing files, 606
+  \item {\bf eigenMatrix}, 293
+  \item {\bf eigenvalues}, 291
+  \item {\bf eigenvector}, 292
+  \item {\bf eigenvectors}, 292
+  \item element
+    \subitem primitive, 338, 340
+  \item {\tt else}, 38, 110
+  \item {\bf elt}, 496, 519, 520, 573, 574, 579, 580, 593
+  \item emacs, 606
+  \item empty, 640
+  \item {\bf empty?}, 495
+  \item {\bf entries}, 558
+  \item environment, 633, 640, 642, 645, 657
+  \item {\bf eq?}, 428
+  \item {\sf EqTable}, 428
+  \item equation, 110
+  \item {\sf Equation}, 429
+  \item equations
+    \subitem differential
+      \subsubitem solving, 322
+      \subsubitem solving in closed form, 322
+      \subsubitem solving in power series, 328
+    \subitem linear
+      \subsubitem solving, 295
+    \subitem polynomial
+      \subsubitem solving, 297, 299
+  \item {\bf error}, 155
+  \item {Euler $\varphi$ function}, 473
+  \item {\bf EulerE}, 278
+  \item {\bf eulerPhi}, 469, 473
+  \item {\bf eval}, 318, 500, 533
+  \item evaluation, 632, 633, 637, 640, 647, 657
+  \item {\bf even?}, 464
+  \item example functions
+    \subitem {\bf abs}, 161
+    \subitem {\bf dg}, 175, 176
+    \subitem {\bf digitsOf}, 175, 176
+    \subitem {\bf displayRow}, 178
+    \subitem {\bf double}, 439
+    \subitem {\bf f}, 113, 114
+    \subitem {\bf f1}, 163
+    \subitem {\bf f2}, 164
+    \subitem {\bf f3}, 164
+    \subitem {\bf fact}, 154
+    \subitem {\bf fib}, 158, 625
+    \subitem {\bf g}, 172
+    \subitem {\bf groupSqrt}, 32
+    \subitem {\bf h}, 156
+    \subitem {\bf middle}, 173
+    \subitem {\bf pal?}, 173, 176
+    \subitem {\bf pascalRow}, 178
+    \subitem {\bf sum4}, 319
+    \subitem {\bf swap}, 165
+  \item {\bf exists?}, 444
+  \item exit, 631, 641
+  \item {\sf Exit}, 431
+  \item {\tt exit}, 38
+  \item {exiting \Language}, 2
+  \item {\bf exp}, 21, 271, 310, 311
+  \item {\bf expand}, 434, 499, 548
+  \item explicit export, 641
+  \item export, 45, 641, 649
+  \item {\tt export}, 38
+  \item exports, 380, 631, 653
+  \item expose, 177, 641
+  \item exposed, 370
+  \item exposed constructor, 71
+  \item exposed constructors, 389
+  \item exposed domains and packages
+    \subitem {\sf Any}, 60
+    \subitem {\sf BinaryExpansion}, 391
+    \subitem {\sf Boolean}, 130
+    \subitem {\sf CardinalNumber}, 393
+    \subitem {\sf CartesianTensor}, 396
+    \subitem {\sf Character}, 407, 409
+    \subitem {\sf CharacterClass}, 409
+    \subitem {\sf CliffordAlgebra}, 411
+    \subitem {\sf Complex}, 417
+    \subitem {\sf ContinuedFraction}, 419
+    \subitem {\sf DecimalExpansion}, 425
+    \subitem {\sf DistributedMultivariatePolynomial}, 19, 426
+    \subitem {\sf EqTable}, 428
+    \subitem {\sf Equation}, 429
+    \subitem {\sf Exit}, 431
+    \subitem {\sf ExpressionToUnivariatePowerSeries}, 432
+    \subitem {\sf Factored}, 360, 432
+    \subitem {\sf FactoredFunctions2}, 439
+    \subitem {\sf File}, 440
+    \subitem {\sf FileName}, 443
+    \subitem {\sf FiniteField}, 446
+    \subitem {\sf FiniteFieldCyclicGroup}, 446
+    \subitem {\sf FiniteFieldCyclicGroupExtension}, 446
+    \subitem {\sf FiniteFieldCyclicGroupExtensionByPolynomial}, 446
+    \subitem {\sf FiniteFieldExtension}, 446
+    \subitem {\sf FiniteFieldExtensionByPolynomial}, 446
+    \subitem {\sf FiniteFieldHomomorphisms}, 446
+    \subitem {\sf FiniteFieldNormalBasis}, 446
+    \subitem {\sf FiniteFieldNormalBasisExtension}, 446
+    \subitem {\sf FiniteFieldNormalBasisExtensionByPolynomial}, 447
+    \subitem {\sf FiniteFieldPolynomialPackage}, 447
+    \subitem {\sf FiniteFieldPolynomialPackage2}, 447
+    \subitem {\sf Float}, 447
+    \subitem {\sf Fraction}, 455
+    \subitem {\sf FunctionSpaceComplexIntegration}, 458
+    \subitem {\sf FunctionSpaceIntegration}, 458
+    \subitem {\sf GeneralDistributedMultivariatePolynomial}, 19, 458
+    \subitem {\sf GeneralSparseTable}, 458
+    \subitem {\sf GenerateUnivariatePowerSeries}, 459
+    \subitem {\sf HexadecimalExpansion}, 459
+    \subitem {\sf IdealDecompositionPackage}, 461
+    \subitem {\sf InnerPrimeField}, 461
+    \subitem {\sf Integer}, 461
+    \subitem {\sf IntegerLinearDependence}, 470
+    \subitem {\sf IntegerMod}, 471
+    \subitem {\sf IntegerNumberTheoryFunctions}, 472
+    \subitem {\sf KeyedAccessFile}, 477
+    \subitem {\sf Library}, 480
+    \subitem {\sf LinearOrdinaryDifferentialOperator}, 482
+    \subitem {\sf List}, 493
+    \subitem {\sf MakeFunction}, 499
+    \subitem {\sf Mapping}, 145
+    \subitem {\sf Matrix}, 502
+    \subitem {\sf MultivariatePolynomial}, 18, 511
+    \subitem {\sf NewDistributedMultivariatePolynomial}, 19, 514
+    \subitem {\sf None}, 514
+    \subitem {\sf Octonion}, 515
+    \subitem {\sf OneDimensionalArray}, 518
+    \subitem {\sf OutputForm}, 177
+    \subitem {\sf PartialFraction}, 523
+    \subitem {\sf Permanent}, 525
+    \subitem {\sf Polynomial}, 18, 526
+    \subitem {\sf PolynomialIdeals}, 536
+    \subitem {\sf PrimeField}, 536
+    \subitem {\sf Quaternion}, 515, 536
+    \subitem {\sf RadixExpansion}, 540
+    \subitem {\sf RationalFunctionDefiniteIntegration}, 544
+    \subitem {\sf RomanNumeral}, 545
+    \subitem {\sf Segment}, 547
+    \subitem {\sf SegmentBinding}, 549
+    \subitem {\sf Set}, 551
+    \subitem {\sf SingleInteger}, 554
+    \subitem {\sf SparseTable}, 557
+    \subitem {\sf SquareMatrix}, 65, 559
+    \subitem {\sf Stream}, 560
+    \subitem {\sf String}, 563
+    \subitem {\sf StringTable}, 568
+    \subitem {\sf Symbol}, 569
+    \subitem {\sf Table}, 573
+    \subitem {\sf TextFile}, 576
+    \subitem {\sf TwoDimensionalArray}, 578
+    \subitem {\sf UnivariateLaurentSeries}, 583
+    \subitem {\sf UnivariatePolynomial}, 18, 583
+    \subitem {\sf UnivariatePuiseuxSeries}, 591
+    \subitem {\sf UnivariateTaylorSeries}, 591
+    \subitem {\sf UniversalSegment}, 591
+    \subitem {\sf Vector}, 593
+    \subitem {\sf Void}, 110, 112, 595
+  \item exposure group, 71
+  \item expression, 640, 641
+  \item {\sf ExpressionToUnivariatePowerSeries}, 432
+  \item {\bf exquo}, 58, 466
+  \item extend, 641
+  \item {\bf eyeDistance}, 239
+
+  \indexspace
+
+  \item {\bf factor}, 143, 287, 361, 363, 364, 419, 432, 456, 457, 467,
+		523, 528
+  \item {\sf Factored}, 360, 432
+  \item {\sf FactoredFunctions2}, 439
+  \item {\bf factorial}, 642
+  \item {\bf factorList}, 433, 437
+  \item {\bf factors}, 433
+  \item {\bf fibonacci}, 142, 468, 475
+  \item Fibonacci numbers, 305
+  \item field, 384, 641, 651
+    \subitem finite
+      \subsubitem conversions, 346
+      \subsubitem extension of, 334, 336, 340, 343
+      \subsubitem prime, 330
+    \subitem Hilbert class, 367
+    \subitem imaginary quadratic, 476
+    \subitem prime, 330
+    \subitem splitting, 359
+  \item file, 641
+    \subitem {\bf .Xdefaults}, 87, 190
+    \subitem history, 608
+    \subitem input, 31, 89, 107, 597, 610, 617
+      \subsubitem where found, 90
+    \subitem {\bf INTERP.EXPOSED}, 71
+    \subitem sending output to, 91
+    \subitem {\bf spadprof.input}, 90
+    \subitem spool, 620
+  \item {\sf File}, 440
+  \item {\sf FileName}, 443
+  \item {\bf filename}, 445
+  \item {\tt )fin}, 606
+  \item finite field, 330, 334, 336, 340, 343
+    \subitem factoring polynomial with coefficients in, 285
+  \item {\bf finite?}, 394
+  \item {\sf FiniteField}, 446
+  \item {\sf FiniteFieldCyclicGroup}, 446
+  \item {\sf FiniteFieldCyclicGroupExtension}, 446
+  \item {\sf FiniteFieldCyclicGroupExtensionByPolynomial}, 446
+  \item {\sf FiniteFieldExtension}, 446
+  \item {\sf FiniteFieldExtensionByPolynomial}, 446
+  \item {\sf FiniteFieldHomomorphisms}, 446
+  \item {\sf FiniteFieldNormalBasis}, 446
+  \item {\sf FiniteFieldNormalBasisExtension}, 446
+  \item {\sf FiniteFieldNormalBasisExtensionByPolynomial}, 447
+  \item {\sf FiniteFieldPolynomialPackage}, 447
+  \item {\sf FiniteFieldPolynomialPackage2}, 447
+  \item {\bf first}, 16, 17, 495
+  \item {\bf firstDenom}, 524
+  \item {\bf firstNumer}, 524
+  \item float, 641
+  \item {\sf Float}, 447
+  \item floating point, 10
+    \subitem arbitrary precision, 447
+    \subitem hardware, 447
+    \subitem input, 447
+    \subitem output, 452
+  \item floats, 646
+  \item font, 87
+  \item {\tt for}, 38, 124, 125, 645, 647, 653
+  \item formal arguments, 638, 645
+  \item formal parameter, 642
+  \item formal parameters, 647
+  \item FORTRAN
+    \subitem assignment, 104
+  \item FORTRAN output format, 95
+    \subitem breaking into multiple statements, 96
+  \item {\bf frac}, 450
+  \item fraction
+    \subitem partial, 12, 523
+  \item {\sf Fraction}, 455
+  \item {\bf fractRagits}, 544
+  \item frame, 642, 644, 658
+    \subitem exposure and, 74
+  \item {\tt )frame}, 74, 607
+  \item {\tt )frame drop}, 608
+  \item {\tt )frame import}, 608
+  \item {\tt )frame last}, 608
+  \item {\tt )frame names}, 607
+  \item {\tt )frame new}, 607
+  \item {\tt )frame next}, 608
+  \item free, 642, 657
+  \item {\tt free}, 38, 653
+  \item free variable, 642, 647
+  \item {\tt from}, 38
+  \item function, 29, 633, 637, 639, 640, 642, 643, 645, 648, 651,
+		654, 655
+    \subitem anonymous, 168
+      \subsubitem declaring, 170
+      \subsubitem restrictions, 172
+    \subitem arguments, 139
+    \subitem calling, 7
+    \subitem compilation, 152
+    \subitem constant argument, 154
+    \subitem declaring, 164, 170
+    \subitem from an object, 162
+    \subitem interpretation, 152
+    \subitem {made by {\it function}}, 162
+    \subitem one-line definition, 147
+    \subitem parameters, 139
+    \subitem piece-wise definition, 154
+    \subitem predicate, 157
+    \subitem transformation of argument names, 157
+    \subitem vs. macro, 139
+    \subitem with no arguments, 149
+  \item {\bf function}, 162--165, 500--502, 631
+  \item function body, 381, 633, 643, 645, 653
+  \item function name completion, 81
+  \item functions, 635, 638, 639, 648
+  \item {\sf FunctionSpaceComplexIntegration}, 458
+  \item {\sf FunctionSpaceIntegration}, 458
+
+  \indexspace
+
+  \item Galois field, 330
+  \item Galois group, 359
+  \item {\bf Gamma}, 272
+  \item garbage collection, 643
+  \item garbage collector, 643
+  \item Gaussian, 643
+  \item Gaussian integers, 418
+  \item {\bf gcd}, 432, 456, 464, 529, 585, 586
+  \item general case, 158
+  \item {\sf GeneralDistributedMultivariatePolynomial}, 19, 458
+  \item {\sf GeneralSparseTable}, 458
+  \item {\sf GenerateUnivariatePowerSeries}, 459
+  \item generic function, 642, 643
+  \item {\bf getGraph}, 256, 258
+  \item global variable, 642, 643, 647
+  \item global variables, 657
+  \item graphics, 2
+    \subitem 2D options, 201
+      \subsubitem adaptive, 201
+      \subsubitem clip, 201
+      \subsubitem clip in a range, 202
+      \subsubitem coordinates, 206
+      \subsubitem curve color, 202
+      \subsubitem point color, 205
+      \subsubitem range, 205
+      \subsubitem set units, 206
+      \subsubitem to scale, 202
+    \subitem 2d commands, 212
+      \subsubitem axes, 212
+      \subsubitem close, 212
+      \subsubitem connect, 212
+      \subsubitem control panel, 212
+      \subsubitem graphs, 213
+      \subsubitem key, 213
+      \subsubitem move, 213
+      \subsubitem options, 213
+      \subsubitem points, 214
+      \subsubitem region, 214
+      \subsubitem reset, 214
+      \subsubitem resize, 214
+      \subsubitem scale, 214
+      \subsubitem show, 215
+      \subsubitem state of graphs, 213
+      \subsubitem title, 215
+      \subsubitem translate, 215
+      \subsubitem units, 212
+      \subsubitem write, 215, 243
+    \subitem 2d control panel, 216
+      \subsubitem axes, 219
+      \subsubitem box, 219
+      \subsubitem buttons, 219
+      \subsubitem clear, 218
+      \subsubitem drop, 219
+      \subsubitem hide, 220
+      \subsubitem lines, 219
+      \subsubitem messages, 218
+      \subsubitem multiple graphs, 218
+      \subsubitem pick, 218
+      \subsubitem points, 219
+      \subsubitem ps, 220
+      \subsubitem query, 218
+      \subsubitem quit, 220
+      \subsubitem reset, 220
+      \subsubitem scale, 216
+      \subsubitem transformations, 216
+      \subsubitem translate, 216
+      \subsubitem units, 219
+    \subitem 3d commands, 238
+      \subsubitem axes, 238
+      \subsubitem close, 238
+      \subsubitem control panel, 238
+      \subsubitem define color, 238
+      \subsubitem deltaX default, 242
+      \subsubitem deltaY default, 242
+      \subsubitem diagonals, 238
+      \subsubitem drawing style, 239
+      \subsubitem eye distance, 239
+      \subsubitem key, 239
+      \subsubitem lighting, 239
+      \subsubitem modify point data, 239
+      \subsubitem move, 240
+      \subsubitem options, 240
+      \subsubitem outline, 240
+      \subsubitem perspective, 240
+      \subsubitem phi default, 242
+      \subsubitem region, 241
+      \subsubitem reset, 240
+      \subsubitem resize, 240
+      \subsubitem rotate, 241
+      \subsubitem subspace, 241
+      \subsubitem theta default, 243
+      \subsubitem title, 241
+      \subsubitem translate, 241
+      \subsubitem translucence, 242
+      \subsubitem viewpoint, 242
+      \subsubitem zoom, 244
+      \subsubitem zoom default, 243
+    \subitem 3d control panel, 245
+      \subsubitem axes, 249
+      \subsubitem bounds, 248
+      \subsubitem buttons, 247
+      \subsubitem bw, 249
+      \subsubitem clip volume, 250, 252
+      \subsubitem clipping on, 252
+      \subsubitem color map, 247
+      \subsubitem eye reference, 250
+      \subsubitem hide, 252
+      \subsubitem intensity, 250
+      \subsubitem light, 249
+      \subsubitem messages, 247
+      \subsubitem move xy, 250
+      \subsubitem move z, 250
+      \subsubitem outline, 249
+      \subsubitem perspective, 250
+      \subsubitem pixmap, 252
+      \subsubitem ps, 252
+      \subsubitem quit, 252
+      \subsubitem reset, 252
+      \subsubitem rotate, 246
+      \subsubitem save, 252
+      \subsubitem scale, 246
+      \subsubitem shade, 248
+      \subsubitem show clip region, 250
+      \subsubitem smooth, 248
+      \subsubitem solid, 248
+      \subsubitem transformations, 246
+      \subsubitem translate, 246
+      \subsubitem view volume, 250
+      \subsubitem wire, 248
+      \subsubitem xy plane, 247
+      \subsubitem xz plane, 247
+      \subsubitem yz plane, 247
+    \subitem 3d defaults, 235
+      \subsubitem available viewport writes, 236
+      \subsubitem reset viewport defaults, 235
+      \subsubitem tube points, 235
+      \subsubitem tube radius, 235
+      \subsubitem var1 steps, 235
+      \subsubitem var2 steps, 235
+      \subsubitem viewport position, 235
+      \subsubitem viewport size, 235
+      \subsubitem viewport writes, 236
+    \subitem 3d options, 227
+      \subsubitem color function, 227
+      \subsubitem coordinates, 229
+      \subsubitem title, 229
+      \subsubitem tube points, 231
+      \subsubitem tube radius, 231
+      \subsubitem variable steps, 231
+    \subitem advanced, 256
+      \subsubitem build 2d object, 259
+      \subsubitem build 3d objects, 261
+      \subsubitem clip, 270
+      \subsubitem coordinate systems, 266
+      \subsubitem drop, 256
+      \subsubitem multiple graphs, 256
+      \subsubitem pick, 256
+    \subitem color, 253
+      \subsubitem color function, 253
+      \subsubitem hue function, 253
+      \subsubitem multiply function, 253
+      \subsubitem number of hues, 253
+      \subsubitem primary color functions, 253
+    \subitem output, 188
+      \subsubitem bitmap, 189
+      \subsubitem image, 189
+      \subsubitem pixmap, 189
+      \subsubitem PostScript, 189
+    \subitem palette, 255
+      \subsubitem hue function, 255
+      \subsubitem hue intensity functions, 255
+      \subsubitem shade function, 255
+    \subitem plot3d defaults, 237
+      \subsubitem adaptive, 237
+      \subsubitem max points, 237
+      \subsubitem min points, 237
+      \subsubitem screen resolution, 237
+      \subsubitem set adaptive, 236
+      \subsubitem set max points, 236
+      \subsubitem set min points, 236
+      \subsubitem set screen resolution, 236
+    \subitem plot3d set defaults, 236
+    \subitem set 2d defaults, 210
+      \subsubitem adaptive, 210
+      \subsubitem axes color, 210
+      \subsubitem clip points, 210
+      \subsubitem line color, 210
+      \subsubitem max points, 211
+      \subsubitem min points, 211
+      \subsubitem point color, 211
+      \subsubitem point size, 211
+      \subsubitem reset viewport, 211
+      \subsubitem screen resolution, 211
+      \subsubitem to scale, 210
+      \subsubitem units color, 211
+      \subsubitem viewport position, 211
+      \subsubitem viewport size, 211
+      \subsubitem write viewport, 211
+    \subitem three dimensional, 221
+    \subitem two dimensional, 193
+    \subitem using, 188
+    \subitem view, 188
+    \subitem {\bf viewAlone}, 189
+    \subitem {\bf viewman}, 188
+    \subitem Xdefaults, 190
+      \subsubitem 2d, 191
+      \subsubitem 3d, 191
+  \item {\bf graphs}, 213
+  \item {\bf graphStates}, 213
+  \item {\bf green}, 253
+  \item Groebner basis, 643
+  \item {Gr\"{o}bner basis}, 19, 426
+  \item {\bf ground?}, 531
+  \item group, 643
+    \subitem dihedral, 362, 367
+    \subitem exposure, 71
+    \subitem Galois, 359
+    \subitem symmetric, 367
+
+  \indexspace
+
+  \item {\tt has}, 38
+  \item hash table, 634, 643
+  \item hash tables, 637
+  \item {\bf hasHi}, 591
+  \item {\tt )hd}, 1
+  \item heap, 643
+  \item {\tt )help}, 609
+  \item {\bf HermiteH}, 276
+  \item {\bf hex}, 459
+  \item {\sf HexadecimalExpansion}, 459
+  \item {\bf hi}, 547
+  \item Hilbert class field, 367
+  \item Hilbert matrix, 454
+  \item history, 642, 644
+  \item {\tt )history}, 609
+  \item {\tt )history )change}, 611
+  \item {\tt )history )off}, 610
+  \item {\tt )history )on}, 610
+  \item {\tt )history )restore}, 601
+  \item {\tt )history )save}, 601
+  \item {\tt )history )show}, 80
+  \item {\tt )history )show both}, 80
+  \item {\tt )history )write}, 90, 601
+  \item homogeneous, 60
+  \item {\bf horizConcat}, 507
+  \item {\bf hue}, 253, 255
+  \item {\HyperName}, 1
+  \item {\bf hypergeometric0F1}, 274
+
+  \indexspace
+
+  \item IBM Script Formula Format, 94
+  \item ideal, 644
+    \subitem primary decomposition, 356
+  \item {\sf IdealDecompositionPackage}, 461
+  \item identifier, 644, 655
+  \item {\tt if}, 38, 110, 653
+  \item {\bf imag}, 418
+  \item {\bf imagE}, 515
+  \item {\bf imagI}, 515
+  \item {\bf imagi}, 515
+  \item {\bf imagJ}, 515
+  \item {\bf imagj}, 515
+  \item {\bf imagK}, 515
+  \item {\bf imagk}, 515
+  \item immediate assignment, 103
+  \item immutable, 644, 648, 651
+  \item implicit export, 641, 644
+  \item {\tt import}, 38
+  \item {\tt in}, 38, 124
+  \item {\bf incr}, 548
+  \item indentation, 107
+  \item index, 644
+  \item {\bf index}, 337
+  \item {$\infty$ (= \%infinity)}, 7
+  \item infix, 644, 648
+  \item {\tt inline}, 38
+  \item {\sf InnerPrimeField}, 461
+  \item input, 89
+  \item input area, 644, 654
+  \item input file, 89
+  \item instantiate, 644
+  \item integer, 645
+  \item {\sf Integer}, 461
+  \item {\sf IntegerLinearDependence}, 470
+  \item {\sf IntegerMod}, 471
+  \item {\sf IntegerNumberTheoryFunctions}, 472
+  \item integers, 646
+  \item {\bf integrate}, 143, 303, 304, 534
+  \item integration, 26, 301
+    \subitem definite, 303
+    \subitem result as a complex functions, 302
+    \subitem result as list of real functions, 302
+  \item interactive, 645
+  \item {\bf INTERP.EXPOSED}, 71
+  \item interpret-code mode, 112, 152
+  \item interpreter, 645
+  \item interrupt, 2
+  \item {\bf intersect}, 551
+  \item {\bf inv}, 63
+  \item {\bf inverse}, 378, 383, 384, 509
+  \item invocation, 632, 642, 645
+  \item invoke, 139
+  \item {\tt is}, 38
+  \item {\tt isnt}, 38
+  \item {\tt iterate}, 38, 106, 120, 126
+  \item iteration, 124, 133, 645
+    \subitem nested, 130, 135
+    \subitem parallel, 130, 136
+
+  \indexspace
+
+  \item {\bf jacobi}, 468, 475
+  \item Jacobi symbol, 476
+  \item Join, 636, 646
+
+  \indexspace
+
+  \item KCL, 646
+  \item {\bf key}, 213, 239
+  \item {\sf KeyedAccessFile}, 477
+  \item {\bf keys}, 478, 480, 481, 558, 574, 575
+
+  \indexspace
+
+  \item {\bf LaguerreL}, 276
+  \item {\bf laurent}, 305, 318
+  \item Laurent series, 314
+  \item lazy evaluation, 308
+  \item {\bf lcm}, 456, 464, 529, 585
+  \item {\bf ldexquo}, 487
+  \item {\bf ldiv}, 485
+  \item {\bf ldquo}, 487
+  \item {\bf ldrem}, 487
+  \item {\bf leadingCoefficient}, 533, 584
+  \item {\bf leadingMonomial}, 533
+  \item {\tt leave}, 38, 106, 114, 124
+  \item {\bf leftTrim}, 565
+  \item {\bf legendre}, 468, 475
+  \item Legendre symbol, 475
+  \item {\bf LegendreP}, 276
+  \item {\tt let}, 38
+  \item {\bf lgcd}, 487
+  \item {\bf lhs}, 429
+  \item library, 46, 646
+  \item {\sf Library}, 480
+  \item {\bf light}, 255
+  \item {\bf lighting}, 239
+  \item lineage, 381, 640, 646
+  \item linear dependence, 470
+  \item {\sf LinearOrdinaryDifferentialOperator}, 482
+  \item {\bf lineColorDefault}, 202, 210
+  \item LISP, 636, 646, 648
+  \item {\tt )lisp}, 612
+  \item list, 15, 493, 646, 654
+    \subitem empty, 514
+    \subitem sorting, 16
+  \item {\sf List}, 493
+  \item {\bf list}, 494
+  \item lists, 637
+  \item literal, 644--646
+  \item literals, 633, 641, 648, 655
+  \item {\bf llcm}, 487
+  \item {\bf lo}, 547
+  \item {\tt )load}, 613
+  \item local, 646
+  \item {\tt local}, 38
+  \item local variable, 125, 633, 642, 646, 647, 652, 657
+  \item {\bf log}, 21, 271, 310
+  \item logarithm
+    \subitem discrete, 333, 338
+  \item {\bf logGamma}, 273
+  \item {\bf lookup}, 353
+  \item loop, 112, 644, 647
+    \subitem compilation, 112
+    \subitem interpretation, 112
+    \subitem leaving via leave, 114
+    \subitem leaving via return, 113
+    \subitem mixing modifiers, 133
+  \item loop body, 112, 633, 647
+  \item loop, nested, 115
+  \item loops, 637
+  \item {\bf lowerCase}, 407, 566
+  \item {\bf lowerCase!}, 566
+  \item {\tt )ltrace}, 614
+
+  \indexspace
+
+  \item macro, 140, 638, 647
+    \subitem predefined, 7
+    \subitem vs. function, 139
+  \item {\tt macro}, 38
+  \item {\bf mainVariable}, 530
+  \item {\bf makeFR}, 437
+  \item {\sf MakeFunction}, 499
+  \item {\bf makeGraphImage}, 259
+  \item {\bf makeViewport2D}, 256, 258, 260
+  \item {\bf makeViewport3D}, 262
+  \item {\bf makeViewport3D()}, 261
+  \item {\bf map}, 63, 171, 287, 385, 436, 439, 440, 457, 521, 581
+  \item {\bf map!}, 581
+  \item {\sf Mapping}, 145
+  \item matrix, 22
+    \subitem concatenating, 506
+    \subitem copying, 504
+    \subitem creating, 23
+    \subitem destructive change to, 503
+    \subitem determinant of, 510
+    \subitem diagonal, 504
+    \subitem Hilbert, 23
+    \subitem ill-conditioned, 455
+    \subitem inverse of, 509
+    \subitem nullity of, 510
+    \subitem permanent of, 525
+    \subitem rank of, 510
+    \subitem row echelon form of, 511
+    \subitem square, 559
+    \subitem submatrix of, 505
+    \subitem trace of, 510
+    \subitem transposing, 507
+  \item {\sf Matrix}, 502
+  \item {\bf matrix}, 135, 503
+  \item {\bf max}, 270, 456, 465, 554
+  \item {\bf maxPoints}, 211
+  \item {\bf maxPoints3D}, 237
+  \item {\bf member?}, 498, 552, 582
+  \item {\bf members}, 575
+  \item {\bf min}, 270, 456, 465, 554
+  \item {\bf minimumDegree}, 532
+  \item {\bf minPoints}, 211
+  \item {\bf minPoints3D}, 237
+  \item mod, 330
+  \item {\tt mod}, 38
+  \item mode, 43, 46, 48, 647
+  \item modemap, 605
+  \item {\bf modifyPointData}, 239
+  \item {\bf modp}, 556
+  \item modular arithmetic, 330
+  \item modulo, 330
+  \item {M\"{o}bius}
+    \subitem inversion formula, 474
+    \subitem {$\mu$ function}, 473
+  \item {\bf moebiusMu}, 469, 473
+  \item {\bf monicDivide}, 534
+  \item monoid, 654
+  \item monospace 2D output format, 93
+  \item {\bf move}, 213, 240
+  \item multiple immediate assignment, 105
+  \item {\sf MultivariatePolynomial}, 18, 511
+  \item mutable, 497, 648, 651
+
+  \indexspace
+
+  \item name, 144, 648
+  \item {\bf name}, 571
+  \item {\bf ncols}, 508, 580
+  \item {\bf negative?}, 456
+  \item nested iteration, 130
+  \item {\bf new}, 377, 445, 503, 518, 563, 570, 578, 593
+  \item {\sf NewDistributedMultivariatePolynomial}, 19, 514
+  \item {\bf nextIrreduciblePoly}, 351, 354
+  \item {\bf nextNormalPoly}, 354
+  \item {\bf nextPrime}, 467
+  \item {\bf nil}, 495
+  \item {\sf None}, 514
+  \item {\bf norm}, 337, 341, 418, 517
+  \item normal, 343
+  \item normal basis, 343
+  \item {\bf normal?}, 350
+  \item {\tt not}, 38
+  \item {\bf nrows}, 508, 580
+  \item {\bf nthFactor}, 360
+  \item {\bf nthFractionalTerm}, 524
+  \item {\bf nthRoot}, 271
+  \item nullary, 648
+  \item nullary function, 149
+  \item {\bf nullity}, 510
+  \item {\bf nullSpace}, 296, 510
+  \item {\bf numberOfDivisors}, 472
+  \item {\bf numberOfFractionalTerms}, 524
+  \item {\bf numberOfHues}, 253
+  \item {\bf numer}, 456
+  \item {\bf numeric}, 536
+
+  \indexspace
+
+  \item Object, 648
+  \item object, 639, 648
+  \item object code, 648
+  \item objects, 635
+  \item {\sf Octonion}, 515
+  \item {\bf odd?}, 464, 631
+  \item {\bf one?}, 435
+  \item {\sf OneDimensionalArray}, 518
+  \item {\bf open}, 440
+  \item operand, 648, 651, 652
+  \item operands, 644, 645
+  \item operation, 641, 642, 644, 648, 654
+  \item operations, 635, 639, 640, 643
+  \item operator, 641, 644, 648, 651, 652, 655
+  \item operators, 143
+  \item {\bf options}, 213, 240
+  \item {\tt or}, 38
+  \item {\bf ord}, 407
+  \item order, 334, 338, 341
+  \item {\bf order}, 338, 341
+  \item {\bf orthonormalBasis}, 294
+  \item {\bf outlineRender}, 238, 240
+  \item {\bf output}, 113, 116, 153, 178
+  \item output formats
+    \subitem common features, 91
+    \subitem FORTRAN, 95
+    \subitem IBM Script Formula Format, 94
+    \subitem monospace 2D, 93
+    \subitem sending to file, 92
+    \subitem sending to screen, 91
+    \subitem starting, 91
+    \subitem stopping, 91
+    \subitem TeX, 93
+  \item {\bf OutputFixed}, 453
+  \item {\bf OutputFloating}, 453
+  \item {\sf OutputForm}, 177
+  \item {\bf OutputSpacing}, 452
+  \item overloading, 145, 528, 649
+
+  \indexspace
+
+  \item package, 45, 637, 638, 644, 649
+  \item package call, 143, 649
+  \item package calling, 61
+  \item package constructor, 649
+  \item packages, 379, 380
+  \item {\bf padicFraction}, 523
+  \item palindrome, 172
+  \item panic
+    \subitem avoiding, 112, 152
+  \item parameter, 649
+  \item parameterized, 139
+  \item parameterized datatype, 649
+  \item parameterized form, 632, 649
+  \item parameters to a function, 139
+  \item parent, 632, 649
+  \item parentheses
+    \subitem using with types, 47, 48
+  \item parents, 636
+  \item parse, 638, 647, 649, 650
+  \item partial fraction, 12, 523
+  \item {\sf PartialFraction}, 523
+  \item {\bf partialFraction}, 457, 523
+  \item partially ordered set, 650
+  \item {\bf partialQuotients}, 420
+  \item PASCAL
+    \subitem assignment, 104
+  \item Pascal's triangle, 177
+  \item {\bf pastel}, 255
+  \item pattern, 179
+  \item pattern match, 650
+  \item pattern matching, 32, 179, 653
+  \item pattern variables, 180
+  \item {\%}, 4
+  \item {\%\%}, 5
+  \item {\sf Permanent}, 525
+  \item {\bf permanent}, 525
+  \item {\bf perspective}, 240
+  \item {$\varphi(n)$}, 473
+  \item {$\pi$ (= \%pi)}, 7
+  \item {\bf pi}, 271
+  \item piece-wise function definition, 154
+  \item piecewise definition, 155
+  \item pile, 39, 107, 650
+  \item {\bf pointColorDefault}, 205, 211
+  \item pointer, 650, 652
+  \item pointer semantics, 637, 644, 648, 650, 651
+  \item pointers, 648
+  \item {\bf points}, 214
+  \item {\bf pointSizeDefault}, 211
+  \item pole, 314
+  \item {\bf polygamma}, 273
+  \item polymorphic, 649, 651
+  \item polynomial, 18
+    \subitem Bernoulli, 314, 319
+    \subitem factorization, 282
+      \subsubitem algebraic extension field coefficients, 285
+      \subsubitem finite field coefficients, 285
+      \subsubitem integer coefficients, 284
+      \subsubitem rational number coefficients, 284
+    \subitem irreducible, 350
+    \subitem multiple variables, 511
+    \subitem normal, 349
+    \subitem one variable, 583
+    \subitem primitive, 349
+    \subitem root finding, 297
+    \subitem root of, 355
+  \item {\sf Polynomial}, 18, 526
+  \item {\sf PolynomialIdeals}, 536
+  \item {\bf position}, 567
+  \item {\bf positive?}, 456
+  \item postfix, 651
+  \item PostScript, 2, 189
+  \item power series, 328
+  \item {\tt )pquit}, 91, 615, 616
+  \item precedence, 644, 648, 651
+  \item precision, 641, 652
+  \item {\bf precision}, 632, 652
+  \item predicate, 68, 110, 120, 130, 154, 652, 655
+    \subitem in function definition, 157
+  \item prefix, 644, 648, 652
+  \item {\bf prefix?}, 566
+  \item {\bf prefixRagits}, 543
+  \item {\tt pretend}, 38, 71, 113, 154
+  \item {\bf prevPrime}, 467
+  \item primary decomposition of ideal, 356
+  \item prime field, 330
+  \item {\bf prime?}, 467
+  \item {\bf primeFactor}, 524
+  \item {\sf PrimeField}, 536
+  \item {\bf primes}, 468
+  \item primitive element, 333, 338, 340
+  \item {\bf primitive?}, 350
+  \item {\bf primitiveElement}, 338
+  \item {\bf product}, 399, 406
+  \item prompt, 1
+    \subitem with frame name, 608
+  \item {\bf puiseux}, 305, 318
+  \item Puiseux series, 315
+  \item {\bf putGraph}, 256, 258
+
+  \indexspace
+
+  \item {\bf qelt}, 520, 580, 593, 594
+  \item {\bf qsetelt!}, 520, 580, 593, 594
+  \item {\bf quatern}, 536
+  \item {\sf Quaternion}, 515, 536
+  \item {\tt )quit}, 2, 33, 35, 90, 615, 616
+  \item {\bf quo}, 144, 466, 588
+  \item {\tt quo}, 38
+  \item quote, 59, 652
+
+  \indexspace
+
+  \item radical, 13, 297
+  \item {\bf radicalEigenvectors}, 292
+  \item {\bf radicalSolve}, 299
+  \item radix, 10
+  \item {\sf RadixExpansion}, 540
+  \item {\bf rank}, 380, 381, 387, 510
+  \item {\bf ratForm}, 14, 15
+  \item rational function
+    \subitem factoring, 287
+  \item {\sf RationalFunctionDefiniteIntegration}, 544
+  \item {\bf rdexquo}, 487
+  \item {\bf rdiv}, 485
+  \item {\bf rdquo}, 486
+  \item {\bf rdrem}, 486
+  \item {\tt )read}, 38, 89, 601, 616
+  \item {\bf read!}, 440, 441, 480
+  \item {\bf readable?}, 444
+  \item {\bf readIfCan!}, 441
+  \item {\bf readLine!}, 576
+  \item {\bf readLineIfCan!}, 577
+  \item {\bf real}, 418, 515
+  \item {\bf realEigenvectors}, 293
+  \item Record, 652
+  \item {\sf Record}, 17, 53
+  \item record, 17
+    \subitem selector, 53
+  \item recurrence relation, 652
+  \item recurrence relations, 634
+  \item recursion, 652
+  \item recursive, 652
+  \item {\bf red}, 253
+  \item {\bf reduce}, 465, 522, 586
+  \item {\bf reductum}, 532, 584
+  \item reference, 652
+  \item {\bf region}, 214
+  \item {\bf reindex}, 403
+  \item relatives, 380
+  \item {\bf rem}, 144, 466, 588
+  \item {\tt rem}, 38
+  \item {\bf remove!}, 575
+  \item {\bf removeDuplicates}, 498
+  \item Rep, 652, 653
+  \item {\tt repeat}, 38, 40, 112, 645, 647
+  \item representation, 631, 639, 653
+  \item representations, 635
+  \item reserved word, 653
+  \item reserved words, 644
+  \item {\bf reset}, 214, 240
+  \item {\bf resize}, 214, 240
+  \item resolve, 67, 152
+  \item {\bf rest}, 16, 17
+  \item result
+    \subitem previous, 4
+  \item {\bf resultant}, 359, 530, 585
+  \item {\bf retractIfCan}, 58
+  \item retraction, 653
+  \item retractions, 636
+  \item return, 653
+  \item {\tt return}, 38, 106, 113, 645, 653
+  \item reverse
+    \subitem {\bf reverse
+      \subsubitem }, 638
+  \item {\bf reverse}, 498, 520, 638
+  \item {\bf reverse!}, 520
+  \item {\bf rfactor}, 287
+  \item {\bf rgcd}, 487
+  \item {\bf rhs}, 429
+  \item {Riemann $\zeta$ function}, 474
+  \item {\bf rightTrim}, 565
+  \item ring, 633, 641, 653
+  \item rings, 375
+  \item {\bf rlcm}, 487
+  \item Roman numerals, 10
+  \item {\sf RomanNumeral}, 545
+  \item {\bf rootOf}, 288, 289, 291, 303
+  \item {\bf rootOfIrreduciblePoly}, 355
+  \item {\bf rotate}, 241
+  \item {\bf round}, 449
+  \item {\bf row}, 508, 580
+  \item {\bf rowEchelon}, 511
+  \item rule, 653
+  \item {\tt rule}, 38, 180
+  \item run-time, 636, 640, 643, 653, 655
+  \item run-time check, 653
+
+  \indexspace
+
+  \item {\bf scale}, 214
+  \item {\bf scan}, 561
+  \item {\bf screenResolution}, 211
+  \item {\bf screenResolution3D}, 237
+  \item {\bf script}, 572
+  \item {\bf scripted?}, 571
+  \item {\bf scripts}, 571
+  \item {\bf search}, 478, 574
+  \item search string, 369, 654
+  \item search strings, 650
+  \item {\bf sec}, 271
+  \item {\bf sech}, 271
+  \item segment, 125
+  \item {\sf Segment}, 547
+  \item {\bf segment}, 550
+  \item {\sf SegmentBinding}, 549
+  \item selector, 53, 654
+    \subitem quoting, 54, 59
+    \subitem record, 53
+    \subitem union, 59
+  \item semantics, 654
+  \item semigroup, 654
+  \item series
+    \subitem arithmetic, 309
+    \subitem creating, 305
+    \subitem extracting coefficients, 307
+    \subitem giving formula for coefficients, 316
+    \subitem Laurent, 314
+    \subitem multiple variables, 313
+    \subitem numerical approximation, 318
+    \subitem power, 20, 328
+    \subitem Puiseux, 315
+    \subitem Taylor, 20, 307, 311, 312, 316
+  \item {\bf series}, 20, 305, 312, 315, 316, 318
+  \item {\bf seriesSolve}, 328
+  \item set, 17
+  \item {\sf Set}, 551
+  \item {\tt )set}, 617
+  \item {\tt )set expose}, 72
+  \item {\tt )set expose add constructor}, 73
+  \item {\tt )set expose add group}, 73
+  \item {\tt )set expose drop constructor}, 73
+  \item {\tt )set expose drop group}, 73
+  \item {\tt )set fortran}, 96
+  \item {\tt )set fortran explength}, 96
+  \item {\tt )set fortran ints2floats}, 96
+  \item {\tt )set fortran optlevel}, 95, 97
+  \item {\tt )set fortran precision double}, 98
+  \item {\tt )set fortran precision single}, 98
+  \item {\tt )set fortran segment}, 96
+  \item {\tt )set fortran startindex}, 100
+  \item {\tt )set history off}, 610
+  \item {\tt )set history on}, 610
+  \item {\tt )set hyperdoc browse exposure}, 389
+  \item {\tt )set hyperdoc browse summary}, 390
+  \item {\tt )set hyperdoc browse threshold}, 390
+  \item {\tt )set message frame}, 608
+  \item {\tt )set message prompt frame}, 608
+  \item {\tt )set message time}, 618
+  \item {\tt )set output}, 91
+  \item {\tt )set output algebra}, 93
+  \item {\tt )set output fortran}, 91, 95
+  \item {\tt )set output script}, 94
+  \item {\tt )set output tex}, 93
+  \item {\tt )set quit protected}, 91, 616
+  \item {\tt )set quit unprotected}, 91, 616, 618
+  \item {\tt )set streams calculate}, 135, 305, 320, 560
+  \item {\tt )set system boot}, 600
+  \item {\tt )set userlevel}, 628
+  \item {\tt )set userlevel compiler}, 597
+  \item {\tt )set userlevel development}, 597
+  \item {\tt )set userlevel interpreter}, 597
+  \item {\bf setAdaptive3D}, 236
+  \item {\bf setColumn!}, 504
+  \item {\bf setelt}, 497, 503, 519, 520, 573, 579, 580, 593
+  \item {\bf setMaxPoints3D}, 236
+  \item {\bf setMinPoints3D}, 236
+  \item {\bf setRow!}, 504
+  \item {\bf setScreenResolution3D}, 236
+  \item {\bf setsubMatrix!}, 505
+  \item {\bf shade}, 255
+  \item {\bf show}, 215
+  \item {\tt )show}, 76, 618
+  \item {\bf showRegion}, 241
+  \item side effect, 654
+  \item side effects, 640
+  \item {$\sigma(n)$}, 472
+  \item {\bf sign}, 462
+  \item signature, 604, 642, 648, 649, 654, 655
+  \item signatures, 45, 637, 656
+  \item simplification, 32
+  \item {\bf sin}, 271, 310
+  \item {\bf sinh}, 271
+  \item small float, 641, 654
+  \item small integer, 654
+  \item {\sf SingleInteger}, 554
+  \item {\bf solve}, 292, 295, 299, 327, 380, 429
+  \item {\bf solveLinearlyOverQ}, 471
+  \item sort
+    \subitem bubble, 166
+    \subitem insertion, 167
+  \item {\bf sort}, 16, 171
+  \item {\bf sort!}, 521
+  \item sorting, 16
+  \item source, 654
+  \item SPADEDIT, 606
+  \item sparse, 654
+  \item {\sf SparseTable}, 557
+  \item {\bf spherical}, 268
+  \item splitting field, 359
+  \item {\tt )spool}, 601, 620
+  \item {\bf sqrt}, 271
+  \item {\sf SquareMatrix}, 65, 559
+  \item {\bf squareMatrix}, 559
+  \item start-up profile file, 90
+  \item {starting \Language}, 1
+  \item static, 640, 653, 654
+  \item step number, 1, 642, 654, 658
+  \item {stopping \Language}, 2
+  \item stopping a computation, 39
+  \item stream, 16, 654
+    \subitem {using {\tt while}}, 135
+  \item {\sf Stream}, 560
+  \item streams, 639
+  \item string, 39, 655
+  \item {\sf String}, 563
+  \item strings, 646
+  \item {\sf StringTable}, 568
+  \item subdomain, 68, 655, 656
+  \item {\bf subMatrix}, 505, 506
+  \item {\bf subset?}, 552
+  \item {\bf subspace}, 241
+  \item {\bf substring?}, 567
+  \item {\tt such}, 38
+  \item such that, 130
+  \item such that clause, 655
+  \item suffix, 655
+  \item {\bf suffix?}, 566
+  \item summation
+    \subitem definite, 319
+  \item {\bf sumOfDivisors}, 472
+  \item {\bf sumOfKthPowerDivisors}, 473
+  \item surface
+    \subitem parametric surface, 225
+    \subitem two variable function, 221
+  \item {\bf surface}, 225
+  \item swap
+    \subitem {\bf swap
+      \subsubitem }, 651
+  \item symbol, 638, 647, 648, 655
+  \item {\sf Symbol}, 569
+  \item symbols, 646
+  \item {\bf symmetricDifference}, 551
+  \item {\tt )synonym}, 620
+  \item syntax, 655
+  \item {\tt )system}, 34, 621
+  \item system command, 1
+  \item system commands, 655
+    \subitem {\tt )abbreviation}, 49, 598
+    \subitem {\tt )abbreviation category}, 599
+    \subitem {\tt )abbreviation domain}, 599
+    \subitem {\tt )abbreviation package}, 599
+    \subitem {\tt )abbreviation query}, 76, 599
+    \subitem {\tt )abbreviation remove}, 600
+    \subitem {\tt )apropos}, 628
+    \subitem {\tt )boot}, 600
+    \subitem {\tt )cd}, 90, 92, 601, 620
+    \subitem {\tt )clear}, 602
+    \subitem {\tt )clear prop}, 80
+    \subitem {\tt )clear type}, 80
+    \subitem {\tt )close}, 87
+    \subitem {\tt )compile}, 601, 603
+    \subitem {\tt )display}, 33, 604
+    \subitem {\tt )display all}, 79
+    \subitem {\tt )display operation}, 78
+    \subitem {\tt )display prop}, 80
+    \subitem {\tt )display type}, 80
+    \subitem {\tt )edit}, 601, 605
+    \subitem {\tt )fin}, 606
+    \subitem {\tt )frame}, 74, 607
+    \subitem {\tt )frame drop}, 608
+    \subitem {\tt )frame import}, 608
+    \subitem {\tt )frame last}, 608
+    \subitem {\tt )frame names}, 607
+    \subitem {\tt )frame new}, 607
+    \subitem {\tt )frame next}, 608
+    \subitem {\tt )hd}, 1
+    \subitem {\tt )help}, 609
+    \subitem {\tt )history}, 609
+    \subitem {\tt )history )change}, 611
+    \subitem {\tt )history )off}, 610
+    \subitem {\tt )history )on}, 610
+    \subitem {\tt )history )restore}, 601
+    \subitem {\tt )history )save}, 601
+    \subitem {\tt )history )show}, 80
+    \subitem {\tt )history )show both}, 80
+    \subitem {\tt )history )write}, 90, 601
+    \subitem {\tt )lisp}, 612
+    \subitem {\tt )load}, 613
+    \subitem {\tt )ltrace}, 614
+    \subitem {\tt )pquit}, 91, 615, 616
+    \subitem {\tt )quit}, 2, 33, 35, 90, 615, 616
+    \subitem {\tt )read}, 38, 89, 601, 616
+    \subitem {\tt )set}, 617
+    \subitem {\tt )set expose}, 72
+    \subitem {\tt )set expose add constructor}, 73
+    \subitem {\tt )set expose add group}, 73
+    \subitem {\tt )set expose drop constructor}, 73
+    \subitem {\tt )set expose drop group}, 73
+    \subitem {\tt )set fortran}, 96
+    \subitem {\tt )set fortran explength}, 96
+    \subitem {\tt )set fortran ints2floats}, 96
+    \subitem {\tt )set fortran optlevel}, 95, 97
+    \subitem {\tt )set fortran precision double}, 98
+    \subitem {\tt )set fortran precision single}, 98
+    \subitem {\tt )set fortran segment}, 96
+    \subitem {\tt )set fortran startindex}, 100
+    \subitem {\tt )set history off}, 610
+    \subitem {\tt )set history on}, 610
+    \subitem {\tt )set hyperdoc browse exposure}, 389
+    \subitem {\tt )set hyperdoc browse summary}, 390
+    \subitem {\tt )set hyperdoc browse threshold}, 390
+    \subitem {\tt )set message frame}, 608
+    \subitem {\tt )set message prompt frame}, 608
+    \subitem {\tt )set message time}, 618
+    \subitem {\tt )set output}, 91
+    \subitem {\tt )set output algebra}, 93
+    \subitem {\tt )set output fortran}, 91, 95
+    \subitem {\tt )set output script}, 94
+    \subitem {\tt )set output tex}, 93
+    \subitem {\tt )set quit protected}, 91, 616
+    \subitem {\tt )set quit unprotected}, 91, 616, 618
+    \subitem {\tt )set streams calculate}, 135, 305, 320, 560
+    \subitem {\tt )set system boot}, 600
+    \subitem {\tt )set userlevel}, 628
+    \subitem {\tt )set userlevel compiler}, 597
+    \subitem {\tt )set userlevel development}, 597
+    \subitem {\tt )set userlevel interpreter}, 597
+    \subitem {\tt )show}, 76, 618
+    \subitem {\tt )spool}, 601, 620
+    \subitem {\tt )synonym}, 620
+    \subitem {\tt )system}, 34, 621
+    \subitem {\tt )trace}, 622
+    \subitem {\tt )what}, 34, 49, 627
+    \subitem {\tt )what categories}, 628
+    \subitem {\tt )what commands}, 628
+    \subitem {\tt )what domain}, 76
+    \subitem {\tt )what domains}, 628
+    \subitem {\tt )what operation}, 75
+    \subitem {\tt )what operations}, 628
+    \subitem {\tt )what packages}, 50, 76, 628
+    \subitem {\tt )what synonym}, 628
+    \subitem {\tt )what things}, 628
+
+  \indexspace
+
+  \item {\sf Table}, 573
+  \item {\bf table}, 428
+  \item tag, 655
+  \item {\bf tan}, 271, 310
+  \item {\bf tanh}, 271
+  \item target, 655
+  \item target type, 62
+  \item {\bf taylor}, 305, 312, 318
+  \item tensor
+    \subitem Cartesian, 396
+  \item TeX output format, 93
+  \item {\sf TextFile}, 576
+  \item {\tt then}, 38, 110
+  \item timings
+    \subitem displaying, 618
+  \item {\bf title}, 215, 229, 241
+  \item top-level, 655
+  \item {\bf totalDegree}, 532
+  \item totally ordered set, 655
+  \item trace, 655
+  \item {\bf trace}, 337, 341, 510
+  \item {\tt )trace}, 622
+  \item transformation of function argument names, 157
+  \item {\bf translate}, 215, 241
+  \item {\bf translucence}, 242
+  \item {\bf transpose}, 403, 507
+  \item {\bf trim}, 565
+  \item {\bf trunc}, 449
+  \item {\bf tubePoints}, 231
+  \item {\bf tubePointsDefault}, 235
+  \item {\bf tubeRadius}, 231
+  \item {\bf tubeRadiusDefault}, 235
+  \item tuple, 105, 631, 656
+  \item {\sf TwoDimensionalArray}, 578
+  \item type, 43, 144, 633, 636, 637, 641, 654--657
+    \subitem target, 62
+    \subitem using parentheses, 47, 48
+  \item {\tt type}, 38
+  \item type checking, 656
+  \item type constructor, 656
+  \item type inference, 656
+  \item {\tt typeOf}, 57
+
+  \indexspace
+
+  \item unary, 656
+  \item underlying domain, 631, 639, 656
+  \item Union, 634, 655, 657
+  \item {\sf Union}, 56
+  \item union
+    \subitem selector, 59
+    \subitem {vs. {\sf Any}}, 60
+  \item {\bf union}, 551
+  \item unit, 657
+  \item {\bf units}, 212
+  \item {\bf unitsColorDefault}, 211
+  \item {\sf UnivariateLaurentSeries}, 583
+  \item {\sf UnivariatePolynomial}, 18, 583
+  \item {\sf UnivariatePuiseuxSeries}, 591
+  \item {\sf UnivariateTaylorSeries}, 591
+  \item {\sf UniversalSegment}, 591
+  \item {\bf upperCase}, 407, 566
+  \item {\bf upperCase!}, 566
+  \item user function, 633, 657
+  \item user functions, 636
+  \item user variable, 657
+
+  \indexspace
+
+  \item value, 633, 640, 657
+  \item {\tt value}, 38
+  \item values, 652
+  \item {\bf var1Steps}, 231
+  \item {\bf var1StepsDefault}, 235
+  \item {\bf var2Steps}, 231
+  \item {\bf var2StepsDefault}, 235
+  \item variable, 633, 648, 657
+  \item {\bf variable}, 550
+  \item {\bf variables}, 531
+  \item {\sf Vector}, 593
+  \item {\bf vectorise}, 587
+  \item {\bf vertConcat}, 507
+  \item vi, 606
+  \item {\bf view2D}, 188
+  \item {\bf view3D}, 188
+  \item {\bf viewAlone}, 189
+  \item {\bf viewDefaults}, 211, 235
+  \item {\bf viewDeltaXDefault}, 242, 243
+  \item {\bf viewDeltaYDefault}, 242, 243
+  \item {\bf viewman}, 188
+  \item {\bf viewPhiDefault}, 241--243
+  \item {\bf viewpoint}, 242
+  \item viewport, 188
+  \item {\bf viewPosDefault}, 211, 213, 235, 240
+  \item {\bf viewSizeDefault}, 211, 214, 235, 241
+  \item {\bf viewThetaDefault}, 241, 243
+  \item {\bf viewWriteAvailable}, 236
+  \item {\bf viewWriteDefault}, 211, 236
+  \item {\bf viewZoomDefault}, 243, 244
+  \item Void, 657
+  \item {\sf Void}, 110, 112, 595
+
+  \indexspace
+
+  \item {\tt )what}, 34, 49, 627
+  \item {\tt )what categories}, 628
+  \item {\tt )what commands}, 628
+  \item {\tt )what domain}, 76
+  \item {\tt )what domains}, 628
+  \item {\tt )what operation}, 75
+  \item {\tt )what operations}, 628
+  \item {\tt )what packages}, 50, 76, 628
+  \item {\tt )what synonym}, 628
+  \item {\tt )what things}, 628
+  \item {\tt where}, 38
+  \item {\tt while}, 38, 116, 120, 645, 647
+  \item {\bf wholePart}, 524
+  \item {\bf wholeRagits}, 175, 543
+  \item wild card, 370, 657
+  \item window, 1
+  \item {\tt with}, 38
+  \item workspace, 658
+  \item {\bf writable?}, 445
+  \item {\bf write}, 188, 189, 211, 215, 216, 236, 243, 245, 252
+  \item {\bf write!}, 440, 479, 577
+  \item {\bf writeLine!}, 576
+
+  \indexspace
+
+  \item X Window System, 87
+
+  \indexspace
+
+  \item {\bf yellow}, 253
+
+  \indexspace
+
+  \item {\bf zero?}, 435, 456, 464
+  \item {\bf zeroOf}, 289, 291
+  \item {\bf zerosOf}, 291
+  \item {\bf zoom}, 244
+
+\end{theindex}

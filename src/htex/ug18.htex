@@ -1,0 +1,1280 @@
+
+% Copyright (c) 1991-2002, The Numerical ALgorithms Group Ltd.
+% All rights reserved.
+% 
+% Redistribution and use in source and binary forms, with or without
+% modification, are permitted provided that the following conditions are
+% met:
+% 
+%     - Redistributions of source code must retain the above copyright
+%       notice, this list of conditions and the following disclaimer.
+% 
+%     - Redistributions in binary form must reproduce the above copyright
+%       notice, this list of conditions and the following disclaimer in
+%       the documentation and/or other materials provided with the
+%       distribution.
+% 
+%     - Neither the name of The Numerical ALgorithms Group Ltd. nor the
+%       names of its contributors may be used to endorse or promote products
+%       derived from this software without specific prior written permission.
+% 
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+% IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+% TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+% PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+% OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+% EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+% PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES-- LOSS OF USE, DATA, OR
+% PROFITS-- OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+% LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+% NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+% SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+\texht{\setcounter{chapter}{2}}{} % Appendix C
+
+\twocolumn[%
+% *********************************************************************
+\head{chapter}{Domains}{ugAppDomains}
+% *********************************************************************
+\useFullPage{}
+
+This is a listing of all domains in the \Language{} library at the
+time this book was produced.
+Use the \Browse{} facility (described in \chapref{ugBrowse})
+to get more information about these constructors.
+
+% ----------------------------------------------------------------------
+\beginImportant
+This sample entry will help you read the following table:
+\medskip
+\sampdata{DomainAbbreviation}{DomainName}{\subscriptIt{{\sf Category}}{1}
+\ldots \subscriptIt{{\sf Category}}{N}}%
+{\subscriptIt{{\rm operation}}{1} \ldots \subscriptIt{{\rm operation}}{M}}
+\medskip
+where
+
+\medskip
+\medskip
+\begin{tabular}{@{\quad}ll}
+\sf DomainName & is the full domain name, for example, {\sf Integer}. \\
+\sf DomainAbbreviation & is the domain abbreviation, for example, {\sf INT}. \\
+\subscriptIt{{\sf Category}}{i} & is a category to which the domain belongs. \\
+\subscriptIt{{\rm operation}}{j} & is an operation exported by the domain.
+\end{tabular}
+\endImportant
+% ----------------------------------------------------------------------
+]
+\appendixMark{Domains}
+
+% ----------------------------------------------------------------------
+\begin{constructorListing}
+% ----------------------------------------------------------------------
+\condata{ALGSC}{AlgebraGivenByStructuralConstants}{FramedNonAssociativeAlgebra LeftModule}{0 {\tt *} {\tt ^} {\tt +}
+   {\tt -} {\tt =} JacobiIdentity? JordanAlgebra? alternative? antiAssociative? antiCommutative? antiCommutator apply
+   associative? associator associatorDependence basis coerce commutative? commutator conditionsForIdempotents convert
+   coordinates elt flexible? jordanAdmissible? leftAlternative? leftCharacteristicPolynomial leftDiscriminant
+   leftMinimalPolynomial leftNorm leftPower leftRankPolynomial leftRecip leftRegularRepresentation leftTrace
+   leftTraceMatrix leftUnit leftUnits lieAdmissible? lieAlgebra? noncommutativeJordanAlgebra? plenaryPower
+   powerAssociative? rank recip represents rightAlternative? rightCharacteristicPolynomial rightDiscriminant
+   rightMinimalPolynomial rightNorm rightPower rightRankPolynomial rightRecip rightRegularRepresentation rightTrace
+   rightTraceMatrix rightUnit rightUnits someBasis structuralConstants unit zero?}
+%
+\condata{ALGFF}{AlgebraicFunctionField}{FunctionFieldCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =} D
+   absolutelyIrreducible? associates? basis branchPoint? branchPointAtInfinity? characteristic characteristicPolynomial
+   charthRoot coerce complementaryBasis convert coordinates definingPolynomial derivationCoordinates differentiate
+   discriminant divide elt euclideanSize expressIdealMember exquo extendedEuclidean factor gcd generator genus integral?
+   integralAtInfinity? integralBasis integralBasisAtInfinity integralCoordinates integralDerivationMatrix integralMatrix
+   integralMatrixAtInfinity integralRepresents inv inverseIntegralMatrix inverseIntegralMatrixAtInfinity knownInfBasis lcm
+   lift minimalPolynomial multiEuclidean nonSingularModel norm normalizeAtInfinity numberOfComponents one? prime?
+   primitivePart principalIdeal quo ramified? ramifiedAtInfinity? rank rationalPoint? rationalPoints recip reduce
+   reduceBasisAtInfinity reducedSystem regularRepresentation rem represents retract retractIfCan singular?
+   singularAtInfinity? sizeLess? squareFree squareFreePart trace traceMatrix unit? unitCanonical unitNormal yCoordinates
+   zero?}
+%
+\condata{AN}{AlgebraicNumber}{AlgebraicallyClosedField CharacteristicZero ConvertibleTo DifferentialRing
+   ExpressionSpace LinearlyExplicitRingOver RealConstant RetractableTo}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt
+   <} {\tt =} D associates? belong? box characteristic coerce convert definingPolynomial denom differentiate distribute
+   divide elt euclideanSize eval expressIdealMember exquo extendedEuclidean factor freeOf? gcd height inv is? kernel
+   kernels lcm mainKernel map max min minPoly multiEuclidean nthRoot numer one? operator operators paren prime?
+   principalIdeal quo recip reduce reducedSystem rem retract retractIfCan rootOf rootsOf sizeLess? sqrt squareFree
+   squareFreePart subst tower unit? unitCanonical unitNormal zero? zeroOf zerosOf}
+%
+\condata{ANON}{AnonymousFunction}{SetCategory}{{\tt =} coerce}
+%
+\condata{ANTISYM}{AntiSymm}{LeftAlgebra RetractableTo}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt =} characteristic
+   coefficient coerce degree exp generator homogeneous? leadingBasisTerm leadingCoefficient map one? recip reductum
+   retract retractIfCan retractable? zero?}
+%
+\condata{ANY}{Any}{SetCategory}{{\tt =} any coerce domain domainOf obj objectOf showTypeInOutput}
+%
+\condata{ASTACK}{ArrayStack}{StackAggregate}{{\tt \#} {\tt =} any? arrayStack bag coerce copy count depth empty empty?
+   eq? every? extract! insert! inspect less? map map! member? members more? parts pop! push! size? top}
+%
+\condata{JORDAN}{AssociatedJordanAlgebra}{CoercibleTo FiniteRankNonAssociativeAlgebra FramedNonAssociativeAlgebra
+   NonAssociativeAlgebra}{0 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt =} JacobiIdentity? JordanAlgebra? alternative?
+   antiAssociative? antiCommutative? antiCommutator apply associative? associator associatorDependence basis coerce
+   commutative? commutator conditionsForIdempotents convert coordinates elt flexible? jordanAdmissible? leftAlternative?
+   leftCharacteristicPolynomial leftDiscriminant leftMinimalPolynomial leftNorm leftPower leftRankPolynomial leftRecip
+   leftRegularRepresentation leftTrace leftTraceMatrix leftUnit leftUnits lieAdmissible? lieAlgebra?
+   noncommutativeJordanAlgebra? plenaryPower powerAssociative? rank recip represents rightAlternative?
+   rightCharacteristicPolynomial rightDiscriminant rightMinimalPolynomial rightNorm rightPower rightRankPolynomial
+   rightRecip rightRegularRepresentation rightTrace rightTraceMatrix rightUnit rightUnits someBasis structuralConstants
+   unit zero?}
+%
+\condata{LIE}{AssociatedLieAlgebra}{CoercibleTo FiniteRankNonAssociativeAlgebra FramedNonAssociativeAlgebra
+   NonAssociativeAlgebra}{0 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt =} JacobiIdentity? JordanAlgebra? alternative?
+   antiAssociative? antiCommutative? antiCommutator apply associative? associator associatorDependence basis coerce
+   commutative? commutator conditionsForIdempotents convert coordinates elt flexible? jordanAdmissible? leftAlternative?
+   leftCharacteristicPolynomial leftDiscriminant leftMinimalPolynomial leftNorm leftPower leftRankPolynomial leftRecip
+   leftRegularRepresentation leftTrace leftTraceMatrix leftUnit leftUnits lieAdmissible? lieAlgebra?
+   noncommutativeJordanAlgebra? plenaryPower powerAssociative? rank recip represents rightAlternative?
+   rightCharacteristicPolynomial rightDiscriminant rightMinimalPolynomial rightNorm rightPower rightRankPolynomial
+   rightRecip rightRegularRepresentation rightTrace rightTraceMatrix rightUnit rightUnits someBasis structuralConstants
+   unit zero?}
+%
+\condata{ALIST}{AssociationList}{AssociationListAggregate}{{\tt \#} {\tt =} any? assoc bag child? children coerce
+   concat concat! construct copy copyInto! count cycleEntry cycleLength cycleSplit! cycleTail cyclic? delete delete!
+   dictionary distance elt empty empty? entries entry? eq? every? explicitlyFinite? extract! fill! find first index?
+   indices insert insert! inspect key? keys last leaf? less? list map map! maxIndex member? members merge merge! minIndex
+   more? new node? nodes parts position possiblyInfinite? qelt qsetelt! reduce remove remove! removeDuplicates
+   removeDuplicates! rest reverse reverse! search second select select! setchildren! setelt setfirst! setlast! setrest!
+   setvalue! size? sort sort! sorted? split! swap! table tail third value}
+%
+\condata{BBTREE}{BalancedBinaryTree}{BinaryTreeCategory}{{\tt \#} {\tt =} any? balancedBinaryTree children coerce copy
+   count cyclic? elt empty empty? eq? every? leaf? leaves left less? map map! mapDown! mapUp! member? members more? node
+   node? nodes parts right setchildren! setelt setleaves! setleft! setright! setvalue! size? value}
+%
+\condata{BPADIC}{BalancedPAdicInteger}{PAdicIntegerCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt =} approximate
+   associates? characteristic coerce complete digits divide euclideanSize expressIdealMember exquo extend
+   extendedEuclidean gcd lcm moduloP modulus multiEuclidean one? order principalIdeal quo quotientByP recip rem sizeLess?
+   sqrt unit? unitCanonical unitNormal zero?}
+%
+\condata{BPADICRT}{BalancedPAdicRational}{QuotientFieldCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =} D
+   approximate associates? characteristic coerce continuedFraction denom denominator differentiate divide euclideanSize
+   expressIdealMember exquo extendedEuclidean factor fractionPart gcd inv lcm map multiEuclidean numer numerator one?
+   prime? principalIdeal quo recip reducedSystem rem removeZeroes retract retractIfCan sizeLess? squareFree squareFreePart
+   unit? unitCanonical unitNormal wholePart zero?}
+%
+\condata{BOP}{BasicOperator}{OrderedSet}{{\tt <} {\tt =} arity assert coerce comparison copy deleteProperty! display
+   equality has? input is? max min name nary? nullary? operator properties property setProperties setProperty unary?
+   weight}
+%
+\condata{BINARY}{BinaryExpansion}{QuotientFieldCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <} {\tt =} D
+   abs associates? binary ceiling characteristic coerce convert denom denominator differentiate divide euclideanSize
+   expressIdealMember exquo extendedEuclidean factor floor fractionPart gcd init inv lcm map max min multiEuclidean
+   negative? nextItem numer numerator one? patternMatch positive? prime? principalIdeal quo random recip reducedSystem rem
+   retract retractIfCan sign sizeLess? squareFree squareFreePart unit? unitCanonical unitNormal wholePart zero?}
+%
+\condata{BSTREE}{BinarySearchTree}{BinaryTreeCategory}{{\tt \#} {\tt =} any? binarySearchTree children coerce copy
+   count cyclic? elt empty empty? eq? every? insert! insertRoot! leaf? leaves left less? map map! member? members more?
+   node node? nodes parts right setchildren! setelt setleft! setright! setvalue! size? split value}
+%
+\condata{BTOURN}{BinaryTournament}{BinaryTreeCategory}{{\tt \#} {\tt =} any? binaryTournament children coerce copy
+   count cyclic? elt empty empty? eq? every? insert! leaf? leaves left less? map map! member? members more? node node?
+   nodes parts right setchildren! setelt setleft! setright! setvalue! size? value}
+%
+\condata{BTREE}{BinaryTree}{BinaryTreeCategory}{{\tt \#} {\tt =} any? binaryTree children coerce copy count cyclic? elt
+   empty empty? eq? every? leaf? leaves left less? map map! member? members more? node node? nodes parts right
+   setchildren! setelt setleft! setright! setvalue! size? value}
+%
+\condata{BITS}{Bits}{BitAggregate}{{\tt \#} {\tt <} {\tt =} {\tt \^{}} and any? bits coerce concat construct convert
+   copy copyInto! count delete elt empty empty? entries entry? eq? every? fill! find first index? indices insert less? map
+   map! max maxIndex member? members merge min minIndex more? nand new nor not or parts position qelt qsetelt! reduce
+   remove removeDuplicates reverse reverse! select setelt size? sort sort! sorted? swap! xor}
+%
+\condata{BOOLEAN}{Boolean}{ConvertibleTo Finite OrderedSet}{{\tt <} {\tt =} {\tt \^{}} and coerce convert false implies
+   index lookup max min nand nor not or random size true xor}
+%
+\condata{CARD}{CardinalNumber}{CancellationAbelianMonoid Monoid OrderedSet RetractableTo}{0 1 {\tt *} {\tt ^} {\tt +}
+   {\tt -} {\tt <} {\tt =} Aleph coerce countable? finite? generalizedContinuumHypothesisAssumed
+   generalizedContinuumHypothesisAssumed? max min one? recip retract retractIfCan zero?}
+%
+\condata{CARTEN}{CartesianTensor}{GradedAlgebra}{0 1 {\tt *} {\tt +} {\tt -} {\tt =} coerce contract degree elt
+   kroneckerDelta leviCivitaSymbol product rank ravel reindex retract retractIfCan transpose unravel}
+%
+\condata{CCLASS}{CharacterClass}{ConvertibleTo FiniteSetAggregate SetCategory}{{\tt \#} {\tt <} {\tt =} alphabetic
+   alphanumeric any? bag brace cardinality charClass coerce complement construct convert copy count dictionary difference
+   digit empty empty? eq? every? extract! find hexDigit index insert! inspect intersect less? lookup lowerCase map map!
+   max member? members min more? parts random reduce remove remove! removeDuplicates select select! size size? subset?
+   symmetricDifference union universe upperCase}
+%
+\condata{CHAR}{Character}{OrderedFinite}{{\tt <} {\tt =} alphabetic? alphanumeric? char coerce digit? escape hexDigit?
+   index lookup lowerCase lowerCase? max min ord quote random size space upperCase upperCase?}
+%
+\condata{CLIF}{CliffordAlgebra}{Algebra Ring VectorSpace}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =}
+   characteristic coefficient coerce dimension e monomial one? recip zero?}
+%
+\condata{COLOR}{Color}{AbelianSemiGroup}{{\tt *} {\tt +} {\tt =} blue coerce color green hue numberOfHues red yellow}
+%
+\condata{COMM}{Commutator}{SetCategory}{{\tt =} coerce mkcomm}
+%
+\condata{COMPLEX}{Complex}{ComplexCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <} {\tt =} D abs acos
+   acosh acot acoth acsc acsch argument asec asech asin asinh associates? atan atanh basis characteristic
+   characteristicPolynomial charthRoot coerce complex conditionP conjugate convert coordinates cos cosh cot coth
+   createPrimitiveElement csc csch definingPolynomial derivationCoordinates differentiate discreteLog discriminant divide
+   elt euclideanSize eval exp expressIdealMember exquo extendedEuclidean factor factorPolynomial
+   factorSquareFreePolynomial factorsOfCyclicGroupSize gcd gcdPolynomial generator imag imaginary index init inv lcm lift
+   log lookup map max min minimalPolynomial multiEuclidean nextItem norm nthRoot one? order pi polarCoordinates prime?
+   primeFrobenius primitive? primitiveElement principalIdeal quo random rank rational rational? rationalIfCan real recip
+   reduce reducedSystem regularRepresentation rem representationType represents retract retractIfCan sec sech sin sinh
+   size sizeLess? solveLinearPolynomialEquation sqrt squareFree squareFreePart squareFreePolynomial
+   tableForDiscreteLogarithm tan tanh trace traceMatrix unit? unitCanonical unitNormal zero?}
+%
+\condata{CONTFRAC}{ContinuedFraction}{Algebra Field}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =} approximants
+   associates? characteristic coerce complete continuedFraction convergents denominators divide euclideanSize
+   expressIdealMember exquo extend extendedEuclidean factor gcd inv lcm multiEuclidean numerators one? partialDenominators
+   partialNumerators partialQuotients prime? principalIdeal quo recip reducedContinuedFraction reducedForm rem sizeLess?
+   squareFree squareFreePart unit? unitCanonical unitNormal wholePart zero?}
+%
+\condata{DBASE}{Database}{SetCategory}{{\tt +} {\tt -} {\tt =} coerce display elt fullDisplay}
+%
+\condata{DFLOAT}{DoubleFloat}{ConvertibleTo DifferentialRing FloatingPointSystem TranscendentalFunctionCategory}{0 1 {\tt *}
+   {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <} {\tt =} D abs acos acosh acot acoth acsc acsch asec asech asin asinh
+   associates? atan atanh base bits ceiling characteristic coerce convert cos cosh cot coth csc csch decreasePrecision
+   differentiate digits divide euclideanSize exp exp1 exponent expressIdealMember exquo extendedEuclidean factor float
+   floor fractionPart gcd hash increasePrecision inv lcm log log10 log2 mantissa max min multiEuclidean negative? norm
+   nthRoot one? order patternMatch pi positive? precision prime? principalIdeal quo rationalApproximation recip rem
+   retract retractIfCan round sec sech sign sin sinh sizeLess? sqrt squareFree squareFreePart tan tanh truncate unit?
+   unitCanonical unitNormal wholePart zero?}
+%
+\condata{DLIST}{DataList}{ListAggregate}{{\tt \#} {\tt <} {\tt =} any? children coerce concat concat! construct convert
+   copy copyInto! count cycleEntry cycleLength cycleSplit! cycleTail cyclic? datalist delete delete! elt empty empty?
+   entries entry? eq? every? explicitlyFinite? fill! find first index? indices insert insert! last leaf? leaves less? list
+   map map! max maxIndex member? members merge merge! min minIndex more? new node? nodes parts position possiblyInfinite?
+   qelt qsetelt! reduce remove remove! removeDuplicates removeDuplicates! rest reverse reverse! second select select!
+   setchildren! setelt setfirst! setlast! setrest! setvalue! size? sort sort! sorted? split! swap! tail third value}
+%
+\condata{DECIMAL}{DecimalExpansion}{QuotientFieldCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <} {\tt =}
+   D abs associates? ceiling characteristic coerce convert decimal denom denominator differentiate divide euclideanSize
+   expressIdealMember exquo extendedEuclidean factor floor fractionPart gcd init inv lcm map max min multiEuclidean
+   negative? nextItem numer numerator one? patternMatch positive? prime? principalIdeal quo random recip reducedSystem rem
+   retract retractIfCan sign sizeLess? squareFree squareFreePart unit? unitCanonical unitNormal wholePart zero?}
+%
+\condata{DHMATRIX}{DenavitHartenbergMatrix}{MatrixCategory}{{\tt \#} {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =}
+   antisymmetric? any? coerce column copy count determinant diagonal? diagonalMatrix elt empty empty? eq? every? exquo
+   fill! horizConcat identity inverse less? listOfLists map map! matrix maxColIndex maxRowIndex member? members
+   minColIndex minRowIndex minordet more? ncols new nrows nullSpace nullity parts qelt qsetelt! rank rotatex rotatey
+   rotatez row rowEchelon scalarMatrix scale setColumn! setRow! setelt setsubMatrix! size? square? squareTop subMatrix
+   swapColumns! swapRows! symmetric? translate transpose vertConcat zero}
+%
+\condata{DEQUEUE}{Dequeue}{DequeueAggregate}{{\tt \#} {\tt =} any? back bag bottom! coerce copy count depth dequeue
+   dequeue! empty empty? enqueue! eq? every? extract! extractBottom! extractTop! front height insert! insertBottom!
+   insertTop! inspect length less? map map! member? members more? parts pop! push! reverse! rotate! size? top top!}
+%
+\condata{DERHAM}{DeRhamComplex}{LeftAlgebra RetractableTo}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt =} characteristic
+   coefficient coerce degree exteriorDifferential generator homogeneous? leadingBasisTerm leadingCoefficient map one?
+   recip reductum retract retractIfCan retractable? totalDifferential zero?}
+%
+\condata{DSMP}{DifferentialSparseMultivariatePolynomial}{DifferentialPolynomialCategory RetractableTo}{0 1 {\tt *} {\tt
+   ^} {\tt +} {\tt -} {\tt /} {\tt <} {\tt =} D associates? characteristic charthRoot coefficient coefficients coerce
+   conditionP content convert degree differentialVariables differentiate discriminant eval exquo factor factorPolynomial
+   factorSquareFreePolynomial gcd gcdPolynomial ground ground? initial isExpt isPlus isTimes isobaric? lcm leader
+   leadingCoefficient leadingMonomial mainVariable makeVariable map mapExponents max min minimumDegree monicDivide
+   monomial monomial? monomials multivariate numberOfMonomials one? order patternMatch prime? primitiveMonomials
+   primitivePart recip reducedSystem reductum resultant retract retractIfCan separant solveLinearPolynomialEquation
+   squareFree squareFreePart squareFreePolynomial totalDegree unit? unitCanonical unitNormal univariate variables weight
+   weights zero?}
+%
+\condata{DPMM}{DirectProductMatrixModule}{DirectProductCategory LeftModule}{0 1 {\tt \#} {\tt *} {\tt ^} {\tt +} {\tt
+   -} {\tt /} {\tt <} {\tt =} D abs any? characteristic coerce copy count differentiate dimension directProduct dot elt
+   empty empty? entries entry? eq? every? fill! first index index? indices less? lookup map map! max maxIndex member?
+   members min minIndex more? negative? one? parts positive? qelt qsetelt! random recip reducedSystem retract retractIfCan
+   setelt sign size size? sup swap! unitVector zero?}
+%
+\condata{DPMO}{DirectProductModule}{DirectProductCategory LeftModule}{0 1 {\tt \#} {\tt *} {\tt ^} {\tt +} {\tt -}
+   {\tt /} {\tt <} {\tt =} D abs any? characteristic coerce copy count differentiate dimension directProduct dot elt empty
+   empty? entries entry? eq? every? fill! first index index? indices less? lookup map map! max maxIndex member? members
+   min minIndex more? negative? one? parts positive? qelt qsetelt! random recip reducedSystem retract retractIfCan setelt
+   sign size size? sup swap! unitVector zero?}
+%
+\condata{DIRPROD}{DirectProduct}{DirectProductCategory}{0 1 {\tt \#} {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <}
+   {\tt =} D abs any? characteristic coerce copy count differentiate dimension directProduct dot elt empty empty? entries
+   entry? eq? every? fill! first index index? indices less? lookup map map! max maxIndex member? members min minIndex
+   more? negative? one? parts positive? qelt qsetelt! random recip reducedSystem retract retractIfCan setelt sign size
+   size? sup swap! unitVector zero?}
+%
+\condata{DMP}{DistributedMultivariatePolynomial}{PolynomialCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt
+   <} {\tt =} D associates? characteristic charthRoot coefficient coefficients coerce conditionP const content convert
+   degree differentiate discriminant eval exquo factor factorPolynomial factorSquareFreePolynomial gcd gcdPolynomial
+   ground ground? isExpt isPlus isTimes lcm leadingCoefficient leadingMonomial mainVariable map mapExponents max min
+   minimumDegree monicDivide monomial monomial? monomials multivariate numberOfMonomials one? prime? primitiveMonomials
+   primitivePart recip reducedSystem reductum reorder resultant retract retractIfCan solveLinearPolynomialEquation
+   squareFree squareFreePart squareFreePolynomial totalDegree unit? unitCanonical unitNormal univariate variables zero?}
+%
+\condata{DROPT}{DrawOption}{SetCategory}{{\tt =} adaptive clip coerce colorFunction coordinate coordinates curveColor
+   option option? pointColor range ranges space style title toScale tubePoints tubeRadius unit var1Steps var2Steps}
+%
+\condata{EFULS}{ElementaryFunctionsUnivariateLaurentSeries}{PartialTranscendentalFunctions}{{\tt ^} acos acosIfCan
+   acosh acoshIfCan acot acotIfCan acoth acothIfCan acsc acscIfCan acsch acschIfCan asec asecIfCan asech asechIfCan asin
+   asinIfCan asinh asinhIfCan atan atanIfCan atanh atanhIfCan cos cosIfCan cosh coshIfCan cot cotIfCan coth cothIfCan csc
+   cscIfCan csch cschIfCan exp expIfCan log logIfCan nthRootIfCan sec secIfCan sech sechIfCan sin sinIfCan sinh sinhIfCan
+   tan tanIfCan tanh tanhIfCan}
+%
+\condata{EFUPXS}{ElementaryFunctionsUnivariatePuiseuxSeries}{PartialTranscendentalFunctions}{{\tt ^} acos acosIfCan
+   acosh acoshIfCan acot acotIfCan acoth acothIfCan acsc acscIfCan acsch acschIfCan asec asecIfCan asech asechIfCan asin
+   asinIfCan asinh asinhIfCan atan atanIfCan atanh atanhIfCan cos cosIfCan cosh coshIfCan cot cotIfCan coth cothIfCan csc
+   cscIfCan csch cschIfCan exp expIfCan log logIfCan nthRootIfCan sec secIfCan sech sechIfCan sin sinIfCan sinh sinhIfCan
+   tan tanIfCan tanh tanhIfCan}
+%
+\condata{EQTBL}{EqTable}{TableAggregate}{{\tt \#} {\tt =} any? bag coerce construct copy count dictionary elt empty
+   empty? entries entry? eq? every? extract! fill! find first index? indices insert! inspect key? keys less? map map!
+   maxIndex member? members minIndex more? parts qelt qsetelt! reduce remove remove! removeDuplicates search select
+   select! setelt size? swap! table}
+%
+\condata{EQ}{Equation}{CoercibleTo InnerEvalable Object SetCategory}{{\tt *} {\tt ^} {\tt +} {\tt -} {\tt =} coerce
+   equation eval lhs map rhs}
+%
+\condata{EMR}{EuclideanModularRing}{EuclideanDomain}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt =} associates?
+   characteristic coerce divide euclideanSize exQuo expressIdealMember exquo extendedEuclidean gcd inv lcm modulus
+   multiEuclidean one? principalIdeal quo recip reduce rem sizeLess? unit? unitCanonical unitNormal zero?}
+%
+\condata{EXIT}{Exit}{SetCategory}{{\tt =} coerce}
+%
+\condata{EXPR}{Expression}{AlgebraicallyClosedFunctionSpace CombinatorialOpsCategory FunctionSpace
+   LiouvillianFunctionCategory RetractableTo SpecialFunctionCategory TranscendentalFunctionCategory}{0 1 {\tt *} {\tt ^}
+   {\tt +} {\tt -} {\tt /} {\tt <} {\tt =} Beta Ci D Ei Gamma Si abs acos acosh acot acoth acsc acsch airyAi airyBi
+   applyQuote asec asech asin asinh associates? atan atanh belong? besselI besselJ besselK besselY binomial box
+   characteristic charthRoot coerce commutator conjugate convert cos cosh cot coth csc csch definingPolynomial denom
+   denominator differentiate digamma dilog distribute divide elt erf euclideanSize eval exp expressIdealMember exquo
+   extendedEuclidean factor factorial factorials freeOf? gcd ground ground? height integral inv is? isExpt isMult isPlus
+   isPower isTimes kernel kernels lcm li log mainKernel map max min minPoly multiEuclidean nthRoot numer numerator one?
+   operator operators paren patternMatch permutation pi polygamma prime? principalIdeal product quo recip reduce
+   reducedSystem rem retract retractIfCan rootOf rootsOf sec sech sin sinh sizeLess? sqrt squareFree squareFreePart subst
+   summation tan tanh tower unit? unitCanonical unitNormal univariate variables zero? zeroOf zerosOf}
+%
+\condata{EAB}{ExtAlgBasis}{OrderedSet}{{\tt <} {\tt =} Nul coerce degree exponents max min}
+%
+\condata{FR}{Factored}{Algebra DifferentialExtension Eltable Evalable FullyEvalableOver FullyRetractableTo GcdDomain
+   InnerEvalable IntegralDomain RealConstant UniqueFactorizationDomain}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt =} D
+   associates? characteristic coerce convert differentiate elt eval expand exponent exquo factor factorList factors
+   flagFactor gcd irreducibleFactor lcm makeFR map nilFactor nthExponent nthFactor nthFlag numberOfFactors one? prime?
+   primeFactor rational rational? rationalIfCan recip retract retractIfCan sqfrFactor squareFree squareFreePart unit unit?
+   unitCanonical unitNormal unitNormalize zero?}
+%
+\condata{FNAME}{FileName}{FileNameCategory}{{\tt =} coerce directory exists? extension filename name new readable?
+   writable?}
+%
+\condata{FILE}{File}{FileCategory}{{\tt =} close! coerce iomode name open read! readIfCan! reopen! write!}
+%
+\condata{FDIV}{FiniteDivisor}{AbelianGroup}{0 {\tt *} {\tt +} {\tt -} {\tt =} algsplit coerce divisor finiteBasis
+   generator ideal lSpaceBasis mkBasicDiv principal? reduce zero?}
+%
+\condata{FFCGP}{FiniteFieldCyclicGroupExtensionByPolynomial}{FiniteAlgebraicExtensionField}{0 1 {\tt *} {\tt ^} {\tt
+   +} {\tt -} {\tt /} {\tt =} Frobenius algebraic? associates? basis characteristic charthRoot coerce conditionP
+   coordinates createNormalElement createPrimitiveElement definingPolynomial degree dimension discreteLog divide
+   euclideanSize expressIdealMember exquo extendedEuclidean extensionDegree factor factorsOfCyclicGroupSize gcd generator
+   getZechTable inGroundField? index init inv lcm lookup minimalPolynomial multiEuclidean nextItem norm normal?
+   normalElement one? order prime? primeFrobenius primitive? primitiveElement principalIdeal quo random recip rem
+   representationType represents retract retractIfCan size sizeLess? squareFree squareFreePart tableForDiscreteLogarithm
+   trace transcendenceDegree transcendent? unit? unitCanonical unitNormal zero?}
+%
+\condata{FFCGX}{FiniteFieldCyclicGroupExtension}{FiniteAlgebraicExtensionField}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -}
+   {\tt /} {\tt =} Frobenius algebraic? associates? basis characteristic charthRoot coerce conditionP coordinates
+   createNormalElement createPrimitiveElement definingPolynomial degree dimension discreteLog divide euclideanSize
+   expressIdealMember exquo extendedEuclidean extensionDegree factor factorsOfCyclicGroupSize gcd generator getZechTable
+   inGroundField? index init inv lcm lookup minimalPolynomial multiEuclidean nextItem norm normal? normalElement one?
+   order prime? primeFrobenius primitive? primitiveElement principalIdeal quo random recip rem representationType
+   represents retract retractIfCan size sizeLess? squareFree squareFreePart tableForDiscreteLogarithm trace
+   transcendenceDegree transcendent? unit? unitCanonical unitNormal zero?}
+%
+\condata{FFCG}{FiniteFieldCyclicGroup}{FiniteAlgebraicExtensionField}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt
+   =} Frobenius algebraic? associates? basis characteristic charthRoot coerce conditionP coordinates createNormalElement
+   createPrimitiveElement definingPolynomial degree dimension discreteLog divide euclideanSize expressIdealMember exquo
+   extendedEuclidean extensionDegree factor factorsOfCyclicGroupSize gcd generator getZechTable inGroundField? index init
+   inv lcm lookup minimalPolynomial multiEuclidean nextItem norm normal? normalElement one? order prime? primeFrobenius
+   primitive? primitiveElement principalIdeal quo random recip rem representationType represents retract retractIfCan size
+   sizeLess? squareFree squareFreePart tableForDiscreteLogarithm trace transcendenceDegree transcendent? unit?
+   unitCanonical unitNormal zero?}
+%
+\condata{FFP}{FiniteFieldExtensionByPolynomial}{FiniteAlgebraicExtensionField}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -}
+   {\tt /} {\tt =} Frobenius algebraic? associates? basis characteristic charthRoot coerce conditionP coordinates
+   createNormalElement createPrimitiveElement definingPolynomial degree dimension discreteLog divide euclideanSize
+   expressIdealMember exquo extendedEuclidean extensionDegree factor factorsOfCyclicGroupSize gcd generator inGroundField?
+   index init inv lcm lookup minimalPolynomial multiEuclidean nextItem norm normal? normalElement one? order prime?
+   primeFrobenius primitive? primitiveElement principalIdeal quo random recip rem representationType represents retract
+   retractIfCan size sizeLess? squareFree squareFreePart tableForDiscreteLogarithm trace transcendenceDegree transcendent?
+   unit? unitCanonical unitNormal zero?}
+%
+\condata{FFX}{FiniteFieldExtension}{FiniteAlgebraicExtensionField}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =}
+   Frobenius algebraic? associates? basis characteristic charthRoot coerce conditionP coordinates createNormalElement
+   createPrimitiveElement definingPolynomial degree dimension discreteLog divide euclideanSize expressIdealMember exquo
+   extendedEuclidean extensionDegree factor factorsOfCyclicGroupSize gcd generator inGroundField? index init inv lcm
+   lookup minimalPolynomial multiEuclidean nextItem norm normal? normalElement one? order prime? primeFrobenius primitive?
+   primitiveElement principalIdeal quo random recip rem representationType represents retract retractIfCan size sizeLess?
+   squareFree squareFreePart tableForDiscreteLogarithm trace transcendenceDegree transcendent? unit? unitCanonical
+   unitNormal zero?}
+%
+\condata{FFNBP}{FiniteFieldNormalBasisExtensionByPolynomial}{FiniteAlgebraicExtensionField}{0 1 {\tt *} {\tt ^} {\tt
+   +} {\tt -} {\tt /} {\tt =} Frobenius algebraic? associates? basis characteristic charthRoot coerce conditionP
+   coordinates createNormalElement createPrimitiveElement definingPolynomial degree dimension discreteLog divide
+   euclideanSize expressIdealMember exquo extendedEuclidean extensionDegree factor factorsOfCyclicGroupSize gcd generator
+   getMultiplicationMatrix getMultiplicationTable inGroundField? index init inv lcm lookup minimalPolynomial
+   multiEuclidean nextItem norm normal? normalElement one? order prime? primeFrobenius primitive? primitiveElement
+   principalIdeal quo random recip rem representationType represents retract retractIfCan size sizeLess?
+   sizeMultiplication squareFree squareFreePart tableForDiscreteLogarithm trace transcendenceDegree transcendent? unit?
+   unitCanonical unitNormal zero?}
+%
+\condata{FFNBX}{FiniteFieldNormalBasisExtension}{FiniteAlgebraicExtensionField}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -}
+   {\tt /} {\tt =} Frobenius algebraic? associates? basis characteristic charthRoot coerce conditionP coordinates
+   createNormalElement createPrimitiveElement definingPolynomial degree dimension discreteLog divide euclideanSize
+   expressIdealMember exquo extendedEuclidean extensionDegree factor factorsOfCyclicGroupSize gcd generator
+   getMultiplicationMatrix getMultiplicationTable inGroundField? index init inv lcm lookup minimalPolynomial
+   multiEuclidean nextItem norm normal? normalElement one? order prime? primeFrobenius primitive? primitiveElement
+   principalIdeal quo random recip rem representationType represents retract retractIfCan size sizeLess?
+   sizeMultiplication squareFree squareFreePart tableForDiscreteLogarithm trace transcendenceDegree transcendent? unit?
+   unitCanonical unitNormal zero?}
+%
+\condata{FFNB}{FiniteFieldNormalBasis}{FiniteAlgebraicExtensionField}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt
+   =} Frobenius algebraic? associates? basis characteristic charthRoot coerce conditionP coordinates createNormalElement
+   createPrimitiveElement definingPolynomial degree dimension discreteLog divide euclideanSize expressIdealMember exquo
+   extendedEuclidean extensionDegree factor factorsOfCyclicGroupSize gcd generator getMultiplicationMatrix
+   getMultiplicationTable inGroundField? index init inv lcm lookup minimalPolynomial multiEuclidean nextItem norm normal?
+   normalElement one? order prime? primeFrobenius primitive? primitiveElement principalIdeal quo random recip rem
+   representationType represents retract retractIfCan size sizeLess? sizeMultiplication squareFree squareFreePart
+   tableForDiscreteLogarithm trace transcendenceDegree transcendent? unit? unitCanonical unitNormal zero?}
+%
+\condata{FF}{FiniteField}{FiniteAlgebraicExtensionField}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =} Frobenius
+   algebraic? associates? basis characteristic charthRoot coerce conditionP coordinates createNormalElement
+   createPrimitiveElement definingPolynomial degree dimension discreteLog divide euclideanSize expressIdealMember exquo
+   extendedEuclidean extensionDegree factor factorsOfCyclicGroupSize gcd generator inGroundField? index init inv lcm
+   lookup minimalPolynomial multiEuclidean nextItem norm normal? normalElement one? order prime? primeFrobenius primitive?
+   primitiveElement principalIdeal quo random recip rem representationType represents retract retractIfCan size sizeLess?
+   squareFree squareFreePart tableForDiscreteLogarithm trace transcendenceDegree transcendent? unit? unitCanonical
+   unitNormal zero?}
+%
+\condata{FARRAY}{FlexibleArray}{ExtensibleLinearAggregate OneDimensionalArrayAggregate}{{\tt \#} {\tt <} {\tt =} any?
+   coerce concat concat! construct convert copy copyInto! count delete delete! elt empty empty? entries entry? eq? every?
+   fill! find first flexibleArray index? indices insert insert! less? map map! max maxIndex member? members merge merge!
+   min minIndex more? new parts physicalLength physicalLength! position qelt qsetelt! reduce remove remove!
+   removeDuplicates removeDuplicates! reverse reverse! select select! setelt shrinkable size? sort sort! sorted? swap!}
+%
+\condata{FLOAT}{Float}{CoercibleTo ConvertibleTo DifferentialRing FloatingPointSystem TranscendentalFunctionCategory}{0
+   1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <} {\tt =} D abs acos acosh acot acoth acsc acsch asec asech asin asinh
+   associates? atan atanh base bits ceiling characteristic coerce convert cos cosh cot coth csc csch decreasePrecision
+   differentiate digits divide euclideanSize exp exp1 exponent expressIdealMember exquo extendedEuclidean factor float
+   floor fractionPart gcd increasePrecision inv lcm log log10 log2 mantissa max min multiEuclidean negative? norm
+   normalize nthRoot one? order outputFixed outputFloating outputGeneral outputSpacing patternMatch pi positive? precision
+   prime? principalIdeal quo rationalApproximation recip relerror rem retract retractIfCan round sec sech shift sign sin
+   sinh sizeLess? sqrt squareFree squareFreePart tan tanh truncate unit? unitCanonical unitNormal wholePart zero?}
+%
+\condata{FRIDEAL}{FractionalIdeal}{Group}{1 {\tt *} {\tt ^} {\tt /} {\tt =} basis coerce commutator conjugate denom
+   ideal inv minimize norm numer one? randomLC recip}
+%
+\condata{FRAC}{Fraction}{QuotientFieldCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <} {\tt =} D abs
+   associates? ceiling characteristic charthRoot coerce conditionP convert denom denominator differentiate divide elt
+   euclideanSize eval expressIdealMember exquo extendedEuclidean factor factorPolynomial factorSquareFreePolynomial floor
+   fractionPart gcd gcdPolynomial init inv lcm map max min multiEuclidean negative? nextItem numer numerator one?
+   patternMatch positive? prime? principalIdeal quo random recip reducedSystem rem retract retractIfCan sign sizeLess?
+   solveLinearPolynomialEquation squareFree squareFreePart squareFreePolynomial unit? unitCanonical unitNormal wholePart
+   zero?}
+%
+\condata{FRMOD}{FramedModule}{Monoid}{1 {\tt *} {\tt ^} {\tt =} basis coerce module norm one? recip}
+%
+\condata{FAGROUP}{FreeAbelianGroup}{AbelianGroup FreeAbelianMonoidCategory Module OrderedSet}{0 {\tt *} {\tt +} {\tt -}
+   {\tt <} {\tt =} coefficient coerce highCommonTerms mapCoef mapGen max min nthCoef nthFactor retract retractIfCan size
+   terms zero?}
+%
+\condata{FAMONOID}{FreeAbelianMonoid}{FreeAbelianMonoidCategory}{0 {\tt *} {\tt +} {\tt -} {\tt =} coefficient coerce
+   highCommonTerms mapCoef mapGen nthCoef nthFactor retract retractIfCan size terms zero?}
+%
+\condata{FGROUP}{FreeGroup}{Group RetractableTo}{1 {\tt *} {\tt ^} {\tt /} {\tt =} coerce commutator conjugate factors
+   inv mapExpon mapGen nthExpon nthFactor one? recip retract retractIfCan size}
+%
+\condata{FM}{FreeModule}{BiModule IndexedDirectProductCategory Module}{0 {\tt *} {\tt +} {\tt -} {\tt =} coerce
+   leadingCoefficient leadingSupport map monomial reductum zero?}
+%
+\condata{FMONOID}{FreeMonoid}{Monoid OrderedSet RetractableTo}{1 {\tt *} {\tt ^} {\tt <} {\tt =} coerce divide factors
+   hclf hcrf lquo mapExpon mapGen max min nthExpon nthFactor one? overlap recip retract retractIfCan rquo size}
+%
+\condata{FNLA}{FreeNilpotentLie}{NonAssociativeAlgebra}{0 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt =} antiCommutator
+   associator coerce commutator deepExpand dimension generator leftPower rightPower shallowExpand zero?}
+%
+\condata{FUNCTION}{FunctionCalled}{SetCategory}{{\tt =} coerce name}
+%
+\condata{GDMP}{GeneralDistributedMultivariatePolynomial}{PolynomialCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt
+   /} {\tt <} {\tt =} D associates? characteristic charthRoot coefficient coefficients coerce conditionP const content
+   convert degree differentiate discriminant eval exquo factor factorPolynomial factorSquareFreePolynomial gcd
+   gcdPolynomial ground ground? isExpt isPlus isTimes lcm leadingCoefficient leadingMonomial mainVariable map mapExponents
+   max min minimumDegree monicDivide monomial monomial? monomials multivariate numberOfMonomials one? prime?
+   primitiveMonomials primitivePart recip reducedSystem reductum reorder resultant retract retractIfCan
+   solveLinearPolynomialEquation squareFree squareFreePart squareFreePolynomial totalDegree unit? unitCanonical unitNormal
+   univariate variables zero?}
+%
+\condata{GSTBL}{GeneralSparseTable}{TableAggregate}{{\tt \#} {\tt =} any? bag coerce construct copy count dictionary
+   elt empty empty? entries entry? eq? every? extract! fill! find first index? indices insert! inspect key? keys less? map
+   map! maxIndex member? members minIndex more? parts qelt qsetelt! reduce remove remove! removeDuplicates search select
+   select! setelt size? swap! table}
+%
+\condata{GCNAALG}{GenericNonAssociativeAlgebra}{FramedNonAssociativeAlgebra LeftModule}{0 {\tt *} {\tt ^} {\tt +} {\tt
+   -} {\tt =} JacobiIdentity? JordanAlgebra? alternative? antiAssociative? antiCommutative? antiCommutator apply
+   associative? associator associatorDependence basis coerce commutative? commutator conditionsForIdempotents convert
+   coordinates elt flexible? generic genericLeftDiscriminant genericLeftMinimalPolynomial genericLeftNorm genericLeftTrace
+   genericLeftTraceForm genericRightDiscriminant genericRightMinimalPolynomial genericRightNorm genericRightTrace
+   genericRightTraceForm jordanAdmissible? leftAlternative? leftCharacteristicPolynomial leftDiscriminant
+   leftMinimalPolynomial leftNorm leftPower leftRankPolynomial leftRecip leftRegularRepresentation leftTrace
+   leftTraceMatrix leftUnit leftUnits lieAdmissible? lieAlgebra? noncommutativeJordanAlgebra? plenaryPower
+   powerAssociative? rank recip represents rightAlternative? rightCharacteristicPolynomial rightDiscriminant
+   rightMinimalPolynomial rightNorm rightPower rightRankPolynomial rightRecip rightRegularRepresentation rightTrace
+   rightTraceMatrix rightUnit rightUnits someBasis structuralConstants unit zero?}
+%
+\condata{GRIMAGE}{GraphImage}{SetCategory}{{\tt =} appendPoint coerce component graphImage key makeGraphImage point
+   pointLists putColorInfo ranges units}
+%
+\condata{HASHTBL}{HashTable}{TableAggregate}{{\tt \#} {\tt =} any? bag coerce construct copy count dictionary elt empty
+   empty? entries entry? eq? every? extract! fill! find first index? indices insert! inspect key? keys less? map map!
+   maxIndex member? members minIndex more? parts qelt qsetelt! reduce remove remove! removeDuplicates search select
+   select! setelt size? swap! table}
+%
+\condata{HEAP}{Heap}{PriorityQueueAggregate}{{\tt \#} {\tt =} any? bag coerce copy count empty empty? eq? every?
+   extract! heap insert! inspect less? map map! max member? members merge merge! more? parts size?}
+%
+\condata{HEXADEC}{HexadecimalExpansion}{QuotientFieldCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <}
+   {\tt =} D abs associates? ceiling characteristic coerce convert denom denominator differentiate divide euclideanSize
+   expressIdealMember exquo extendedEuclidean factor floor fractionPart gcd hex init inv lcm map max min multiEuclidean
+   negative? nextItem numer numerator one? patternMatch positive? prime? principalIdeal quo random recip reducedSystem rem
+   retract retractIfCan sign sizeLess? squareFree squareFreePart unit? unitCanonical unitNormal wholePart zero?}
+%
+\condata{ICARD}{IndexCard}{OrderedSet}{{\tt <} {\tt =} coerce display elt fullDisplay max min}
+%
+\condata{IBITS}{IndexedBits}{BitAggregate}{{\tt \#} {\tt <} {\tt =} And Not Or {\tt \^{}} and any? coerce concat
+   construct convert copy copyInto! count delete elt empty empty? entries entry? eq? every? fill! find first index?
+   indices insert less? map map! max maxIndex member? members merge min minIndex more? nand new nor not or parts position
+   qelt qsetelt! reduce remove removeDuplicates reverse reverse! select setelt size? sort sort! sorted? swap! xor}
+%
+\condata{IDPAG}{IndexedDirectProductAbelianGroup}{AbelianGroup IndexedDirectProductCategory}{0 {\tt *} {\tt +} {\tt -}
+   {\tt =} coerce leadingCoefficient leadingSupport map monomial reductum zero?}
+%
+\condata{IDPAM}{IndexedDirectProductAbelianMonoid}{AbelianMonoid IndexedDirectProductCategory}{0 {\tt *} {\tt +} {\tt
+   =} coerce leadingCoefficient leadingSupport map monomial reductum zero?}
+%
+\condata{IDPO}{IndexedDirectProductObject}{IndexedDirectProductCategory}{{\tt =} coerce leadingCoefficient
+   leadingSupport map monomial reductum}
+%
+\condata{IDPOAMS}{IndexedDirectProductOrderedAbelianMonoidSup}{IndexedDirectProductCategory OrderedAbelianMonoidSup}{0
+   {\tt *} {\tt +} {\tt -} {\tt <} {\tt =} coerce leadingCoefficient leadingSupport map max min monomial reductum sup
+   zero?}
+%
+\condata{IDPOAM}{IndexedDirectProductOrderedAbelianMonoid}{IndexedDirectProductCategory OrderedAbelianMonoid}{0 {\tt *}
+   {\tt +} {\tt <} {\tt =} coerce leadingCoefficient leadingSupport map max min monomial reductum zero?}
+%
+\condata{INDE}{IndexedExponents}{IndexedDirectProductCategory OrderedAbelianMonoidSup}{0 {\tt *} {\tt +} {\tt -} {\tt
+   <} {\tt =} coerce leadingCoefficient leadingSupport map max min monomial reductum sup zero?}
+%
+\condata{IFARRAY}{IndexedFlexibleArray}{ExtensibleLinearAggregate OneDimensionalArrayAggregate}{{\tt \#} {\tt <} {\tt
+   =} any? coerce concat concat! construct convert copy copyInto! count delete delete! elt empty empty? entries entry? eq?
+   every? fill! find first flexibleArray index? indices insert insert! less? map map! max maxIndex member? members merge
+   merge! min minIndex more? new parts physicalLength physicalLength! position qelt qsetelt! reduce remove remove!
+   removeDuplicates removeDuplicates! reverse reverse! select select! setelt shrinkable size? sort sort! sorted? swap!}
+%
+\condata{ILIST}{IndexedList}{ListAggregate}{{\tt \#} {\tt <} {\tt =} any? child? children coerce concat concat!
+   construct convert copy copyInto! count cycleEntry cycleLength cycleSplit! cycleTail cyclic? delete delete! distance elt
+   empty empty? entries entry? eq? every? explicitlyFinite? fill! find first index? indices insert insert! last leaf?
+   less? list map map! max maxIndex member? members merge merge! min minIndex more? new node? nodes parts position
+   possiblyInfinite? qelt qsetelt! reduce remove remove! removeDuplicates removeDuplicates! rest reverse reverse! second
+   select select! setchildren! setelt setfirst! setlast! setrest! setvalue! size? sort sort! sorted? split! swap! tail
+   third value}
+%
+\condata{IMATRIX}{IndexedMatrix}{MatrixCategory}{{\tt \#} {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =}
+   antisymmetric? any? coerce column copy count determinant diagonal? diagonalMatrix elt empty empty? eq? every? exquo
+   fill! horizConcat inverse less? listOfLists map map! matrix maxColIndex maxRowIndex member? members minColIndex
+   minRowIndex minordet more? ncols new nrows nullSpace nullity parts qelt qsetelt! rank row rowEchelon scalarMatrix
+   setColumn! setRow! setelt setsubMatrix! size? square? squareTop subMatrix swapColumns! swapRows! symmetric? transpose
+   vertConcat zero}
+%
+\condata{IARRAY1}{IndexedOneDimensionalArray}{OneDimensionalArrayAggregate}{{\tt \#} {\tt <} {\tt =} any? coerce concat
+   construct convert copy copyInto! count delete elt empty empty? entries entry? eq? every? fill! find first index?
+   indices insert less? map map! max maxIndex member? members merge min minIndex more? new parts position qelt qsetelt!
+   reduce remove removeDuplicates reverse reverse! select setelt size? sort sort! sorted? swap!}
+%
+\condata{ISTRING}{IndexedString}{StringAggregate}{{\tt \#} {\tt <} {\tt =} any? coerce concat construct copy copyInto!
+   count delete elt empty empty? entries entry? eq? every? fill! find first hash index? indices insert leftTrim less?
+   lowerCase lowerCase! map map! match? max maxIndex member? members merge min minIndex more? new parts position prefix?
+   qelt qsetelt! reduce remove removeDuplicates replace reverse reverse! rightTrim select setelt size? sort sort! sorted?
+   split substring? suffix? swap! trim upperCase upperCase!}
+%
+\condata{IARRAY2}{IndexedTwoDimensionalArray}{TwoDimensionalArrayCategory}{{\tt \#} {\tt =} any? coerce column copy
+   count elt empty empty? eq? every? fill! less? map map! maxColIndex maxRowIndex member? members minColIndex minRowIndex
+   more? ncols new nrows parts qelt qsetelt! row setColumn! setRow! setelt size?}
+%
+\condata{IVECTOR}{IndexedVector}{VectorCategory}{{\tt \#} {\tt *} {\tt +} {\tt -} {\tt <} {\tt =} any? coerce concat
+   construct convert copy copyInto! count delete dot elt empty empty? entries entry? eq? every? fill! find first index?
+   indices insert less? map map! max maxIndex member? members merge min minIndex more? new parts position qelt qsetelt!
+   reduce remove removeDuplicates reverse reverse! select setelt size? sort sort! sorted? swap! zero}
+%
+\condata{ITUPLE}{InfiniteTuple}{CoercibleTo}{coerce construct filterUntil filterWhile generate map select}
+%
+\condata{IFF}{InnerFiniteField}{FiniteAlgebraicExtensionField}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =}
+   Frobenius algebraic? associates? basis characteristic charthRoot coerce conditionP coordinates createNormalElement
+   createPrimitiveElement definingPolynomial degree dimension discreteLog divide euclideanSize expressIdealMember exquo
+   extendedEuclidean extensionDegree factor factorsOfCyclicGroupSize gcd generator inGroundField? index init inv lcm
+   lookup minimalPolynomial multiEuclidean nextItem norm normal? normalElement one? order prime? primeFrobenius primitive?
+   primitiveElement principalIdeal quo random recip rem representationType represents retract retractIfCan size sizeLess?
+   squareFree squareFreePart tableForDiscreteLogarithm trace transcendenceDegree transcendent? unit? unitCanonical
+   unitNormal zero?}
+%
+\condata{IFAMON}{InnerFreeAbelianMonoid}{FreeAbelianMonoidCategory}{0 {\tt *} {\tt +} {\tt -} {\tt =} coefficient
+   coerce highCommonTerms mapCoef mapGen nthCoef nthFactor retract retractIfCan size terms zero?}
+%
+\condata{IIARRAY2}{InnerIndexedTwoDimensionalArray}{TwoDimensionalArrayCategory}{{\tt \#} {\tt =} any? coerce column
+   copy count elt empty empty? eq? every? fill! less? map map! maxColIndex maxRowIndex member? members minColIndex
+   minRowIndex more? ncols new nrows parts qelt qsetelt! row setColumn! setRow! setelt size?}
+%
+\condata{IPADIC}{InnerPAdicInteger}{PAdicIntegerCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt =} approximate
+   associates? characteristic coerce complete digits divide euclideanSize expressIdealMember exquo extend
+   extendedEuclidean gcd lcm moduloP modulus multiEuclidean one? order principalIdeal quo quotientByP recip rem sizeLess?
+   sqrt unit? unitCanonical unitNormal zero?}
+%
+\condata{IPF}{InnerPrimeField}{ConvertibleTo FiniteAlgebraicExtensionField FiniteFieldCategory}{0 1 {\tt *} {\tt ^}
+   {\tt +} {\tt -} {\tt /} {\tt =} Frobenius algebraic? associates? basis characteristic charthRoot coerce conditionP
+   convert coordinates createNormalElement createPrimitiveElement definingPolynomial degree dimension discreteLog divide
+   euclideanSize expressIdealMember exquo extendedEuclidean extensionDegree factor factorsOfCyclicGroupSize gcd generator
+   inGroundField? index init inv lcm lookup minimalPolynomial multiEuclidean nextItem norm normal? normalElement one?
+   order prime? primeFrobenius primitive? primitiveElement principalIdeal quo random recip rem representationType
+   represents retract retractIfCan size sizeLess? squareFree squareFreePart tableForDiscreteLogarithm trace
+   transcendenceDegree transcendent? unit? unitCanonical unitNormal zero?}
+%
+\condata{ITAYLOR}{InnerTaylorSeries}{IntegralDomain Ring}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt =} associates?
+   characteristic coefficients coerce exquo one? order pole? recip series unit? unitCanonical unitNormal zero?}
+%
+\condata{INFORM}{InputForm}{ConvertibleTo SExpressionCategory}{0 1 {\tt \#} {\tt *} {\tt ^} {\tt +} {\tt /} {\tt =}
+   atom? binary car cdr coerce compile convert declare destruct elt eq expr flatten float float? function integer integer?
+   interpret lambda list? null? pair? string string? symbol symbol? uequal unparse}
+%
+\condata{ZMOD}{IntegerMod}{CommutativeRing ConvertibleTo Finite StepThrough}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt
+   =} characteristic coerce convert index init lookup nextItem one? random recip size zero?}
+%
+\condata{INT}{Integer}{ConvertibleTo IntegerNumberSystem}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt <} {\tt =} D abs
+   addmod associates? base binomial bit? characteristic coerce convert copy dec differentiate divide euclideanSize even?
+   expressIdealMember exquo extendedEuclidean factor factorial gcd hash inc init invmod lcm length mask max min mulmod
+   multiEuclidean negative? nextItem odd? one? patternMatch permutation positive? positiveRemainder powmod prime?
+   principalIdeal quo random rational rational? rationalIfCan recip reducedSystem rem retract retractIfCan shift sign
+   sizeLess? squareFree squareFreePart submod symmetricRemainder unit? unitCanonical unitNormal zero?}
+%
+\condata{IR}{IntegrationResult}{Module RetractableTo}{0 {\tt *} {\tt +} {\tt -} {\tt =} D coerce differentiate elem?
+   integral logpart mkAnswer notelem ratpart retract retractIfCan zero?}
+%
+\condata{KERNEL}{Kernel}{CachableSet ConvertibleTo Patternable}{{\tt <} {\tt =} argument coerce convert height is?
+   kernel max min name operator position setPosition symbolIfCan}
+%
+\condata{KAFILE}{KeyedAccessFile}{FileCategory TableAggregate}{{\tt \#} {\tt =} any? bag close! coerce construct copy
+   count dictionary elt empty empty? entries entry? eq? every? extract! fill! find first index? indices insert! inspect
+   iomode key? keys less? map map! maxIndex member? members minIndex more? name open pack! parts qelt qsetelt! read!
+   reduce remove remove! removeDuplicates reopen! search select select! setelt size? swap! table write!}
+%
+\condata{LAUPOL}{LaurentPolynomial}{CharacteristicNonZero CharacteristicZero ConvertibleTo DifferentialExtension
+   EuclideanDomain FullyRetractableTo IntegralDomain RetractableTo}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt =} D
+   associates? characteristic charthRoot coefficient coerce convert degree differentiate divide euclideanSize
+   expressIdealMember exquo extendedEuclidean gcd lcm leadingCoefficient monomial monomial? multiEuclidean one? order
+   principalIdeal quo recip reductum rem retract retractIfCan separate sizeLess? trailingCoefficient unit? unitCanonical
+   unitNormal zero?}
+%
+\condata{LIB}{Library}{TableAggregate}{{\tt \#} {\tt =} any? bag coerce construct copy count dictionary elt empty
+   empty? entries entry? eq? every? extract! fill! find first index? indices insert! inspect key? keys less? library map
+   map! maxIndex member? members minIndex more? pack! parts qelt qsetelt! reduce remove remove! removeDuplicates search
+   select select! setelt size? swap! table}
+%
+\condata{LSQM}{LieSquareMatrix}{CoercibleTo FramedNonAssociativeAlgebra SquareMatrixCategory}{0 1 {\tt \#} {\tt *} {\tt
+   ^} {\tt +} {\tt -} {\tt /} {\tt =} D JacobiIdentity? JordanAlgebra? alternative? antiAssociative? antiCommutative?
+   antiCommutator antisymmetric? any? apply associative? associator associatorDependence basis characteristic coerce
+   column commutative? commutator conditionsForIdempotents convert coordinates copy count determinant diagonal diagonal?
+   diagonalMatrix diagonalProduct differentiate elt empty empty? eq? every? exquo flexible? inverse jordanAdmissible?
+   leftAlternative? leftCharacteristicPolynomial leftDiscriminant leftMinimalPolynomial leftNorm leftPower
+   leftRankPolynomial leftRecip leftRegularRepresentation leftTrace leftTraceMatrix leftUnit leftUnits less?
+   lieAdmissible? lieAlgebra? listOfLists map map! matrix maxColIndex maxRowIndex member? members minColIndex minRowIndex
+   minordet more? ncols noncommutativeJordanAlgebra? nrows nullSpace nullity one? parts plenaryPower powerAssociative?
+   qelt rank recip reducedSystem represents retract retractIfCan rightAlternative? rightCharacteristicPolynomial
+   rightDiscriminant rightMinimalPolynomial rightNorm rightPower rightRankPolynomial rightRecip rightRegularRepresentation
+   rightTrace rightTraceMatrix rightUnit rightUnits row rowEchelon scalarMatrix size? someBasis square?
+   structuralConstants symmetric? trace unit zero?}
+%
+\condata{LODO}{LinearOrdinaryDifferentialOperator}{MonogenicLinearOperator}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt
+   =} D characteristic coefficient coerce degree elt leadingCoefficient leftDivide leftExactQuotient leftGcd leftLcm
+   leftQuotient leftRemainder minimumDegree monomial one? recip reductum rightDivide rightExactQuotient rightGcd rightLcm
+   rightQuotient rightRemainder zero?}
+%
+\condata{LMOPS}{ListMonoidOps}{RetractableTo SetCategory}{{\tt =} coerce leftMult listOfMonoms makeMulti makeTerm
+   makeUnit mapExpon mapGen nthExpon nthFactor outputForm plus retract retractIfCan reverse reverse! rightMult size}
+%
+\condata{LMDICT}{ListMultiDictionary}{MultiDictionary}{{\tt \#} {\tt =} any? bag coerce construct convert copy count
+   dictionary duplicates duplicates? empty empty? eq? every? extract! find insert! inspect less? map map! member? members
+   more? parts reduce remove remove! removeDuplicates removeDuplicates! select select! size? substitute}
+%
+\condata{LIST}{List}{ListAggregate}{{\tt \#} {\tt <} {\tt =} any? append child? children coerce concat concat! cons
+   construct convert copy copyInto! count cycleEntry cycleLength cycleSplit! cycleTail cyclic? delete delete! distance elt
+   empty empty? entries entry? eq? every? explicitlyFinite? fill! find first index? indices insert insert! last leaf?
+   less? list map map! max maxIndex member? members merge merge! min minIndex more? new nil node? nodes null parts
+   position possiblyInfinite? qelt qsetelt! reduce remove remove! removeDuplicates removeDuplicates! rest reverse reverse!
+   second select select! setDifference setIntersection setUnion setchildren! setelt setfirst! setlast! setrest! setvalue!
+   size? sort sort! sorted? split! swap! tail third value}
+%
+\condata{LA}{LocalAlgebra}{Algebra OrderedRing}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <} {\tt =} abs
+   characteristic coerce denom max min negative? numer one? positive? recip sign zero?}
+%
+\condata{LO}{Localize}{Module OrderedAbelianGroup}{0 {\tt *} {\tt +} {\tt -} {\tt /} {\tt <} {\tt =} coerce denom max
+   min numer zero?}
+%
+\condata{MKCHSET}{MakeCachableSet}{CachableSet CoercibleTo}{{\tt <} {\tt =} coerce max min position setPosition}
+%
+\condata{MKODRING}{MakeOrdinaryDifferentialRing}{CoercibleTo DifferentialRing}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -}
+   {\tt =} D characteristic coerce differentiate one? recip zero?}
+%
+\condata{MATRIX}{Matrix}{MatrixCategory}{{\tt \#} {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =} antisymmetric? any?
+   coerce column copy count determinant diagonal? diagonalMatrix elt empty empty? eq? every? exquo fill! horizConcat
+   inverse less? listOfLists map map! matrix maxColIndex maxRowIndex member? members minColIndex minRowIndex minordet
+   more? ncols new nrows nullSpace nullity parts qelt qsetelt! rank row rowEchelon scalarMatrix setColumn! setRow! setelt
+   setsubMatrix! size? square? squareTop subMatrix swapColumns! swapRows! symmetric? transpose vertConcat zero}
+%
+\condata{MODMON}{ModMonic}{Finite UnivariatePolynomialCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <}
+   {\tt =} An D UnVectorise Vectorise associates? characteristic charthRoot coefficient coefficients coerce composite
+   computePowers conditionP content degree differentiate discriminant divide divideExponents elt euclideanSize eval
+   expressIdealMember exquo extendedEuclidean factor factorPolynomial factorSquareFreePolynomial gcd gcdPolynomial ground
+   ground? index init integrate isExpt isPlus isTimes lcm leadingCoefficient leadingMonomial lift lookup mainVariable
+   makeSUP map mapExponents max min minimumDegree modulus monicDivide monomial monomial? monomials multiEuclidean
+   multiplyExponents multivariate nextItem numberOfMonomials one? order pow prime? primitiveMonomials primitivePart
+   principalIdeal pseudoDivide pseudoQuotient pseudoRemainder quo random recip reduce reducedSystem reductum rem resultant
+   retract retractIfCan separate setPoly size sizeLess? solveLinearPolynomialEquation squareFree squareFreePart
+   squareFreePolynomial subResultantGcd totalDegree unit? unitCanonical unitNormal univariate unmakeSUP variables
+   vectorise zero?}
+%
+\condata{MODFIELD}{ModularField}{Field}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =} associates? characteristic
+   coerce divide euclideanSize exQuo expressIdealMember exquo extendedEuclidean factor gcd inv lcm modulus multiEuclidean
+   one? prime? principalIdeal quo recip reduce rem sizeLess? squareFree squareFreePart unit? unitCanonical unitNormal
+   zero?}
+%
+\condata{MODRING}{ModularRing}{Ring}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt =} characteristic coerce exQuo inv
+   modulus one? recip reduce zero?}
+%
+\condata{MOEBIUS}{MoebiusTransform}{Group}{1 {\tt *} {\tt ^} {\tt /} {\tt =} coerce commutator conjugate eval inv
+   moebius one? recip scale shift}
+%
+\condata{MRING}{MonoidRing}{Algebra CharacteristicNonZero CharacteristicZero Finite RetractableTo Ring}{0 1 {\tt *}
+   {\tt ^} {\tt +} {\tt -} {\tt =} characteristic charthRoot coefficient coefficients coerce index leadingCoefficient
+   leadingMonomial lookup map monomial monomial? monomials numberOfMonomials one? random recip reductum retract
+   retractIfCan size terms zero?}
+%
+\condata{MSET}{Multiset}{MultiSetAggregate}{{\tt \#} {\tt <} {\tt =} any? bag brace coerce construct convert copy count
+   dictionary difference duplicates empty empty? eq? every? extract! find insert! inspect intersect less? map map! member?
+   members more? multiset parts reduce remove remove! removeDuplicates removeDuplicates! select select! size? subset?
+   symmetricDifference union}
+%
+\condata{MPOLY}{MultivariatePolynomial}{PolynomialCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <} {\tt
+   =} D associates? characteristic charthRoot coefficient coefficients coerce conditionP content convert degree
+   differentiate discriminant eval exquo factor factorPolynomial factorSquareFreePolynomial gcd gcdPolynomial ground
+   ground? isExpt isPlus isTimes lcm leadingCoefficient leadingMonomial mainVariable map mapExponents max min
+   minimumDegree monicDivide monomial monomial? monomials multivariate numberOfMonomials one? prime? primitiveMonomials
+   primitivePart recip reducedSystem reductum resultant retract retractIfCan solveLinearPolynomialEquation squareFree
+   squareFreePart squareFreePolynomial totalDegree unit? unitCanonical unitNormal univariate variables zero?}
+%
+\condata{NDP}{NewDirectProduct}{DirectProductCategory}{0 1 {\tt \#} {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <}
+   {\tt =} D abs any? characteristic coerce copy count differentiate dimension directProduct dot elt empty empty? entries
+   entry? eq? every? fill! first index index? indices less? lookup map map! max maxIndex member? members min minIndex
+   more? negative? one? parts positive? qelt qsetelt! random recip reducedSystem retract retractIfCan setelt sign size
+   size? sup swap! unitVector zero?}
+%
+\condata{NDMP}{NewDistributedMultivariatePolynomial}{PolynomialCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /}
+   {\tt <} {\tt =} D associates? characteristic charthRoot coefficient coefficients coerce conditionP const content
+   convert degree differentiate discriminant eval exquo factor factorPolynomial factorSquareFreePolynomial gcd
+   gcdPolynomial ground ground? isExpt isPlus isTimes lcm leadingCoefficient leadingMonomial mainVariable map mapExponents
+   max min minimumDegree monicDivide monomial monomial? monomials multivariate numberOfMonomials one? prime?
+   primitiveMonomials primitivePart recip reducedSystem reductum reorder resultant retract retractIfCan
+   solveLinearPolynomialEquation squareFree squareFreePart squareFreePolynomial totalDegree unit? unitCanonical unitNormal
+   univariate variables zero?}
+%
+\condata{NONE}{None}{SetCategory}{{\tt =} coerce}
+%
+\condata{NNI}{NonNegativeInteger}{Monoid OrderedAbelianMonoidSup}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt <} {\tt =}
+   coerce divide exquo gcd max min one? quo recip rem sup zero?}
+%
+\condata{OCT}{Octonion}{FullyRetractableTo OctonionCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt <} {\tt =} abs
+   characteristic charthRoot coerce conjugate convert elt eval imagE imagI imagJ imagK imagi imagj imagk index inv lookup
+   map max min norm octon one? random rational rational? rationalIfCan real recip retract retractIfCan size zero?}
+%
+\condata{ARRAY1}{OneDimensionalArray}{OneDimensionalArrayAggregate}{{\tt \#} {\tt <} {\tt =} any? coerce concat
+   construct convert copy copyInto! count delete elt empty empty? entries entry? eq? every? fill! find first index?
+   indices insert less? map map! max maxIndex member? members merge min minIndex more? new oneDimensionalArray parts
+   position qelt qsetelt! reduce remove removeDuplicates reverse reverse! select setelt size? sort sort! sorted? swap!}
+%
+\condata{ONECOMP}{OnePointCompletion}{AbelianGroup FullyRetractableTo OrderedRing SetCategory}{0 1 {\tt *} {\tt ^}
+   {\tt +} {\tt -} {\tt <} {\tt =} abs characteristic coerce finite? infinite? infinity max min negative? one? positive?
+   rational rational? rationalIfCan recip retract retractIfCan sign zero?}
+%
+\condata{OP}{Operator}{Algebra CharacteristicNonZero CharacteristicZero Eltable RetractableTo Ring}{0 1 {\tt *} {\tt
+   ^} {\tt +} {\tt -} {\tt =} characteristic charthRoot coerce elt evaluate one? opeval recip retract retractIfCan zero?}
+%
+\condata{OMLO}{OppositeMonogenicLinearOperator}{DifferentialRing MonogenicLinearOperator}{0 1 {\tt *} {\tt ^} {\tt +}
+   {\tt -} {\tt =} D characteristic coefficient coerce degree differentiate leadingCoefficient minimumDegree monomial one?
+   op po recip reductum zero?}
+%
+\condata{ORDCOMP}{OrderedCompletion}{AbelianGroup FullyRetractableTo OrderedRing SetCategory}{0 1 {\tt *} {\tt ^} {\tt
+   +} {\tt -} {\tt <} {\tt =} abs characteristic coerce finite? infinite? max min minusInfinity negative? one?
+   plusInfinity positive? rational rational? rationalIfCan recip retract retractIfCan sign whatInfinity zero?}
+%
+\condata{ODP}{OrderedDirectProduct}{DirectProductCategory}{0 1 {\tt \#} {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt
+   <} {\tt =} D abs any? characteristic coerce copy count differentiate dimension directProduct dot elt empty empty?
+   entries entry? eq? every? fill! first index index? indices less? lookup map map! max maxIndex member? members min
+   minIndex more? negative? one? parts positive? qelt qsetelt! random recip reducedSystem retract retractIfCan setelt sign
+   size size? sup swap! unitVector zero?}
+%
+\condata{OVAR}{OrderedVariableList}{ConvertibleTo OrderedFinite}{{\tt <} {\tt =} coerce convert index lookup max min
+   random size variable}
+%
+\condata{ODPOL}{OrderlyDifferentialPolynomial}{DifferentialPolynomialCategory RetractableTo}{0 1 {\tt *} {\tt ^} {\tt
+   +} {\tt -} {\tt /} {\tt <} {\tt =} D associates? characteristic charthRoot coefficient coefficients coerce conditionP
+   content degree differentialVariables differentiate discriminant eval exquo factor factorPolynomial
+   factorSquareFreePolynomial gcd gcdPolynomial ground ground? initial isExpt isPlus isTimes isobaric? lcm leader
+   leadingCoefficient leadingMonomial mainVariable makeVariable map mapExponents max min minimumDegree monicDivide
+   monomial monomial? monomials multivariate numberOfMonomials one? order prime? primitiveMonomials primitivePart recip
+   reducedSystem reductum resultant retract retractIfCan separant solveLinearPolynomialEquation squareFree squareFreePart
+   squareFreePolynomial totalDegree unit? unitCanonical unitNormal univariate variables weight weights zero?}
+%
+\condata{ODVAR}{OrderlyDifferentialVariable}{DifferentialVariableCategory}{{\tt <} {\tt =} D coerce differentiate
+   makeVariable max min order retract retractIfCan variable weight}
+%
+\condata{ODR}{OrdinaryDifferentialRing}{Algebra DifferentialRing Field}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /}
+   {\tt =} D associates? characteristic coerce differentiate divide euclideanSize expressIdealMember exquo
+   extendedEuclidean factor gcd inv lcm multiEuclidean one? prime? principalIdeal quo recip rem sizeLess? squareFree
+   squareFreePart unit? unitCanonical unitNormal zero?}
+%
+\condata{OSI}{OrdSetInts}{OrderedSet}{{\tt <} {\tt =} coerce max min value}
+%
+\condata{OUTFORM}{OutputForm}{SetCategory}{{\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <} {\tt <=} {\tt =} {\tt >}
+   {\tt >=} D SEGMENT {\tt \^{}=} and assign blankSeparate box brace bracket center coerce commaSeparate differentiate div
+   dot elt empty exquo hconcat height hspace infix infix? int label left matrix message messagePrint not or outputForm
+   over overbar paren pile postfix prefix presub presuper prime print prod quo quote rarrow rem right root rspace scripts
+   semicolonSeparate slash string sub subHeight sum super superHeight supersub vconcat vspace width zag}
+%
+\condata{PADIC}{PAdicInteger}{PAdicIntegerCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt =} approximate
+   associates? characteristic coerce complete digits divide euclideanSize expressIdealMember exquo extend
+   extendedEuclidean gcd lcm moduloP modulus multiEuclidean one? order principalIdeal quo quotientByP recip rem sizeLess?
+   sqrt unit? unitCanonical unitNormal zero?}
+%
+\condata{PADICRC}{PAdicRationalConstructor}{QuotientFieldCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <}
+   {\tt =} D abs approximate associates? ceiling characteristic charthRoot coerce conditionP continuedFraction convert
+   denom denominator differentiate divide elt euclideanSize eval expressIdealMember exquo extendedEuclidean factor
+   factorPolynomial factorSquareFreePolynomial floor fractionPart gcd gcdPolynomial init inv lcm map max min
+   multiEuclidean negative? nextItem numer numerator one? patternMatch positive? prime? principalIdeal quo random recip
+   reducedSystem rem removeZeroes retract retractIfCan sign sizeLess? solveLinearPolynomialEquation squareFree
+   squareFreePart squareFreePolynomial unit? unitCanonical unitNormal wholePart zero?}
+%
+\condata{PADICRAT}{PAdicRational}{QuotientFieldCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =} D
+   approximate associates? characteristic coerce continuedFraction denom denominator differentiate divide euclideanSize
+   expressIdealMember exquo extendedEuclidean factor fractionPart gcd inv lcm map multiEuclidean numer numerator one?
+   prime? principalIdeal quo recip reducedSystem rem removeZeroes retract retractIfCan sizeLess? squareFree squareFreePart
+   unit? unitCanonical unitNormal wholePart zero?}
+%
+\condata{PALETTE}{Palette}{SetCategory}{{\tt =} bright coerce dark dim hue light pastel shade}
+%
+\condata{PARPCURV}{ParametricPlaneCurve}{}{coordinate curve}
+%
+\condata{PARSCURV}{ParametricSpaceCurve}{}{coordinate curve}
+%
+\condata{PARSURF}{ParametricSurface}{}{coordinate surface}
+%
+\condata{PFR}{PartialFraction}{Algebra Field}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =} associates?
+   characteristic coerce compactFraction divide euclideanSize expressIdealMember exquo extendedEuclidean factor firstDenom
+   firstNumer gcd inv lcm multiEuclidean nthFractionalTerm numberOfFractionalTerms one? padicFraction padicallyExpand
+   partialFraction prime? principalIdeal quo recip rem sizeLess? squareFree squareFreePart unit? unitCanonical unitNormal
+   wholePart zero?}
+%
+\condata{PRTITION}{Partition}{ConvertibleTo OrderedCancellationAbelianMonoid}{0 {\tt *} {\tt +} {\tt -} {\tt <} {\tt =}
+   coerce conjugate convert max min partition pdct powers zero?}
+%
+\condata{PATLRES}{PatternMatchListResult}{SetCategory}{{\tt =} atoms coerce failed failed? lists makeResult new}
+%
+\condata{PATRES}{PatternMatchResult}{SetCategory}{{\tt =} addMatch addMatchRestricted coerce construct destruct failed
+   failed? getMatch insertMatch new satisfy? union}
+%
+\condata{PATTERN}{Pattern}{RetractableTo SetCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt /} {\tt =} addBadValue coerce
+   constant? convert copy depth elt generic? getBadValues hasPredicate? hasTopPredicate? inR? isExpt isList isOp isPlus
+   isPower isQuotient isTimes multiple? optional? optpair patternVariable predicates quoted? resetBadValues retract
+   retractIfCan setPredicates setTopPredicate symbol? topPredicate variables withPredicates}
+%
+\condata{PENDTREE}{PendantTree}{BinaryRecursiveAggregate}{{\tt \#} {\tt =} any? children coerce copy count cyclic? elt
+   empty empty? eq? every? leaf? leaves left less? map map! member? members more? node? nodes parts ptree right
+   setchildren! setelt setleft! setright! setvalue! size? value}
+%
+\condata{PERMGRP}{PermutationGroup}{SetCategory}{{\tt <} {\tt <=} {\tt =} base coerce degree elt generators
+   initializeGroupForWordProblem member? movedPoints orbit orbits order permutationGroup random strongGenerators
+   wordInGenerators wordInStrongGenerators wordsForStrongGenerators}
+%
+\condata{PERM}{Permutation}{PermutationCategory}{1 {\tt *} {\tt ^} {\tt /} {\tt <} {\tt =} coerce coerceImages
+   coerceListOfPairs coercePreimagesImages commutator conjugate cycle cyclePartition cycles degree elt eval even?
+   fixedPoints inv listRepresentation max min movedPoints numberOfCycles odd? one? orbit order recip sign sort}
+%
+\condata{HACKPI}{Pi}{CharacteristicZero CoercibleTo ConvertibleTo Field RealConstant RetractableTo}{0 1 {\tt *} {\tt
+   ^} {\tt +} {\tt -} {\tt /} {\tt =} associates? characteristic coerce convert divide euclideanSize expressIdealMember
+   exquo extendedEuclidean factor gcd inv lcm multiEuclidean one? pi prime? principalIdeal quo recip rem retract
+   retractIfCan sizeLess? squareFree squareFreePart unit? unitCanonical unitNormal zero?}
+%
+\condata{ACPLOT}{PlaneAlgebraicCurvePlot}{PlottablePlaneCurveCategory}{coerce listBranches makeSketch refine xRange
+   yRange}
+%
+\condata{PLOT3D}{Plot3D}{PlottableSpaceCurveCategory}{adaptive3D? coerce debug3D listBranches maxPoints3D minPoints3D
+   numFunEvals3D plot pointPlot refine screenResolution3D setAdaptive3D setMaxPoints3D setMinPoints3D
+   setScreenResolution3D tRange tValues xRange yRange zRange zoom}
+%
+\condata{PLOT}{Plot}{PlottablePlaneCurveCategory}{adaptive? coerce debug listBranches maxPoints minPoints numFunEvals
+   parametric? plot plotPolar pointPlot refine screenResolution setAdaptive setMaxPoints setMinPoints setScreenResolution
+   tRange xRange yRange zoom}
+%
+\condata{POINT}{Point}{PointCategory}{{\tt \#} {\tt *} {\tt +} {\tt -} {\tt <} {\tt =} any? coerce concat construct
+   convert copy copyInto! count cross delete dimension dot elt empty empty? entries entry? eq? every? extend fill! find
+   first index? indices insert length less? map map! max maxIndex member? members merge min minIndex more? new parts point
+   position qelt qsetelt! reduce remove removeDuplicates reverse reverse! select setelt size? sort sort! sorted? swap!
+   zero}
+%
+\condata{IDEAL}{PolynomialIdeals}{SetCategory}{{\tt *} {\tt ^} {\tt +} {\tt =} backOldPos coerce contract dimension
+   element? generalPosition generators groebner groebner? groebnerIdeal ideal in? inRadical? intersect leadingIdeal
+   quotient relationsIdeal saturate zeroDim?}
+%
+\condata{PR}{PolynomialRing}{FiniteAbelianMonoidRing}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =} associates?
+   characteristic charthRoot coefficient coefficients coerce content degree exquo ground ground? leadingCoefficient
+   leadingMonomial map mapExponents minimumDegree monomial monomial? numberOfMonomials one? primitivePart recip reductum
+   retract retractIfCan unit? unitCanonical unitNormal zero?}
+%
+\condata{POLY}{Polynomial}{PolynomialCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <} {\tt =} D
+   associates? characteristic charthRoot coefficient coefficients coerce conditionP content convert degree differentiate
+   discriminant eval exquo factor factorPolynomial factorSquareFreePolynomial gcd gcdPolynomial ground ground? integrate
+   isExpt isPlus isTimes lcm leadingCoefficient leadingMonomial mainVariable map mapExponents max min minimumDegree
+   monicDivide monomial monomial? monomials multivariate numberOfMonomials one? patternMatch prime? primitiveMonomials
+   primitivePart recip reducedSystem reductum resultant retract retractIfCan solveLinearPolynomialEquation squareFree
+   squareFreePart squareFreePolynomial totalDegree unit? unitCanonical unitNormal univariate variables zero?}
+%
+\condata{PI}{PositiveInteger}{AbelianSemiGroup Monoid OrderedSet}{1 {\tt *} {\tt ^} {\tt +} {\tt <} {\tt =} coerce gcd
+   max min one? recip}
+%
+\condata{PF}{PrimeField}{ConvertibleTo FiniteAlgebraicExtensionField FiniteFieldCategory}{0 1 {\tt *} {\tt ^} {\tt +}
+   {\tt -} {\tt /} {\tt =} Frobenius algebraic? associates? basis characteristic charthRoot coerce conditionP convert
+   coordinates createNormalElement createPrimitiveElement definingPolynomial degree dimension discreteLog divide
+   euclideanSize expressIdealMember exquo extendedEuclidean extensionDegree factor factorsOfCyclicGroupSize gcd generator
+   inGroundField? index init inv lcm lookup minimalPolynomial multiEuclidean nextItem norm normal? normalElement one?
+   order prime? primeFrobenius primitive? primitiveElement principalIdeal quo random recip rem representationType
+   represents retract retractIfCan size sizeLess? squareFree squareFreePart tableForDiscreteLogarithm trace
+   transcendenceDegree transcendent? unit? unitCanonical unitNormal zero?}
+%
+\condata{PRIMARR}{PrimitiveArray}{OneDimensionalArrayAggregate}{{\tt \#} {\tt <} {\tt =} any? coerce concat construct
+   convert copy copyInto! count delete elt empty empty? entries entry? eq? every? fill! find first index? indices insert
+   less? map map! max maxIndex member? members merge min minIndex more? new parts position qelt qsetelt! reduce remove
+   removeDuplicates reverse reverse! select setelt size? sort sort! sorted? swap!}
+%
+\condata{PRODUCT}{Product}{AbelianGroup AbelianMonoid CancellationAbelianMonoid Finite Group Monoid
+   OrderedAbelianMonoidSup OrderedSet SetCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <} {\tt =} coerce
+   commutator conjugate index inv lookup makeprod max min one? random recip selectfirst selectsecond size sup zero?}
+%
+\condata{QFORM}{QuadraticForm}{AbelianGroup}{0 {\tt *} {\tt +} {\tt -} {\tt =} coerce elt matrix quadraticForm zero?}
+%
+\condata{QALGSET}{QuasiAlgebraicSet}{CoercibleTo SetCategory}{{\tt =} coerce definingEquations definingInequation
+   empty? idealSimplify quasiAlgebraicSet setStatus simplify}
+%
+\condata{QUAT}{Quaternion}{QuaternionCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt <} {\tt =} D abs
+   characteristic charthRoot coerce conjugate convert differentiate elt eval imagI imagJ imagK inv map max min norm one?
+   quatern rational rational? rationalIfCan real recip reducedSystem retract retractIfCan zero?}
+%
+\condata{QEQUAT}{QueryEquation}{}{equation value variable}
+%
+\condata{QUEUE}{Queue}{QueueAggregate}{{\tt \#} {\tt =} any? back bag coerce copy count dequeue! empty empty? enqueue!
+   eq? every? extract! front insert! inspect length less? map map! member? members more? parts queue rotate! size?}
+%
+\condata{RADFF}{RadicalFunctionField}{FunctionFieldCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =} D
+   absolutelyIrreducible? associates? basis branchPoint? branchPointAtInfinity? characteristic characteristicPolynomial
+   charthRoot coerce complementaryBasis convert coordinates definingPolynomial derivationCoordinates differentiate
+   discriminant divide elt euclideanSize expressIdealMember exquo extendedEuclidean factor gcd generator genus integral?
+   integralAtInfinity? integralBasis integralBasisAtInfinity integralCoordinates integralDerivationMatrix integralMatrix
+   integralMatrixAtInfinity integralRepresents inv inverseIntegralMatrix inverseIntegralMatrixAtInfinity lcm lift
+   minimalPolynomial multiEuclidean nonSingularModel norm normalizeAtInfinity numberOfComponents one? prime? primitivePart
+   principalIdeal quo ramified? ramifiedAtInfinity? rank rationalPoint? rationalPoints recip reduce reduceBasisAtInfinity
+   reducedSystem regularRepresentation rem represents retract retractIfCan singular? singularAtInfinity? sizeLess?
+   squareFree squareFreePart trace traceMatrix unit? unitCanonical unitNormal yCoordinates zero?}
+%
+\condata{RADIX}{RadixExpansion}{QuotientFieldCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <} {\tt =} D
+   abs associates? ceiling characteristic coerce convert cycleRagits denom denominator differentiate divide euclideanSize
+   expressIdealMember exquo extendedEuclidean factor floor fractRadix fractRagits fractionPart gcd init inv lcm map max
+   min multiEuclidean negative? nextItem numer numerator one? patternMatch positive? prefixRagits prime? principalIdeal
+   quo random recip reducedSystem rem retract retractIfCan sign sizeLess? squareFree squareFreePart unit? unitCanonical
+   unitNormal wholePart wholeRadix wholeRagits zero?}
+%
+\condata{RMATRIX}{RectangularMatrix}{CoercibleTo RectangularMatrixCategory VectorSpace}{0 {\tt \#} {\tt *} {\tt +} {\tt
+   -} {\tt /} {\tt =} antisymmetric? any? coerce column copy count diagonal? dimension elt empty empty? eq? every? exquo
+   less? listOfLists map map! matrix maxColIndex maxRowIndex member? members minColIndex minRowIndex more? ncols nrows
+   nullSpace nullity parts qelt rank rectangularMatrix row rowEchelon size? square? symmetric? zero?}
+%
+\condata{REF}{Reference}{Object SetCategory}{{\tt =} coerce deref elt ref setelt setref}
+%
+\condata{RULE}{RewriteRule}{Eltable RetractableTo SetCategory}{{\tt =} coerce elt lhs pattern quotedOperators retract
+   retractIfCan rhs rule suchThat}
+%
+\condata{ROMAN}{RomanNumeral}{IntegerNumberSystem}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt <} {\tt =} D abs addmod
+   associates? base binomial bit? characteristic coerce convert copy dec differentiate divide euclideanSize even?
+   expressIdealMember exquo extendedEuclidean factor factorial gcd hash inc init invmod lcm length mask max min mulmod
+   multiEuclidean negative? nextItem odd? one? patternMatch permutation positive? positiveRemainder powmod prime?
+   principalIdeal quo random rational rational? rationalIfCan recip reducedSystem rem retract retractIfCan roman shift
+   sign sizeLess? squareFree squareFreePart submod symmetricRemainder unit? unitCanonical unitNormal zero?}
+%
+\condata{RULECOLD}{RuleCalled}{SetCategory}{{\tt =} coerce name}
+%
+\condata{RULESET}{Ruleset}{Eltable SetCategory}{{\tt =} coerce elt rules ruleset}
+%
+\condata{FORMULA1}{ScriptFormulaFormat1}{Object}{coerce}
+%
+\condata{FORMULA}{ScriptFormulaFormat}{SetCategory}{{\tt =} coerce convert display epilogue formula new prologue
+   setEpilogue! setFormula! setPrologue!}
+%
+\condata{SEGBIND}{SegmentBinding}{SetCategory}{{\tt =} coerce equation segment variable}
+%
+\condata{SEG}{Segment}{SegmentCategory SegmentExpansionCategory}{{\tt =} BY SEGMENT coerce convert expand hi high incr
+   lo low map segment}
+%
+\condata{SCFRAC}{SemiCancelledFraction}{ConvertibleTo QuotientFieldCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt
+   /} {\tt <} {\tt =} D abs associates? ceiling characteristic charthRoot coerce conditionP convert denom denominator
+   differentiate divide elt euclideanSize eval expressIdealMember exquo extendedEuclidean factor factorPolynomial
+   factorSquareFreePolynomial floor fractionPart gcd gcdPolynomial init inv lcm map max min multiEuclidean negative?
+   nextItem normalize numer numerator one? patternMatch positive? prime? principalIdeal quo random recip reducedSystem rem
+   retract retractIfCan sign sizeLess? solveLinearPolynomialEquation squareFree squareFreePart squareFreePolynomial unit?
+   unitCanonical unitNormal wholePart zero?}
+%
+\condata{SDPOL}{SequentialDifferentialPolynomial}{DifferentialPolynomialCategory RetractableTo}{0 1 {\tt *} {\tt ^}
+   {\tt +} {\tt -} {\tt /} {\tt <} {\tt =} D associates? characteristic charthRoot coefficient coefficients coerce
+   conditionP content degree differentialVariables differentiate discriminant eval exquo factor factorPolynomial
+   factorSquareFreePolynomial gcd gcdPolynomial ground ground? initial isExpt isPlus isTimes isobaric? lcm leader
+   leadingCoefficient leadingMonomial mainVariable makeVariable map mapExponents max min minimumDegree monicDivide
+   monomial monomial? monomials multivariate numberOfMonomials one? order prime? primitiveMonomials primitivePart recip
+   reducedSystem reductum resultant retract retractIfCan separant solveLinearPolynomialEquation squareFree squareFreePart
+   squareFreePolynomial totalDegree unit? unitCanonical unitNormal univariate variables weight weights zero?}
+%
+\condata{SDVAR}{SequentialDifferentialVariable}{DifferentialVariableCategory}{{\tt <} {\tt =} D coerce differentiate
+   makeVariable max min order retract retractIfCan variable weight}
+%
+\condata{SET}{Set}{FiniteSetAggregate}{{\tt \#} {\tt <} {\tt =} any? bag brace cardinality coerce complement construct
+   convert copy count dictionary difference empty empty? eq? every? extract! find index insert! inspect intersect less?
+   lookup map map! max member? members min more? parts random reduce remove remove! removeDuplicates select select! size
+   size? subset? symmetricDifference union universe}
+%
+\condata{SEXOF}{SExpressionOf}{SExpressionCategory}{{\tt \#} {\tt =} atom? car cdr coerce convert destruct elt eq expr
+   float float? integer integer? list? null? pair? string string? symbol symbol? uequal}
+%
+\condata{SEX}{SExpression}{SExpressionCategory}{{\tt \#} {\tt =} atom? car cdr coerce convert destruct elt eq expr
+   float float? integer integer? list? null? pair? string string? symbol symbol? uequal}
+%
+\condata{SAE}{SimpleAlgebraicExtension}{MonogenicAlgebra}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =} D
+   associates? basis characteristic characteristicPolynomial charthRoot coerce conditionP convert coordinates
+   createPrimitiveElement definingPolynomial derivationCoordinates differentiate discreteLog discriminant divide
+   euclideanSize expressIdealMember exquo extendedEuclidean factor factorsOfCyclicGroupSize gcd generator index init inv
+   lcm lift lookup minimalPolynomial multiEuclidean nextItem norm one? order prime? primeFrobenius primitive?
+   primitiveElement principalIdeal quo random rank recip reduce reducedSystem regularRepresentation rem representationType
+   represents retract retractIfCan size sizeLess? squareFree squareFreePart tableForDiscreteLogarithm trace traceMatrix
+   unit? unitCanonical unitNormal zero?}
+%
+\condata{SAOS}{SingletonAsOrderedSet}{OrderedSet}{{\tt <} {\tt =} coerce create max min}
+%
+\condata{SINT}{SingleInteger}{IntegerNumberSystem}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt <} {\tt =} And D Not Or {\tt
+   \^{}} abs addmod and associates? base binomial bit? characteristic coerce convert copy dec differentiate divide
+   euclideanSize even? expressIdealMember exquo extendedEuclidean factor factorial gcd hash inc init invmod lcm length
+   mask max min mulmod multiEuclidean negative? nextItem not odd? one? or patternMatch permutation positive?
+   positiveRemainder powmod prime? principalIdeal quo random rational rational? rationalIfCan recip reducedSystem rem
+   retract retractIfCan shift sign sizeLess? squareFree squareFreePart submod symmetricRemainder unit? unitCanonical
+   unitNormal xor zero?}
+%
+\condata{SMP}{SparseMultivariatePolynomial}{PolynomialCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <}
+   {\tt =} D associates? characteristic charthRoot coefficient coefficients coerce conditionP content convert degree
+   differentiate discriminant eval exquo factor factorPolynomial factorSquareFreePolynomial gcd gcdPolynomial ground
+   ground? isExpt isPlus isTimes lcm leadingCoefficient leadingMonomial mainVariable map mapExponents max min
+   minimumDegree monicDivide monomial monomial? monomials multivariate numberOfMonomials one? patternMatch prime?
+   primitiveMonomials primitivePart recip reducedSystem reductum resultant retract retractIfCan
+   solveLinearPolynomialEquation squareFree squareFreePart squareFreePolynomial totalDegree unit? unitCanonical unitNormal
+   univariate variables zero?}
+%
+\condata{SMTS}{SparseMultivariateTaylorSeries}{MultivariateTaylorSeriesCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -}
+   {\tt /} {\tt =} D acos acosh acot acoth acsc acsch asec asech asin asinh associates? atan atanh characteristic
+   charthRoot coefficient coerce complete cos cosh cot coth csc csch csubst degree differentiate eval exp exquo extend
+   fintegrate integrate leadingCoefficient leadingMonomial log map monomial monomial? nthRoot one? order pi pole?
+   polynomial recip reductum sec sech sin sinh sqrt tan tanh unit? unitCanonical unitNormal variables zero?}
+%
+\condata{STBL}{SparseTable}{TableAggregate}{{\tt \#} {\tt =} any? bag coerce construct copy count dictionary elt empty
+   empty? entries entry? eq? every? extract! fill! find first index? indices insert! inspect key? keys less? map map!
+   maxIndex member? members minIndex more? parts qelt qsetelt! reduce remove remove! removeDuplicates search select
+   select! setelt size? swap! table}
+%
+\condata{SUP}{SparseUnivariatePolynomial}{UnivariatePolynomialCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /}
+   {\tt <} {\tt =} D associates? characteristic charthRoot coefficient coefficients coerce composite conditionP content
+   degree differentiate discriminant divide divideExponents elt euclideanSize eval expressIdealMember exquo
+   extendedEuclidean factor factorPolynomial factorSquareFreePolynomial gcd gcdPolynomial ground ground? init integrate
+   isExpt isPlus isTimes lcm leadingCoefficient leadingMonomial mainVariable makeSUP map mapExponents max min
+   minimumDegree monicDivide monomial monomial? monomials multiEuclidean multiplyExponents multivariate nextItem
+   numberOfMonomials one? order outputForm prime? primitiveMonomials primitivePart principalIdeal pseudoDivide
+   pseudoQuotient pseudoRemainder quo recip reducedSystem reductum rem resultant retract retractIfCan separate sizeLess?
+   solveLinearPolynomialEquation squareFree squareFreePart squareFreePolynomial subResultantGcd totalDegree unit?
+   unitCanonical unitNormal univariate unmakeSUP variables vectorise zero?}
+%
+\condata{SUTS}{SparseUnivariateTaylorSeries}{UnivariateTaylorSeriesCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt
+   /} {\tt =} D acos acosh acot acoth acsc acsch approximate asec asech asin asinh associates? atan atanh center
+   characteristic charthRoot coefficient coefficients coerce complete cos cosh cot coth csc csch degree differentiate elt
+   eval exp exquo extend integrate leadingCoefficient leadingMonomial log map monomial monomial? multiplyCoefficients
+   multiplyExponents nthRoot one? order pi pole? polynomial quoByVar recip reductum sec sech series sin sinh sqrt tan tanh
+   terms truncate unit? unitCanonical unitNormal variable variables zero?}
+%
+\condata{SQMATRIX}{SquareMatrix}{CoercibleTo SquareMatrixCategory}{0 1 {\tt \#} {\tt *} {\tt ^} {\tt +} {\tt -} {\tt
+   /} {\tt =} D antisymmetric? any? characteristic coerce column copy count determinant diagonal diagonal? diagonalMatrix
+   diagonalProduct differentiate elt empty empty? eq? every? exquo inverse less? listOfLists map map! matrix maxColIndex
+   maxRowIndex member? members minColIndex minRowIndex minordet more? ncols nrows nullSpace nullity one? parts qelt rank
+   recip reducedSystem retract retractIfCan row rowEchelon scalarMatrix size? square? squareMatrix symmetric? trace
+   transpose zero?}
+%
+\condata{STACK}{Stack}{StackAggregate}{{\tt \#} {\tt =} any? bag coerce copy count depth empty empty? eq? every?
+   extract! insert! inspect less? map map! member? members more? parts pop! push! size? stack top}
+%
+\condata{STREAM}{Stream}{LazyStreamAggregate}{{\tt \#} {\tt =} any? child? children coerce complete concat concat! cons
+   construct convert copy count cycleEntry cycleLength cycleSplit! cycleTail cyclic? delay delete distance elt empty
+   empty? entries entry? eq? every? explicitEntries? explicitlyEmpty? explicitlyFinite? extend fill! filterUntil
+   filterWhile find findCycle first frst generate index? indices insert last lazy? lazyEvaluate leaf? less? map map!
+   maxIndex member? members minIndex more? new node? nodes numberOfComputedEntries output parts possiblyInfinite? qelt
+   qsetelt! reduce remove removeDuplicates repeating repeating? rest rst second select setchildren! setelt setfirst!
+   setlast! setrest! setvalue! showAll? showAllElements size? split! swap! tail third value}
+%
+\condata{STRTBL}{StringTable}{TableAggregate}{{\tt \#} {\tt =} any? bag coerce construct copy count dictionary elt
+   empty empty? entries entry? eq? every? extract! fill! find first index? indices insert! inspect key? keys less? map
+   map! maxIndex member? members minIndex more? parts qelt qsetelt! reduce remove remove! removeDuplicates search select
+   select! setelt size? swap! table}
+%
+\condata{STRING}{String}{StringCategory}{{\tt \#} {\tt <} {\tt =} any? coerce concat construct copy copyInto! count
+   delete elt empty empty? entries entry? eq? every? fill! find first index? indices insert leftTrim less? lowerCase
+   lowerCase! map map! match? max maxIndex member? members merge min minIndex more? new parts position prefix? qelt
+   qsetelt! reduce remove removeDuplicates replace reverse reverse! rightTrim select setelt size? sort sort! sorted? split
+   string substring? suffix? swap! trim upperCase upperCase!}
+%
+\condata{COMPPROP}{SubSpaceComponentProperty}{SetCategory}{{\tt =} close closed? coerce copy new solid solid?}
+%
+\condata{SUBSPACE}{SubSpace}{SetCategory}{{\tt =} addPoint addPoint2 addPointLast birth child children closeComponent
+   coerce deepCopy defineProperty extractClosed extractIndex extractPoint extractProperty internal? leaf? level merge
+   modifyPoint new numberOfChildren parent pointData root? separate shallowCopy subspace traverse}
+%
+\condata{SUCH}{SuchThat}{SetCategory}{{\tt =} coerce construct lhs rhs}
+%
+\condata{SYMBOL}{Symbol}{ConvertibleTo OrderedSet PatternMatchable}{{\tt <} {\tt =} argscript coerce convert elt list
+   max min name new patternMatch resetNew script scripted? scripts string subscript superscript}
+%
+\condata{SYMPOLY}{SymmetricPolynomial}{FiniteAbelianMonoidRing}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =}
+   associates? characteristic charthRoot coefficient coefficients coerce content degree exquo ground ground?
+   leadingCoefficient leadingMonomial map mapExponents minimumDegree monomial monomial? numberOfMonomials one?
+   primitivePart recip reductum retract retractIfCan unit? unitCanonical unitNormal zero?}
+%
+\condata{TABLEAU}{Tableau}{Object}{coerce listOfLists tableau}
+%
+\condata{TABLE}{Table}{TableAggregate}{{\tt \#} {\tt =} any? bag coerce construct copy count dictionary elt empty
+   empty? entries entry? eq? every? extract! fill! find first index? indices insert! inspect key? keys less? map map!
+   maxIndex member? members minIndex more? parts qelt qsetelt! reduce remove remove! removeDuplicates search select
+   select! setelt size? swap! table}
+%
+\condata{TS}{TaylorSeries}{MultivariateTaylorSeriesCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt =} D
+   acos acosh acot acoth acsc acsch asec asech asin asinh associates? atan atanh characteristic charthRoot coefficient
+   coerce complete cos cosh cot coth csc csch degree differentiate eval exp exquo extend fintegrate integrate
+   leadingCoefficient leadingMonomial log map monomial monomial? nthRoot one? order pi pole? polynomial recip reductum sec
+   sech sin sinh sqrt tan tanh unit? unitCanonical unitNormal variables zero?}
+%
+\condata{TEX1}{TexFormat1}{Object}{coerce}
+%
+\condata{TEX}{TexFormat}{SetCategory}{{\tt =} coerce convert display epilogue new prologue setEpilogue! setPrologue!
+   setTex! tex}
+%
+\condata{TEXTFILE}{TextFile}{FileCategory}{{\tt =} close! coerce endOfFile? iomode name open read! readIfCan! readLine!
+   readLineIfCan! reopen! write! writeLine!}
+%
+\condata{VIEW3D}{ThreeDimensionalViewport}{SetCategory}{{\tt =} axes clipSurface close coerce colorDef controlPanel
+   diagonals dimensions drawStyle eyeDistance hitherPlane intensity key lighting makeViewport3D modifyPointData move
+   options outlineRender perspective reset resize rotate showClipRegion showRegion subspace title translate
+   viewDeltaXDefault viewDeltaYDefault viewPhiDefault viewThetaDefault viewZoomDefault viewpoint viewport3D write zoom}
+%
+\condata{SPACE3}{ThreeSpace}{ThreeSpaceCategory}{{\tt =} check closedCurve closedCurve? coerce components composite
+   composites copy create3Space curve curve? enterPointData lllip lllp llprop lp lprop merge mesh mesh? modifyPointData
+   numberOfComponents numberOfComposites objects point point? polygon polygon? subspace}
+%
+\condata{TREE}{Tree}{RecursiveAggregate}{{\tt \#} {\tt =} any? children coerce copy count cyclic? elt empty empty? eq?
+   every? leaf? leaves less? map map! member? members more? node? nodes parts setchildren! setelt setvalue! size? tree
+   value}
+%
+\condata{TUBE}{TubePlot}{}{closed? getCurve listLoops open? setClosed tube}
+%
+\condata{TUPLE}{Tuple}{CoercibleTo SetCategory}{{\tt =} coerce length select}
+%
+\condata{ARRAY2}{TwoDimensionalArray}{TwoDimensionalArrayCategory}{{\tt \#} {\tt =} any? coerce column copy count elt
+   empty empty? eq? every? fill! less? map map! maxColIndex maxRowIndex member? members minColIndex minRowIndex more?
+   ncols new nrows parts qelt qsetelt! row setColumn! setRow! setelt size?}
+%
+\condata{VIEW2D}{TwoDimensionalViewport}{SetCategory}{{\tt =} axes close coerce connect controlPanel dimensions
+   getGraph graphState graphStates graphs key makeViewport2D move options points putGraph region reset resize scale show
+   title translate units viewport2D write}
+%
+\condata{ULSCONS}{UnivariateLaurentSeriesConstructor}{UnivariateLaurentSeriesConstructorCategory}{0 1 {\tt *} {\tt ^}
+   {\tt +} {\tt -} {\tt /} {\tt <} {\tt =} D abs acos acosh acot acoth acsc acsch approximate asec asech asin asinh
+   associates? atan atanh ceiling center characteristic charthRoot coefficient coerce complete conditionP convert cos cosh
+   cot coth csc csch degree denom denominator differentiate divide elt euclideanSize eval exp expressIdealMember exquo
+   extend extendedEuclidean factor factorPolynomial factorSquareFreePolynomial floor fractionPart gcd gcdPolynomial init
+   integrate inv laurent lcm leadingCoefficient leadingMonomial log map max min monomial monomial? multiEuclidean
+   multiplyCoefficients multiplyExponents negative? nextItem nthRoot numer numerator one? order patternMatch pi pole?
+   positive? prime? principalIdeal quo random rationalFunction recip reducedSystem reductum rem removeZeroes retract
+   retractIfCan sec sech series sign sin sinh sizeLess? solveLinearPolynomialEquation sqrt squareFree squareFreePart
+   squareFreePolynomial tan tanh taylor taylorIfCan taylorRep terms truncate unit? unitCanonical unitNormal variable
+   variables wholePart zero?}
+%
+\condata{ULS}{UnivariateLaurentSeries}{UnivariateLaurentSeriesConstructorCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -}
+   {\tt /} {\tt =} D acos acosh acot acoth acsc acsch approximate asec asech asin asinh associates? atan atanh center
+   characteristic charthRoot coefficient coerce complete cos cosh cot coth csc csch degree denom denominator differentiate
+   divide elt euclideanSize eval exp expressIdealMember exquo extend extendedEuclidean factor gcd integrate inv laurent
+   lcm leadingCoefficient leadingMonomial log map monomial monomial? multiEuclidean multiplyCoefficients multiplyExponents
+   nthRoot numer numerator one? order pi pole? prime? principalIdeal quo rationalFunction recip reducedSystem reductum rem
+   removeZeroes retract retractIfCan sec sech series sin sinh sizeLess? sqrt squareFree squareFreePart tan tanh taylor
+   taylorIfCan taylorRep terms truncate unit? unitCanonical unitNormal variable variables zero?}
+%
+\condata{UP}{UnivariatePolynomial}{UnivariatePolynomialCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt <}
+   {\tt =} D associates? characteristic charthRoot coefficient coefficients coerce composite conditionP content degree
+   differentiate discriminant divide divideExponents elt euclideanSize eval expressIdealMember exquo extendedEuclidean
+   factor factorPolynomial factorSquareFreePolynomial gcd gcdPolynomial ground ground? init integrate isExpt isPlus
+   isTimes lcm leadingCoefficient leadingMonomial mainVariable makeSUP map mapExponents max min minimumDegree monicDivide
+   monomial monomial? monomials multiEuclidean multiplyExponents multivariate nextItem numberOfMonomials one? order prime?
+   primitiveMonomials primitivePart principalIdeal pseudoDivide pseudoQuotient pseudoRemainder quo recip reducedSystem
+   reductum rem resultant retract retractIfCan separate sizeLess? solveLinearPolynomialEquation squareFree squareFreePart
+   squareFreePolynomial subResultantGcd totalDegree unit? unitCanonical unitNormal univariate unmakeSUP variables
+   vectorise zero?}
+%
+\condata{UPXSCONS}{UnivariatePuiseuxSeriesConstructor}{UnivariatePuiseuxSeriesConstructorCategory}{0 1 {\tt *} {\tt ^}
+   {\tt +} {\tt -} {\tt /} {\tt =} D acos acosh acot acoth acsc acsch approximate asec asech asin asinh associates? atan
+   atanh center characteristic charthRoot coefficient coerce complete cos cosh cot coth csc csch degree differentiate
+   divide elt euclideanSize eval exp expressIdealMember exquo extend extendedEuclidean factor gcd integrate inv laurent
+   laurentIfCan laurentRep lcm leadingCoefficient leadingMonomial log map monomial monomial? multiEuclidean
+   multiplyExponents nthRoot one? order pi pole? prime? principalIdeal puiseux quo rationalPower recip reductum rem
+   retract retractIfCan sec sech series sin sinh sizeLess? sqrt squareFree squareFreePart tan tanh terms truncate unit?
+   unitCanonical unitNormal variable variables zero?}
+%
+\condata{UPXS}{UnivariatePuiseuxSeries}{UnivariatePuiseuxSeriesConstructorCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt
+   -} {\tt /} {\tt =} D acos acosh acot acoth acsc acsch approximate asec asech asin asinh associates? atan atanh center
+   characteristic charthRoot coefficient coerce complete cos cosh cot coth csc csch degree differentiate divide elt
+   euclideanSize eval exp expressIdealMember exquo extend extendedEuclidean factor gcd integrate inv laurent laurentIfCan
+   laurentRep lcm leadingCoefficient leadingMonomial log map monomial monomial? multiEuclidean multiplyExponents nthRoot
+   one? order pi pole? prime? principalIdeal puiseux quo rationalPower recip reductum rem retract retractIfCan sec sech
+   series sin sinh sizeLess? sqrt squareFree squareFreePart tan tanh terms truncate unit? unitCanonical unitNormal
+   variable variables zero?}
+%
+\condata{UTS}{UnivariateTaylorSeries}{UnivariateTaylorSeriesCategory}{0 1 {\tt *} {\tt ^} {\tt +} {\tt -} {\tt /} {\tt
+   =} D acos acosh acot acoth acsc acsch approximate asec asech asin asinh associates? atan atanh center characteristic
+   charthRoot coefficient coefficients coerce complete cos cosh cot coth csc csch degree differentiate elt eval
+   evenlambert exp exquo extend generalLambert integrate invmultisect lagrange lambert leadingCoefficient leadingMonomial
+   log map monomial monomial? multiplyCoefficients multiplyExponents multisect nthRoot oddlambert one? order pi pole?
+   polynomial quoByVar recip reductum revert sec sech series sin sinh sqrt tan tanh terms truncate unit? unitCanonical
+   unitNormal univariatePolynomial variable variables zero?}
+%
+\condata{UNISEG}{UniversalSegment}{SegmentCategory SegmentExpansionCategory}{{\tt =} BY SEGMENT coerce convert expand
+   hasHi hi high incr lo low map segment}
+%
+\condata{VARIABLE}{Variable}{CoercibleTo SetCategory}{{\tt =} coerce variable}
+%
+\condata{VECTOR}{Vector}{VectorCategory}{{\tt \#} {\tt *} {\tt +} {\tt -} {\tt <} {\tt =} any? coerce concat construct
+   convert copy copyInto! count delete dot elt empty empty? entries entry? eq? every? fill! find first index? indices
+   insert less? map map! max maxIndex member? members merge min minIndex more? new parts position qelt qsetelt! reduce
+   remove removeDuplicates reverse reverse! select setelt size? sort sort! sorted? swap! vector zero}
+%
+\condata{VOID}{Void}{}{coerce void}
+%
+%
+% ----------------------------------------------------------------------
+\end{constructorListing}
+% ----------------------------------------------------------------------
