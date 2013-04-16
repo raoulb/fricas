@@ -167,3 +167,483 @@ $(fricas_target_bindir)/hypertex$(EXEEXT): $(hypertex_objects) $(hypertex_DEPEND
 ${OUTLIB}/spadbuf$(EXEEXT): $(spadbuf_objects) $(spadbuf_DEPENDENCIES)
 	${CC} $(spadbuf_objects) -o $@ $(spadbuf_LDADD) \
 		$(FRICAS_X11_LDFLAGS) -lm
+
+
+#------------------------------------------------------------------
+#---
+#--- FriCAS
+#--- Copyright (C) 2013,  Ralf Hemmecke <ralf@hemmecke.org>
+#---
+#------------------------------------------------------------------
+
+# Let's start with a view variables that must be set before starting 'make'.
+
+# We only have one Makefile and avoid recursing into subdirectories.
+# So it can be assumed that all commands are run from THISDIR as the
+# working directory.
+TARGETDIR = $(shell pwd)
+
+# This is the directory of the sources.
+srcdir = $(shell pwd)
+# The actual sources are in the subdirectory src.
+SRC = ${srcdir}/src
+
+# What is the location of the actual fricas install. We assume that
+# under ${FRICAS}/bin all the binaries for fricas are found, like
+# AXIOMsys, htadd and sman.
+FRICAS=${HOME}/scratch/test-fricas/usr/local/lib/fricas/target/x86_64-unknown-linux
+
+# We need access to the algebra source in order to generate a list of abbreviations (filenames and corresponding constructor name.
+ALGEBRASOURCES=${HOME}/g/fricas/src/algebra
+
+###################################################################
+# No need to set anything below this point
+###################################################################
+
+# A few programs that are needed to generate the pht and ht files and
+# add them to the ht.db database.
+# We silently assume 'sed' to be available.
+AWK=awk
+FRICASEXE=$(fricas_target_bindir)/bin/fricas
+HTADD=$(fricas_target_bindir)/htadd
+HTEX2HT=${AWK} -f ${srcdir}/ht.awk
+HTEX2SECMENU=${AWK} -f ${srcdir}/secmenu.awk
+ADD2HTDB=${HTADD} -f ${httargetdir}
+
+###################################################################
+htexsrcdir=${SRC}/doc/htex
+htsrcdir=${SRC}/doc/hypertex/pages
+inputsrcdir=${SRC}/input
+# this is where the hypertex documentation files are
+HYPER=$(fricas_target_datadir)/hypertex
+httargetdir=${HYPER}/pages
+
+###################################################################
+# The current chapters. Except for 09, there exists a .htex file for
+# each chapter. ug09.tex is generated and is not needed for HyperDoc.
+# The lists of categories, domains, packages, and operations in
+# chapters 17-20 is probably out of date. It should be generated from
+# a call to FriCAS.
+#
+# All the examples sections are available in .htex format.
+#
+# Unfortunately, the chapter filenames must match the regular
+# expression "ug[0-9][0-9]", since these number will be extracted in
+# some .awk scripts. Also, currently, the generated examples chapter
+# must be 09.
+
+# 00   What's New in \Language{} Version 2.2
+# 01   An Overview of \Language{}
+# 02   Using Types and Modes
+# 03   Using \HyperName{}
+# 04   Input Files and Output Styles
+# 05   Introduction to the \Language{} Interactive Language
+# 06   User-Defined Functions, Macros and Rules
+# 07   Graphics
+# 08   Advanced Problem Solving
+# 09 G Some Examples of Domains and Packages
+# 10   Interactive Programming
+# 11   Packages
+# 12   Categories
+# 13   Domains
+# 14   Browse
+# 15   What's New in AXIOM Version 2.x
+# 16   \Language{} System Commands
+# 17 g Categories (List)
+# 18 g Domains (List)
+# 19 g Packages (List)
+# 20 g Operations (List)
+# 21   Programs for FriCAS Images
+# 22   Glossary
+
+# The stuff that should be visible in HyperDoc
+CHAPTERS=00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22
+EXAMPLES_CHAPTER = 09
+EXAMPLES_CHAPTER_NO_LEADING_ZERO = 9
+EXAMPLES = ALIST ARRAY1 ARRAY2 BBTREE BINARY BOP BSTREE CARD CARTEN	\
+  CCLASS CHAR CLIF COMPLEX CONTFRAC CYCLES DECIMAL DERHAM DFLOAT DMP	\
+  EQ EQTBL EXIT EXPR FARRAY FILE FLOAT FNAME FPARFRAC FR FR2 FRAC GBF	\
+  GSTBL HEAP HEXADEC INT INTHEORY KAFILE KERNEL LAZM3PK LEXP LEXTRIPK	\
+  LIB LIST LODO LODO1 LODO2 LPOLY LWORD MAGMA MAPPKG1 MATRIX MKFUNC	\
+  MPOLY MSET NONE OCT ODPOL OP OVAR PERMAN PFR POLY QUAT QUAT2 RADIX	\
+  RECLOS REGSET ROMAN SEG SEGBIND SET SINT SQMATRIX SREGSET STBL	\
+  STREAM STRING STRTBL SYMBOL TABLE TEXTFILE UNISEG UP VECTOR VOID	\
+  WUTSET XPBWPOLY XPOLY XPR ZDSOLVE ZLINDEP
+NON_HD_CHAPTERS = ${EXAMPLES_CHAPTER} 16 17 18 19 20 21 22
+
+# The chapters used in HyperDoc that must be made from the .htex files.
+HD_CHAPTERS = ${filter-out ${NON_HD_CHAPTERS}, ${CHAPTERS}}
+HD_CHAPTERS_HTEX=$(patsubst %, ug%.htex, $(HD_CHAPTERS))
+HD_CHAPTERS_HT_FILES  =$(patsubst %, ${httargetdir}/ug%.ht, $(HD_CHAPTERS))
+HD_CHAPTERS_PHT_FILES =$(patsubst %, ${httargetdir}/ug%.pht, $(HD_CHAPTERS))
+HD_CHAPTERS_MENU_FILES=$(patsubst %, tmp/ug%.menu, $(HD_CHAPTERS))
+
+EXAMPLES_HTEX = $(patsubst %, %.htex, $(EXAMPLES))
+HD_EXAMPLES_HT_FILES        = $(patsubst %, ${httargetdir}/%.ht,  ${EXAMPLES})
+HD_EXAMPLES_PHT_FILES       = $(patsubst %, ${httargetdir}/%.pht, ${EXAMPLES})
+
+HD_HTEX = ${HD_CHAPTERS_HTEX} ${EXAMPLES_HTEX}
+
+HD_INPUT_FILES  = $(patsubst %.htex, tmp/%.input,  ${HD_HTEX})
+HD_DRIVER_FILES = $(patsubst %.htex, tmp/%.driver, ${HD_HTEX})
+HD_OUT_FILES    = $(patsubst %.htex, tmp/%.out,    ${HD_HTEX})
+
+###################################################################
+# A few files exist in a source .ht format under ${htsrcdir}.
+HTEXAMPLES = exdiff exint exlap exlimit exmatrix explot2d explot3d	\
+  exseries exsum
+HTSOURCES = ${HTEXAMPLES} algebra aspex basic bmcat CPHelp evalex	\
+  expose function graphics grpthry help HTXAdvPage1 HTXAdvPage2		\
+  HTXAdvPage3 HTXAdvPage4 HTXAdvPage5 HTXAdvPage6 HTXAdvTopPage		\
+  HTXFormatPage1 HTXFormatPage2 HTXFormatPage3 HTXFormatPage4		\
+  HTXFormatPage5 HTXFormatPage6 HTXFormatPage7 HTXFormatPage8		\
+  HTXFormatTopPage HTXIntroPage1 HTXIntroPage2 HTXIntroPage3		\
+  HTXIntroTopPage HTXLinkPage1 HTXLinkPage2 HTXLinkPage3 HTXLinkPage4	\
+  HTXLinkPage5 HTXLinkPage6 HTXLinkTopPage HTXplay HTXTopPage		\
+  HTXTryPage hyperdoc Link man0 mapping newuser numbers patch polys	\
+  record rootpage srchkey topics type ug union util
+
+HTSOURCES_HT_FILES  = $(patsubst %, ${httargetdir}/%.ht,  ${HTSOURCES})
+HTSOURCES_PHT_FILES = $(patsubst %, ${httargetdir}/%.pht, ${HTSOURCES})
+HTEXAMPLES_COVEREXHT_FILES = $(patsubst %, tmp/%.coverexht, ${HTEXAMPLES})
+HTEXAMPLES_MENU_FILES = $(patsubst %, tmp/%.menu, ${HTEXAMPLES})
+
+HD_PHT_FILES = ${HD_EXAMPLES_PHT_FILES} ${HD_CHAPTERS_PHT_FILES}	\
+     ${HTSOURCES_PHT_FILES} ${httargetdir}/coverex.pht
+
+###################################################################
+# The user guide refers to short programs that are stored under ${inputsrcdir}.
+UG_EXTRA_INPUT = arrows bouquet matrix newton ribbon vectors
+UG_EXTRA_INPUT_FILES = $(patsubst %, ${httargetdir}/%.input, ${UG_EXTRA_INPUT})
+
+###################################################################
+# The actual targets...
+###################################################################
+
+.EXPORT_ALL_VARIABLES:
+
+mkdirs:
+	-rm -rf mnt obj share tmp ${INT}
+	-mkdir -p tmp
+	-mkdir -p ${httargetdir}
+	-mkdir -p ${INT}/input
+	-mkdir -p ${INT}/doc/htex/input
+	-mkdir -p ${INT}/doc/htex/tex
+	-mkdir -p ${INT}/doc/htex/output
+	-mkdir -p ${INT}/doc/htex/ps
+
+###################################################################
+# Make the .ht files.
+###################################################################
+# Find the long names for the abbreviations from XMPLIST from the
+# *.spad.pamphlet files.
+examples.list: $(wildcard ${ALGEBRASOURCES}/*.spad.pamphlet)
+	(for a in ${EXAMPLES}; do echo $$a; done; \
+	 sed -n 's/^)abb[a-z]* [a-z][a-z]*  *\([A-Z0-9][A-Z0-9]*\) *\([^ ]*\)/\1 \2/p' ${ALGEBRASOURCES}/*.spad.pamphlet\
+	) | sort -k1,1 | ${AWK} '{if(a==$$1){print};a=$$a}' | sort -k2 > $@
+
+${HD_CHAPTERS_MENU_FILES}: tmp/ug%.menu: ${htexsrcdir}/ug%.htex mkdirs
+# Provide chapter and section number as 2nd and 3rd arguments.
+#       ${HTEX2SECMENU} SRC CHAPTERNUMBER SECTIONNUMBER MENUDIR
+	${HTEX2SECMENU} $< $* 0 tmp > $@
+
+${HD_EXAMPLES_MENU_FILES}: tmp/%.menu: ${htexsrcdir}/%.htex examples.list mkdirs
+#       ${HTEX2SECMENU} SRC CHAPTERNUMBER SECTIONNUMBER MENUDIR
+	${HTEX2SECMENU} $< ${EXAMPLES_CHAPTER_NO_LEADING_ZERO} `sed -n '/^$* /=' examples.list` tmp > $@
+
+${HTEXAMPLES_COVEREXHT_FILES}: tmp/%.coverexht: ${htsrcdir}/%.ht mkdirs
+	echo "\\\\begin{page}{Menu$*}{`sed -n 's/^% Title: //p' $<`}" > $@
+	echo '\\beginscroll\\beginmenu' >> $@
+	sed -n \
+	  -e 's/^\\begin{page}\({[a-zA-Z0-9]*}\)\({.*}\)/\\menudownlink\2\1/p' \
+	  -e '/^\\\(spad\|graph\)paste/p' $< >> $@
+	echo '\\endmenu\\endscroll\\end{page}' >> $@
+	echo >> $@
+
+${httargetdir}/coverex.ht: ${HTEXAMPLES_COVEREXHT_FILES} mkdirs
+	(echo '% DO NOT EDIT! This file is generated.'; \
+	 echo;\
+	 echo '\\begin{page}{ExampleCoverPage}{Examples Of FriCAS Commands}';\
+	 echo '\\beginscroll\\table{';\
+	 for x in $(HTEXAMPLES); do \
+	   echo "{\\\\downlink{`sed -n 's/^% Title: //p' ${htsrcdir}/$$x.ht`}{Menu$$x}}"; \
+	 done;\
+	 echo '}\\endscroll\\end{page}';\
+	 echo;\
+	 cat  ${HTEXAMPLES_COVEREXHT_FILES}\
+	) > $@
+	git add .; git commit --allow-empty -m '::: src/doc/hypertex/pages:coverex.ht'
+
+$(HD_CHAPTERS_HT_FILES): ${httargetdir}/ug%.ht: ${htexsrcdir}/ug%.htex \
+    tmp/ug%.menu
+#	${HTEX2HT} SRC MENUDIR
+#       Chapter number will be extracted from the source filename ug??.htex
+	${HTEX2HT} $< tmp > $@
+
+${HD_EXAMPLES_HT_FILES}: ${httargetdir}/%.ht: ${htexsrcdir}/%.htex \
+    tmp/%.menu examples.list
+#	${HTEX2HT} SRC MENUDIR CONSTRUCTORNAME CHAPTERNUMBER SECTIONNUMBER
+	${HTEX2HT} $< tmp `sed -n 's/^$* //p' examples.list`		\
+	    ${EXAMPLES_CHAPTER_NO_LEADING_ZERO} `sed -n '/^$* /=' examples.list` > $@
+
+###################################################################
+# Make the .pht files.
+###################################################################
+# Input files needed during the computation of the pht files.
+${UG_EXTRA_INPUT_FILES}: ${httargetdir}/%: ${inputsrcdir}/%
+	cp $< $@
+
+${HD_PHT_FILES}: ${httargetdir}/%.pht: ${httargetdir}/%.ht ${UG_EXTRA_INPUT_FILES}
+	echo $<
+	ls -l ${httargetdir}
+	cd ${httargetdir}; ${FRICASEXE} -noihere -paste $<
+
+###################################################################
+# Create the ht.db database.
+###################################################################
+${httargetdir}/ht.db: $(HD_CHAPTERS_HT_FILES) ${HD_EXAMPLES_HT_FILES} ${HD_PHT_FILES}
+# The -n flag means "create a fresh ht.db".
+	${ADD2HTDB} -n $(HD_CHAPTERS_HT_FILES)
+	${ADD2HTDB}    $(HD_EXAMPLES_HT_FILES)
+	${ADD2HTDB}    ${HTSOURCES_HT_FILES}
+	git add .; git commit -m '::: make src/doc htadd ht'
+# For chapters without commands, there will be no .pht file generated.
+# Thus, we simply add all .pht files that are available in the target directory.
+# Therefore the wildcard.
+	${HTADD} -f ${httargetdir} ${httargetdir}/*.pht
+	git add .; git commit -m '::: make src/doc htadd pht'
+
+
+###################################################################
+###################################################################
+###################################################################
+###################################################################
+###################################################################
+
+
+BOOK_EXTRA_HTEX_FILES = bios.htex copyright.htex cover.htex	\
+  foreword.htex intro.htex sum.htex tecintro.htex
+
+
+
+
+
+
+
+TESTCHAPNUMS=00 01 02 03 04 05 06 07 08 \
+             10 11 12 13    15 16 \
+
+TESTCHAPS =$(patsubst %, ${INT}/input/ug%.input, $(TESTCHAPNUMS))
+
+
+
+$(TESTCHAPS): ${INT}/input/ug%.input: ${SRC}/doc/htex/ug%.htex
+	 ${AWK} -f ${SRC}/htex/tinput.awk $< > $@
+
+Toc:	${HD_CHAPTERS_HT}
+	${AWK} -f ${SRC}/htex/chapmenu.awk $(patsubst %, ${SRC}/doc/htex/ug%.htex, $(CHAPNUMS)) > ${httargetdir}/ug.ht
+	git add .; git commit --allow-empty -m '::: share/doc/hypertex/pages/ug*.ht'
+
+EXAMPLE_TITLE='Some Examples of Domains and Packages'
+${INT}/doc/htex/tex/ug${EXAMPLES_CHAPTER}.tex: examples.list
+#	${AWK} -f ${SRC}/htex/xmpchap.awk examples.list ${INT}/doc/htex/tex/ > $@
+	echo '% !! DO NOT MODIFY BY HAND !! It is generated.' > $@
+	echo '\\setcounter{chapter}{8} % Chapter 9' >> $@
+	echo '\\chapter{${EXAMPLE_TITLE}}\\label{ExamplesExposed}' >> $@
+	echo '%' >> $@
+	echo 'In this chapter we show examples of many of the most commonly'>>$@
+	echo 'used \\Language{} domains and packages.'>>$@
+	echo 'The sections are organized by constructor names.'>>$@
+	echo '%'>>$@
+	sed 'h;s/.* //;s,\([a-z0-9]\)\([A-Z]\),\1\\-\2,g;x;G;s/\n/ /;s,\([^ ]*\) \([^ ]*\) \(.*\),\\head{section}{\3}{\2Xmp}\n\\exptypeindex{\2}\n\\input{${INT}/doc/htex/tex/\1}\n%,;' examples.list >>$@
+
+${httargetdir}/xmpexp.ht: examples.list
+	echo '% !! DO NOT MODIFY BY HAND !! It is generated.' > $@
+	echo '\\newcommand{\ExamplesExposedTitle}{${EXAMPLE_TITLE}}' >> $@
+	echo '\\newcommand{\ExamplesExposedNumber}{${EXAMPLES_CHAPTER_NO_LEADING_ZERO}.}' >> $@ # Chapter 9
+	echo '\\begin{page}{ExamplesExposedPage}{${EXAMPLES_CHAPTER_NO_LEADING_ZERO}. ${EXAMPLE_TITLE}}' >> $@
+	echo 'This is a menu of examples of some domains and packages.' >> $@
+	echo 'Click on any item below to see that section.' >> $@
+	echo '\\beginscroll' >> $@
+	echo '\\table{'   >> $@
+	sed 's/.* //;h;s/1/One/g;s/2/Two/g;s/3/Three/g;s/4/Four/g;s/5/Five/g;s/6/Six/g;s/7/Seven/g;s/8/Eight/g;s/9/Nine/g;s/0/Ten/g;s/^/}{/;s/$$/XmpPage} }/;H;x;s/^/{ \\downlink{/;s/\n//' examples.list >> $@
+	echo '}'       >> $@
+	echo '\\endscroll'     >> $@
+	echo '\\autobuttons'   >> $@
+	echo '\\end{page}'     >> $@
+
+
+examples: ${INT}/doc/htex/tex/ug${EXAMPLES_CHAPTER}.tex ${httargetdir}/xmpexp.ht ${XMPHTFILES}
+# We redo all files in src/doc/htex/examples.list.
+#	$(SRC)/htex/mkxmps 9 ${httargetdir}/ ${INT}/doc/htex/input/ ${INT}/doc/htex/output/ ${INT}/doc/htex/tex/
+	git add .; git commit --allow-empty -m '::: int/doc/htex/*/ug09* examples'
+
+src-doc-htex: mkdirs ${CHAPS} ${TESTCHAPS} Toc examples
+	git add .; git commit -m '::: make src/doc/htex'
+
+HTLIST =\
+  algebra\
+  aspex\
+  basic\
+  bmcat\
+  CPHelp\
+  evalex\
+  exdiff\
+  exint\
+  exlap\
+  exlimit\
+  exmatrix\
+  explot2d\
+  explot3d\
+  expose\
+  exseries\
+  exsum\
+  function\
+  graphics\
+  grpthry\
+  help\
+  HTXAdvPage1\
+  HTXAdvPage2\
+  HTXAdvPage3\
+  HTXAdvPage4\
+  HTXAdvPage5\
+  HTXAdvPage6\
+  HTXAdvTopPage\
+  HTXFormatPage1\
+  HTXFormatPage2\
+  HTXFormatPage3\
+  HTXFormatPage4\
+  HTXFormatPage5\
+  HTXFormatPage6\
+  HTXFormatPage7\
+  HTXFormatPage8\
+  HTXFormatTopPage\
+  HTXIntroPage1\
+  HTXIntroPage2\
+  HTXIntroPage3\
+  HTXIntroTopPage\
+  HTXLinkPage1\
+  HTXLinkPage2\
+  HTXLinkPage3\
+  HTXLinkPage4\
+  HTXLinkPage5\
+  HTXLinkPage6\
+  HTXLinkTopPage\
+  HTXplay\
+  HTXTopPage\
+  HTXTryPage\
+  hyperdoc\
+  Link\
+  man0\
+  mapping\
+  newuser\
+  numbers\
+  patch\
+  polys\
+  record\
+  rootpage\
+  srchkey\
+  topics\
+  type\
+  ug\
+  union\
+  util
+
+HTINPUTFILES = $(patsubst %, ${INT}/input/%.input, ${HTLIST})
+TARGETEXAMPLEHTFILES = $(patsubst %, ${httargetdir}/%.ht, ${HTEXAMPLES})
+TARGETHTFILES = $(patsubst %, ${httargetdir}/%.ht, ${HTLIST})
+TARGETPHTFILES = $(patsubst %, ${httargetdir}/%.pht, ${HTLIST})
+
+${TARGETHTFILES}: ${httargetdir}/%.ht: ${htsrcdir}/%.ht mkdirs
+	cp $< $@
+
+${HTINPUTFILES}: ${INT}/input/%.input: ${httargetdir}/%.ht
+	awk -f ${SRC}/htex/tinput.awk $< > $@
+
+${INT}/input/coverex.input: ${httargetdir}/coverex.ht
+
+src-doc-hypertex-pages:  ${INT}/input/coverex.input $(HTINPUTFILES)
+	git add .; git commit --allow-empty -m '::: src/doc/hypertex/pages'
+
+
+book2: ${httargetdir}/ht.db driver-files out-files
+
+driver-files: $(DRIVERFILES)
+	git add .; git commit -m '::: make GNU htex-> (input,drivers)'
+
+out-files: $(OUTFILES)
+	git add .; git commit -m '::: make out files'
+
+${INPUTFILES}: ${SRC}/htex/input.awk mkdirs
+${INPUTFILES}: ${INT}/doc/htex/input/%.input: ${htexsrcdir}/%.htex
+	${AWK} -f ${SRC}/htex/input.awk $< ${INT}/doc/htex/output/ > $@
+${DRIVERFILES}: tmp/%.driver: ${INT}/doc/htex/input/%.input
+	echo ")read $<" > $@
+$(OUTFILES): ${INT}/doc/htex/output/%.out: tmp/%.driver
+	cat $< | ${FRICASEXE} -nosman
+	sed -i -e 's/^\\leqno(\([1-9][0-9]*\))/%AXIOM STEP NUMBER: \1/' $@
+
+src-doc-hypertex: mkdirs
+	cp -rp ${SRC}/doc/hypertex/bitmaps share/doc/hypertex
+	git add .; git commit --allow-empty -m '::: hypertex:bitmaps'
+
+cpstytex: mkdirs
+	cp -p ${htexsrcdir}/*.sty ${htexsrcdir}/*.tex ${TARGETTEX}
+	git add .; git commit --allow-empty -m '::: int/doc/htex/tex: .sty+.tex'
+
+cpnoconsole: mkdirs
+	cp ${htexsrcdir}/ug03.htex ${TARGETTEX}/ug03.tex
+	cp ${htexsrcdir}/ug14.htex ${TARGETTEX}/ug14.tex
+	cp ${htexsrcdir}/ug15.htex ${TARGETTEX}/ug16.tex
+	cp ${htexsrcdir}/ug16.htex ${TARGETTEX}/ug17.tex
+	cp ${htexsrcdir}/ug17.htex ${TARGETTEX}/ug18.tex
+	cp ${htexsrcdir}/ug18.htex ${TARGETTEX}/ug19.tex
+	git add .; git commit --allow-empty -m '::: int/doc/htex/tex/ug*.tex htex --> tex;'
+
+texbreak: ${SRC}/htex/texbreak.c mkdirs
+# Make texbreak
+	${CC} ${CCF} -I${SRC}/htex -o tmp/texbreak $<
+	git add .; git commit -m '::: make src/htex (texbreak)'
+
+book3: book2 src-doc-hypertex cpstytex cpnoconsole texbreak
+	# forword.htex and bios.htex are only different from the same files
+	# in int/doc/htex/newtex in commented areas.
+	cp ${htexsrcdir}/foreword.htex ${TARGETTEX}
+	cp ${htexsrcdir}/bios.htex ${TARGETTEX}
+	# int/doc/htex/newtex/r-intro.tex is like intro.htex with the
+	# \xtc{...}{COMMAND} evaluated and output pasted into the
+	# document.
+	cp ${htexsrcdir}/intro.htex ${TARGETTEX}/r-intro.tex
+	# There are tecintro.tex and .htex as well as techintro.tex
+	# files in int/doc/htex/newtex. They are pretty similar to the
+	# file from SRCHTEX.
+	cp ${htexsrcdir}/tecintro.htex ${TARGETTEX}
+	# newtex/ug00.tex and smallug00.tex are pretty similar. The
+	# smallug00 is leaves out fortran stuff.
+	# The newtex versions are for release 2.0.
+	# The SRCHTEX version for release 2.2.
+	git add .; git commit --allow-empty -m '::: latex:intro-stuff'
+	cp ${htexsrcdir}/ug00.htex ${TARGETTEX}/ug00.tex
+	# It seems that newtex/r-ug01.tex is the evaluated form of
+	# SRCHTEX/ug01.htex. newtex/ug01.tex is slightly different.
+	sed 's/{inputonly}/{verbatim}/' ${htexsrcdir}/ug01.htex > ${TARGETTEX}/ug01.tex
+	sed 's/{inputonly}/{verbatim}/' ${htexsrcdir}/ug02.htex > ${TARGETTEX}/ug02.tex
+	cp ${htexsrcdir}/ug04.htex ${TARGETTEX}/ug04.tex
+	cp ${htexsrcdir}/ug05.htex ${TARGETTEX}/ug05.tex
+	# It seems that newtex/r-ug06.tex is the evaluated form of
+	# SRCHTEX/ug06.htex. newtex/ug06.tex is slightly different.
+	sed 's/{inputonly}/{verbatim}/' ${htexsrcdir}/ug06.htex > ${TARGETTEX}/ug06.tex
+	cp ${htexsrcdir}/ug07.htex ${TARGETTEX}/ug07.tex
+	sed 's/{inputonly}/{verbatim}/' ${htexsrcdir}/ug08.htex > ${TARGETTEX}/ug08.tex
+	git add .; git commit --allow-empty -m '::: ug00-08'
+	# current/axiom.sty and tex/axiom.sty are identical with SRCHTEX,
+	# but I've added a few tricks to make 'latex book' work.
+#	cat ${SRCHTEX}/examples.list|while read a l; do sed 's/{inputonly}/{verbatim}/' ${SRCHTEX}/$$a.htex > ${TARGETTEX}/$$a.tex;done
+	cat ${htexsrcdir}/examples.list|while read a l; do ${AWK} -f ${SRC}/htex/tex.awk ${INT}/doc/htex/output/$$a.out > ${TARGETTEX}/$$a.tex;done
+# Actually texbreak is missing!!!
+#	cat ${SRCHTEX}/examples.list|while read a l; do ${AWK} ${SRCHTEX}/tex.awk ${INT}/doc/htex/output/$$a.out|texbreak -width 6750 > ${TARGETTEX}/$$a.tex;done
+	git add .; git commit --allow-empty -m '::: latax:examples.list'
+
+latex-book: book3
+#force remake of coverex.ht and ex*.input (can be removed eventually)
+	cd ${TARGETTEX}; latex book
