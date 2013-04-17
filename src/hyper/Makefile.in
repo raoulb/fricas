@@ -356,6 +356,7 @@ ${HD_PHT_FILES}: ${httargetdir}/%.pht: ${httargetdir}/%.ht ${UG_EXTRA_INPUT_FILE
 # We need to make sure that 'ht.db', the hypertex database file
 # is up to date. The file contains absolute offsets into the various
 # '.ht' and '.pht' files so it must reflect the current pages.
+ht-db: ${httargetdir}/ht.db
 ${httargetdir}/ht.db: $(HD_CHAPTERS_HT_FILES) ${HD_EXAMPLES_HT_FILES} ${HD_PHT_FILES}
 # The -n flag means "create a fresh ht.db".
 	${ADD2HTDB} -n $(HD_CHAPTERS_HT_FILES)
