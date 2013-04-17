@@ -235,8 +235,9 @@ HD_CHAPTERS_PHT_FILES =$(patsubst %, ${httargetdir}/ug%.pht, $(HD_CHAPTERS))
 HD_CHAPTERS_MENU_FILES=$(patsubst %, tmp/ug%.menu, $(HD_CHAPTERS))
 
 EXAMPLES_HTEX = $(patsubst %, %.htex, $(EXAMPLES))
-HD_EXAMPLES_HT_FILES        = $(patsubst %, ${httargetdir}/%.ht,  ${EXAMPLES})
-HD_EXAMPLES_PHT_FILES       = $(patsubst %, ${httargetdir}/%.pht, ${EXAMPLES})
+HD_EXAMPLES_HT_FILES   = $(patsubst %, ${httargetdir}/%.ht, ${EXAMPLES})
+HD_EXAMPLES_PHT_FILES  = $(patsubst %, ${httargetdir}/%.pht, ${EXAMPLES})
+HD_EXAMPLES_MENU_FILES = $(patsubst %, tmp/%.menu, ${EXAMPLES})
 
 HD_HTEX = ${HD_CHAPTERS_HTEX} ${EXAMPLES_HTEX}
 
