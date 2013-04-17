@@ -161,7 +161,7 @@ ALGEBRASOURCES=${fricas_src_algdir}
 # A few programs that are needed to generate the pht and ht files and
 # add them to the ht.db database.
 # We silently assume 'sed' to be available.
-FRICASEXE=$(fricas_target_bindir)/bin/fricas
+FRICASEXE=$(fricas_target_bindir)/fricas
 HTADD=$(fricas_target_bindir)/htadd
 HTEX2HT=${AWK} -f ${srcdir}/ht.awk
 HTEX2SECMENU=${AWK} -f ${srcdir}/secmenu.awk
