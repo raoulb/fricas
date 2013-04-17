@@ -168,7 +168,7 @@ HTEX2SECMENU=${AWK} -f ${srcdir}/secmenu.awk
 ADD2HTDB=${HTADD} -f ${httargetdir}
 
 ###################################################################
-htexsrcdir=${top_srcdir}/htex
+htexsrcdir=${top_srcdir}/src/htex
 htsrcdir=pages
 inputsrcdir=${htexsrcdir}/input
 # this is where the hypertex documentation files are
