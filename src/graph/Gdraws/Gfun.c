@@ -851,7 +851,7 @@ PSCreateContext(
   /* fill newGC with information */
 
   newGC->GCint = gc;
-  sprintf(newGC->GCchar, "%s", C_gc);
+  snprintf(newGC->GCchar, sizeof(newGC->GCchar), "%s", C_gc);
   newGC->next = NULL;
 
   if ((fp = fopen(psData[GCdictps].filename, "a")) == NULL) {
