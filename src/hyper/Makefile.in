@@ -325,7 +325,7 @@ ${httargetdir}/coverex.ht: ${HTEXAMPLES_COVEREXHT_FILES} mkdirs
 	 echo;\
 	 cat  ${HTEXAMPLES_COVEREXHT_FILES}\
 	) > $@
-	git add .; git commit --allow-empty -m '::: src/doc/hypertex/pages:coverex.ht'
+	cd ${abs_top_builddir}; git add .; git commit --allow-empty -m '::: src/doc/hypertex/pages:coverex.ht'
 
 $(HD_CHAPTERS_HT_FILES): ${httargetdir}/ug%.ht: ${htexsrcdir}/ug%.htex \
     tmp/ug%.menu
@@ -363,9 +363,9 @@ ${httargetdir}/ht.db: $(HD_CHAPTERS_HT_FILES) ${HD_EXAMPLES_HT_FILES} ${HD_PHT_F
 	${ADD2HTDB} -n $(HD_CHAPTERS_HT_FILES)
 	${ADD2HTDB}    $(HD_EXAMPLES_HT_FILES)
 	${ADD2HTDB}    ${HTSOURCES_HT_FILES}
-	git add .; git commit -m '::: make src/doc htadd ht'
+	cd ${abs_top_builddir}; git add .; git commit --allow-empty -m '::: make src/doc htadd ht'
 # For chapters without commands, there will be no .pht file generated.
 # Thus, we simply add all .pht files that are available in the target directory.
 # Therefore the wildcard.
 	${HTADD} -f ${httargetdir} ${httargetdir}/*.pht
-	git add .; git commit -m '::: make src/doc htadd pht'
+	cd ${abs_top_builddir}; git add .; git commit --allow-empty -m '::: make src/doc htadd pht'
