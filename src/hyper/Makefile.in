@@ -161,7 +161,7 @@ ALGEBRASOURCES=${fricas_src_algdir}
 # A few programs that are needed to generate the pht and ht files and
 # add them to the ht.db database.
 # We silently assume 'sed' to be available.
-FRICASEXE=$(fricas_target_bindir)/fricas
+SMAN=$(fricas_target_bindir)/sman
 HTADD=$(fricas_target_bindir)/htadd
 HTEX2HT=${AWK} -f ${srcdir}/ht.awk
 HTEX2SECMENU=${AWK} -f ${srcdir}/secmenu.awk
@@ -349,7 +349,7 @@ ${UG_EXTRA_INPUT_FILES}: ${httargetdir}/%: ${inputsrcdir}/%
 ${HD_PHT_FILES}: ${httargetdir}/%.pht: ${httargetdir}/%.ht ${UG_EXTRA_INPUT_FILES}
 	echo $<
 	ls -l ${httargetdir}
-	cd ${httargetdir}; ${FRICASEXE} -noihere -paste $<
+	cd ${httargetdir}; unset DAASE; ${SMAN} -noihere -paste $<
 
 ###################################################################
 # Create the ht.db database.
