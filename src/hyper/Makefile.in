@@ -169,7 +169,7 @@ ADD2HTDB=${HTADD} -f ${httargetdir}
 
 ###################################################################
 htexsrcdir=${top_srcdir}/src/htex
-htsrcdir=pages
+htsrcdir=${srcdir}/pages
 inputsrcdir=${htexsrcdir}/input
 # this is where the hypertex documentation files are
 httargetdir=${HYPER}/pages
