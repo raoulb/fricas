@@ -339,6 +339,9 @@ ${HD_EXAMPLES_HT_FILES}: ${httargetdir}/%.ht: ${htexsrcdir}/%.htex \
 	${HTEX2HT} $< tmp `sed -n 's/^$* //p' examples.list`		\
 	    ${EXAMPLES_CHAPTER_NO_LEADING_ZERO} `sed -n '/^$* /=' examples.list` > $@
 
+${HTSOURCES_HT_FILES}: ${httargetdir}/%.ht: ${htsrcdir}/%.ht
+	cp $< $@
+
 ###################################################################
 # Make the .pht files.
 ###################################################################
