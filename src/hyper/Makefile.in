@@ -151,7 +151,8 @@ ${OUTLIB}/spadbuf$(EXEEXT): $(spadbuf_objects) $(spadbuf_DEPENDENCIES)
 
 # Let's start with a view variables that must be set before starting 'make'.
 
-# We need access to the algebra source in order to generate a list of abbreviations (filenames and corresponding constructor name.
+# We need access to the algebra source in order to generate a list of
+# abbreviations (filenames and corresponding constructor name.
 ALGEBRASOURCES=${fricas_src_algdir}
 
 ###################################################################
@@ -162,7 +163,6 @@ ALGEBRASOURCES=${fricas_src_algdir}
 # add them to the ht.db database.
 # We silently assume 'sed' to be available.
 SMAN=$(fricas_target_bindir)/sman
-HTADD=$(fricas_target_bindir)/htadd
 HTEX2HT=${AWK} -f ${srcdir}/ht.awk
 HTEX2SECMENU=${AWK} -f ${srcdir}/secmenu.awk
 ADD2HTDB=${HTADD} -f ${httargetdir}
@@ -265,7 +265,7 @@ HTSOURCES_PHT_FILES = $(patsubst %, ${httargetdir}/%.pht, ${HTSOURCES})
 HTEXAMPLES_COVEREXHT_FILES = $(patsubst %, tmp/%.coverexht, ${HTEXAMPLES})
 HTEXAMPLES_MENU_FILES = $(patsubst %, tmp/%.menu, ${HTEXAMPLES})
 
-HD_PHT_FILES = ${HD_EXAMPLES_PHT_FILES} ${HD_CHAPTERS_PHT_FILES}	\
+HD_PHT_FILES = ${HD_CHAPTERS_PHT_FILES} ${HD_EXAMPLES_PHT_FILES}	\
      ${HTSOURCES_PHT_FILES} ${httargetdir}/coverex.pht
 
 ###################################################################
@@ -346,7 +346,7 @@ ${HD_EXAMPLES_HT_FILES}: ${httargetdir}/%.ht: ${htexsrcdir}/%.htex \
 ${UG_EXTRA_INPUT_FILES}: ${httargetdir}/%: ${inputsrcdir}/%
 	cp $< $@
 
-${HD_PHT_FILES}: ${httargetdir}/%.pht: ${httargetdir}/%.ht ${UG_EXTRA_INPUT_FILES}
+${HD_PHT_FILES}: ${httargetdir}/%.pht: ${httargetdir}/%.ht ${UG_EXTRA_INPUT_FILES} ${SMAN} $(fricas_target_bindir)/hypertex$(EXEEXT)
 	echo $<
 	ls -l ${httargetdir}
 	cd ${httargetdir}; unset DAASE; ${SMAN} -noihere -paste $<
@@ -358,7 +358,7 @@ ${HD_PHT_FILES}: ${httargetdir}/%.pht: ${httargetdir}/%.ht ${UG_EXTRA_INPUT_FILE
 # is up to date. The file contains absolute offsets into the various
 # '.ht' and '.pht' files so it must reflect the current pages.
 ht-db: ${httargetdir}/ht.db
-${httargetdir}/ht.db: $(HD_CHAPTERS_HT_FILES) ${HD_EXAMPLES_HT_FILES} ${HD_PHT_FILES}
+${httargetdir}/ht.db: $(HD_CHAPTERS_HT_FILES) ${HD_EXAMPLES_HT_FILES} ${HD_PHT_FILES} ${HTADD}
 # The -n flag means "create a fresh ht.db".
 	${ADD2HTDB} -n $(HD_CHAPTERS_HT_FILES)
 	${ADD2HTDB}    $(HD_EXAMPLES_HT_FILES)
@@ -367,5 +367,5 @@ ${httargetdir}/ht.db: $(HD_CHAPTERS_HT_FILES) ${HD_EXAMPLES_HT_FILES} ${HD_PHT_F
 # For chapters without commands, there will be no .pht file generated.
 # Thus, we simply add all .pht files that are available in the target directory.
 # Therefore the wildcard.
-	${HTADD} -f ${httargetdir} ${httargetdir}/*.pht
+	${ADD2HTDB} ${httargetdir}/*.pht
 	cd ${abs_top_builddir}; git add .; git commit --allow-empty -m '::: make src/doc htadd pht'

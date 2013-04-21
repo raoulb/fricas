@@ -690,9 +690,8 @@ fi
 AC_SUBST(fricas_src_all)
 if test x"$fricas_has_xpm" = xyes; then
    AC_CHECK_HEADER([regex.h],
-                   [fricas_src_all="$fricas_src_all all-hyper all-paste"
-                    fricas_src_subdirs="$fricas_src_subdirs hyper paste"
-                    FRICAS_MAKEFILE([src/paste/Makefile])],
+                   [fricas_src_all="$fricas_src_all all-hyper"
+                    fricas_src_subdirs="$fricas_src_subdirs hyper"],
                    [AC_MSG_NOTICE([HyperDoc is disabled.])])
 fi
 # We need the Makefile (for util.ht) even if we do not build HyperDoc.
@@ -871,22 +870,6 @@ if test -f $srcdir/src/algebra/use_lisp ; then
     # Sanity check
     if test -f $srcdir/src/algebra/A1AGG.lsp ; then
         touch src/algebra/use_lisp
-    else
-        AC_MSG_ERROR([Sources look corrupted])
-    fi
-fi
-
-if test -f $srcdir/src/paste/copy_nphts ; then
-    # Sanity check
-    if test -f $srcdir/src/paste/SYMBOL.pht ; then
-        touch src/paste/copy_nphts
-    fi
-fi
-
-if test -f $srcdir/src/paste/copy_gphts ; then
-    # Sanity check
-    if test -d $srcdir/src/paste/mobius.VIEW ; then
-        touch src/paste/copy_gphts
     else
         AC_MSG_ERROR([Sources look corrupted])
     fi
