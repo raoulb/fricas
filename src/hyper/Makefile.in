@@ -325,7 +325,6 @@ ${httargetdir}/coverex.ht: ${HTEXAMPLES_COVEREXHT_FILES} mkdirs
 	 echo;\
 	 cat  ${HTEXAMPLES_COVEREXHT_FILES}\
 	) > $@
-	cd ${abs_top_builddir}; git add .; git commit --allow-empty -m '::: src/doc/hypertex/pages:coverex.ht'
 
 $(HD_CHAPTERS_HT_FILES): ${httargetdir}/ug%.ht: ${htexsrcdir}/ug%.htex \
     tmp/ug%.menu
@@ -366,7 +365,6 @@ stamp-ht-db: $(HD_CHAPTERS_HT_FILES) ${HD_EXAMPLES_HT_FILES} ${HTADD}
 	${ADD2HTDB}    $(HD_EXAMPLES_HT_FILES)
 	${ADD2HTDB}    ${HTSOURCES_HT_FILES}
 	touch $@
-	cd ${abs_top_builddir}; git add .; git commit --allow-empty -m '::: make src/doc htadd ht'
 
 ###################################################################
 # Make the .pht files.
@@ -389,4 +387,3 @@ ${httargetdir}/ht.db: ${HD_PHT_FILES} ${HTADD}
 # Thus, we simply add all .pht files that are available in the target directory.
 # Therefore the wildcard.
 	${HTADD} -f ${httargetdir} ${httargetdir}/*.pht
-	cd ${abs_top_builddir}; git add .; git commit --allow-empty -m '::: make src/doc htadd pht'
