@@ -188,7 +188,6 @@ httargetdir=${HYPER}/pages
 # some .awk scripts. Also, currently, the generated examples chapter
 # must be 09.
 
-# 00   What's New in \Language{} Version 2.2
 # 01   An Overview of \Language{}
 # 02   Using Types and Modes
 # 03   Using \HyperName{}
@@ -213,7 +212,7 @@ httargetdir=${HYPER}/pages
 # 22   Glossary
 
 # The stuff that should be visible in HyperDoc
-CHAPTERS=00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22
+CHAPTERS=01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22
 EXAMPLES_CHAPTER = 09
 EXAMPLES_CHAPTER_NO_LEADING_ZERO = 9
 EXAMPLES = ALIST ARRAY1 ARRAY2 BBTREE BINARY BOP BSTREE CARD CARTEN	\
