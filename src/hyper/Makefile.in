@@ -342,6 +342,32 @@ ${HD_EXAMPLES_HT_FILES}: ${httargetdir}/%.ht: ${htexsrcdir}/%.htex \
 ${HTSOURCES_HT_FILES}: ${httargetdir}/%.ht: ${htsrcdir}/%.ht
 	cp $< $@
 
+
+###################################################################
+# Create the final ht.db database.
+###################################################################
+# Not that ht.db must exist before SMAN can be called. In fact,
+# according to page "Standard Pages" in HTXLinkPage2.ht, there must be
+# certain content in ht.db, otherwise the hypertex program will
+# immediately exit.
+#
+# So the following uses stamp-db-ht to create a ht.db with all the .ht
+# files and the creation of the .pht files depends on existing of that
+# stamp.
+###################################################################
+# Create a partial ht.db database of the .ht files.
+###################################################################
+# We need to make sure that 'ht.db', the hypertex database file
+# is up to date. The file contains absolute offsets into the various
+# '.ht' and '.pht' files so it must reflect the current pages.
+stamp-ht-db: $(HD_CHAPTERS_HT_FILES) ${HD_EXAMPLES_HT_FILES} ${HTADD}
+# The -n flag means "create a fresh ht.db".
+	${ADD2HTDB} -n $(HD_CHAPTERS_HT_FILES)
+	${ADD2HTDB}    $(HD_EXAMPLES_HT_FILES)
+	${ADD2HTDB}    ${HTSOURCES_HT_FILES}
+	touch $@
+	cd ${abs_top_builddir}; git add .; git commit --allow-empty -m '::: make src/doc htadd ht'
+
 ###################################################################
 # Make the .pht files.
 ###################################################################
@@ -349,26 +375,18 @@ ${HTSOURCES_HT_FILES}: ${httargetdir}/%.ht: ${htsrcdir}/%.ht
 ${UG_EXTRA_INPUT_FILES}: ${httargetdir}/%: ${inputsrcdir}/%
 	cp $< $@
 
-${HD_PHT_FILES}: ${httargetdir}/%.pht: ${httargetdir}/%.ht ${UG_EXTRA_INPUT_FILES} ${SMAN} $(fricas_target_bindir)/hypertex$(EXEEXT)
+${HD_PHT_FILES}: ${httargetdir}/%.pht: ${httargetdir}/%.ht ${UG_EXTRA_INPUT_FILES} ${SMAN} $(fricas_target_bindir)/hypertex$(EXEEXT) stamp-ht-db
 	echo $<
 	ls -l ${httargetdir}
 	cd ${httargetdir}; unset DAASE; ${SMAN} -noihere -paste $<
 
 ###################################################################
-# Create the ht.db database.
+# Create the final ht.db database.
 ###################################################################
-# We need to make sure that 'ht.db', the hypertex database file
-# is up to date. The file contains absolute offsets into the various
-# '.ht' and '.pht' files so it must reflect the current pages.
 ht-db: ${httargetdir}/ht.db
-${httargetdir}/ht.db: $(HD_CHAPTERS_HT_FILES) ${HD_EXAMPLES_HT_FILES} ${HD_PHT_FILES} ${HTADD}
-# The -n flag means "create a fresh ht.db".
-	${ADD2HTDB} -n $(HD_CHAPTERS_HT_FILES)
-	${ADD2HTDB}    $(HD_EXAMPLES_HT_FILES)
-	${ADD2HTDB}    ${HTSOURCES_HT_FILES}
-	cd ${abs_top_builddir}; git add .; git commit --allow-empty -m '::: make src/doc htadd ht'
+${httargetdir}/ht.db: ${HD_PHT_FILES} ${HTADD}
 # For chapters without commands, there will be no .pht file generated.
 # Thus, we simply add all .pht files that are available in the target directory.
 # Therefore the wildcard.
-	${ADD2HTDB} ${httargetdir}/*.pht
+	${HTADD} -f ${httargetdir} ${httargetdir}/*.pht
 	cd ${abs_top_builddir}; git add .; git commit --allow-empty -m '::: make src/doc htadd pht'
