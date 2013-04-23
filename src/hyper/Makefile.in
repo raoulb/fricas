@@ -87,13 +87,6 @@ stamp: ${SCRIPTS} ${BINFILES} ${HYPER}/pages/ht.db
 	-rm -f stamp
 	$(STAMP) stamp
 
-util-ht: stamp-util-ht
-
-stamp-util-ht: $(srcdir)/pages/util.ht
-	mkdir -p ${HYPER}/pages
-	cp $(srcdir)/pages/util.ht ${HYPER}/pages/util.ht
-	$(STAMP) stamp-util-ht
-
 mostlyclean-local:
 	-rm -f $(hypertex_objects)
 	-rm -f $(htadd_objects)
@@ -101,7 +94,7 @@ mostlyclean-local:
 	-rm -f $(spadbuf_objects)
 	-rm -f $(hthits_objects)
 	-rm -f $(ex2ht_objects)
-	-rm -f stamp stamp-util-ht
+	-rm -f stamp
 
 
 clean-local: mostlyclean-local
@@ -284,6 +277,8 @@ mkdirs:
 	-mkdir -p tmp
 	-mkdir -p ${httargetdir}
 
+util-ht: ${httargetdir}/util.ht
+
 ###################################################################
 # Make the .ht files.
 ###################################################################
@@ -337,7 +332,7 @@ ${HD_EXAMPLES_HT_FILES}: ${httargetdir}/%.ht: ${htexsrcdir}/%.htex \
 	${HTEX2HT} $< tmp `sed -n 's/^$* //p' examples.list`		\
 	    ${EXAMPLES_CHAPTER_NO_LEADING_ZERO} `sed -n '/^$* /=' examples.list` > $@
 
-${HTSOURCES_HT_FILES}: ${httargetdir}/%.ht: ${htsrcdir}/%.ht
+${HTSOURCES_HT_FILES}: ${httargetdir}/%.ht: ${htsrcdir}/%.ht mkdirs
 	cp $< $@
 
 
@@ -369,7 +364,7 @@ stamp-ht-db: $(HD_CHAPTERS_HT_FILES) ${HD_EXAMPLES_HT_FILES} ${HTADD}
 # Make the .pht files.
 ###################################################################
 # Input files needed during the computation of the pht files.
-${UG_EXTRA_INPUT_FILES}: ${httargetdir}/%: ${inputsrcdir}/%
+${UG_EXTRA_INPUT_FILES}: ${httargetdir}/%: ${inputsrcdir}/% mkdirs
 	cp $< $@
 
 ${HD_PHT_FILES}: ${httargetdir}/%.pht: ${httargetdir}/%.ht ${UG_EXTRA_INPUT_FILES} ${SMAN} $(fricas_target_bindir)/hypertex$(EXEEXT) stamp-ht-db
