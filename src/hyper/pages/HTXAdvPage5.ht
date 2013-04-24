@@ -78,7 +78,7 @@ Set the environment variable {\tt HTPATH} so that
 it points first to your directory and then the system directory.
 In the {\bf /bin/csh}, you might use
 \centerline{
-{\tt setenv HTPATH /tmp:\$AXIOM/doc/hypertex/pages}
+{\tt setenv HTPATH /tmp:\$AXIOM/share/hypertex/pages}
 }
 Make sure that no {\bf trypaste.input} or {\bf trypaste.pht}
 files exist in the directory.
@@ -94,13 +94,13 @@ the {\bf trypaste.pht} file.
 This is because the generated \HyperName{} text will assume that
 the {\it viewport} data will be located in the
 {\it system} directory.
-\centerline{{\bf \env{AXIOM}/doc/viewports}}
+\centerline{{\bf \env{AXIOM}/share/viewports}}
 You may want to place your images in a different directory,
 say, {\bf /u/sugar/viewports}.
 If so, then change all occurences of
 \beginImportant
 \newline
-{\tt \\env\{AXIOM\}/doc/viewports/}
+{\tt \\env\{AXIOM\}/share/viewports/}
 \centerline{{\it by}}
 {\tt /u/sugar/viewports/}
 \endImportant

@@ -72,7 +72,7 @@ the {\tt AXIOM} environment variable is not set.
 If it is, then \HyperName{} will assume that it points
 to the \Language{} system directory and will look for
 these files in
-{\bf \$AXIOM/doc/hypertex/bitmaps}.
+{\bf \$AXIOM/share/hypertex/bitmaps}.
 
 
 

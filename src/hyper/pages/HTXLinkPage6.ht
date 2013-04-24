@@ -22,7 +22,7 @@ a line like this.
 \endImportant
 
 This macro is defined in
-\centerline{ {\bf \env{AXIOM}/doc/hypertex/pages/util.ht}}
+\centerline{ {\bf \env{AXIOM}/share/hypertex/pages/util.ht}}
 to be (see \downlink{Macros}{HTXAdvPage3} to learn how to define macros):
 \beginImportant
 \newline
@@ -76,7 +76,7 @@ list of directory full pathnames.
 The order of the directories is respected with earlier entries overriding
 later ones. Since we want all the \Language{} pages but need to override the
 {\tt \\localinfo} macro, we should use the value
-\centerline{{\bf /u/sugar/\HyperName{}:\env{AXIOM}/doc/hypertex/pages}}
+\centerline{{\bf /u/sugar/\HyperName{}:\env{AXIOM}/share/hypertex/pages}}
 The way that you define environment variables depends on the shell
 you are using. In the {\bf /bin/csh}, it would be
 \newline
@@ -131,9 +131,9 @@ is specified.
 {\tt -s}\tab{8}\indentrel{8}
 build {\bf ht.db} database in {\it system} directory. The
 system directory is built as follows. If the {\tt AXIOM}
-variable is defined, the {\bf \$AXIOM/doc/hypertex/pages} directory
+variable is defined, the {\bf \$AXIOM/share/hypertex/pages} directory
 is used. If {\tt AXIOM} is not defined, the
-{\bf /usr/local/axiom/doc/hypertex/pages} directory is used.
+{\bf /usr/local/axiom/share/hypertex/pages} directory is used.
 
 
 \indentrel{-8}\newline
@@ -164,7 +164,7 @@ Otherwise, the following interpretation will occur:
 If the {\tt HTPATH} variable is defined, the directories
 specified in it will be tried in order. If {\tt HTPATH}
 is not defined, then, if {\tt AXIOM} is defined, the
-{\bf \$AXIOM/doc/hypertex/pages} will be tried, else
+{\bf \$AXIOM/share/hypertex/pages} will be tried, else
 the file will be deemed missing and {\bf htadd} will fail.
 \indentrel{-12}
 \end{paste}
@@ -185,7 +185,7 @@ The \HyperName{} program is
 If {\tt AXIOM} is defined and {\tt HTPATH} is not
 (this is the case when \Language{} starts \HyperName{})
 \HyperName{} will look in
-\centerline{{\bf \env{AXIOM}/doc/hypertex/pages}}
+\centerline{{\bf \env{AXIOM}/share/hypertex/pages}}
 for the {\bf ht.db} file and all \HyperName{} pages.
 If {\tt HTPATH} is defined, it is assumed that
 it alone points to the directories to be searched

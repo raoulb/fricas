@@ -6,7 +6,7 @@ This section explains how to include \Language{}
 commands in your page. The commands we will
 introduce are actually {\it macros} that are defined
 in
-\centerline{{\bf \env{AXIOM}/doc/hypertex/pages/util.ht}}
+\centerline{{\bf \env{AXIOM}/share/hypertex/pages/util.ht}}
 This means that you can use them only if you include
 this file in your \HyperName{} database.
 
