@@ -159,13 +159,17 @@ SMAN=$(fricas_target_bindir)/sman
 HTEX2HT=${AWK} -f ${srcdir}/ht.awk
 HTEX2SECMENU=${AWK} -f ${srcdir}/secmenu.awk
 ADD2HTDB=${HTADD} -f ${httargetdir}
+UGSYSCMD2HELP=${AWK} -f ${abs_srcdir}/syscmd.awk
 
 ###################################################################
-htexsrcdir=${top_srcdir}/src/htex
+htexsrcdir=${abs_top_srcdir}/src/htex
 htsrcdir=${srcdir}/pages
 inputsrcdir=${htexsrcdir}/input
 # this is where the hypertex documentation files are
 httargetdir=${HYPER}/pages
+bitmapstargetdir=${HYPER}/bitmaps
+viewportstargetdir=$(fricas_target_datadir)/viewports
+helptargetdir=$(fricas_target_datadir)/spadhelp
 
 ###################################################################
 # The current chapters. Except for 09, there exists a .htex file for
@@ -273,9 +277,13 @@ UG_EXTRA_INPUT_FILES = $(patsubst %, ${httargetdir}/%.input, ${UG_EXTRA_INPUT})
 
 rmdirs:
 	-rm -rf tmp ${httargetdir}
-mkdirs:
-	-mkdir -p tmp
-	-mkdir -p ${httargetdir}
+stamp-mkdirs:
+	mkdir -p tmp
+	mkdir -p ${httargetdir}
+	mkdir -p ${bitmapstargetdir}
+	mkdir -p ${viewportstargetdir}
+	mkdir -p ${helptargetdir}
+	${STAMP} $@
 
 util-ht: ${httargetdir}/util.ht
 
@@ -289,16 +297,16 @@ examples.list: $(wildcard ${ALGEBRASOURCES}/*.spad.pamphlet)
 	 sed -n 's/^)abb[a-z]* [a-z][a-z]*  *\([A-Z0-9][A-Z0-9]*\) *\([^ ]*\)/\1 \2/p' ${ALGEBRASOURCES}/*.spad.pamphlet\
 	) | sort -k1,1 | ${AWK} '{if(a==$$1){print};a=$$a}' | sort -k2 > $@
 
-${HD_CHAPTERS_MENU_FILES}: tmp/ug%.menu: ${htexsrcdir}/ug%.htex mkdirs
+${HD_CHAPTERS_MENU_FILES}: tmp/ug%.menu: ${htexsrcdir}/ug%.htex stamp-mkdirs
 # Provide chapter and section number as 2nd and 3rd arguments.
 #       ${HTEX2SECMENU} SRC CHAPTERNUMBER SECTIONNUMBER MENUDIR
 	${HTEX2SECMENU} $< $* 0 tmp > $@
 
-${HD_EXAMPLES_MENU_FILES}: tmp/%.menu: ${htexsrcdir}/%.htex examples.list mkdirs
+${HD_EXAMPLES_MENU_FILES}: tmp/%.menu: ${htexsrcdir}/%.htex examples.list stamp-mkdirs
 #       ${HTEX2SECMENU} SRC CHAPTERNUMBER SECTIONNUMBER MENUDIR
 	${HTEX2SECMENU} $< ${EXAMPLES_CHAPTER_NO_LEADING_ZERO} `sed -n '/^$* /=' examples.list` tmp > $@
 
-${HTEXAMPLES_COVEREXHT_FILES}: tmp/%.coverexht: ${htsrcdir}/%.ht mkdirs
+${HTEXAMPLES_COVEREXHT_FILES}: tmp/%.coverexht: ${htsrcdir}/%.ht stamp-mkdirs
 	echo "\\\\begin{page}{Menu$*}{`sed -n 's/^% Title: //p' $<`}" > $@
 	echo '\\beginscroll\\beginmenu' >> $@
 	sed -n \
@@ -307,7 +315,7 @@ ${HTEXAMPLES_COVEREXHT_FILES}: tmp/%.coverexht: ${htsrcdir}/%.ht mkdirs
 	echo '\\endmenu\\endscroll\\end{page}' >> $@
 	echo >> $@
 
-${httargetdir}/coverex.ht: ${HTEXAMPLES_COVEREXHT_FILES} mkdirs
+${httargetdir}/coverex.ht: ${HTEXAMPLES_COVEREXHT_FILES} stamp-mkdirs
 	(echo '% DO NOT EDIT! This file is generated.'; \
 	 echo;\
 	 echo '\\begin{page}{ExampleCoverPage}{Examples Of FriCAS Commands}';\
@@ -332,9 +340,32 @@ ${HD_EXAMPLES_HT_FILES}: ${httargetdir}/%.ht: ${htexsrcdir}/%.htex \
 	${HTEX2HT} $< tmp `sed -n 's/^$* //p' examples.list`		\
 	    ${EXAMPLES_CHAPTER_NO_LEADING_ZERO} `sed -n '/^$* /=' examples.list` > $@
 
-${HTSOURCES_HT_FILES}: ${httargetdir}/%.ht: ${htsrcdir}/%.ht mkdirs
+${HTSOURCES_HT_FILES}: ${httargetdir}/%.ht: ${htsrcdir}/%.ht stamp-mkdirs
 	cp $< $@
 
+
+###################################################################
+# The bitmap files must be copied to the right place.
+###################################################################
+stamp-bitmaps: stamp-mkdirs
+	cp -r ${srcdir}/bitmaps/* ${bitmapstargetdir}
+	${STAMP} $@
+
+###################################################################
+# Viewports are generated during the generation of the .pht files.
+###################################################################
+stamp-viewports: ${HD_PHT_FILES} stamp-mkdirs
+	cp -r ${httargetdir}/*.VIEW ${viewportstargetdir}
+	${STAMP} $@
+
+###################################################################
+# Generate the .help file.
+###################################################################
+# ug16.htex contains documentation about system commands
+stamp-helpfiles: stamp-mkdirs
+	cd ${helptargetdir}; ${UGSYSCMD2HELP} ${htexsrcdir}/ug16.htex
+	cp ${fricas_src_datadir}/spadhelp/*.help ${helptargetdir}
+	${STAMP} $@
 
 ###################################################################
 # Create the final ht.db database.
@@ -358,13 +389,13 @@ stamp-ht-db: $(HD_CHAPTERS_HT_FILES) ${HD_EXAMPLES_HT_FILES} ${HTADD}
 	${ADD2HTDB} -n $(HD_CHAPTERS_HT_FILES)
 	${ADD2HTDB}    $(HD_EXAMPLES_HT_FILES)
 	${ADD2HTDB}    ${HTSOURCES_HT_FILES}
-	touch $@
+	${STAMP} $@
 
 ###################################################################
 # Make the .pht files.
 ###################################################################
 # Input files needed during the computation of the pht files.
-${UG_EXTRA_INPUT_FILES}: ${httargetdir}/%: ${inputsrcdir}/% mkdirs
+${UG_EXTRA_INPUT_FILES}: ${httargetdir}/%: ${inputsrcdir}/% stamp-mkdirs
 	cp $< $@
 
 ${HD_PHT_FILES}: ${httargetdir}/%.pht: ${httargetdir}/%.ht ${UG_EXTRA_INPUT_FILES} ${SMAN} $(fricas_target_bindir)/hypertex$(EXEEXT) stamp-ht-db
@@ -375,8 +406,7 @@ ${HD_PHT_FILES}: ${httargetdir}/%.pht: ${httargetdir}/%.ht ${UG_EXTRA_INPUT_FILE
 ###################################################################
 # Create the final ht.db database.
 ###################################################################
-ht-db: ${httargetdir}/ht.db
-${httargetdir}/ht.db: ${HD_PHT_FILES} ${HTADD}
+${httargetdir}/ht.db: ${HTADD} stamp-bitmaps stamp-viewports stamp-helpfiles
 # For chapters without commands, there will be no .pht file generated.
 # Thus, we simply add all .pht files that are available in the target directory.
 # Therefore the wildcard.
