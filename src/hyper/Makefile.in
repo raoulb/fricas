@@ -159,7 +159,7 @@ SMAN=$(fricas_target_bindir)/sman
 HTEX2HT=${AWK} -f ${srcdir}/ht.awk
 HTEX2SECMENU=${AWK} -f ${srcdir}/secmenu.awk
 ADD2HTDB=${HTADD} -f ${httargetdir}
-UGSYSCMD2HELP=${AWK} -f ${abs_srcdir}/syscmd.awk
+UGSYSCMD2HELP=${AWK} -f ${fricas_src_datadir}/spadhelp/syscmd.awk
 
 ###################################################################
 htexsrcdir=${abs_top_srcdir}/src/htex

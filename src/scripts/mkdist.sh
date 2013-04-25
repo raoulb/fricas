@@ -92,33 +92,6 @@ if [ ! -z "${GCL_DIST}" ] ; then
    clean_svn gcl
 fi
 
-# copy help files
-if [ ! -z "${HELP_DIR}" ] ; then
-   cp -r "${HELP_DIR}" src/share/spadhelp
-fi
-
-# copy graphic .pht pages
-if [ ! -z "${copy_gphts}" ]; then
-   for A in SEGBIND explot2d coverex explot3d graphics ug01 ug07 \
-           ug08 ug10 ug11
-   do
-      cp ../src/paste/${A}.pht src/paste
-   done
-
-# copy generated images
-   (cd ../src/paste; \
-      for A in *.VIEW; do \
-         cp -r $A ../../dist/src/paste ; \
-      done)
-  touch src/paste/copy_gphts
-fi
-
-# copy nornal .pht pages
-if [ ! -z "${copy_phts}" ]; then
-    cp ../src/paste/*.pht src/paste
-    touch src/paste/copy_nphts
-fi
-
 # copy databases and algebra bootstrap files
 if [ ! -z "${copy_lisp}" ]; then
    (cd ../src/algebra; ls -d *.NRLIB | sed 's,\.NRLIB$,,' ) > ../nrlst
