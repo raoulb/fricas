@@ -280,7 +280,7 @@ debugEnter("cleanLine")
           if ("ugSysCmd" == substr(a,1,8))
             a = "description of command )" substr(a,9)
           else
-            a = "the AXIOM User Guide index"
+            a = "the FriCAS User Guide index"
           line = a " " substr(line,n+1)
           if (p != 1)
             line = pref " " line
