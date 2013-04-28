@@ -221,7 +221,7 @@ EXAMPLES = ALIST ARRAY1 ARRAY2 BBTREE BINARY BOP BSTREE CARD CARTEN	\
   RECLOS REGSET ROMAN SEG SEGBIND SET SINT SQMATRIX SREGSET STBL	\
   STREAM STRING STRTBL SYMBOL TABLE TEXTFILE UNISEG UP VECTOR VOID	\
   WUTSET XPBWPOLY XPOLY XPR ZDSOLVE ZLINDEP
-NON_HD_CHAPTERS = ${EXAMPLES_CHAPTER} 16 17 18 19 20 21 22
+NON_HD_CHAPTERS = ${EXAMPLES_CHAPTER} 17 18 19 20 21 22
 
 # The chapters used in HyperDoc that must be made from the .htex files.
 HD_CHAPTERS = ${filter-out ${NON_HD_CHAPTERS}, ${CHAPTERS}}
@@ -246,7 +246,7 @@ HD_OUT_FILES    = $(patsubst %.htex, tmp/%.out,    ${HD_HTEX})
 HTEXAMPLES = exdiff exint exlap exlimit exmatrix explot2d explot3d	\
   exseries exsum
 HTSOURCES = ${HTEXAMPLES} algebra aspex basic bmcat CPHelp evalex	\
-  expose function graphics grpthry help HTXAdvPage1 HTXAdvPage2		\
+  expose function gloss graphics grpthry help HTXAdvPage1 HTXAdvPage2	\
   HTXAdvPage3 HTXAdvPage4 HTXAdvPage5 HTXAdvPage6 HTXAdvTopPage		\
   HTXFormatPage1 HTXFormatPage2 HTXFormatPage3 HTXFormatPage4		\
   HTXFormatPage5 HTXFormatPage6 HTXFormatPage7 HTXFormatPage8		\
@@ -261,10 +261,14 @@ HTSOURCES_PHT_FILES = $(patsubst %, ${httargetdir}/%.pht, ${HTSOURCES})
 HTEXAMPLES_COVEREXHT_FILES = $(patsubst %, tmp/%.coverexht, ${HTEXAMPLES})
 HTEXAMPLES_MENU_FILES = $(patsubst %, tmp/%.menu, ${HTEXAMPLES})
 
+HTGENERATED = xmpexp coverex
+HTGENERATED_HT_FILES = $(patsubst %, ${httargetdir}/%.ht,  ${HTGENERATED})
+HTGENERATED_PHT_FILES = $(patsubst %, ${httargetdir}/%.pht,  ${HTGENERATED})
+
 HD_HT_FILES = ${HD_CHAPTERS_HT_FILES} ${HD_EXAMPLES_HT_FILES}	\
-  ${HTSOURCES_HT_FILES} ${httargetdir}/coverex.ht
+  ${HTSOURCES_HT_FILES} ${HTGENERATED_HT_FILES}
 HD_PHT_FILES = ${HD_CHAPTERS_PHT_FILES} ${HD_EXAMPLES_PHT_FILES}	\
-  ${HTSOURCES_PHT_FILES} ${httargetdir}/coverex.pht
+  ${HTSOURCES_PHT_FILES} ${HTGENERATED_PHT_FILES}
 
 ###################################################################
 # The user guide refers to short programs that are stored under ${inputsrcdir}.
@@ -299,6 +303,21 @@ examples.list: $(wildcard ${ALGEBRASOURCES}/*.spad.pamphlet)
 	 sed -n 's/^)abb[a-z]* [a-z][a-z]*  *\([A-Z0-9][A-Z0-9]*\) *\([^ ]*\)/\1 \2/p' ${ALGEBRASOURCES}/*.spad.pamphlet\
 	) | sort -k1,1 | ${AWK} '{if(a==$$1){print};a=$$a}' | sort -k2 > $@
 
+${httargetdir}/xmpexp.ht: examples.list
+	echo '% !! DO NOT MODIFY BY HAND !! It is generated.' > $@
+	echo '\newcommand{\ExamplesExposedTitle}{${EXAMPLE_TITLE}}' >> $@
+	echo '\newcommand{\ExamplesExposedNumber}{${EXAMPLES_CHAPTER_NO_LEADING_ZERO}.}' >> $@ # Chapter 9
+	echo '\begin{page}{ExamplesExposedPage}{${EXAMPLES_CHAPTER_NO_LEADING_ZERO}. ${EXAMPLE_TITLE}}' >> $@
+	echo 'This is a menu of examples of some domains and packages.' >> $@
+	echo 'Click on any item below to see that section.' >> $@
+	echo '\beginscroll' >> $@
+	echo '\table{'   >> $@
+	sed 's/.* //;h;s/1/One/g;s/2/Two/g;s/3/Three/g;s/4/Four/g;s/5/Five/g;s/6/Six/g;s/7/Seven/g;s/8/Eight/g;s/9/Nine/g;s/0/Ten/g;s/^/}{/;s/$$/XmpPage} }/;H;x;s/^/{ \\downlink{/;s/\n//' examples.list >> $@
+	echo '}'       >> $@
+	echo '\endscroll'     >> $@
+	echo '\autobuttons'   >> $@
+	echo '\end{page}'     >> $@
+
 ${HD_CHAPTERS_MENU_FILES}: tmp/ug%.menu: ${htexsrcdir}/ug%.htex stamp-mkdirs
 # Provide chapter and section number as 2nd and 3rd arguments.
 #       ${HTEX2SECMENU} SRC CHAPTERNUMBER SECTIONNUMBER MENUDIR
@@ -309,23 +328,23 @@ ${HD_EXAMPLES_MENU_FILES}: tmp/%.menu: ${htexsrcdir}/%.htex examples.list stamp-
 	${HTEX2SECMENU} $< ${EXAMPLES_CHAPTER_NO_LEADING_ZERO} `sed -n '/^$* /=' examples.list` tmp > $@
 
 ${HTEXAMPLES_COVEREXHT_FILES}: tmp/%.coverexht: ${htsrcdir}/%.ht stamp-mkdirs
-	echo "\\\\begin{page}{Menu$*}{`sed -n 's/^% Title: //p' $<`}" > $@
-	echo '\\beginscroll\\beginmenu' >> $@
+	echo "\\begin{page}{Menu$*}{`sed -n 's/^% Title: //p' $<`}" > $@
+	echo '\beginscroll\beginmenu' >> $@
 	sed -n \
 	  -e 's/^\\begin{page}\({[a-zA-Z0-9]*}\)\({.*}\)/\\menudownlink\2\1/p' \
 	  -e '/^\\\(spad\|graph\)paste/p' $< >> $@
-	echo '\\endmenu\\endscroll\\end{page}' >> $@
+	echo '\endmenu\endscroll\end{page}' >> $@
 	echo >> $@
 
 ${httargetdir}/coverex.ht: ${HTEXAMPLES_COVEREXHT_FILES} stamp-mkdirs
 	(echo '% DO NOT EDIT! This file is generated.'; \
 	 echo;\
-	 echo '\\begin{page}{ExampleCoverPage}{Examples Of FriCAS Commands}';\
-	 echo '\\beginscroll\\table{';\
+	 echo '\begin{page}{ExampleCoverPage}{Examples Of FriCAS Commands}';\
+	 echo '\beginscroll\table{';\
 	 for x in $(HTEXAMPLES); do \
-	   echo "{\\\\downlink{`sed -n 's/^% Title: //p' ${htsrcdir}/$$x.ht`}{Menu$$x}}"; \
+	   echo "{\\downlink{`sed -n 's/^% Title: //p' ${htsrcdir}/$$x.ht`}{Menu$$x}}"; \
 	 done;\
-	 echo '}\\endscroll\\end{page}';\
+	 echo '}\endscroll\end{page}';\
 	 echo;\
 	 cat  ${HTEXAMPLES_COVEREXHT_FILES}\
 	) > $@
