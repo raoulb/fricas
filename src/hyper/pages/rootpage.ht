@@ -63,7 +63,9 @@ What would you like to do?
 \menuwindowlink{About FriCAS}{RootPageLogo}
 \tab{16}See some basic information about \Language{}.
 
-%\menuwindowlink{What's New}{ugWhatsNewTwoTwoPage}
+\menuwindowlink{What's New}{ugWhatsNewPage}
+\tab{16}Chapter 15.
+
 \menuwindowlink{What's New}{releaseNotes}
 \tab{16}Enhancements in this version of \Language{}.
 

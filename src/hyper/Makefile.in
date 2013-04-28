@@ -254,15 +254,17 @@ HTSOURCES = ${HTEXAMPLES} algebra aspex basic bmcat CPHelp evalex	\
   HTXIntroTopPage HTXLinkPage1 HTXLinkPage2 HTXLinkPage3 HTXLinkPage4	\
   HTXLinkPage5 HTXLinkPage6 HTXLinkTopPage HTXplay HTXTopPage		\
   HTXTryPage hyperdoc Link man0 mapping newuser numbers patch polys	\
-  record rootpage srchkey topics type ug union util
+  record releaseNotes rootpage srchkey topics type ug union util
 
 HTSOURCES_HT_FILES  = $(patsubst %, ${httargetdir}/%.ht,  ${HTSOURCES})
 HTSOURCES_PHT_FILES = $(patsubst %, ${httargetdir}/%.pht, ${HTSOURCES})
 HTEXAMPLES_COVEREXHT_FILES = $(patsubst %, tmp/%.coverexht, ${HTEXAMPLES})
 HTEXAMPLES_MENU_FILES = $(patsubst %, tmp/%.menu, ${HTEXAMPLES})
 
+HD_HT_FILES = ${HD_CHAPTERS_HT_FILES} ${HD_EXAMPLES_HT_FILES}	\
+  ${HTSOURCES_HT_FILES} ${httargetdir}/coverex.ht
 HD_PHT_FILES = ${HD_CHAPTERS_PHT_FILES} ${HD_EXAMPLES_PHT_FILES}	\
-     ${HTSOURCES_PHT_FILES} ${httargetdir}/coverex.pht
+  ${HTSOURCES_PHT_FILES} ${httargetdir}/coverex.pht
 
 ###################################################################
 # The user guide refers to short programs that are stored under ${inputsrcdir}.
@@ -384,11 +386,9 @@ stamp-helpfiles: stamp-mkdirs
 # We need to make sure that 'ht.db', the hypertex database file
 # is up to date. The file contains absolute offsets into the various
 # '.ht' and '.pht' files so it must reflect the current pages.
-stamp-ht-db: $(HD_CHAPTERS_HT_FILES) ${HD_EXAMPLES_HT_FILES} ${HTADD}
+stamp-ht-db: ${HD_HT_FILES} ${HTADD}
 # The -n flag means "create a fresh ht.db".
-	${ADD2HTDB} -n $(HD_CHAPTERS_HT_FILES)
-	${ADD2HTDB}    $(HD_EXAMPLES_HT_FILES)
-	${ADD2HTDB}    ${HTSOURCES_HT_FILES}
+	${ADD2HTDB} -n $(HD_HT_FILES)
 	${STAMP} $@
 
 ###################################################################
