@@ -79,8 +79,7 @@ will display the {\tt TestHelpPage} page in a new window.
 \begin{paste}{HTXLinkPage1xPaste1A}{HTXLinkPage1xPatch1A}
 \pastebutton{HTXLinkPage1xPaste1A}{Source}
 \newline
-\windowlink{windowlink to Actions
-menu}{HTXLinkTopPage}\newline
+\windowlink{windowlink to Actions menu}{HTXLinkTopPage}\newline
 \downlink{downlink to Actions menu}{HTXLinkTopPage}\newline
 \memolink{memolink to Actions menu}{HTXLinkTopPage}
 \end{paste}
