@@ -1005,7 +1005,7 @@ There are also library changes that affect user code:
 %------------------------------------------------------------------
 \begin{itemize}
 \item Improvements to 'integrate': better handling of algebraic
-  integrals, new routine which handles some integrals contaning
+  integrals, new routine which handles some integrals containing
   'lambertW'.
 
 \item Improvements to 'limit', now Gruntz algorithm knows about

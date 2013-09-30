@@ -15,7 +15,7 @@ UnitGaussianElimination : with
       ++ Note:  m is modified in place
     pre_smith : Matrix(Integer) -> Matrix(Integer)
       ++ pre_smith(m) first performs pre_gauss(m) and then
-      ++ drops all rows and colums of m contaning pivots.
+      ++ drops all rows and colums of m containing pivots.
   == add
 
     M ==> Matrix(Integer)
