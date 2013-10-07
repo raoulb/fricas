@@ -131,6 +131,14 @@ TwoDimensionalArrayCategory(R, Row, Col) : Category == Definition where
        ++ \spad{elt(x, ls1, col)} is equivalent to \spad{elt(x, l1, col)}
        ++ where l1 is obtained appending expansions of elements of ls1,
        ++ but should be more convenient and more efficient.
+    setelt! : (%, Integer, LSI, %) -> %
+       ++ \spad{setelt!(x, row, ls2)} is equivalent to \spad{setelt!(x, row, l2)}
+       ++ where l2 is obtained appending expansions of elements of ls2,
+       ++ but should be more convenient and more efficient.
+    setelt! : (%, LSI, Integer, %) -> %
+       ++ \spad{setelt!(x, ls1, col)} is equivalent to \spad{setelt!(x, l1, col)}
+       ++ where l1 is obtained appending expansions of elements of ls1,
+       ++ but should be more convenient and more efficient.
     -- Works by coercing single integers to segments of integers
     -- elt : (%, LI, LSI) -> %
     -- elt : (%, LSI, LI) -> %
@@ -161,6 +169,12 @@ TwoDimensionalArrayCategory(R, Row, Col) : Category == Definition where
       ++ setRow!(m, i, v) sets to ith row of m to v
     setColumn! : (%, Integer, Col) -> %
       ++ setColumn!(m, j, v) sets to jth column of m to v
+    setelt! : (%, Integer, LI, %) -> %
+       ++ \spad{setelt!(x, row, colList)} assigns to an 1-by-n selection
+       ++ of the array, where \spad{n = # colList}.
+    setelt! : (%, LI, Integer, %) -> %
+       ++ \spad{setelt!(x, rowList, col)} assigns to an m-by-1 selection
+       ++ of the array, where \spad{m = # rowList}.
     setelt! : (%, List Integer, List Integer, %) -> %
        ++ \spad{setelt!(x, rowList, colList, y)} destructively alters
        ++ the array x.  If y is \spad{m}-by-\spad{n},
@@ -173,8 +187,27 @@ TwoDimensionalArrayCategory(R, Row, Col) : Category == Definition where
        ++ \spad{setelt!(x, s1, s2)} is equivalent to
        ++ \spad{setelt!(x, expand(s1), expand(s2))} but should be more
        ++ convenient and more efficient.
+    setelt! : (%, LI, SI, %) -> %
+       ++ \spad{setelt!(x, l1, s2)} is equivalent to
+       ++ \spad{setelt!(x, l1, expand(s2))} but should be more
+       ++ convenient and more  efficient.
+    setelt! : (%, SI, LI, %) -> %
+       ++ \spad{setelt!(x, s1, l2)} is equivalent to
+       ++ \spad{setelt!(x, expand(s1), l2)} but should be more
+       ++ convenient and more  efficient.
+    -- Works by coercing single integers to segments of integers
+    -- setelt! : (%, LI, LSI, %) -> %
+    -- setelt! : (%, LSI, LI, %) -> %
+    setelt! : (%, SI, LSI, %) -> %
+       ++ \spad{setelt!(x, s1, ls2)} is equivalent to \spad{setelt!(x, l1, l2)}
+       ++ where li is obtained appending expansions of elements of lsi,
+       ++ but should be more convenient and more efficient.
+    setelt! : (%, LSI, SI, %) -> %
+       ++ \spad{setelt!(x, ls1, s2)} is equivalent to \spad{setelt!(x, l1, l2)}
+       ++ where li is obtained appending expansions of elements of lsi,
+       ++ but should be more convenient and more efficient.
     setelt! : (%, LSI, LSI, %) -> %
-       ++ \spad{setelt!(x, ls1, ls1)} is equivalent to \spad{setelt!(x, l1, l2)}
+       ++ \spad{setelt!(x, ls1, ls2)} is equivalent to \spad{setelt!(x, l1, l2)}
        ++ where li is obtained appending expansions of elements of lsi,
        ++ but should be more convenient and more efficient.
     setsubMatrix! : (%, Integer, Integer, %) -> %
@@ -527,6 +560,32 @@ TwoDimensionalArrayCategory(R, Row, Col) : Category == Definition where
 
     -- Setting parts
 
+    setelt!(x : %, row : Integer, colList : LI, y : %) ==
+        (row < minr(x)) or (row > maxr(x)) =>
+            error "setelt: index out of range"
+        for ej in colList repeat
+            (ej < minc(x)) or (ej > maxc(x)) =>
+                error "setelt: index out of range"
+        ((nrows y) ~= 1) or ((# colList) ~= (ncols y)) =>
+            error "setelt: matrix has bad dimensions"
+        rowiy := minr(y)
+        for ej in colList for j in minc(y)..maxc(y) repeat
+            qsetelt!(x, row, ej, qelt(y, rowiy, j))
+        y
+
+    setelt!(x : %, rowList : LI, col : Integer, y : %) ==
+        for ei in rowList repeat
+            (ei < minr(x)) or (ei > maxr(x)) =>
+                error "setelt: index out of range"
+        (col < minc(x)) or (col > maxc(x)) =>
+            error "setelt: index out of range"
+        ((# rowList) ~= (nrows y)) or ((ncols y) ~= 1) =>
+            error "setelt: matrix has bad dimensions"
+        coliy := minc(y)
+        for ei in rowList for i in minr(y)..maxr(y) repeat
+            qsetelt!(x, ei, col, qelt(y, i, coliy))
+        y
+
     setelt!(x : %, rowList : List Integer, colList : List Integer, y : %) ==
         for ei in rowList repeat
             (ei < minr(x)) or (ei > maxr(x)) =>
@@ -557,6 +616,94 @@ TwoDimensionalArrayCategory(R, Row, Col) : Category == Definition where
         for i in minr(y)..maxr(y) for k in lr..ur by ir repeat
             for j in minc(y)..maxc(y) for l in lc..uc by ic repeat
                 qsetelt!(x, k, l, qelt(y, i, j))
+        y
+
+    setelt!(x : %, rowList : LI, sc : SI, y : %) ==
+        lc := low(sc)
+        uc := high(sc)
+        ic := incr(sc)
+        nr := # rowList
+        nc := check_seg(sc, minc(x), maxc(x))
+        nrows(y) ~= nr or ncols(y) ~= nc =>
+            error "setelt: matrix has bad dimensions"
+        nr = 0 or nc = 0 => y
+        for i in minr(y)..maxr(y) for k in rowList repeat
+            for j in minc(y)..maxc(y) for l in lc..uc by ic repeat
+                qsetelt!(x, k, l, qelt(y, i, j))
+        y
+
+    setelt!(x : %, sr : SI, colList : LI, y : %) ==
+        lr := low(sr)
+        ur := high(sr)
+        ir := incr(sr)
+        nr := check_seg(sr, minr(x), maxr(x))
+        nc := # colList
+        nrows(y) ~= nr or ncols(y) ~= nc =>
+            error "setelt: matrix has bad dimensions"
+        nr = 0 or nc = 0 => y
+        for i in minr(y)..maxr(y) for k in lr..ur by ir repeat
+            for j in minc(y)..maxc(y) for l in colList repeat
+                qsetelt!(x, k, l, qelt(y, i, j))
+        y
+
+    setelt!(x : %, row : Integer, lsc : LSI, y : %) ==
+        nc := check_segs(lsc, minc(x), maxc(x))
+        nrows(y) ~= 1 or ncols(y) ~= nc =>
+            error "setelt: matrix has bad dimensions"
+        nc = 0 => y
+        i := minr(y)
+        j := minc(y)
+        for sc in lsc repeat
+            for l in low(sc)..high(sc) by incr(sc) repeat
+                qsetelt!(x, row, l, qelt(y, i, j))
+                j := j + 1
+        y
+
+    setelt!(x : %, lsr : LSI, col : Integer, y : %) ==
+        nr := check_segs(lsr, minr(x), maxr(x))
+        nrows(y) ~= nr or ncols(y) ~= 1 =>
+            error "setelt: matrix has bad dimensions"
+        nr = 0 => y
+        i := minr(y)
+        j := minc(y)
+        for sr in lsr repeat
+            for k in low(sr)..high(sr) by incr(sr) repeat
+                qsetelt!(x, k, col, qelt(y, i, j))
+                i := i + 1
+        y
+
+    setelt!(x : %, sr : SI, lsc : LSI, y : %) ==
+        lr := low(sr)
+        ur := high(sr)
+        ir := incr(sr)
+        nr := check_seg(sr, minr(x), maxr(x))
+        nc := check_segs(lsc, minc(x), maxc(x))
+        nrows(y) ~= nr or ncols(y) ~= nc =>
+            error "setelt: matrix has bad dimensions"
+        nr = 0 or nc = 0 => y
+        j := minc(y)
+        for sc in lsc repeat
+            for l in low(sc)..high(sc) by incr(sc) repeat
+                for i in minr(y)..maxr(y) for k in lr..ur by ir repeat
+                    qsetelt!(x, k, l, qelt(y, i, j))
+                j := j + 1
+        y
+
+    setelt!(x : %, lsr : LSI, sc : SI, y : %) ==
+        lc := low(sc)
+        uc := high(sc)
+        ic := incr(sc)
+        nr := check_segs(lsr, minr(x), maxr(x))
+        nc := check_seg(sc, minc(x), maxc(x))
+        nrows(y) ~= nr or ncols(y) ~= nc =>
+            error "setelt: matrix has bad dimensions"
+        nr = 0 or nc = 0 => y
+        i := minr(y)
+        for sr in lsr repeat
+            for k in low(sr)..high(sr) by incr(sr) repeat
+                for j in minc(y)..maxc(y) for l in lc..uc by ic repeat
+                    qsetelt!(x, k, l, qelt(y, i, j))
+                i := i + 1
         y
 
     setelt!(x : %, lsr : LSI, lsc : LSI, y : %) ==
