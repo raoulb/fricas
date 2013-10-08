@@ -1255,7 +1255,7 @@ Bug fixes, in particular:
 \item Experimental support for using gmp with Closure CL (64-bit
   Intel/Amd only).
 
-\item New categoris CoercibleFrom and ConvertibleFrom. New domain for
+\item New categories CoercibleFrom and ConvertibleFrom. New domain for
   ordinals up to epsilon0. New domain for matrices of machine
   integers. New package for solving linear equations written as
   expressions (faster then general expression solver).

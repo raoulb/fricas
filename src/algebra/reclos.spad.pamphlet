@@ -10,7 +10,7 @@
 \tableofcontents
 \eject
 This file describes the Real Closure 1.0 package which consists of different
-packages, categoris and domains :
+packages, categories and domains :
 
 - the package RealPolynomialUtilitiesPackage whichs receives a field and a
 univariate polynomial domain with coefficients in the field. It computes some
