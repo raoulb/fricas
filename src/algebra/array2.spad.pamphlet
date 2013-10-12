@@ -478,11 +478,14 @@ TwoDimensionalArrayCategory(R, Row, Col) : Category == Definition where
         uc := high(sc)
         ir := incr(sr)
         ic := incr(sc)
-        ir = 1 and ic = 1 => subMatrix(x, lr, ur, lc, uc)
         nr := check_seg(sr, minr(x), maxr(x))
         nc := check_seg(sc, minc(x), maxc(x))
+        -- Zero rows or cols
+        nr = 0 or nc = 0 => qnew(nr, nc)
+        -- Dense rectangular subarray
+        ir = 1 and ic = 1 => subMatrix(x, lr, ur, lc, uc)
+        -- All other cases
         y := qnew(nr, nc)
-        nr = 0 or nc = 0 => y
         for i in minr(y)..maxr(y) for k in lr..ur by ir repeat
             for j in minc(y)..maxc(y) for l in lc..uc by ic repeat
                 qsetelt!(y, i, j, qelt(x, k, l))

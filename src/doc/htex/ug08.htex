@@ -4776,7 +4776,7 @@ Verify the result.
 
 This section shows some examples on selecting various (rectangular) submatrices
 of matrices. In the numerics literature, these operations are usually referred
-to as slicing. Apart from indexing matrices by two integers from retrieving single
+to as slicing. Apart from indexing matrices by two integers for retrieving single
 elements, it is possible to use lists of integers, segments and list of segments
 to select slices like whole rows, columns or submatrices.
 
