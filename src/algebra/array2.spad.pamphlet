@@ -422,6 +422,9 @@ TwoDimensionalArrayCategory(R, Row, Col) : Category == Definition where
         ii := incr(s)
         i1 := low(s)
         i2 := high(s)
+        -- Empty segment:
+        (i1 > i2 and ii > 0) or (i2 > i1 and ii < 0) => 0
+        -- Regular segment:
         0 < ii  =>
             (i2 + 1 < i1) => error "check_seg: index out of range"
             cc := qcoerce(i2 - i1 + ii)@NonNegativeInteger
