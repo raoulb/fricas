@@ -154,6 +154,12 @@ TwoDimensionalArrayCategory(R, Row, Col) : Category == Definition where
        ++ \spad{elt(x, ls1, ls2)} is equivalent to \spad{elt(x, l1, l2)}
        ++ where li is obtained appending expansions of elements of lsi,
        ++ but should be more convenient and more efficient.
+    rowSlice : % -> Segment(Integer)
+       ++ \spad{rowSlice(m)} returns a segment s such that for
+       ++ m the access m(s, j) gives the j-th column.
+    colSlice : % -> Segment(Integer)
+       ++ \spad{colSlice(m)} returns a segment s such that for
+       ++ m the access m(i, s) gives the i-th row.
 
 --% Part assignments
 
@@ -557,6 +563,12 @@ TwoDimensionalArrayCategory(R, Row, Col) : Category == Definition where
                         j := j + 1
                 i := i + 1
         y
+
+    rowSlice(x :%) : Segment(Integer) ==
+        minr(x)..maxr(x)
+
+    colSlice(x :%) : Segment(Integer) ==
+        minc(x)..maxc(x)
 
     -- Setting parts
 
