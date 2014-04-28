@@ -4860,3 +4860,38 @@ requires assignment of a matrix type:
 \spadcommand{m([2], [2]) := matrix([[4]]) \bound{m}}
 \spadcommand{m \free{m}}
 }
+
+By using the functions \spadfun{rowSlice} and \spadfun{colSlice} it is
+possible to obtain for a given matrix two special slicing objects that
+when used will select all elements along a row or column respectively.
+The advantage of using these is that no information about the actual
+matrix size in necessary.
+
+\xtc{
+It is easily possible to select the second and fourth columns
+of a given matrix:
+}{
+\spadcommand{r := rowSlice(m) \bound{r}}
+\spadcommand{m(r, 2) \free{m}}
+\spadcommand{m(r, 4) \free{m}}
+}
+
+\xtc{
+Assignment of course works the same way. The following snippet shows
+simple row operations as used in Gaussian elimination:
+}{
+\spadcommand{c := colSlice(m) \bound{c}}
+\spadcommand{m := m :: Matrix(Fraction(Integer))}
+\spadcommand{m(2, c) := m(2, c) - m(2,1)/m(1,1) * m(1, c) \free{m}}
+\spadcommand{m(3, c) := m(3, c) - m(3,1)/m(1,1) * m(1, c) \free{m}}
+\spadcommand{m(3, c) := m(3, c) - m(3,2)/m(2,2) * m(2, c) \free{m}}
+\spadcommand{m \free{m}}
+}
+
+\xtc{
+Selecting the whole matrix:
+}{
+\spadcommand{r := rowSlice(m) \bound{r}}
+\spadcommand{c := colSlice(m) \bound{c}}
+\spadcommand{m(r,c) \free{m}}
+}
