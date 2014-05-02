@@ -4863,7 +4863,8 @@ requires assignment of a matrix type:
 
 By using the functions \spadfun{rowSlice} and \spadfun{colSlice} it is
 possible to obtain for a given matrix two special slicing objects that
-when used will select all elements along a row or column respectively.
+when used will select all elements along a colum or row respectively
+(\spadfun{rowSlice} varies row index giving a column).
 The advantage of using these is that no information about the actual
 matrix size in necessary.
 
