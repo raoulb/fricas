@@ -28,6 +28,7 @@ INTERPSYS=AXIOM=${AXIOM} $(fricas_build_bindir)/interpsys
 
 
 SPAD_SRCS= \
+     1d \
      acplot aggcat2 aggcat algcat algext algfact \
      algfunc allfact alql amodgcd any array1 \
      array2 attribs bags bezout boolean \
@@ -189,6 +190,7 @@ SPADLIST4=\
      LALG LAMBDA LAPLACE LA LAUPOL LAZM3PK LEADCDET \
      LEXP LEXTRIPK LFCAT LF LGROBP LIB \
      LIECAT LIE LIMITPS LIMITRF LINCOMB LINDEP LINEXP \
+     LINOUT \
      LIST2MAP LIST2 LIST3 LIST LMDICT LMODULE \
      LMOPS LNAGG LO LODEEF LODO1 LODO2 LODOCAT \
      LODOF LODOOPS LODO LOGIC LOOP LORER LPEFRAC \
